@@ -157,7 +157,7 @@ const PlaceOrder = () => {
                                                 {
                                                     ((amount.total).toFixed(2) > balance?.balance) ?
                                                         <div className="alert alert-danger mt-2  fs-4" role="alert">
-                                                            <span><i className="fas fa-balance-scale-right"></i></span> Insaficinent Wallet Balance
+                                                            <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
                                                         </div>
                                                         : null
                                                 }

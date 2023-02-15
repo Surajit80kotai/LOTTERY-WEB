@@ -54,16 +54,19 @@ const SignUp = () => {
         }
     }
 
-    // Slider Settings
-    // const settings = {
-    //     dots: false,
-    //     arrows: false,
-    //     autoplay: true,
-    //     infinite: false,
-    //     speed: 300,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1
-    // }
+
+    // To ensure only valid mobile numbers(3000000000 to 9999999999) are entered
+    // ('body').on('keyup', '.js-input-mobile', function () {
+    //     var input = (this),
+    //         value = input.val(),
+    //         length = value.length,
+    //         inputCharacter = parseInt(value.slice(-1));
+
+    //     if (!((length > 1 && inputCharacter >= 0 && inputCharacter <= 9) || (length === 1 && inputCharacter >= 3 && inputCharacter <= 9))) {
+    //         input.val(value.substring(0, length - 1));
+    //     }
+    // });
+
 
     // getCountryId
     const getCountryId = (name) => {
@@ -109,9 +112,12 @@ const SignUp = () => {
                                             id="full_name"
                                             name="full_name"
                                             placeholder="Enter Your Full Name"
+                                            title="Accept Alphabets & Whitespaces Only"
+                                            pattern='^[a-zA-Z ]+$'
                                             aria-describedby="emailHelp"
                                             value={full_name}
                                             onChange={handleChange}
+                                            required
                                         />
                                         {/* Full Name Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{signupErr?.full_name?.message}</p>
@@ -145,9 +151,12 @@ const SignUp = () => {
                                             name="phone"
                                             aria-describedby="emailHelp"
                                             placeholder="Enter Your Phone Number"
+                                            pattern="[0-9]{10}"
+                                            title="Accept Numbers Only"
                                             value={phone}
                                             onChange={handleChange}
                                             maxLength={10}
+                                            required
 
                                         />
                                         {/* Phone Vaidation */}
@@ -169,6 +178,7 @@ const SignUp = () => {
                                                     className="calendar form-control form_input cal_input"
                                                     value={dob}
                                                     onChange={handleChange}
+                                                    required
                                                 />
                                                 {/* DOB Vaidation */}
                                                 <p className='text-danger fs-4 mt-2'>{signupErr?.dob?.message}</p>
@@ -186,6 +196,7 @@ const SignUp = () => {
                                                     name='country'
                                                     value={country}
                                                     onChange={handleChange}
+                                                    required
                                                 >
                                                     <option value="1">Select...</option>
                                                     {
@@ -218,6 +229,7 @@ const SignUp = () => {
                                                     aria-describedby="emailHelp"
                                                     value={password}
                                                     onChange={handleChange}
+                                                    required
                                                 />
                                             </div>
                                         </div>
@@ -235,6 +247,7 @@ const SignUp = () => {
                                                     placeholder="Confrim Password"
                                                     value={confirmPassword}
                                                     onChange={handleChange}
+                                                    required
                                                 />
                                                 {/* ConfirmPassword Vaidation */}
                                                 <p className='text-danger fs-4 mt-2'>{error}</p>

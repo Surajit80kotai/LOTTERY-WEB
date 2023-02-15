@@ -22,6 +22,13 @@ html {
 	--third-font: 'Roboto', sans-serif;
 }
 
+/* To Remove Spinners from Input type Number */
+/* input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+} */
+
 /* custom scrollbar */
 /* width */
 ::-webkit-scrollbar {
@@ -109,7 +116,8 @@ input[type="email"],
 input[type="password"],
 input[type="tel"],
 input[type="date"],
-input[type="radio"] {
+input[type="radio"],
+input[type="number"] {
 	font-size: 1.5rem;
 }
 

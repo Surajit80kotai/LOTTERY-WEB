@@ -58,6 +58,8 @@ const Contact = () => {
                                                                 aria-describedby="emailHelp"
                                                                 value={formData.name}
                                                                 onChange={handleChange}
+                                                                title="Accept Alphabets & Whitespaces Only"
+                                                                pattern='^[a-zA-Z ]+$'
                                                                 required
                                                             />
 
@@ -92,9 +94,11 @@ const Contact = () => {
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Your Mobile Number"
                                                                         maxLength={10}
-                                                                        required
                                                                         value={formData.phone}
                                                                         onChange={handleChange}
+                                                                        required
+                                                                        title="Accept Numbers Only"
+                                                                        pattern="[0-9]{10}"
                                                                     />
 
                                                                 </div>

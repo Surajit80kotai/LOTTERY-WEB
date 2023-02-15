@@ -90,6 +90,7 @@ const Login = () => {
                                             placeholder="Enter Email Id"
                                             value={formValues.email}
                                             onChange={handleChange}
+                                            required
                                         />
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_user.error}</p>
@@ -109,6 +110,7 @@ const Login = () => {
                                             placeholder="Enter Password"
                                             value={formValues.password}
                                             onChange={handleChange}
+                                            required
                                         />
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_password.error}</p>
