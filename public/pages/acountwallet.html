@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lottery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css"
+    integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
+
+<body>
+
+  <header>
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark fixed-top">
+
+      <div class="container-fluid">
+        <div class="nv_lf">
+          <a class="navbar-brand" href="#">
+            <div class="companyLogo">
+              <img src="assets/img/logo2.png" alt="logo" class="img-fluid">
+            </div>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Product</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">How To play</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Charities</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+
+          </div>
+
+
+        </div>
+        <div class="nv_rt">
+          <div class="cart">
+            <a href="orderlist.html" class="cartbtn"><i class="fas fa-shopping-cart"></i> <span
+                class="label">23</span></a>
+
+          </div>
+          <div class="counrency">
+            <div class="dropdown">
+              <a class=" dropdown-toggle userbtn" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <span><img src="assets/img/currency.png" alt="" class=""></span> currency
+              </a>
+
+              <ul class="dropdown-menu">
+                <div class="item">
+                  <a href="#">
+                    FCFA
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    XAF
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    XOF
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    USD
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    Euro
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    Naira
+                  </a>
+                </div>
+                </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="area_profile">
+            <div class="dropdown">
+              <a class=" dropdown-toggle userbtn" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                User Name <i class="fas fa-user"></i>
+              </a>
+
+              <ul class="dropdown-menu">
+                <div class="user_name">
+                  <h3>User Name</h3>
+                </div>
+                <li class="user-menu__item">
+                  <a class="user-menu-link dropdown-item" href="#">
+
+                    <div>Dashboard</div>
+                  </a>
+                </li>
+                <li class="user-menu__item">
+                  <a class="user-menu-link dropdown-item" href="#">
+
+
+                    <div>Logout</div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  
+  <main style="padding-top: 5rem;">
+    <div class="sidebar_wrapper">
+
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+        <div class="menu-inner-shadow"></div>
+
+        <ul class="menu-inner py-1">
+          <!-- Dashboard -->
+          <li class="menu-item active">
+            <a href="adminuser.html" class="menu-link">
+
+              <i class="menu-icon tf-icons fas fa-tachometer-alt"></i>
+              <div data-i18n="Analytics">Dashboard</div>
+            </a>
+          </li>
+
+          <li class="menu-item ">
+            <a href="index.html" class="menu-link">
+              <i class="menu-icon fas fa-gift"></i>
+              <div data-i18n="Analytics">Bonus</div>
+            </a>
+          </li>
+          <li class="menu-item ">
+            <a href="index.html" class="menu-link">
+              <i class="menu-icon fas fa-wallet"></i>
+
+              <div data-i18n="Analytics">Wallet</div>
+            </a>
+          </li>
+          <li class="menu-item ">
+            <a href="index.html" class="menu-link">
+              <i class="menu-icon fas fa-puzzle-piece"></i>
+              <div data-i18n="Analytics">Games</div>
+            </a>
+          </li>
+          <li class="menu-item ">
+            <a href="adminuser orderlist.html" class="menu-link">
+              <i class="menu-icon fas fa-history"></i>
+              <div data-i18n="Analytics">Order History</div>
+            </a>
+          </li>
+
+
+
+        </ul>
+        <hr>
+
+      </aside>
+      <div class="content_wrapper">
+        <div class="paymentwallet_bg">
+          <h1>Check Your Current Balance</h1>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="payment_area">
+                <div class="paymentwallet_top_header">
+                  <div class="pay_title">
+                    <div class="wallet_icon">
+                      <i class="fas fa-wallet"></i>
+                    </div>
+                    <span>Payment Wallet</span>
+                  </div>
+                  <div class="total_balns">
+                    <span>Total Balance</span>
+                    <h5 class="total_amount">€ 5,300</h5>
+                  </div>
+                </div>
+                <div class="payment_area_body">
+                  <h4>ADD MONEY TO WALLET</h4>
+                  <form action="">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="payment_input">
+                          <div class="currency_icon">
+                            <p>€</p>
+                          </div>
+                          <input type="email" class="payinput" id="" name="" aria-describedby="emailHelp"
+                            placeholder="Enter amount">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <button type="button" class="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+                          Money</button>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+                <!-- transaction histrory -->
+                <h3 class="tranhis">Transaction History</h3>
+                <div class="transaction_area">
+                 
+                  <table class="table mt-4">
+                    <thead class="table_head sticky-top ">
+                      <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+
+                        <td>2 Jan 2023, 11.30AM</td>
+                        <td>€ 230</td>
+                        <td class="status"><i class="fas fa-check-circle"></i> Success</td>
+                      </tr>
+                      <tr>
+
+                        <td>8 Jan 2023, 1.30PM</td>
+                        <td>€ 230</td>
+                        <td class="status"><i class="fas fa-check-circle"></i> Success</td>
+                      </tr>
+                      <tr>
+
+                        <td>10 Feb 2023, 12.00PM</td>
+                        <td>€ 8230</td>
+                        <td class="failed"><i class="fas fa-exclamation-triangle"></i> Failed</td>
+                      </tr>
+                       <tr>
+
+                        <td>25 Feb 2023, 11.30AM</td>
+                        <td>€ 3030</td>
+                        <td class="status"><i class="fas fa-check-circle"></i> Success</td>
+                      </tr>
+                      <tr>
+
+                        <td>28 Feb 2023, 8.00PM</td>
+                        <td>€ 8230</td>
+                        <td class="failed"><i class="fas fa-exclamation-triangle"></i> Failed</td>
+                      </tr>
+                      <tr>
+
+                        <td>28 Feb 2023, 8.00PM</td>
+                        <td>€ 8230</td>
+                        <td class="failed"><i class="fas fa-exclamation-triangle"></i> Failed</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- Modal payment -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Add Money to Wallet</h3>
+                <h4>€ 60</h4>
+              </div>
+
+              <div class="modal-body">
+                <h4 class="option_title">Payment Option</h4>
+                <div class="payment_section">
+                  <div class="payment_item">
+                    <input type="radio" id="control_01" name="select" value="1" checked onclick="checkout()">
+                    <label for="control_01">
+                      <div class="pay_icon">
+                        <img src="assets/img/pay1.jpg" alt="" class="img-fluid">
+                      </div>
+                      <p>Pay with cinet Pay</p>
+                    </label>
+
+                  </div>
+                  <div class="payment_item">
+                    <input type="radio" id="control_02" name="select" value="2">
+                    <label for="control_02">
+                      <div class="pay_icon">
+                        <img src="assets/img/pay2.png" alt="" class="img-fluid">
+                      </div>
+                      <p>Pay with Master Card</p>
+                    </label>
+                  </div>
+                  <div class="payment_item">
+                    <input type="radio" id="control_03" name="select" value="3">
+                    <label for="control_03">
+                      <div class="pay_icon">
+                        <img src="assets/img/pay3.png" alt="" class="img-fluid">
+                      </div>
+                      <p>Pay with Paypal</p>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer_top">
+        <div class="footitem">
+          <h4 class="foot_title">Information</h4>
+          <ul class="footlinks">
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>About us</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Find Us</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Terms & Condition</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Privacy Policy</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Cookies Policy</a></li>
+          </ul>
+        </div>
+        <div class="footitem">
+          <h4 class="foot_title">Help</h4>
+          <ul class="footlinks">
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>How to Play</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>How to Deposite</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Betting Rule</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>How to Withdraw</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>How to Register</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Balance Check</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Help Center</a></li>
+          </ul>
+        </div>
+        <div class="footitem">
+          <h4 class="foot_title">Partner</h4>
+          <ul class="footlinks">
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Agents</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Influencer</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Affiliate Partner</a></li>
+
+          </ul>
+        </div>
+        <div class="footitem">
+          <h4 class="foot_title">Career</h4>
+          <ul class="footlinks">
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Job</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Work With Us</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Apply</a></li>
+
+          </ul>
+        </div>
+
+        <div class="footitem">
+          <div class="partner_num">
+            <h3>21 +</h3>
+          </div>
+        </div>
+      </div>
+      <hr class="hr">
+      <div class="footer_bottom">
+        <ul class="social mt-5">
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (1).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (2).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (3).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (4).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (5).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (6).png" alt=""></a></li>
+        </ul>
+        <div class="copywriter">
+          <h6>
+            Copyright © 2022
+            <span><a href="" class="copy"> ES-Play Corporation</a></span>
+          </h6>
+
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </footer>
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
+  <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
+
+  <script>
+    function checkout() {
+      CinetPay.setConfig({
+        apikey: '102219127563b7f7c53a41e9.62135970',//   YOUR APIKEY
+        site_id: '126127',//YOUR_SITE_ID
+        notify_url: 'http://mondomaine.com/notify/',
+        mode: 'PRODUCTION'
+      });
+      CinetPay.getCheckout({
+        transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
+        amount: 100,
+        currency: 'XAF',
+        channels: 'ALL',
+        description: 'Test de paiement',
+        //Fournir ces variables pour le paiements par carte bancaire
+        customer_name: "Joe",//Le nom du client
+        customer_surname: "Down",//Le prenom du client
+        customer_email: "down@test.com",//l'email du client
+        customer_phone_number: "671234567",//l'email du client
+        customer_address: "BP 0024",//addresse du client
+        customer_city: "Antananarivo",// La ville du client
+        customer_country: "CM",// le code ISO du pays
+        customer_state: "CM",// le code ISO l'état
+        customer_zip_code: "06510", // code postal
+
+      });
+      CinetPay.waitResponse(function (data) {
+        if (data.status == "REFUSED") {
+          if (alert("Votre paiement a échoué")) {
+            window.location.reload();
+          }
+        } else if (data.status == "ACCEPTED") {
+          if (alert("Votre paiement a été effectué avec succès")) {
+            window.location.reload();
+          }
+        }
+      });
+      CinetPay.onError(function (data) {
+        console.log(data);
+      });
+    }
+  </script>
+</body>
+
+</html>

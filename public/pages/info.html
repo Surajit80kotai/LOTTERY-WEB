@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lottery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css"
+    integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.4/flickity.min.css" />
+
+<body>
+
+  <header>
+    <div class="topheader">
+      <div class="searchbar">
+        <div class="ser_bar_inn">
+          <input type="text" placeholder="Search Here...">
+          <button><img src="assets/img/search.png" alt=""></button>
+        </div>
+      </div>
+      <div class="right_menu">
+        <div class="crncy_menu">
+          <input type="checkbox" id="drop-3" hidden>
+          <label class="dropHeader dropHeader-3 droplabel" for="drop-3"><span><img src="assets/img/currency.png" alt=""
+                class=""></span> currency
+            <i class="fas fa-chevron-down fa-sm"></i></label>
+          <div class="list list-3">
+            <div class="item">
+              <a href="#">
+                FCFA
+              </a>
+            </div>
+            <div class="item">
+              <a href="#">
+                XAF
+              </a>
+            </div>
+            <div class="item">
+              <a href="#">
+                XOF
+              </a>
+            </div>
+            <div class="item">
+              <a href="#">
+                USD
+              </a>
+            </div>
+            <div class="item">
+              <a href="#">
+                Euro
+              </a>
+            </div>
+            <div class="item">
+              <a href="#">
+                Naira
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sign">
+          <a href=""><i class="bi bi-person-add"></i> SignUp</a>
+        </div>
+        <div class="sign">
+          <a href=""><i class="bi bi-box-arrow-in-right"></i> Login</a>
+        </div>
+      </div>
+    </div>
+    <div class="navarea">
+      <nav class="main_nav">
+        <div class="left_nav">
+          <div class="companyLogo">
+            <img src="assets/img/logo.png" alt="logo" class="img-fluid">
+          </div>
+          <ul class="menu_list">
+            <li><a href="#" class="menu_links">Home</a></li>
+            <li><a href="#" class="menu_links">About Us</a></li>
+            <li><a href="#" class="menu_links">Product</a></li>
+            <li><a href="#" class="menu_links">How To play</a></li>
+            <li><a href="#" class="menu_links">Charities</a></li>
+            <li><a href="#" class="menu_links">Contact</a></li>
+          </ul>
+
+        </div>
+        <div class="right_nav">
+          <div class="cart">
+            <a href="orderlist.html" class="cartbtn"><i class="fas fa-shopping-cart"></i> <span
+                class="label">23</span></a>
+
+          </div>
+          <div class="user_menu">
+
+            <input type="checkbox" id="drop-4" hidden>
+            <label class="dropHeader dropHeader-4 droplabel" for="drop-4"><i class="fa-solid fa-user"></i></label>
+            <div class="user_menulist list-4">
+              <div class="menu-container">
+                <ul class="user-menu">
+                  <div class="profile-highlight">
+                    <img src="assets/img/user.jpg" alt="profile-img" width=36 height=36>
+                    <div class="details">
+                      <div id="profile-name">Kenny Lee</div>
+
+                    </div>
+                  </div>
+                  <li class="user-menu__item">
+                    <a class="user-menu-link" href="#">
+                      <img src="assets/img/achievement.png" alt="trophy_icon" width=20 height=20>
+                      <div>Achievements</div>
+                    </a>
+                  </li>
+                  <li class="user-menu__item">
+                    <a class="user-menu-link" href="#">
+                      <img src="assets/img/wallet.png" alt="team_icon" width=20 height=20>
+                      <div>Acouunt Balance</div>
+                    </a>
+                  </li>
+                  <li class="user-menu__item">
+                    <a class="user-menu-link" href="#">
+                      <img src="assets/img/history.png" alt="team_icon" width=20 height=20>
+                      <div>Order History</div>
+                    </a>
+                  </li>
+
+                  <div class="foot">
+                    <li class="user-menu__item"><a class="user-menu-link" href="#" style="color: #F44336;">Logout</a>
+                    </li>
+                    <li class="user-menu__item"><a class="user-menu-link" href="#">Settings</a></li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          <div class="hamburger-menu" id="hamburger-menu">
+            <div class="menu-bar1"></div>
+            <div class="menu-bar2"></div>
+            <div class="menu-bar3"></div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+
+
+  <main>
+    <!-- banner -->
+    <div class="banner_wrapper">
+      <div class="banslider">
+        <div class="banner_item">
+          <div class="banner_img">
+            <img src="assets/img/banner1.jpg" alt="baaner" class="img-fluid">
+          </div>
+          <div class="banner_content">
+            <h1 class="banner_title">Villa, Costa del Sol -Spain-</h1>
+            <div class="time_counter">
+              <h3>Timeleft</h3>
+              <div id="coundown" class="countdown">
+                <div class="one_time">
+                  <div id="days" class="time days">000
+                  </div>
+                  <br><span>Days</span>
+                </div>
+                <div class="one_time">
+                  <div id="hours" class="time hours">000
+                  </div>
+                  <br><span>Hours</span>
+                </div>
+                <div class="one_time">
+                  <div id="minutes" class="time minutes">000
+                  </div>
+                  <br><span>Mins</span>
+                </div>
+                <div class="one_time">
+                  <div id="seconds" class="time seconds">000
+                  </div>
+                  <br><span>Sec</span>
+                </div>
+              </div>
+            </div>
+            <div class="ticket_price">
+              <h4>Ticket Price<span><img src="assets/img/usd.png" alt=""></span>365</h4>
+            </div>
+          </div>
+        </div>
+        <div class="banner_item">
+          <div class="banner_img">
+            <img src="assets/img/banner2.jpg" alt="baaner" class="img-fluid">
+          </div>
+          <div class="banner_content">
+            <h1 class="banner_title">Villa, Costa del Sol -Spain-</h1>
+            <div class="time_counter">
+              <h3>Timeleft</h3>
+              <div id="coundown" class="countdown">
+                <div class="one_time">
+                  <div id="days" class="time days">000
+                  </div>
+                  <br><span>Days</span>
+                </div>
+                <div class="one_time">
+                  <div id="hours" class="time hours">000
+                  </div>
+                  <br><span>Hours</span>
+                </div>
+                <div class="one_time">
+                  <div id="minutes" class="time minutes">000
+                  </div>
+                  <br><span>Mins</span>
+                </div>
+                <div class="one_time">
+                  <div id="seconds" class="time seconds">000
+                  </div>
+                  <br><span>Sec</span>
+                </div>
+              </div>
+            </div>
+            <div class="ticket_price">
+              <h4>Ticket Price<span><img src="assets/img/usd.png" alt=""></span>365</h4>
+            </div>
+          </div>
+        </div>
+        <div class="banner_item">
+          <div class="banner_img">
+            <img src="assets/img/banner3.jpg" alt="baaner" class="img-fluid">
+          </div>
+          <div class="banner_content">
+            <h1 class="banner_title">Villa, Costa del Sol -Spain-</h1>
+            <div class="time_counter">
+              <h3>Timeleft</h3>
+              <div id="coundown" class="countdown">
+                <div class="one_time">
+                  <div id="days" class="time days">000
+                  </div>
+                  <br><span>Days</span>
+                </div>
+                <div class="one_time">
+                  <div id="hours" class="time hours">000
+                  </div>
+                  <br><span>Hours</span>
+                </div>
+                <div class="one_time">
+                  <div id="minutes" class="time minutes">000
+                  </div>
+                  <br><span>Mins</span>
+                </div>
+                <div class="one_time">
+                  <div id="seconds" class="time seconds">000
+                  </div>
+                  <br><span>Sec</span>
+                </div>
+              </div>
+            </div>
+            <div class="ticket_price">
+              <h4>Ticket Price<span><img src="assets/img/usd.png" alt=""></span>365</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- product info area -->
+    <div class="container mt-5">
+      <div class="bred">
+        <div class="product_title_top">
+          <h3>Appartement Costa del Sol-Spain</h3>
+        </div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Home Lottery</li>
+          </ol>
+        </nav>
+
+      </div>
+    </div>
+
+
+    <!-- product info -->
+
+    <div class="product_info_wraper">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ">
+            <div class="product_slider_images">
+
+              <!-- Flickity HTML init -->
+              <div class="carousel carousel-main" data-flickity='{"pageDots": false }'>
+                <div class="carousel-cell"><img src="assets/img/productslider/product1.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room1.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room2.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room3.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room4.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room2.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room3.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room4.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room2.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room4.jpg" /></div>
+              </div>
+
+              <div class="carousel carousel-nav"
+                data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false,"prevNextButtons": false }'>
+                <div class="carousel-cell"><img src="assets/img/productslider/product1.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room1.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room2.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room3.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room4.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room2.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room3.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room4.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room2.jpg" /></div>
+                <div class="carousel-cell"><img src="assets/img/productslider/room4.jpg" /></div>
+              </div>
+
+
+
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="product_information_area">
+              <div class="main_product_title">
+                <h1>Appartement Costa del Sol-Spain-</h1>
+              </div>
+              <div class="tic_of_price">
+                <h4 class="price_tic">Ticket Price : <span>€</span><span>10,000</span></h4>
+              </div>
+              <div class="promo_area">
+                <h3>Add a Promo</h3>
+                <div class="promo_form">
+                  <form action="">
+                    <div class="promo_input_wrapper">
+                      <input type="text" placeholder="Enter Your Promo Code">
+                      <button class="promobtn">Apply</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="quantity">
+                <h3>Quantity</h3>
+                <div class="col-md-4 mb-3">
+                  <div class="qty-container">
+                    <button class="qty-btn-minus btn-light" type="button"><i class="fa fa-minus"></i></button>
+                    <input type="text" name="qty" value="0" class="input-qty" />
+                    <button class="qty-btn-plus btn-light" type="button"><i class="fa fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="btn_area mt-5">
+                <a href="#" class="btn2">Add To Cart</a>
+                <a href="#" class="btn2">Buy Ticket</a>
+              </div>
+              <div class="product_time">
+                <div class="time_left_title">
+                  <h3 class=""><img src="assets/img/time.png" alt="">Timeleft</h3>
+                </div>
+                <div id="coundown" class="countdown product_timeleftwrap">
+                  <div class="product_timeleft">
+                    <div id="days" class="time_left_style days">000
+                    </div>
+                    <br><span>Days</span>
+                  </div>
+                  <div class="product_timeleft">
+                    <div id="hours" class="time_left_style hours">000
+                    </div>
+                    <br><span>Hours</span>
+                  </div>
+                  <div class="product_timeleft">
+                    <div id="minutes" class="time_left_style minutes">000
+                    </div>
+                    <br><span>Mins</span>
+                  </div>
+                  <div class="product_timeleft">
+                    <div id="seconds" class="time_left_style seconds">000
+                    </div>
+                    <br><span>Sec</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ticket_sold">
+                <div class="ticket_sold_title">
+                  <h3><span><img src="assets/img/9121436 1.png" alt=""></span> Ticket Slod Already </h3>
+                </div>
+                <div class="progressarea">
+                  <div data-progress="50"></div>
+                  <p class="text-center"><strong>50%</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="description_wrapper">
+            <div class="des_title">
+              <h3>DESCRIPTION</h3>
+            </div>
+            <div class="description_item">
+              <div class="describe_heading">
+                <h4>Appartement Costa del Sol-Spain-</h4>
+              </div>
+              <p class="description_para">
+                De Super Soco TC is een volledig elektrische scooter van La Souris. Uitgerust met de beste en nieuwste
+                technologieën van deze tijd, viert de Super SOCO TC de wedergeboorte van de klassieker en initieert
+                tegelijkertijd een nieuw tijdperk van de elektrische mobiliteit. Na vele jaren van ontwikkeling en
+                samenwerking met grote spelers van over de hele wereld is er eindelijk een elektrische scooter gemaakt.
+              </p>
+            </div>
+            <hr>
+            <div class="description_item">
+              <div class="describe_heading">
+                <h4>De Super SOCO TC is standaard voorzien van:</h4>
+              </div>
+              <div class="bullet_points">
+                <li><span><i class="fas fa-circle"></i></span>LED-verlichting</li>
+                <li><span><i class="fas fa-circle"></i></span>Bluetooth voorbereiding</li>
+                <li><span><i class="fas fa-circle"></i></span>Anti-diefstal systeem</li>
+                <li><span><i class="fas fa-circle"></i></span>Start-Stop</li>
+                <li><span><i class="fas fa-circle"></i></span>Bosch 3000 watt elektromotor</li>
+              </div>
+            </div>
+            <hr>
+            <div class="description_item">
+              <div class="describe_heading">
+                <h4>100% Elektrisch</h4>
+              </div>
+              <p class="description_para">
+                De Super SOCO TC is 100% elektrisch. Er is geen verbranding, dus ook geen uitstoot. Super
+                milieuvriendelijk. De BOSCH electromotor
+                heeft een vermogen van 3kW. Tevens is het koppel vele malen hoger, zodat je ook met twee personen
+                éénvoudig optrekt.
+              </p>
+            </div>
+            <hr>
+            <div class="description_item">
+              <div class="describe_heading">
+                <h4>Geschikt voor extra passagier</h4>
+              </div>
+              <p class="description_para">
+                De Super SOCO TC is geschikt voor elk type bestuurder, en heeft uitklapbare side steps voor een
+                passagier.
+              </p>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+
+
+
+    <!-- trused payment -->
+
+    <div class="trustedpayemt">
+      <div class="sectitle">
+        <h1>Trusted Payment Method</h1>
+      </div>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-2 col-md-2">
+            <div class="payment_item">
+              <img src="assets/img/pay (3).png" alt="">
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="payment_item">
+              <img src="assets/img/pay (4).png" alt="">
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="payment_item">
+              <img src="assets/img/pay (5).png" alt="">
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="payment_item">
+              <img src="assets/img/pay (2).png" alt="">
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="payment_item">
+              <img src="assets/img/pay (1).png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer_top">
+        <div class="footitem">
+          <h4 class="foot_title">Information</h4>
+          <ul class="footlinks">
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>About us</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Find Us</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Terms & Condition</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Privacy Policy</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Cookies Policy</a></li>
+          </ul>
+        </div>
+        <div class="footitem">
+          <h4 class="foot_title">Help</h4>
+          <ul class="footlinks">
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>How to Play</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>How to Deposite</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Betting Rule</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>How to Withdraw</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>How to Register</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Balance Check</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Help Center</a></li>
+          </ul>
+        </div>
+        <div class="footitem">
+          <h4 class="foot_title">Partner</h4>
+          <ul class="footlinks">
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Agents</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Influencer</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Affiliate Partner</a></li>
+
+          </ul>
+        </div>
+        <div class="footitem">
+          <h4 class="foot_title">Career</h4>
+          <ul class="footlinks">
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Job</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Work With Us</a></li>
+            <li><a href="#"><span><i class="fas fa-caret-right"></i></span>Apply</a></li>
+
+          </ul>
+        </div>
+
+        <div class="footitem">
+          <div class="partner_num">
+            <h3>21 +</h3>
+          </div>
+        </div>
+      </div>
+      <hr class="hr">
+      <div class="footer_bottom">
+        <ul class="social mt-5">
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (1).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (2).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (3).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (4).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (5).png" alt=""></a></li>
+          <li><a href="#" class="soci_btn"><img src="assets/img/social (6).png" alt=""></a></li>
+        </ul>
+        <div class="copywriter">
+          <h6>
+            Copyright © 2022
+            <span><a href="" class="copy"> ES-Play Corporation</a></span>
+          </h6>
+
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </footer>
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.4/flickity.pkgd.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+Currency - FCFA
+User-Benin,Burkina Faso, Côte d'Ivoire, Guinea-Bissau, Mali, Niger, Senegal, Togo
+
+Currency - XAF
+User - Cameroon, Central African Republic, Chad, Republic of the Congo, Equatorial Guinea and Gabon
+
+Currency - XOF
+User - Benin, Burkina Faso, Guinea-Bissau, Ivory Coast, Mali, Senegal, Niger and Togo.
+
+Currency - USD
+User -  Ecuador, El Salvador, Zimbabwe, The British Virgin Islands, The Turks and Caicos, Timor and Leste, Bonaire, Micronesia, Palau, Marshall Islands, and Panama.
+
+Currency - Euro
+User -   Austria, Belgium, Croatia, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, the Netherlands, Portugal, Slovakia, Slovenia and Spain.
+
+Currency - Naira
+User - Nigeria.
