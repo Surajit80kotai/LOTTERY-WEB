@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchCountry } from '../../../services/slice/CountryStateSlice'
 import { updateProfile } from '../../../services/slice/UserSlice'
 import { toast } from 'react-toastify'
 import PreLoader from '../preloader/PreLoader'
 
 
 const MyProfile = () => {
-    const { countryData, loading } = useSelector((state) => state.countrystateslice)
+    const { loading } = useSelector((state) => state.countrystateslice)
     const user = JSON.parse(window.localStorage.getItem("user"))
     const social_user = JSON.parse(window.localStorage.getItem("social_user"))
     const date_of_birth = new Date(user?.dob)
-    const newDOB = `${date_of_birth.getUTCDay()}-${date_of_birth.getUTCMonth()}-${date_of_birth.getUTCFullYear()}`
+    const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const newDOB = `${date_of_birth.getUTCDate()}-${month[date_of_birth.getUTCMonth()]}-${date_of_birth.getUTCFullYear()}`
     const [formValues, setFormValues] = useState({
         full_name: user?.full_name,
         phone: user?.phone
     })
+    
     const dispatch = useDispatch()
     // const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
@@ -44,10 +45,6 @@ const MyProfile = () => {
         document.getElementById("remEdit").classList.add("hidden");
     }
 
-
-    useEffect(() => {
-        dispatch(fetchCountry())
-    }, [dispatch])
 
     return (
         <>
@@ -219,15 +216,9 @@ const MyProfile = () => {
                                                         name='country'
                                                         value={formValues.country}
                                                         onChange={handleChange}
-                                                        disabled >
-                                                        {
-                                                            countryData?.map((country) => {
-                                                                return (
-                                                                    <option key={country.countries_id
-                                                                    } value={country.name + "||" + country.countries_id}>{country.name}</option>
-                                                                )
-                                                            })
-                                                        }
+                                                        disabled
+                                                    >
+                                                        <option readOnly>{user?.country}</option>
                                                     </select>
                                                     :
                                                     <select

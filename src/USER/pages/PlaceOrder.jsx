@@ -176,7 +176,7 @@ const PlaceOrder = () => {
 
                             {/* Right Side Of PlaceOrder */}
                             {
-                                cart_data.length ?
+                                cart_data?.length ?
                                     <div className="col-md-4 ">
                                         <div className="purches_sum fixed_right">
                                             <div className="price_area_wrapper ">
@@ -245,7 +245,7 @@ const PlaceOrder = () => {
 
                             {/* Item List */}
                             {
-                                cart_data.length ?
+                                cart_data?.length ?
                                     <div className="order_history_summary col-md-8">
                                         {
                                             cart_data?.length ?

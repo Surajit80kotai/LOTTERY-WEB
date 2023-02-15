@@ -164,7 +164,7 @@ const LotteryInfo = () => {
                                         }
                                     </div>
                                     {/* Promo area */}
-                                    {
+                                    {/* {
                                         ticketInfo[0]?.is_promo ?
                                             <div className="promo_area">
                                                 <h3>Add a Promo</h3>
@@ -180,7 +180,7 @@ const LotteryInfo = () => {
                                                 </div>
                                             </div>
                                             : null
-                                    }
+                                    } */}
 
                                     {/* Quantity area */}
                                     {/* <div className="quantity">
@@ -211,7 +211,7 @@ const LotteryInfo = () => {
                                     {/* Add to cart buttton */}
                                     <div className="btn_area mt-5">
                                         {
-                                            ticketInfo[0].ticket_quantity > 0 ?
+                                            (ticketInfo[0].ticket_quantity > 0) && (timerDays && timerHours && timerMinutes && timerSeconds >= 0) ?
                                                 token || accessToken ?
                                                     <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
                                                     : <Link to="/login" className="btn2">Add To Cart</Link>
@@ -219,7 +219,7 @@ const LotteryInfo = () => {
                                         }
 
                                         {
-                                            ticketInfo[0].ticket_quantity > 0 ?
+                                            (ticketInfo[0].ticket_quantity > 0) && (timerDays && timerHours && timerMinutes && timerSeconds >= 0) ?
                                                 token || accessToken ?
                                                     <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
                                                     : <Link to="/login" className="btn2">Buy Ticket</Link>
