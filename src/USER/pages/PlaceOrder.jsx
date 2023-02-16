@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getBalance } from '../services/slice/UserSlice';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,7 @@ import PreLoader from '../components/core/preloader/PreLoader';
 const PlaceOrder = () => {
     // State for price calculation
     const [amount, setAmount] = useState({ subtotal: 0, discount: 0, total: 0 })
+    const navigate = useNavigate()
 
     // States from slices
     const { cart_data } = useSelector((state) => state.cartslice)
@@ -26,7 +27,11 @@ const PlaceOrder = () => {
 
     // On orderPlace function
     const procced = () => {
-        if (cart_data?.length) {
+        if (buyNowDataObj?.length) {
+            const buyNowData = buy_now_data?.product_info
+            // console.log(buyNowData);
+            dispatch(itemBuyNow(buyNowData))
+        } else if (cart_data?.length) {
             const cartData = cart_data?.reduce((acc, { resp, info }) => {
                 acc.push({
                     id: resp._id,
@@ -41,10 +46,6 @@ const PlaceOrder = () => {
             const orderData = { price: amount, product_info: cartData }
             // console.log(orderData);
             dispatch(placeOrder(orderData))
-        } else if (buyNowDataObj?.length) {
-            const buyNowData = buy_now_data?.product_info
-            // console.log(buyNowData);
-            dispatch(itemBuyNow(buyNowData))
         }
     }
 
@@ -61,6 +62,7 @@ const PlaceOrder = () => {
         }
         else if (buy_now_data.message === "Order success" || ordered_data.message === "Order success") {
             toast.success("Order success")
+            navigate('/ordersuccess')
         }
     }
 
@@ -74,6 +76,7 @@ const PlaceOrder = () => {
         window.scrollTo(0, 0)
         dispatch(getBalance())
         calculateSum()
+        return () => { }
     }, [cart_data, dispatch])
 
 
