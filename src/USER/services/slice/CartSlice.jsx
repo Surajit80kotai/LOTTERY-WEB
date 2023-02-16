@@ -75,8 +75,9 @@ export const CartSlice = createSlice({
         loading: false
     },
     reducers: {
-        emptyCart(state) {
+        emptyCart(state, { payload }) {
             state.cart_data = []
+            // console.log("empty cart")
         },
         clearAddStatus(state) {
             state.add_cart_status = ""

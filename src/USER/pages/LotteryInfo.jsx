@@ -53,6 +53,7 @@ const LotteryInfo = () => {
 
     // buyNow function
     const buyNow = (ticket) => {
+        // dispatch(emptyCart())
         const subtotal = Number(ticket?.ticket_price * qty)
         const total = (ticket?.discount_percentage ?
             (ticket?.ticket_price - ((ticket?.ticket_price * ticket?.discount_percentage) / 100)) * qty
@@ -211,19 +212,26 @@ const LotteryInfo = () => {
                                     {/* Add to cart buttton */}
                                     <div className="btn_area mt-5">
                                         {
-                                            (ticketInfo[0].ticket_quantity > 0) && (timerDays && timerHours && timerMinutes && timerSeconds >= 0) ?
-                                                token || accessToken ?
-                                                    <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                                    : <Link to="/login" className="btn2">Add To Cart</Link>
+                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                                (ticketInfo[0].ticket_quantity) > 0 ?
+                                                    token || accessToken ?
+                                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
+                                                        : <Link to="/login" className="btn2">Add To Cart</Link>
+                                                    : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
                                                 : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
+
                                         }
 
+                                        {/* Buy now button */}
                                         {
-                                            (ticketInfo[0].ticket_quantity > 0) && (timerDays && timerHours && timerMinutes && timerSeconds >= 0) ?
-                                                token || accessToken ?
-                                                    <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
-                                                    : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                                (ticketInfo[0].ticket_quantity) > 0 ?
+                                                    token || accessToken ?
+                                                        <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
+                                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                                    : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
                                                 : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+
                                         }
                                     </div>
 

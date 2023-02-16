@@ -36,15 +36,20 @@ const Home = () => {
     const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
 
 
+    // update cycle
+    useEffect(() => {
+        dispatch(getCart())
+    }, [dispatch])
 
+
+    // mount cycle
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(fetchLottery())
         dispatch(fetchCategory())
-        // console.log("fetch category called");
-        dispatch(getCart())
-        // console.log("get cart called");
+        // dispatch(getCart())
     }, [dispatch])
+
 
 
     return (

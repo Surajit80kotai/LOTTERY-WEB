@@ -123,7 +123,7 @@ const initialState = {
     transaction_data: [],
     updated_transac_data: [],
     ordered_data: [],
-    buy_now_data: [],
+    buy_now_data: {},
     status: "",
     loading: false
 }
@@ -134,6 +134,7 @@ export const PaymentSlice = createSlice({
     initialState,
     reducers: {
         buyNowItem(state, { payload }) {
+            // console.log(payload)
             state.buy_now_data = payload
         },
         emptyBuyNow(state) {
