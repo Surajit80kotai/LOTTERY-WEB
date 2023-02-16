@@ -269,11 +269,14 @@ const LotteryInfo = () => {
                                     <div className="ticket_sold">
                                         <div className="ticket_sold_title">
                                             {
-                                                (ticketInfo[0]?.ticket_quantity) > 0 ?
-                                                    <h3>
-                                                        <span><img src="/assets/img/9121436 1.png" alt="" /></span>
-                                                        Ticket Remains : <strong>{ticketInfo[0]?.ticket_quantity}</strong>
-                                                    </h3> : <h3>All tickets sold</h3>
+                                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                                    (ticketInfo[0]?.ticket_quantity) > 0 ?
+                                                        <h3>
+                                                            <span><img src="/assets/img/9121436 1.png" alt="" /></span>
+                                                            Ticket Remains : <strong>{ticketInfo[0]?.ticket_quantity}</strong>
+                                                        </h3> : <h3>All tickets sold</h3>
+                                                    : null
+
                                             }
 
                                         </div>

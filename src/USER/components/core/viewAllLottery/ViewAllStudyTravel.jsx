@@ -40,7 +40,7 @@ const ViewAllStudyTravel = () => {
 
                                 {/* Home Lottery */}
                                 <div className="first_row_title">
-                                    <h2>Study & Travle</h2>
+                                    <h2>Study & Travel</h2>
                                 </div>
                                 {
                                     study_travel.map((item) => {
