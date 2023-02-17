@@ -74,22 +74,25 @@ const OrderHistory = () => {
                                 : <h1>No order history present</h1>
                         }
                     </div>
-                    <nav aria-label="Page navigation example">
-                        <ReactPaginate
-                            previousLabel="Prev"
-                            nextLabel="Next"
-                            pageCount={pageCount}
-                            onPageChange={changePage}
-                            containerClassName={"pagination justify-content-center"}
-                            pageClassName={"page-item"}
-                            pageLinkClassName={"page-link"}
-                            previousClassName={"page-item"}
-                            previousLinkClassName={"page-link"}
-                            nextClassName={"page-item"}
-                            nextLinkClassName={"page-link"}
-                            activeClassName={"active"}
-                        />
-                    </nav>
+                    {/* Pagination */}
+                    {/* <div className="pagination pagination-style-three"> */}
+                    <ReactPaginate
+                        breakLabel="..."
+                        previousLabel="&#11164;"
+                        nextLabel="&#11166;"
+                        pageCount={pageCount}
+                        onPageChange={changePage}
+                        containerClassName={"pagination pagination-style-three"}
+                        // pageClassName={"page-item"}
+                        // pageLinkClassName={"page-link"}
+                        // previousClassName={"page-item"}
+                        // previousLinkClassName={"page-link"}
+                        // nextClassName={"page-item"}
+                        // nextLinkClassName={"page-link"}
+                        activeClassName={"active"}
+                        renderOnZeroPageCount={null}
+                    />
+                    {/* </div> */}
                 </div>
             </div>
         </>
