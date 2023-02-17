@@ -29,12 +29,14 @@ export const fetchLogin = createAsyncThunk(
             window.localStorage.setItem("user", JSON.stringify(result?.data?.user_details))
             navigate('/')
 
+            // To reload the page autometically after login
+            setTimeout(() => {
+                window.location.reload()
+            }, 3500)
+            
             // react toast message
             toast.success('Loged In Successfully')
 
-            // To reload the page autometically after login
-            window.location.reload()
-            
             return result?.data
         } catch (err) {
             // console.log(rejectWithValue(err.response.data));

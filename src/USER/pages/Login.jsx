@@ -55,8 +55,10 @@ const Login = () => {
         toast.success('Loged In Successfully')
 
         // To reload the page autometically after login
-        window.location.reload()
-        
+        setTimeout(() => {
+            window.location.reload()
+        }, 3500)
+
         console.log(result);
     }
 
