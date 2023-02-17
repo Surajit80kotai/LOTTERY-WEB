@@ -227,7 +227,7 @@ const MyProfile = () => {
                                                         id="selects"
                                                         name='country'
                                                         disabled >
-                                                        <option readOnly>Country number did not registered</option>
+                                                        <option readOnly>Country did not registered</option>
                                                     </select>
                                             }
                                         </div>

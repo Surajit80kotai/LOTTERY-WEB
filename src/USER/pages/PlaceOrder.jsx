@@ -24,6 +24,7 @@ const PlaceOrder = () => {
     const dueAmount = Number(amount?.total - balance?.balance)
 
     const buyNowDataObj = Object.keys(buy_now_data)
+    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
 
     // On orderPlace function
     const procced = () => {
@@ -115,7 +116,7 @@ const PlaceOrder = () => {
                     <div className="container pt-5">
                         <div className="bred">
                             <div className="product_title_top">
-                                <h3>You Order Payment</h3>
+                                <h3>Payment For Your Order</h3>
                             </div>
                             <nav aria-label="breadcrumb">
                                 <ol className="breadcrumb">
@@ -147,10 +148,10 @@ const PlaceOrder = () => {
                                                 <div className="upi_one">
                                                     <div className="form-check form-check-inline">
                                                         <label className="form-check-label" htmlFor="inlineRadio1">
-                                                            Wallet Balance
+                                                            <span className='fw-bold fs-3'>Wallet Balance&nbsp;:</span>&nbsp;&nbsp;
                                                             {
                                                                 (balance?.balance) > 0 ?
-                                                                    <span className="upi_icon fw-bolder">{(balance?.balance)?.toFixed(2)}</span> :
+                                                                    <span className="upi_icon fw-bolder fs-4">{userCurrency_symbol}{(balance?.balance)?.toFixed(2)}</span> :
                                                                     <span className="upi_icon fw-bolder">0</span>
                                                             }
                                                         </label>

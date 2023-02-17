@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchForgetPass } from '../services/slice/AuthSlice'
 import { Flip, toast, ToastContainer } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader'
+import { Link } from 'react-router-dom'
 
 const ForgetPassword = () => {
     const [formValues, setFormValues] = useState({ email: "" })
@@ -28,6 +29,11 @@ const ForgetPassword = () => {
             {loading && <PreLoader />}
 
             <main className="main">
+                {/* Back to home button */}
+                <Link className='text-secondary' to='/'>
+                    <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Home</h3>
+                </Link>
+
                 <div className="container">
 
                     <div className="forgetwrapper">
