@@ -1,24 +1,20 @@
 import React from 'react'
-// import { useEffect, useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PreLoader from '../components/core/preloader/PreLoader'
+import { getCart } from '../services/slice/CartSlice'
 
 const OrderSuccess = () => {
-    // const [timer, setTimer] = useState(10)
-    // const navigate = useNavigate()
-    // const orderhistory = "orderhistory"
     const { loading } = useSelector((state) => state.userslice)
+    const { cart_data } = useSelector((state) => state.paymentslice)
+    const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         navigate('/profile')
-    //     }, 10000)
-    //     setInterval(() => {
-    //         setTimer(timer - 1)
-    //     }, 1000)
-    // })
+    // update
+    useEffect(() => {
+        dispatch(getCart())
+    }, [dispatch, cart_data])
+
 
     return (
         <>

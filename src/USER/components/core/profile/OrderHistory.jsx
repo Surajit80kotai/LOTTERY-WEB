@@ -13,7 +13,7 @@ const OrderHistory = () => {
 
     // for pagination
     const userPerPage = 8
-    const pagesVisited = pageNumber + userPerPage
+    const pagesVisited = pageNumber * userPerPage
     const orderHistoryData = order_history_data?.slice(pagesVisited, pagesVisited + userPerPage)
     const pageCount = Math.ceil(order_history_data?.length / userPerPage)
 
