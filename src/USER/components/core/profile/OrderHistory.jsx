@@ -1,12 +1,25 @@
 import React from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react'
+import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux'
 import { userOrderHistory } from '../../../services/slice/UserSlice'
 import PreLoader from '../preloader/PreLoader'
 
 const OrderHistory = () => {
+    const [pageNumber, setPageNumber] = useState(0)
     const { order_history_data, loading } = useSelector(state => state.userslice)
     const dispatch = useDispatch()
+
+    // for pagination
+    const userPerPage = 8
+    const pagesVisited = pageNumber + userPerPage
+    const orderHistoryData = order_history_data?.slice(pagesVisited, pagesVisited + userPerPage)
+    const pageCount = Math.ceil(order_history_data?.length / userPerPage)
+
+    const changePage = (data) => {
+        setPageNumber(data?.selected)
+    }
 
     useEffect(() => {
         dispatch(userOrderHistory())
@@ -24,8 +37,8 @@ const OrderHistory = () => {
                     <div className="order_histry_wrapper scroll">
                         {/* order his item  */}
                         {
-                            order_history_data?.length ?
-                                order_history_data?.map((item) => {
+                            orderHistoryData?.length ?
+                                orderHistoryData?.map((item) => {
                                     return (
                                         <div className="orderhistroy_item" key={item?._id}>
                                             <div className="ribbon-wrapper-green">
@@ -61,6 +74,22 @@ const OrderHistory = () => {
                                 : <h1>No order history present</h1>
                         }
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ReactPaginate
+                            previousLabel="Prev"
+                            nextLabel="Next"
+                            pageCount={pageCount}
+                            onPageChange={changePage}
+                            containerClassName={"pagination justify-content-center"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            previousClassName={"page-item"}
+                            previousLinkClassName={"page-link"}
+                            nextClassName={"page-item"}
+                            nextLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                        />
+                    </nav>
                 </div>
             </div>
         </>
