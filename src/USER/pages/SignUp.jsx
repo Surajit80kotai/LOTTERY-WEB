@@ -55,19 +55,6 @@ const SignUp = () => {
     }
 
 
-    // To ensure only valid mobile numbers(3000000000 to 9999999999) are entered
-    // ('body').on('keyup', '.js-input-mobile', function () {
-    //     var input = (this),
-    //         value = input.val(),
-    //         length = value.length,
-    //         inputCharacter = parseInt(value.slice(-1));
-
-    //     if (!((length > 1 && inputCharacter >= 0 && inputCharacter <= 9) || (length === 1 && inputCharacter >= 3 && inputCharacter <= 9))) {
-    //         input.val(value.substring(0, length - 1));
-    //     }
-    // });
-
-
     // getCountryId
     const getCountryId = (name) => {
         // console.log(name);
@@ -95,10 +82,13 @@ const SignUp = () => {
             {loading && <PreLoader />}
 
             <main className="main">
+                {/* Back to home button */}
+                <Link className='text-secondary' to='/'>
+                    <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Home</h3>
+                </Link>
+
                 <div className="wrapper_area margin-top-5">
-
                     <div className="log_area">
-
                         <div className="right_part">
                             <div className="form_areas">
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>

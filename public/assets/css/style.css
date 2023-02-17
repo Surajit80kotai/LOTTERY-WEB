@@ -2774,6 +2774,16 @@ margin: 0.5rem;
 	transition: 0.5s linear;
 }
 
+/* order_success_border */
+.order_success_border {
+	background-color: var(--primary-color) !important;
+}
+
+.border {
+	border: 3px solid var(--primary-color) !important;
+}
+
+
 /* =======================media quries================== */
 
 @media(min-width:1920px) {

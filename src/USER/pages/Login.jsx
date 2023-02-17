@@ -63,6 +63,11 @@ const Login = () => {
             {loading && <PreLoader />}
 
             <main className="main">
+                {/* Back to home button */}
+                <Link className='text-secondary' to='/'>
+                    <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Home</h3>
+                </Link>
+
                 <div className="wrapper_area margin-top">
                     <div className="log_area">
 

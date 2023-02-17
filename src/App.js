@@ -45,6 +45,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/:dueAmount' element={<Profile />} />
+          {/* <Route path='/profile/:orderhistory' element={<Profile />} /> */}
           <Route path='/cart' element={<Cart />} />
           <Route path='/placeorder' element={<PlaceOrder />} />
           <Route path='/ordersuccess' element={<OrderSuccess />} />
