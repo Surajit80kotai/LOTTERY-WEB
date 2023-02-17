@@ -53,6 +53,10 @@ const Login = () => {
         window.localStorage.setItem("accessToken", JSON.stringify(result?.user?.accessToken))
         navigate('/')
         toast.success('Loged In Successfully')
+
+        // To reload the page autometically after login
+        window.location.reload()
+        
         console.log(result);
     }
 

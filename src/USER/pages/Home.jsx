@@ -14,8 +14,8 @@ import PreLoader from '../components/core/preloader/PreLoader'
 
 
 const Home = () => {
-    // const token = JSON.parse(window.localStorage.getItem("token"))
     const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
+    // const token = JSON.parse(window.localStorage.getItem("token"))
     // const { cart_data } = useSelector((state) => state.cartslice)
     // const cartLength = cart_data?.length
     const dispatch = useDispatch()
@@ -36,18 +36,13 @@ const Home = () => {
     const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
 
 
-    // update cycle
-    useEffect(() => {
-        dispatch(getCart())
-    }, [dispatch])
-
 
     // mount cycle
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(fetchLottery())
         dispatch(fetchCategory())
-        // dispatch(getCart())
+        dispatch(getCart())
     }, [dispatch])
 
 
@@ -76,7 +71,7 @@ const Home = () => {
                                     <h2>House & Apartments</h2>
                                 </div>
                                 {
-                                    house.map((item, index) => {
+                                    house?.map((item, index) => {
                                         return <HomeLottery
                                             item={item}
                                             key={item._id}
@@ -93,7 +88,7 @@ const Home = () => {
                                     <h2>Cars & Bikes</h2>
                                 </div>
                                 {
-                                    vehicle.map((item, index) => {
+                                    vehicle?.map((item, index) => {
                                         return <CarsBike
                                             item={item}
                                             key={item._id}
@@ -109,7 +104,7 @@ const Home = () => {
                                     <h2>Study & Travel</h2>
                                 </div>
                                 {
-                                    study_travel.map((item, index) => {
+                                    study_travel?.map((item, index) => {
                                         return <StudyTravel
                                             item={item}
                                             key={item._id}
@@ -126,7 +121,7 @@ const Home = () => {
                                     <h2>Computer & Phones</h2>
                                 </div>
                                 {
-                                    comp_phn.map((item, index) => {
+                                    comp_phn?.map((item, index) => {
                                         return <ComputersPhones
                                             item={item}
                                             key={item._id}
@@ -143,7 +138,7 @@ const Home = () => {
                                     <h2>Cosmetics</h2>
                                 </div>
                                 {
-                                    cosmetics.map((item, index) => {
+                                    cosmetics?.map((item, index) => {
                                         return <Cosmetics
                                             item={item}
                                             key={item._id}
