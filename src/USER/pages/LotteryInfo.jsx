@@ -5,6 +5,7 @@ import { useTimer } from '../customHooks/useTimer'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCart, clearAddStatus, getCart } from '../services/slice/CartSlice'
 import { buyNowItem } from '../services/slice/PaymentSlice'
+import PreLoader from '../components/core/preloader/PreLoader'
 
 const LotteryInfo = () => {
     const { lid } = useParams()
@@ -18,6 +19,11 @@ const LotteryInfo = () => {
     const { cart_data, add_cart_status } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
     const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
+    const { loading } = useSelector((state) => state.lotteryslice)
+
+    // currency variables
+    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
+    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY
 
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
@@ -93,6 +99,9 @@ const LotteryInfo = () => {
 
     return (
         <>
+            {/* PreLoader */}
+            {loading && <PreLoader />}
+
             <main>
                 {/* Product Info */}
                 <div className="product_info_wraper">
@@ -152,15 +161,15 @@ const LotteryInfo = () => {
                                         {
                                             ticketInfo[0]?.discount_percentage ?
                                                 <h3>Ticket Price :&nbsp;&nbsp;
-                                                    <span className="discountprice">{ticketInfo[0]?.currency}{discountedPrice}</span>&nbsp;&nbsp;
+                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{discountedPrice}</span>&nbsp;&nbsp;
                                                     <span className="text-decoration-line-through fs-4 fw-light">
-                                                        {ticketInfo[0]?.currency}{ticketInfo[0]?.ticket_price}
+                                                        {userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{ticketInfo[0]?.ticket_price}
                                                     </span>&nbsp;&nbsp;
                                                     <span className="discount_percent fs-4 ">{ticketInfo[0]?.discount_percentage}% off</span>
                                                 </h3>
                                                 :
                                                 <h3>Ticket Price :&nbsp;&nbsp;
-                                                    <span className="discountprice">{ticketInfo[0]?.currency}{ticketInfo[0]?.ticket_price}</span>
+                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{ticketInfo[0]?.ticket_price}</span>
                                                 </h3>
                                         }
                                     </div>
@@ -201,11 +210,11 @@ const LotteryInfo = () => {
                                     {/* {
                                         ticketInfo[0]?.discount_percentage ?
                                             <h3>Total Price :&nbsp;&nbsp;
-                                                <span className="discountprice">{ticketInfo[0]?.currency}{(discountedPrice * qty).toFixed(2)}</span>&nbsp;&nbsp;
+                                                <span className="discountprice">{userCurrency_symbol? userCurrency_symbol : generalCurrency_symbol}{(discountedPrice * qty).toFixed(2)}</span>&nbsp;&nbsp;
                                             </h3>
                                             :
                                             <h3>Ticket Price :&nbsp;&nbsp;
-                                                <span className="discountprice">{ticketInfo[0]?.currency}{(ticketInfo[0]?.ticket_price) * qty}</span>
+                                                <span className="discountprice">{userCurrency_symbol? userCurrency_symbol : generalCurrency_symbol}{(ticketInfo[0]?.ticket_price) * qty}</span>
                                             </h3>
                                     } */}
 

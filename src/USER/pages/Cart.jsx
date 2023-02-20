@@ -11,6 +11,9 @@ const Cart = () => {
   const dispatch = useDispatch()
   const cartLength = cart_data?.length
   const [amount, setAmount] = useState({ subtotal: 0, discount: 0, total: 0 })
+  const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
+
+
 
   // CalculateSum Function
   const calculateSum = () => {
@@ -112,7 +115,7 @@ const Cart = () => {
                               <div className="other_info">
                                 <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
                                 {/* Calculation of discounted price */}
-                                <p className="tic_price fw-bold text-dark">Price Of Ticket : {item?.info[0]?.currency}
+                                <p className="tic_price fw-bold text-dark">Price Of Ticket : {userCurrency_symbol}
                                   {
                                     (Number(item?.info[0]?.ticket_price - ((item?.info[0]?.ticket_price * item?.info[0]?.discount_percentage) / 100)) * item?.resp?.quantity).toFixed(2)
                                   }
@@ -176,7 +179,7 @@ const Cart = () => {
                     <div className="price_item borderbottom">
                       <h4 className="price_text">Price <span> ({cart_data?.length} Item):</span></h4>
                       <h6 className="price_value">
-                        {cart_data ? <span>{cart_data[0]?.info[0]?.currency}</span> : 0}
+                        {cart_data ? <span>{userCurrency_symbol}</span> : 0}
                         {(amount.subtotal).toFixed(2)}
                       </h6>
                     </div>
@@ -185,7 +188,7 @@ const Cart = () => {
                     <div className="price_item borderbottom">
                       <h4 className="price_text">Total Discount :</h4>
                       <h6 className="price_value text-success">
-                        {cart_data ? <span>{cart_data[0]?.info[0]?.currency}-</span> : 0}
+                        {cart_data ? <span>{userCurrency_symbol}-</span> : 0}
                         {(amount.discount).toFixed(2)}
                       </h6>
                     </div>
@@ -194,7 +197,7 @@ const Cart = () => {
                     <div className="price_item mt-5">
                       <h4 className="price_text">Total Payables:</h4>
                       <h6 className="price_value">
-                        {cart_data ? <span>{cart_data[0]?.info[0]?.currency}</span> : 0}
+                        {cart_data ? <span>{userCurrency_symbol}</span> : 0}
                         {(amount.total).toFixed(2)}
                       </h6>
                     </div>

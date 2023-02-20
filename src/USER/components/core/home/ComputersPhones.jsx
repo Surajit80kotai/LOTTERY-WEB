@@ -8,8 +8,10 @@ const ComputersPhones = ({ item, index }) => {
     const discountedPrice = Number((ticket_price - ((ticket_price * discount_percentage) / 100)))
     // defining states timer
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
-    // const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
+
+    // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
+    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY
 
 
     useEffect(() => {
@@ -38,13 +40,13 @@ const ComputersPhones = ({ item, index }) => {
                                         {
                                             discount_percentage ?
                                                 <h3>
-                                                    <span className="discountprice">{userCurrency_symbol}{discountedPrice}</span>&nbsp;&nbsp;<span>{userCurrency_symbol}</span>
+                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{discountedPrice}</span>&nbsp;&nbsp;<span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span>
                                                     <span className="text-decoration-line-through">{ticket_price}</span>&nbsp;&nbsp;
                                                     <span className="discount_percent">{discount_percentage}% off</span>
                                                 </h3>
                                                 :
                                                 <h3>
-                                                    <span className="discountprice">{userCurrency_symbol}{ticket_price}</span>
+                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{ticket_price}</span>
                                                 </h3>
                                         }
 
