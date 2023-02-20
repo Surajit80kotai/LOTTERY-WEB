@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import "slick-carousel/slick/slick.css";
 import { useTimer } from '../../../customHooks/useTimer';
 
 const Banner = ({ house, vehicle }) => {
 
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
+    // const { fetch_lott_data } = useSelector((state) => state.lotteryslice)
 
     // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
     const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY
+
+    // const image = process.env.REACT_APP_NODE_HOST
+
+    // const bannerImage = fetch_lott_data?.map((item) => {
+    //     if (item.is_promo) return item.main_image
+    // })
 
 
     useEffect(() => {
@@ -21,12 +29,27 @@ const Banner = ({ house, vehicle }) => {
 
             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
+                    {/* {
+                        bannerImage?.length ?
+                            bannerImage?.map((item, index) => {
+                                let act = ""
+                                if (index === 0) {
+                                    act = "active";
+                                }
+                                return (
+                                    <div className={`carousel-item ${act}`} key={index} >
+                                        <img src={image + item} className="d-block w-100" alt="" />
+                                    </div>
+                                )
+                            })
+                            : null
+                    } */}
+
                     <div className="carousel-item active">
                         <div className="banner_img">
                             <img src="/assets/img/banner1.jpg" alt="baaner" className="img-fluid" />
                         </div>
                         <div className="banner_content">
-                            {/* Condition for timer run-out */}
 
                             {
                                 (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
@@ -75,7 +98,7 @@ const Banner = ({ house, vehicle }) => {
                             <img src="/assets/img/banner2.jpg" alt="baaner" className="img-fluid" />
                         </div>
                         <div className="banner_content">
-                            {/* Condition for timer run-out */}
+
 
                             {
                                 (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
@@ -124,7 +147,6 @@ const Banner = ({ house, vehicle }) => {
                             <img src="/assets/img/banner3.jpg" alt="baaner" className="img-fluid" />
                         </div>
                         <div className="banner_content">
-                            {/* Condition for timer run-out */}
 
                             {
                                 (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?

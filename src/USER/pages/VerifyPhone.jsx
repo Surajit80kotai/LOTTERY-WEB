@@ -1,13 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import PreLoader from '../components/core/preloader/PreLoader'
 
 const VerifyPhone = () => {
 
     const { loading } = useSelector((state) => state.authslice)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
 
 
