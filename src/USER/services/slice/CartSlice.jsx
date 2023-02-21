@@ -3,14 +3,25 @@ import { ADDTOCART, DELCART, FETCHCART, UPDATECART } from "../api/Api";
 import { toast } from 'react-toastify'
 
 
+// from socialuser
+const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
+const socialuserID = (JSON.parse(window.localStorage.getItem("social_user")))?.uid
+
 // Defining header
-const header = {
+const header = accessToken ? {
+    headers: {
+        Authorization: `Bearer ${accessToken}`
+    }
+} : {
     headers: {
         Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("token"))}`
     }
-};
+}
 
-const userID = (JSON.parse(window.localStorage.getItem("user"))?.user_id)
+// user ID
+const userID = socialuserID ? socialuserID : (JSON.parse(window.localStorage.getItem("user"))?.user_id)
+
+
 
 
 // AddCart post request handle

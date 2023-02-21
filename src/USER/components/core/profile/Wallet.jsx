@@ -97,7 +97,7 @@ const Wallet = ({ dueAmount }) => {
                                             <div className="col-md-6">
                                                 <div className="payment_input">
                                                     <div className="currency_icon">
-                                                        <p>{userCurrency ? userCurrency : generalCurrency}&nbsp;</p>
+                                                        <p>{userCurrency ? userCurrency : generalCurrency}</p>
                                                     </div>
                                                     <input
                                                         type="text"
@@ -125,10 +125,10 @@ const Wallet = ({ dueAmount }) => {
                                 </div>
 
                                 {/* transaction histrory */}
-                                <h3 className="tranhis">Transaction History</h3>
-                                <div className="transaction_area">
-                                    {
-                                        transaction_data ?
+                                {
+                                    transaction_data?.length ?
+                                        <div className="transaction_area">
+                                            <h3 className="tranhis">Transaction History</h3>
                                             <table className="table mt-4">
                                                 <thead className="table_head sticky-top ">
                                                     <tr>
@@ -153,9 +153,9 @@ const Wallet = ({ dueAmount }) => {
                                                     }
                                                 </tbody>
                                             </table>
-                                            : <h3>No transaction history present</h3>
-                                    }
-                                </div>
+                                        </div>
+                                        : <h4 className='text-center fst-italic fw-semibold mt-2'>No Transaction History Present</h4>
+                                }
                             </div>
 
                         </div>

@@ -19,7 +19,7 @@ import AboutUs from './USER/pages/AboutUs';
 import HowToPlay from './USER/pages/HowToPlay';
 import Charities from './USER/pages/Charities';
 import OrderSuccess from './USER/pages/OrderSuccess';
-// import TestFive from './USER/pages/test/TestFive';
+import TestTwo from './USER/pages/test/TestTwo';
 
 
 function App() {
@@ -39,7 +39,8 @@ function App() {
         <Route path='/viewallstud_trv' element={<ViewAllStudyTravel />} />
         <Route path='/viewallcomp_phn' element={<ViewAllCompPhn />} />
         <Route path='/viewallcosmetics' element={<ViewAllCosmetics />} />
-        {/* <Route path='/test' element={<TestFive />} /> */}
+        <Route path='/test' element={<TestTwo />} />
+
         {/* Private Route Part */}
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />

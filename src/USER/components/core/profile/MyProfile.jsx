@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { updateProfile } from '../../../services/slice/UserSlice'
 import { toast } from 'react-toastify'
 import PreLoader from '../preloader/PreLoader'
+import { useEffect } from 'react'
 
 
 const MyProfile = () => {
@@ -19,8 +20,9 @@ const MyProfile = () => {
     })
     
     const dispatch = useDispatch()
-    // const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
+    
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
+    // console.log(social_user?.photoURL)
 
 
     // handleChange for onChange
@@ -41,8 +43,8 @@ const MyProfile = () => {
             inputs[i].disabled = false;
         }
         // document.getElementById("saveChanges").style.display = "block";
-        document.getElementById("saveChanges").classList.remove("hidden");
         document.getElementById("remEdit").classList.add("hidden");
+        document.getElementById("saveChanges").classList.remove("hidden");
     }
 
 
@@ -65,8 +67,8 @@ const MyProfile = () => {
                                         :
                                         <div className="profile_img ">
                                             {
-                                                social_user?.photoUrl ?
-                                                    <img src={social_user?.photoUrl} alt="" className="img-fluid" />
+                                                social_user?.photoURL ?
+                                                    <img src={social_user?.photoURL} alt="" className="img-fluid" />
                                                     : <img src="/assets/img/avatar.png" alt="" className="img-fluid" />
                                             }
                                         </div>
