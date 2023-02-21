@@ -11,8 +11,13 @@ const Wallet = ({ dueAmount }) => {
     const dispatch = useDispatch()
     const { balance } = useSelector((state) => state.userslice)
     const { paymentData, transaction_data, loading } = useSelector((state) => state.paymentslice)
+
+    // currency variables
     const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
+    const generalCurrency = process.env.REACT_APP_GENERAL_CURRENCY
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
+    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
+
 
     // handleChange function for onChange
     const handleChange = (e) => {
@@ -77,7 +82,7 @@ const Wallet = ({ dueAmount }) => {
                                     <div className="total_balns">
                                         <span>Total Balance</span>
                                         {
-                                            balance?.balance > 0 ? <h5 className="total_amount">{userCurrency_symbol} {(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userCurrency_symbol} 0</h5>
+                                            balance?.balance > 0 ? <h5 className="total_amount">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol} {(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol} 0</h5>
                                         }
 
                                     </div>
@@ -92,7 +97,7 @@ const Wallet = ({ dueAmount }) => {
                                             <div className="col-md-6">
                                                 <div className="payment_input">
                                                     <div className="currency_icon">
-                                                        <p>{userCurrency}</p>
+                                                        <p>{userCurrency ? userCurrency : generalCurrency}</p>
                                                     </div>
                                                     <input
                                                         type="text"
@@ -162,7 +167,7 @@ const Wallet = ({ dueAmount }) => {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h3>Add Money to Wallet</h3>
-                                <h4>{userCurrency_symbol}{formValue.amount}</h4>
+                                <h4>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{formValue.amount}</h4>
                             </div>
                             <div className="modal-body">
                                 <h4 className="option_title">Payment Option</h4>

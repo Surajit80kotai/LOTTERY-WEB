@@ -10,7 +10,7 @@ const Banner = ({ house, vehicle }) => {
 
     // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY
+    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
 
     // const image = process.env.REACT_APP_NODE_HOST
 
