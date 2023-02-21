@@ -59,7 +59,7 @@ const VerifyPhone = () => {
                                         <button type="submit" className="btn_one">Send OTP</button>
                                     </div>
 
-                                    {/* Phone Number */}
+                                    {/* OTP */}
                                     <div className="mb-5">
                                         <label htmlFor="otp" className="form-label label_style">OTP</label>
                                         <input

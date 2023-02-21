@@ -82,7 +82,7 @@ const Wallet = ({ dueAmount }) => {
                                     <div className="total_balns">
                                         <span>Total Balance</span>
                                         {
-                                            balance?.balance > 0 ? <h5 className="total_amount">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol} {(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol} 0</h5>
+                                            balance?.balance > 0 ? <h5 className="total_amount">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;0</h5>
                                         }
 
                                     </div>
@@ -97,7 +97,7 @@ const Wallet = ({ dueAmount }) => {
                                             <div className="col-md-6">
                                                 <div className="payment_input">
                                                     <div className="currency_icon">
-                                                        <p>{userCurrency ? userCurrency : generalCurrency}</p>
+                                                        <p>{userCurrency ? userCurrency : generalCurrency}&nbsp;</p>
                                                     </div>
                                                     <input
                                                         type="text"

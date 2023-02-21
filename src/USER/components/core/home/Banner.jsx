@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import "slick-carousel/slick/slick.css";
 import { useTimer } from '../../../customHooks/useTimer';
 

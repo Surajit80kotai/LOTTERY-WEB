@@ -40,13 +40,13 @@ const Cosmetics = ({ item, index }) => {
                                         {
                                             discount_percentage ?
                                                 <h3>
-                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{discountedPrice}</span>&nbsp;&nbsp;<span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span>
-                                                    <span className="text-decoration-line-through">{ticket_price}</span>&nbsp;&nbsp;
+                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span>
+                                                    <span className="text-decoration-line-through">&nbsp;{ticket_price}</span>&nbsp;&nbsp;
                                                     <span className="discount_percent">{discount_percentage}% off</span>
                                                 </h3>
                                                 :
                                                 <h3>
-                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{ticket_price}</span>
+                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{ticket_price}</span>
                                                 </h3>
                                         }
 

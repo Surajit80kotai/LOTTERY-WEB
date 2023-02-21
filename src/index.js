@@ -10,6 +10,7 @@ import Login from './USER/pages/Login';
 import ForgetPassword from './USER/pages/ForgetPassword';
 import { Store } from './USER/services/store/Store';
 import VerifyPhone from './USER/pages/VerifyPhone';
+import { Flip, ToastContainer } from 'react-toastify';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,10 +22,11 @@ root.render(
         } />
         <Route path='/verifyphone' element={<VerifyPhone />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/login' element={<Login text="/"/>} />
+        <Route path='/login' element={<Login text="/" />} />
         <Route path='/f_password' element={<ForgetPassword />} />
       </Routes>
     </Router>
+    <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} />
   </Provider>
 );
 

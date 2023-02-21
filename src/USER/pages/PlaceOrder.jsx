@@ -24,7 +24,10 @@ const PlaceOrder = () => {
     const dueAmount = Number(amount?.total - balance?.balance)
 
     const buyNowDataObj = Object.keys(buy_now_data)
+
+    // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
+    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
 
     // On orderPlace function
     const procced = () => {
@@ -86,23 +89,47 @@ const PlaceOrder = () => {
     const calculateSum = () => {
         let st = 0
         let dc = 0
-
-        cart_data?.map(({ resp, info }) => {
-            if (info[0].discount_percentage) {
-                st += (Number((info[0].ticket_price * resp.quantity)))
-                dc += (Number(((info[0].ticket_price) * (info[0].discount_percentage) / 100) * resp.quantity))
-                return Number(st)
-            } else {
-                st += Number(info[0].ticket_price * resp.quantity)
-                return st
-            }
-        })
-        return setAmount({
-            ...amount,
-            subtotal: st,
-            discount: dc,
-            total: st - dc
-        })
+        if (buyNowDataObj?.length) {
+            setAmount({
+                ...amount,
+                subtotal: buy_now_data?.amount?.subtotal,
+                discount: buy_now_data?.amount?.discount,
+                total: buy_now_data?.amount?.total
+            })
+        } else {
+            cart_data?.map(({ resp, info }) => {
+                if (info[0].discount_percentage) {
+                    st += (Number((info[0].ticket_price * resp.quantity)))
+                    dc += (Number(((info[0].ticket_price) * (info[0].discount_percentage) / 100) * resp.quantity))
+                    return Number(st)
+                } else {
+                    st += Number(info[0].ticket_price * resp.quantity)
+                    return st
+                }
+            })
+            return setAmount({
+                ...amount,
+                subtotal: st,
+                discount: dc,
+                total: st - dc
+            })
+        }
+        // cart_data?.map(({ resp, info }) => {
+        //     if (info[0].discount_percentage) {
+        //         st += (Number((info[0].ticket_price * resp.quantity)))
+        //         dc += (Number(((info[0].ticket_price) * (info[0].discount_percentage) / 100) * resp.quantity))
+        //         return Number(st)
+        //     } else {
+        //         st += Number(info[0].ticket_price * resp.quantity)
+        //         return st
+        //     }
+        // })
+        // return setAmount({
+        //     ...amount,
+        //     subtotal: st,
+        //     discount: dc,
+        //     total: st - dc
+        // })
     }
 
 
@@ -151,7 +178,7 @@ const PlaceOrder = () => {
                                                             <span className='fw-bold fs-3'>Wallet Balance&nbsp;:</span>&nbsp;&nbsp;
                                                             {
                                                                 (balance?.balance) > 0 ?
-                                                                    <span className="upi_icon fw-bolder fs-4">{userCurrency_symbol}{(balance?.balance)?.toFixed(2)}</span> :
+                                                                    <span className="upi_icon fw-bolder fs-4">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{(balance?.balance)?.toFixed(2)}</span> :
                                                                     <span className="upi_icon fw-bolder">0</span>
                                                             }
                                                         </label>
@@ -189,21 +216,21 @@ const PlaceOrder = () => {
                                                     <div className="price_item borderbottom">
                                                         <h4 className="price_text">Price <span> ({buy_now_data?.product_info?.quantity} Item):</span></h4>
                                                         <h6 className="price_value">
-                                                            {buy_now_data ? <span>{userCurrency_symbol}</span> : 0}
+                                                            {buy_now_data ? <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span> : 0}
                                                             {buy_now_data?.amount ? (buy_now_data?.amount?.subtotal).toFixed(2) : 0}
                                                         </h6>
                                                     </div>
                                                     <div className="price_item mb-5">
                                                         <h4 className="price_text">Total Discount :</h4>
                                                         <h6 className="price_value text-success">
-                                                            {buy_now_data ? <span>-{userCurrency_symbol}</span> : 0}
+                                                            {buy_now_data ? <span>-{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span> : 0}
                                                             {buy_now_data?.amount ? (buy_now_data?.amount?.discount).toFixed(2) : 0}
                                                         </h6>
                                                     </div>
                                                     <div className="price_item mt-5">
                                                         <h4 className="price_text">Total Payables:</h4>
                                                         <h6 className="price_value">
-                                                            {buy_now_data ? <span>{userCurrency_symbol}</span> : 0}
+                                                            {buy_now_data ? <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span> : 0}
 
                                                             {buy_now_data?.amount ? (buy_now_data?.amount?.total).toFixed(2) : 0}
                                                         </h6>
@@ -221,21 +248,21 @@ const PlaceOrder = () => {
                                                     <div className="price_item borderbottom">
                                                         <h4 className="price_text">Price <span> ({cart_data?.length} Item):</span></h4>
                                                         <h6 className="price_value">
-                                                            {cart_data ? <span>{userCurrency_symbol}</span> : 0}
+                                                            {cart_data ? <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span> : 0}
                                                             {(amount.subtotal).toFixed(2)}
                                                         </h6>
                                                     </div>
                                                     <div className="price_item mb-5">
                                                         <h4 className="price_text">Total Discount :</h4>
                                                         <h6 className="price_value text-success">
-                                                            {cart_data ? <span>{userCurrency_symbol}-</span> : 0}
+                                                            {cart_data ? <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}-</span> : 0}
                                                             {(amount.discount).toFixed(2)}
                                                         </h6>
                                                     </div>
                                                     <div className="price_item mt-5">
                                                         <h4 className="price_text">Total Payables:</h4>
                                                         <h6 className="price_value">
-                                                            {cart_data ? <span>{userCurrency_symbol}</span> : 0}
+                                                            {cart_data ? <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span> : 0}
 
                                                             {(amount.total).toFixed(2)}
                                                         </h6>
@@ -264,7 +291,7 @@ const PlaceOrder = () => {
                                                 <div className="other_info">
                                                     <p className="amount fw-bold text-dark">Item Quantity : {buy_now_data?.product_info?.quantity}</p>
                                                     <p className="tic_price fw-bold text-dark">Price Of Ticket :
-                                                        {userCurrency_symbol}
+                                                        {userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}
                                                         {buy_now_data?.product_info?.total_discount_price}
                                                     </p>
                                                 </div>
@@ -298,7 +325,7 @@ const PlaceOrder = () => {
                                                                 </div>
                                                                 <div className="other_info">
                                                                     <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
-                                                                    <p className="tic_price fw-bold text-dark">Price Of Ticket : {userCurrency_symbol}
+                                                                    <p className="tic_price fw-bold text-dark">Price Of Ticket : {userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}
                                                                         {
                                                                             (Number(item?.info[0]?.ticket_price - ((item?.info[0]?.ticket_price * item?.info[0]?.discount_percentage) / 100)) * item?.resp?.quantity).toFixed(2)
                                                                         }

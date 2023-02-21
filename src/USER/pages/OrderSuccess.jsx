@@ -6,15 +6,16 @@ import PreLoader from '../components/core/preloader/PreLoader'
 import { getCart } from '../services/slice/CartSlice'
 
 const OrderSuccess = () => {
-    const { loading } = useSelector((state) => state.userslice)
-    const { cart_data } = useSelector((state) => state.paymentslice)
+    const { cart_data, loading } = useSelector((state) => state.cartslice)
     const dispatch = useDispatch()
+    const cartLength = cart_data?.length
+
 
     // update
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(getCart())
-    }, [dispatch, cart_data])
+    }, [dispatch, cartLength])
 
 
     return (
@@ -38,8 +39,7 @@ const OrderSuccess = () => {
                             <h1 style={{ "fontSize": "3.5rem" }}>Thank You !</h1>
                             <p className='fs-3'>Your order has been placed successfully</p>
                             <br />
-                            <Link to="/profile" className="orderplace text-white">&larr; Back To Profile</Link>
-                            {/* <Link to={`/profile/${orderhistory}`} className="orderplace">&larr; Back To Profile</Link> */}
+                            <Link to="/" className="orderplace text-white">&larr; Continue Shopping</Link>
                         </div>
                     </div>
                 </div>

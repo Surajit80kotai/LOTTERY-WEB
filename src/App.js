@@ -10,7 +10,7 @@ import Profile from './USER/pages/Profile';
 import Cart from './USER/pages/Cart';
 import PlaceOrder from './USER/pages/PlaceOrder';
 import Contact from './USER/pages/Contact';
-import { Flip, ToastContainer } from 'react-toastify'
+// import { Flip, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import ViewAllStudyTravel from './USER/components/core/viewAllLottery/ViewAllStudyTravel';
 import ViewAllCompPhn from './USER/components/core/viewAllLottery/ViewAllCompPhn';
@@ -19,7 +19,6 @@ import AboutUs from './USER/pages/AboutUs';
 import HowToPlay from './USER/pages/HowToPlay';
 import Charities from './USER/pages/Charities';
 import OrderSuccess from './USER/pages/OrderSuccess';
-// import PreLoader from './USER/components/core/preloader/PreLoader';
 // import TestFive from './USER/pages/test/TestFive';
 
 
@@ -45,14 +44,13 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/:dueAmount' element={<Profile />} />
-          {/* <Route path='/profile/:orderhistory' element={<Profile />} /> */}
           <Route path='/cart' element={<Cart />} />
           <Route path='/placeorder' element={<PlaceOrder />} />
           <Route path='/ordersuccess' element={<OrderSuccess />} />
         </Route>
       </Routes>
       <FooterMain />
-      <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} />
+      {/* <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} /> */}
     </div>
   );
 }

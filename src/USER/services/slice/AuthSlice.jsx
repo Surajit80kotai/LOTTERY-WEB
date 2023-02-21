@@ -10,7 +10,7 @@ export const fetchSignUp = createAsyncThunk(
         try {
             const res = await SIGNUP(formValues)
             navigate('/login')
-            // toast.success('Registered Successfully. Please login to continue')
+            toast.success('Registered Successfully. Please login to continue')
             return res?.data
         } catch (err) {
             // console.log("Sign Slice", rejectWithValue(err.response.data.errors));
