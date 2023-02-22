@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { getBalance } from '../services/slice/UserSlice';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { itemBuyNow, placeOrder } from '../services/slice/PaymentSlice';
+import { emptyBuyNow, itemBuyNow, placeOrder } from '../services/slice/PaymentSlice';
 import PreLoader from '../components/core/preloader/PreLoader';
-// import { emptyCart } from '../services/slice/CartSlice';
+import { emptyCart } from '../services/slice/CartSlice';
 
 
 const PlaceOrder = () => {
@@ -33,7 +33,6 @@ const PlaceOrder = () => {
     const procced = () => {
         if (buyNowDataObj?.length) {
             const buyNowData = buy_now_data?.product_info
-            // console.log(buyNowData);
             dispatch(itemBuyNow(buyNowData))
         } else if (cart_data?.length) {
             const cartData = cart_data?.reduce((acc, { resp, info }) => {
@@ -56,7 +55,7 @@ const PlaceOrder = () => {
 
     // checkOrderData function
     const checkOrderData = () => {
-        if (buy_now_data.error === "true" || ordered_data.error === "true") {
+        if (ordered_data.error === "true") {
             const cartIds = ordered_data?.meta?.map((item) => item.cart_id)
             cartIds?.map((item) => {
                 var element = document.getElementById(item);
@@ -64,23 +63,27 @@ const PlaceOrder = () => {
             })
             toast.error("Quantity Is Unavilabe !!")
         }
-        else if (buy_now_data.message === "Order success" || ordered_data.message === "Order success") {
+        else if (ordered_data.message === "Order success") {
+            if (ordered_data?.meta?.length === 0) {
+                dispatch(emptyCart())
+                dispatch(emptyBuyNow())
+            }
             toast.success("Order success")
             navigate('/ordersuccess')
+            dispatch(emptyCart())
         }
     }
 
 
     useEffect(() => {
         checkOrderData()
-    }, [buy_now_data, ordered_data, balance])
+    }, [ordered_data, balance])
 
 
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(getBalance())
         calculateSum()
-        return () => { }
     }, [cart_data, dispatch])
 
 
@@ -207,7 +210,7 @@ const PlaceOrder = () => {
 
                             {/* Right Side Of PlaceOrder */}
                             {
-                                buyNowDataObj?.length ?
+                                buyNowDataObj?.length > 0 ?
                                     <div className="col-md-4 ">
                                         <div className="purches_sum fixed_right">
                                             <div className="price_area_wrapper ">
@@ -276,7 +279,7 @@ const PlaceOrder = () => {
 
                             {/* Item List */}
                             {
-                                buyNowDataObj?.length ?
+                                buyNowDataObj?.length > 0 ?
                                     <div className="order_history_summary col-md-8">
                                         <div className="cart_list_item">
                                             <Link to={`/info/${buy_now_data?.ticket?._id}`}>

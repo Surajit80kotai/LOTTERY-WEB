@@ -18,7 +18,6 @@ import ViewAllCosmetics from './USER/components/core/viewAllLottery/ViewAllCosme
 import AboutUs from './USER/pages/AboutUs';
 import HowToPlay from './USER/pages/HowToPlay';
 import Charities from './USER/pages/Charities';
-import OrderSuccess from './USER/pages/OrderSuccess';
 import TestTwo from './USER/pages/test/TestTwo';
 
 
@@ -47,7 +46,6 @@ function App() {
           <Route path='/profile/:dueAmount' element={<Profile />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/placeorder' element={<PlaceOrder />} />
-          <Route path='/ordersuccess' element={<OrderSuccess />} />
         </Route>
       </Routes>
       <FooterMain />

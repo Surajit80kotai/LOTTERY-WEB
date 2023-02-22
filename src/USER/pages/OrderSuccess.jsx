@@ -3,19 +3,17 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PreLoader from '../components/core/preloader/PreLoader'
-import { getCart } from '../services/slice/CartSlice'
+import { clearOrderedData } from '../services/slice/PaymentSlice'
 
 const OrderSuccess = () => {
-    const { cart_data, loading } = useSelector((state) => state.cartslice)
+    const { loading } = useSelector((state) => state.cartslice)
+    const { ordered_data } = useSelector((state) => state.paymentslice)
     const dispatch = useDispatch()
-    const cartLength = cart_data?.length
 
 
-    // update
     useEffect(() => {
         window.scrollTo(0, 0)
-        dispatch(getCart())
-    }, [dispatch, cartLength])
+    }, [dispatch, ordered_data])
 
 
     return (
@@ -36,10 +34,10 @@ const OrderSuccess = () => {
                             </svg>
                         </div>
                         <div className="text-center">
-                            <h1 style={{ "fontSize": "3.5rem" }}>Thank You !</h1>
+                            <h1 style={{ "fontSize": "3.5rem" }}>Thank You !!</h1>
                             <p className='fs-3'>Your order has been placed successfully</p>
                             <br />
-                            <Link to="/" className="orderplace text-white">&larr; Continue Shopping</Link>
+                            <Link to="/" onClick={() => dispatch(clearOrderedData())} className="orderplace text-white">&larr; Continue Shopping</Link>
                         </div>
                     </div>
                 </div>

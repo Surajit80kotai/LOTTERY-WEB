@@ -108,9 +108,11 @@ export const placeOrder = createAsyncThunk("/auth/order", async (orderData) => {
 
 //buy now
 export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderData) => {
+    console.log("before try catch", orderData);
     try {
+        console.log("Inside try", orderData);
         const res = await BUYNOW(orderData, header)
-        // console.log(res?.data);
+        console.log("response", res?.data);
         return res?.data
     } catch (err) {
         console.log(err)
@@ -123,7 +125,7 @@ const initialState = {
     transaction_data: [],
     updated_transac_data: [],
     ordered_data: [],
-    buy_now_data: {},
+    buy_now_data: [],
     status: "",
     loading: false
 }
@@ -138,6 +140,12 @@ export const PaymentSlice = createSlice({
             state.buy_now_data = payload
         },
         emptyBuyNow(state) {
+            state.buy_now_data = []
+        },
+        clearOrderedData(state) {
+            state.ordered_data = []
+        },
+        clearBuyNowData(state) {
             state.buy_now_data = []
         }
     },
@@ -211,6 +219,7 @@ export const PaymentSlice = createSlice({
             state.loading = true
         })
         builder.addCase(placeOrder.fulfilled, (state, { payload }) => {
+            console.log("ordered_data",payload)
             state.ordered_data = payload
             state.status = "success"
             state.loading = false
@@ -226,8 +235,8 @@ export const PaymentSlice = createSlice({
             state.loading = true
         })
         builder.addCase(itemBuyNow.fulfilled, (state, { payload }) => {
-            state.buy_now_data = payload
-            // console.log(payload);
+            state.ordered_data = payload
+            console.log("Extra reducers", payload);
             state.status = "success"
             state.loading = false
         })
@@ -239,5 +248,5 @@ export const PaymentSlice = createSlice({
 })
 
 
-export const { buyNowItem, emptyBuyNow } = PaymentSlice.actions
+export const { buyNowItem, emptyBuyNow, clearOrderedData, clearBuyNowData } = PaymentSlice.actions
 export default PaymentSlice.reducer
