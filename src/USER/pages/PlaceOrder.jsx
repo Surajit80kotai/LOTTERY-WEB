@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { getBalance } from '../services/slice/UserSlice';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { emptyBuyNow, itemBuyNow, placeOrder } from '../services/slice/PaymentSlice';
+import { clearOrderedData, emptyBuyNow, itemBuyNow, placeOrder } from '../services/slice/PaymentSlice';
 import PreLoader from '../components/core/preloader/PreLoader';
 import { emptyCart } from '../services/slice/CartSlice';
 
@@ -62,6 +62,7 @@ const PlaceOrder = () => {
                 return element.style.backgroundColor = "#ff616170";
             })
             toast.error("Quantity Is Unavilabe !!")
+            dispatch(clearOrderedData())
         }
         else if (ordered_data.message === "Order success") {
             if (ordered_data?.meta?.length === 0) {
