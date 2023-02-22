@@ -14,8 +14,9 @@ const OrderHistory = () => {
     // for pagination
     const userPerPage = 8
     const pagesVisited = pageNumber * userPerPage
-    const orderHistoryData = order_history_data?.slice(pagesVisited, pagesVisited + userPerPage)
-    const pageCount = Math.ceil(order_history_data?.length / userPerPage)
+    const data = [...order_history_data]
+    const orderHistoryData = data?.slice(pagesVisited, pagesVisited + userPerPage)
+    const pageCount = Math.ceil(data?.length / userPerPage)
 
     // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
@@ -26,9 +27,11 @@ const OrderHistory = () => {
         setPageNumber(data?.selected)
     }
 
+    
     useEffect(() => {
         dispatch(userOrderHistory())
     }, [dispatch])
+
 
     return (
         <>
@@ -43,7 +46,7 @@ const OrderHistory = () => {
                         {/* order his item  */}
                         {
                             orderHistoryData?.length ?
-                                orderHistoryData?.map((item) => {
+                                orderHistoryData?.reverse().map((item) => {
                                     return (
                                         <div className="orderhistroy_item" key={item?._id}>
                                             <div className="ribbon-wrapper-green">
@@ -75,7 +78,7 @@ const OrderHistory = () => {
                                             </div>
                                         </div>
                                     )
-                                }).reverse()
+                                })
                                 : <h1>No order history present</h1>
                         }
                     </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart } from '../services/slice/CartSlice'
 import { useEffect } from 'react'
+import { emptyBuyNow } from '../services/slice/PaymentSlice'
 
 const image = process.env.REACT_APP_NODE_HOST
 
@@ -162,7 +163,7 @@ const Cart = () => {
                 {
                   cart_data?.length > 0 ?
                     <div className="placeorder_area sticky">
-                      <Link to="/placeorder" className="orderplace">Place Order</Link>
+                      <Link to="/placeorder" onClick={()=> dispatch(emptyBuyNow())} className="orderplace">Place Order</Link>
                     </div>
                     :
                     <div className="placeorder_area sticky">

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { updateProfile } from '../../../services/slice/UserSlice'
 import { toast } from 'react-toastify'
 import PreLoader from '../preloader/PreLoader'
-import { useEffect } from 'react'
 
 
 const MyProfile = () => {

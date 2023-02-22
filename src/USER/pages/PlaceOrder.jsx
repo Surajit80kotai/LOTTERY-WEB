@@ -47,7 +47,6 @@ const PlaceOrder = () => {
                 return acc
             }, [])
             const orderData = { price: amount, product_info: cartData }
-            // console.log(orderData);
             dispatch(placeOrder(orderData))
         }
     }
