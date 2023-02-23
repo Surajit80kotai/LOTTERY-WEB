@@ -8,7 +8,7 @@ export const useTimer = () => {
 
     const startTimer = (time_left) => {
         const countDownDate = new Date(time_left).getTime()
-        var interval = setTimeout(() => {
+        var interval = setInterval(() => {
             const now = new Date().getTime()
             const distance = countDownDate - now
             const days = Math.floor(distance / (24 * 60 * 60 * 1000))
