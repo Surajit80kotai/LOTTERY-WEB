@@ -11,7 +11,7 @@ import ForgetPassword from './USER/pages/ForgetPassword';
 import { Store } from './USER/services/store/Store';
 import VerifyPhone from './USER/pages/VerifyPhone';
 import { Flip, ToastContainer } from 'react-toastify';
-import OrderSuccess from './USER/pages/OrderSuccess';
+// import OrderSuccess from './USER/pages/OrderSuccess';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,7 +25,7 @@ root.render(
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login text="/" />} />
         <Route path='/f_password' element={<ForgetPassword />} />
-        <Route path='/ordersuccess' element={<OrderSuccess />} />
+        {/* <Route path='/ordersuccess' element={<OrderSuccess />} /> */}
       </Routes>
     </Router>
     <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} />

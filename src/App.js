@@ -19,6 +19,7 @@ import AboutUs from './USER/pages/AboutUs';
 import HowToPlay from './USER/pages/HowToPlay';
 import Charities from './USER/pages/Charities';
 import TestTwo from './USER/pages/test/TestTwo';
+import OrderSuccess from './USER/pages/OrderSuccess';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path='/profile/:dueAmount' element={<Profile />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/placeorder' element={<PlaceOrder />} />
+          <Route path='/ordersuccess' element={<OrderSuccess />} />
         </Route>
       </Routes>
       <FooterMain />
