@@ -59,7 +59,7 @@ const BannerData = ({ item }) => {
 
                             </div>
                             <div className="ticket_price">
-                                <h4>Ticket Price<span><h3 className="currencysymbol">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</h3></span>{item?.ticket_price}</h4>
+                                <h4>Ticket Price<span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span>{item?.ticket_price}</h4>
                             </div>
                         </div>
                         : <h1 className='text-white'>Ticket is unavailabe right now</h1>

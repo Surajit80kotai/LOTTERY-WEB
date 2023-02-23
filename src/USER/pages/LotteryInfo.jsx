@@ -113,7 +113,7 @@ const LotteryInfo = () => {
 
                                     {/* carausal images */}
                                     <div className="mainproduct_image img-fluid">
-                                        <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                                        <div id="carouselExampleControls" className="carousel slide custom-carousel-slide" data-bs-ride="carousel">
                                             {/* Dynamic Image slider */}
                                             <div className="carousel-inner">
                                                 {list_image?.length ?
@@ -123,17 +123,17 @@ const LotteryInfo = () => {
                                                             act = "active";
                                                         }
                                                         return (
-                                                            <div className={`carousel-item ${act}`} key={index} >
+                                                            <div className={`custom-carousel-item carousel-item ${act}`} key={index} >
                                                                 <img src={baseUrl + item} className="d-block w-100" alt="" />
                                                             </div>
                                                         )
                                                     })
                                                     :
                                                     (is_image?.length) ?
-                                                        <div className="carousel-item active">
+                                                        <div className="custom-carousel-item carousel-item active">
                                                             <img src={baseUrl + mainimage} className="d-block w-100" alt="" />
                                                         </div>
-                                                        : <div className="carousel-item active">
+                                                        : <div className="custom-carousel-item carousel-item active">
                                                             <img src="/assets/img/imageunavailable.jpeg" className="d-block w-100" alt="" />
                                                         </div>
                                                 }
