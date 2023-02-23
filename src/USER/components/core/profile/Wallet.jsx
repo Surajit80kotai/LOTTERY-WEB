@@ -44,7 +44,7 @@ const Wallet = ({ dueAmount }) => {
             payment_token: paymentData?.data?.payment_token
         }
         if (paymentData.code === "201") {
-            window.open(paymentData.data.payment_url, "_blank")
+            window.open(paymentData.data.payment_url, "_self")
             // console.log(payment_data)
             dispatch(initPay(payment_data))
         }

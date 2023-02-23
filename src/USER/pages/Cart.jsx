@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart } from '../services/slice/CartSlice'
 import { useEffect } from 'react'
 import { emptyBuyNow } from '../services/slice/PaymentSlice'
+import PreLoader from '../components/core/preloader/PreLoader'
 
 const image = process.env.REACT_APP_NODE_HOST
 
 const Cart = () => {
-  const { cart_data, update_status, delete_status } = useSelector((state) => state.cartslice)
+  const { cart_data, update_status, delete_status, loading } = useSelector((state) => state.cartslice)
   const dispatch = useDispatch()
   const cartLength = cart_data?.length
   const [amount, setAmount] = useState({ subtotal: 0, discount: 0, total: 0 })
@@ -77,6 +78,8 @@ const Cart = () => {
 
   return (
     <>
+      {/* PreLoader */}
+      {loading && <PreLoader />}
       <main>
         <div className="cart_list_wrapper pb-5">
           <div className="container pt-5">
@@ -163,7 +166,7 @@ const Cart = () => {
                 {
                   cart_data?.length > 0 ?
                     <div className="placeorder_area sticky">
-                      <Link to="/placeorder" onClick={()=> dispatch(emptyBuyNow())} className="orderplace">Place Order</Link>
+                      <Link to="/placeorder" onClick={() => dispatch(emptyBuyNow())} className="orderplace">Place Order</Link>
                     </div>
                     :
                     <div className="placeorder_area sticky">
