@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { FORGETPASSWORD, LOGIN, SIGNUP } from "../api/Api";
+import { FORGETPASSWORD, GETOTP, LOGIN, SIGNUP, VERIFYOTP } from "../api/Api";
 
 
 //AsyncThunk For SignUp 
@@ -33,7 +33,7 @@ export const fetchLogin = createAsyncThunk(
             setTimeout(() => {
                 window.location.reload()
             }, 3500)
-            
+
             // react toast message
             toast.success('Loged In Successfully')
 
@@ -60,6 +60,29 @@ export const fetchForgetPass = createAsyncThunk(
     })
 
 
+//AsyncThunk For Register OTP
+export const registerOTP = createAsyncThunk("/system/register/otp", async (data, { rejectWithValue }) => {
+    try {
+        const res = await GETOTP(data)
+        console.log(res?.data);
+        return res?.data
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
+
+//AsyncThunk For Register OTP
+export const verifyOTP = createAsyncThunk("/system/register/otp/verify", async (data, { rejectWithValue }) => {
+    try {
+        const res = await VERIFYOTP(data)
+        console.log(res?.data);
+        return res?.data
+    } catch (err) {
+        return rejectWithValue(err)
+    }
+})
+
 
 // defining initialState
 const initialState = {
@@ -72,7 +95,9 @@ const initialState = {
         error_password: ""
     },
     signupErr: {},
-    loading: false
+    loading: false,
+    reg_otp: "",
+    verify_otp: ""
 }
 
 // Creating Slice
@@ -86,6 +111,9 @@ export const AuthSlice = createSlice({
             window.localStorage.removeItem("user")
             state.user = null
             state.token = ""
+        },
+        clearVerifyOtp(state) {
+            state.verify_otp = ""
         }
     },
     extraReducers: (builder) => {
@@ -145,8 +173,46 @@ export const AuthSlice = createSlice({
             state.loading = false
             state.error = payload
         })
+
+
+        //States for Register OTP
+        builder.addCase(registerOTP.pending, (state) => {
+            state.msg = "Loading"
+            state.loading = true
+        })
+        builder.addCase(registerOTP.fulfilled, (state, { payload }) => {
+            state.msg = "Success"
+            state.loading = false
+            state.reg_otp = payload?.message
+            console.log("reg otp success", typeof payload);
+        })
+        builder.addCase(registerOTP.rejected, (state, { payload }) => {
+            state.msg = "Failed"
+            state.loading = false
+            state.reg_otp = payload?.message
+            console.log("reg otp error", typeof payload);
+        })
+
+
+        //States for Verify OTP
+        builder.addCase(verifyOTP.pending, (state) => {
+            state.msg = "Loading"
+            state.loading = true
+        })
+        builder.addCase(verifyOTP.fulfilled, (state, { payload }) => {
+            state.msg = "Success"
+            state.loading = false
+            state.verify_otp = payload?.message
+            console.log("verify otp success", payload);
+        })
+        builder.addCase(verifyOTP.rejected, (state, { payload }) => {
+            state.msg = "Failed"
+            state.loading = false
+            state.verify_otp = payload?.message
+            console.log("verify otp error", payload);
+        })
     }
 })
 
-export const { doLogOut } = AuthSlice.actions
+export const { doLogOut, clearVerifyOtp } = AuthSlice.actions
 export default AuthSlice.reducer

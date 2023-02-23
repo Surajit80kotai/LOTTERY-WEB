@@ -1,16 +1,59 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader'
+import { clearVerifyOtp, registerOTP, verifyOTP } from '../services/slice/AuthSlice'
 
 const VerifyPhone = () => {
-
+    const [phone, setPhone] = useState({ phone: "" })
+    const [otp, setOtp] = useState({ otp: "" })
+    const [flag, setFlag] = useState(false)
     const { loading } = useSelector((state) => state.authslice)
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { reg_otp, verify_otp } = useSelector((state) => state.authslice)
+
+    // button style
+    const active = "btn_one"
+    const deactive = "btn_deactive"
+
+    // sendOtp func.
+    const sendOtp = () => {
+        const data = { phone_number: "+91" + phone.phone }
+        dispatch(registerOTP(data))
+        setFlag(true)
+        toast.success("OTP Send To Your Number")
+        // setTimeout(() => {
+        //     setPhone({ phone: "" })
+        //     setFlag(false)
+        // }, 10000)
+    }
+
+    // onVerify func.
+    const onVerify = () => {
+        const data = { phone_number: "+91" + phone.phone, otp: otp.otp }
+        dispatch(verifyOTP(data))
+        setTimeout(() => {
+            if (verify_otp !== "Invalid OTP!") {
+                setFlag(false)
+                setOtp({ otp: "" })
+                toast.success("Verified Successfully")
+                navigate('/signup')
+            } else {
+                toast.error("Otp Not Matched")
+            }
+        }, 2000)
+    }
 
 
-
+    useEffect(() => {
+        return () => {
+            dispatch(clearVerifyOtp())
+        }
+    }, [reg_otp, verify_otp])
 
     return (
         <>
@@ -32,10 +75,10 @@ const VerifyPhone = () => {
 
                         <div className="right_part">
                             <div className="form_area">
-                                <form method="post" encType="multipart/form-data">
+                                <form method="post" encType="multipart/form-data" onSubmit={e => e.preventDefault()}>
 
                                     {/* Phone Number */}
-                                    <div className="mb-5">
+                                    <div className="mb-5" style={{ "display": !flag ? "block" : "none" }}>
                                         <label htmlFor="phone" className="form-label label_style">Phone Number</label>
                                         <input
                                             type="tel"
@@ -45,9 +88,9 @@ const VerifyPhone = () => {
                                             aria-describedby="emailHelp"
                                             placeholder="Enter Your Phone Number"
                                             pattern="[0-9]{10}"
-                                            title="Accept Numbers Only"
-                                            // value=""
-                                            // onChange=""
+                                            title="Accept Phone Numbers With Country Code"
+                                            value={phone.phone}
+                                            onChange={(e) => setPhone({ ...phone, [e.target.name]: e.target.value })}
                                             maxLength={10}
                                             required
                                         />
@@ -55,12 +98,17 @@ const VerifyPhone = () => {
                                         {/* <p className='text-danger fs-4 mt-2'>{error_user.error}</p> */}
                                     </div>
 
-                                    <div className="text-center">
-                                        <button type="submit" className="btn_one">Send OTP</button>
+                                    <div className="text-center" style={{ "display": !flag ? "block" : "none" }}>
+                                        <button
+                                            onClick={sendOtp}
+                                            type="submit"
+                                            className={phone.phone.length > 9 ? active : deactive}
+                                            disabled={phone.phone.length > 9 ? false : true}
+                                        >Send OTP</button>
                                     </div>
 
                                     {/* OTP */}
-                                    <div className="mb-5">
+                                    <div className="mb-5" style={{ "display": flag ? "block" : "none" }}>
                                         <label htmlFor="otp" className="form-label label_style">OTP</label>
                                         <input
                                             type="tel"
@@ -69,19 +117,24 @@ const VerifyPhone = () => {
                                             name="otp"
                                             aria-describedby="emailHelp"
                                             placeholder="Enter OTP Here"
-                                            pattern="[0-9]{10}"
+                                            pattern="[0-9]{6}"
                                             title="Accept Numbers Only"
-                                            // value=""
-                                            // onChange=""
-                                            // maxLength={10}
+                                            value={otp.otp}
+                                            onChange={(e) => setOtp({ ...otp, [e.target.name]: e.target.value })}
+                                            maxLength={6}
                                             required
                                         />
                                         {/* Form Vaidation */}
                                         {/* <p className='text-danger fs-4 mt-2'>{error_user.error}</p> */}
                                     </div>
 
-                                    <div className="text-center">
-                                        <button type="submit" className="btn_one">Next</button>
+                                    <div className="text-center" style={{ "display": flag ? "block" : "none" }}>
+                                        <button
+                                            onClick={onVerify}
+                                            type="submit"
+                                            className={otp.otp.length === 6 ? active : deactive}
+                                            disabled={otp.otp.length === 6 ? false : true}
+                                        >Verify</button>
                                     </div>
                                 </form>
                             </div>

@@ -59,3 +59,9 @@ export const ORDERHISTORY = (header) => API.get("/auth/order/history", header)
 
 // contact us
 export const CONTACTUS = (formData) => API.post("/auth/contact", formData)
+
+// get otp api
+export const GETOTP = (phone) => API.post("/system/register/otp", phone)
+
+// verify otp api
+export const VERIFYOTP = (formData) => API.post("/system/register/otp/verify", formData)

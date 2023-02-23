@@ -95,7 +95,7 @@ const LotteryInfo = () => {
     useEffect(() => {
         startTimer(Number(ticketInfo[0]?.time_left))
         // console.log("render");
-    },[ticketInfo[0]?.time_left])
+    })
 
 
     return (

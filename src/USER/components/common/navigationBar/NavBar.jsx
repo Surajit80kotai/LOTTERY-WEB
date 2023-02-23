@@ -183,7 +183,7 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse mx-5" id="navbarSupportedContent">
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <Link className="nav-link" to="/signup"><i className="bi bi-person-add mx-2"></i>Sign Up</Link>
+                      <Link className="nav-link" to="/verifyphone"><i className="bi bi-person-add mx-2"></i>Sign Up</Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/login"><i className="bi bi-box-arrow-in-right mx-2"></i>Log In</Link>

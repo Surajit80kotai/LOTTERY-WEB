@@ -123,6 +123,8 @@ const SignUp = () => {
                                             id="email"
                                             name="email"
                                             aria-describedby="emailHelp"
+                                            // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                            // title="Accept Email Format Only"
                                             placeholder="Enter Your Email Id"
                                             value={email}
                                             onChange={handleChange}

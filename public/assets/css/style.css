@@ -2818,6 +2818,14 @@ margin: 0.5rem;
 	color: #ffffff;
 }
 
+.btn_deactive {
+	text-align: center;
+	padding: 0.8rem 5rem;
+	background: #b4b4b4;;
+	font-size: 1.5rem;
+	color: var(--white);
+	border-radius: 5rem;
+}
 
 /* =======================media quries================== */
 

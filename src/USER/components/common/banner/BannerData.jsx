@@ -15,7 +15,7 @@ const BannerData = ({ item }) => {
     useEffect(() => {
         // console.log("render");
         startTimer(Number(item?.time_left))
-    },[item?.time_left])
+    })
 
     return (
         <>
