@@ -53,7 +53,7 @@ const VerifyPhone = () => {
         return () => {
             dispatch(clearVerifyOtp())
         }
-    }, [reg_otp, verify_otp])
+    }, [dispatch, reg_otp, verify_otp])
 
     return (
         <>
