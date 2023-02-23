@@ -31,7 +31,7 @@ const LotteryInfo = () => {
     const mainimage = ticketInfo[0]?.main_image
     const is_image = ticketInfo[0]?.is_image
     const list_image = ticketInfo[0]?.list_image        //list_image list
-    const image = process.env.REACT_APP_NODE_HOST       //base url link
+    const baseUrl = process.env.REACT_APP_NODE_HOST       //base url link
     const qty = 1                                       // default quantity of a ticket
 
 
@@ -123,14 +123,14 @@ const LotteryInfo = () => {
                                                         }
                                                         return (
                                                             <div className={`carousel-item ${act}`} key={index} >
-                                                                <img src={image + item} className="d-block w-100" alt="" />
+                                                                <img src={baseUrl + item} className="d-block w-100" alt="" />
                                                             </div>
                                                         )
                                                     })
                                                     :
                                                     (is_image?.length) ?
                                                         <div className="carousel-item active">
-                                                            <img src={mainimage} className="d-block w-100" alt="" />
+                                                            <img src={baseUrl + mainimage} className="d-block w-100" alt="" />
                                                         </div>
                                                         : <div className="carousel-item active">
                                                             <img src="/assets/img/imageunavailable.jpeg" className="d-block w-100" alt="" />

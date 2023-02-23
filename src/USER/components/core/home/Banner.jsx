@@ -1,27 +1,14 @@
 import React, { useEffect } from 'react'
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import "slick-carousel/slick/slick.css";
-import { useTimer } from '../../../customHooks/useTimer';
+import BannerData from '../../common/banner/BannerData';
 
-const Banner = ({ house, vehicle }) => {
+const Banner = () => {
+    const { fetch_lott_data } = useSelector((state) => state.lotteryslice)
+    const bannerData = fetch_lott_data?.map((item) => {
+        if (item?.is_banner) return item
+    })
 
-    const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
-    // const { fetch_lott_data } = useSelector((state) => state.lotteryslice)
-
-    // currency variables
-    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
-
-    // const image = process.env.REACT_APP_NODE_HOST
-
-    // const bannerImage = fetch_lott_data?.map((item) => {
-    //     if (item.is_promo) return item.main_image
-    // })
-
-
-    useEffect(() => {
-        startTimer(1677522600000)
-    }, [startTimer])
 
 
     return (
@@ -29,167 +16,22 @@ const Banner = ({ house, vehicle }) => {
 
             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
-                    {/* {
-                        bannerImage?.length ?
-                            bannerImage?.map((item, index) => {
+                    {
+                        bannerData?.length ?
+                            bannerData?.map((item, index) => {
                                 let act = ""
                                 if (index === 0) {
                                     act = "active";
                                 }
                                 return (
-                                    <div className={`carousel-item ${act}`} key={index} >
-                                        <img src={image + item} className="d-block w-100" alt="" />
+                                    <div className={`carousel-item ${act}`} key={index}>
+                                        <BannerData item={item} />
                                     </div>
                                 )
                             })
                             : null
-                    } */}
+                    }
 
-                    <div className="carousel-item active">
-                        <div className="banner_img">
-                            <img src="/assets/img/banner1.jpg" alt="baaner" className="img-fluid" />
-                        </div>
-                        <div className="banner_content">
-
-                            {
-                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                    <div>
-                                        <div className="time_counter">
-                                            <h1 className="banner_title">{house[0]?.ticket_name}</h1>
-                                            <h3>Timeleft</h3>
-                                            <div id="coundown" className="countdown">
-                                                <div className="one_time">
-                                                    <div id="days" className="time days">
-                                                        {timerDays}
-                                                    </div>
-                                                    <br /><span>Days</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="hours" className="time hours">
-                                                        {timerHours}
-                                                    </div>
-                                                    <br /><span>Hours</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="minutes" className="time minutes">
-                                                        {timerMinutes}
-                                                    </div>
-                                                    <br /><span>Mins</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="seconds" className="time seconds">
-                                                        {timerSeconds}
-                                                    </div>
-                                                    <br /><span>Sec</span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div className="ticket_price">
-                                            <h4>Ticket Price<span><h3 className="currencysymbol">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</h3></span>{house[0]?.ticket_price}</h4>
-                                        </div>
-                                    </div>
-                                    : <h1 className='text-white'>Ticket is unavailabe right now</h1>
-                            }
-                        </div>
-                    </div>
-                    <div className="carousel-item">
-                        <div className="banner_img">
-                            <img src="/assets/img/banner2.jpg" alt="baaner" className="img-fluid" />
-                        </div>
-                        <div className="banner_content">
-
-
-                            {
-                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                    <div>
-                                        <div className="time_counter">
-                                            <h1 className="banner_title">{vehicle[0]?.ticket_name}</h1>
-                                            <h3>Timeleft</h3>
-                                            <div id="coundown" className="countdown">
-                                                <div className="one_time">
-                                                    <div id="days" className="time days">
-                                                        {timerDays}
-                                                    </div>
-                                                    <br /><span>Days</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="hours" className="time hours">
-                                                        {timerHours}
-                                                    </div>
-                                                    <br /><span>Hours</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="minutes" className="time minutes">
-                                                        {timerMinutes}
-                                                    </div>
-                                                    <br /><span>Mins</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="seconds" className="time seconds">
-                                                        {timerSeconds}
-                                                    </div>
-                                                    <br /><span>Sec</span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div className="ticket_price">
-                                            <h4>Ticket Price<span><h3 className="currencysymbol">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</h3></span>{vehicle[0]?.ticket_price}</h4>
-                                        </div>
-                                    </div>
-                                    : <h1 className='text-white'>Ticket is unavailabe right now</h1>
-                            }
-                        </div>
-                    </div>
-                    <div className="carousel-item">
-                        <div className="banner_img">
-                            <img src="/assets/img/banner3.jpg" alt="baaner" className="img-fluid" />
-                        </div>
-                        <div className="banner_content">
-
-                            {
-                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                    <div>
-                                        <div className="time_counter">
-                                            <h1 className="banner_title">{house[1]?.ticket_name}</h1>
-                                            <h3>Timeleft</h3>
-                                            <div id="coundown" className="countdown">
-                                                <div className="one_time">
-                                                    <div id="days" className="time days">
-                                                        {timerDays}
-                                                    </div>
-                                                    <br /><span>Days</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="hours" className="time hours">
-                                                        {timerHours}
-                                                    </div>
-                                                    <br /><span>Hours</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="minutes" className="time minutes">
-                                                        {timerMinutes}
-                                                    </div>
-                                                    <br /><span>Mins</span>
-                                                </div>
-                                                <div className="one_time">
-                                                    <div id="seconds" className="time seconds">
-                                                        {timerSeconds}
-                                                    </div>
-                                                    <br /><span>Sec</span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div className="ticket_price">
-                                            <h4>Ticket Price<span><h3 className="currencysymbol">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</h3></span>{house[1]?.ticket_price}</h4>
-                                        </div>
-                                    </div>
-                                    : <h1 className='text-white'>Ticket is unavailabe right now</h1>
-                            }
-                        </div>
-                    </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>

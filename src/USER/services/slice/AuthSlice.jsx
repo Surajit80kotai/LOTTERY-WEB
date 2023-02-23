@@ -120,10 +120,10 @@ export const AuthSlice = createSlice({
         builder.addCase(fetchLogin.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
-            if (payload.data.type === "user") {
+            if (payload?.data?.type === "user") {
                 state.login.error_user = payload.data
                 state.login.error_password = ""
-            } else if (payload.data.type === "password") {
+            } else if (payload?.data?.type === "password") {
                 state.login.error_password = payload.data
                 state.login.error_user = ""
             }

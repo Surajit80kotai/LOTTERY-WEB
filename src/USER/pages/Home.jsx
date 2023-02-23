@@ -10,7 +10,6 @@ import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { fetchCategory, fetchLottery } from '../services/slice/LotterySlice'
 import { getCart } from '../services/slice/CartSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
-// import { Flip, ToastContainer } from 'react-toastify'
 
 
 const Home = () => {
@@ -160,7 +159,6 @@ const Home = () => {
                     </div>
 
                 </div>
-                {/* <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} /> */}
             </main>
         </>
     )

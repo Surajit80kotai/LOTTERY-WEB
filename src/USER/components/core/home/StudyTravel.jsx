@@ -8,11 +8,12 @@ const StudyTravel = ({ item, index }) => {
     const discountedPrice = Number((ticket_price - ((ticket_price * discount_percentage) / 100)))
     // defining states timer
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
-    
+
     // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
     const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
 
+    const baseUrl = process.env.REACT_APP_NODE_HOST
 
     useEffect(() => {
         // console.log("render");
@@ -30,7 +31,7 @@ const StudyTravel = ({ item, index }) => {
                                     <div className="pro_img">
                                         {/* Image Condition */}
                                         {
-                                            (is_image?.length) ? <img src={main_image} alt="" className="img-fluid " />
+                                            (is_image?.length) ? <img src={baseUrl + main_image} alt="" className="img-fluid " />
                                                 : <img src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
                                         }
                                     </div>
@@ -56,9 +57,11 @@ const StudyTravel = ({ item, index }) => {
                                         <h2 className="card_title">{ticket_name}</h2>
                                     </div>
                                     {
-                                        ticket_quantity > 0 ?
-                                            <h3 className="total_ticket">Ticket Quantity : {ticket_quantity}</h3>
-                                            : <h3 className="total_ticket">All tickets sold</h3>
+                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                            ticket_quantity > 0 ?
+                                                <h3 className="total_ticket">Ticket Quantity : {ticket_quantity}</h3>
+                                                : <h3 className="total_ticket">All tickets sold</h3>
+                                            : null
                                     }
 
                                     {/* Condition for timer run-out */}
