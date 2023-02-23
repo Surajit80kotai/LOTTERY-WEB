@@ -8,12 +8,6 @@ const header = {
     }
 };
 
-// const socialHeader = {
-//     headers: {
-//         Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("accessToken"))}`
-//     }
-// };
-
 //get user balance
 export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async () => {
     try {
@@ -44,13 +38,6 @@ export const userOrderHistory = createAsyncThunk("/auth/order/history", async ()
     try {
         const res = await ORDERHISTORY(header)
         return res?.data
-        // if (header) {
-        //     const res = await ORDERHISTORY(header)
-        //     return res?.data
-        // } else if (socialHeader) {
-        //     const res = await ORDERHISTORY(socialHeader)
-        //     return res?.data
-        // }
     } catch (err) {
         console.log(err)
     }
