@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 import "slick-carousel/slick/slick.css";
 import BannerData from '../../common/banner/BannerData';
 
 const Banner = () => {
     const { fetch_lott_data } = useSelector((state) => state.lotteryslice)
-    const bannerData = fetch_lott_data?.map((item) => {
-        if (item?.is_banner) return item
+    const bannerData = fetch_lott_data?.map(item => {
+        return item?.is_banner ? item : null
     })
-
-
 
     return (
         <>
