@@ -13,7 +13,7 @@ const HomeLottery = ({ item, index }) => {
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
     const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
 
-    const baseUrl = process.env.REACT_APP_NODE_HOST
+    // const baseUrl = process.env.REACT_APP_NODE_HOST
 
     useEffect(() => {
         // console.log("render");
@@ -31,7 +31,7 @@ const HomeLottery = ({ item, index }) => {
                                     <div className="pro_img">
                                         {/* Image Condition */}
                                         {
-                                            (is_image?.length) ? <img src={baseUrl + main_image} alt="" className="img-fluid " />
+                                            (is_image?.length) ? <img src={main_image} alt="" className="img-fluid " />
                                                 : <img src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
                                         }
                                     </div>

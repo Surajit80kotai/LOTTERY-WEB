@@ -129,7 +129,11 @@ input:-webkit-autofill:active {
 }
 
 main {
-	padding-top: 5rem;
+	padding-top: 10rem;
+}
+
+.mar_top{
+	margin-top: 10.6rem;
 }
 
 
@@ -1678,8 +1682,8 @@ margin: 0.5rem;
 }
 
 .mainproduct_image {
-	width: 500px;
-	height: 500px;
+	/* width: 500px;
+	height: 500px; */
 
 }
 
@@ -2105,6 +2109,7 @@ margin: 0.5rem;
 	box-shadow: -3px 5px 45px -1px rgba(0, 0, 0, 0.38);
 	border-radius: 1rem;
 	padding: 1rem;
+	
 }
 
 .price_title {
@@ -2177,9 +2182,10 @@ margin: 0.5rem;
 	background: var(--white);
 	border-radius: 1rem;
 	padding: 3rem 2rem;
-	/* -webkit-box-shadow: -3px 5px 45px -1px rgba(0,0,0,0.38);
+	-webkit-box-shadow: -3px 5px 45px -1px rgba(0,0,0,0.38);
 	-moz-box-shadow: -3px 5px 45px -1px rgba(0,0,0,0.38);
-	box-shadow: -3px 5px 45px -1px rgba(0,0,0,0.38); */
+	box-shadow: -3px 5px 45px -1px rgba(0,0,0,0.38);
+	margin: 1rem 0;
 }
 
 .delivery_address h2 {
@@ -2357,8 +2363,8 @@ margin: 0.5rem;
 	background: var(--white);
 	border-radius: 1rem;
 	padding: 3rem 2rem;
-	margin: 2rem 0;
-	height: 388px;
+	/* margin: 2rem 0; */
+	height: 486px;
 	overflow: scroll;
 
 }
@@ -2452,7 +2458,7 @@ margin: 0.5rem;
 /*  payment wallet page  */
 
 .paymentwallet_bg {
-	background: var(--gradient2);
+	background: var(--gradient1);
 	padding: 3rem;
 	height: 200px;
 	text-align: center;

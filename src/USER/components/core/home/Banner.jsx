@@ -11,8 +11,7 @@ const Banner = () => {
 
     return (
         <>
-
-            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleControls" className="carousel slide mar_top" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     {
                         bannerData?.length ?

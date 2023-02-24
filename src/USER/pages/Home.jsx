@@ -57,109 +57,109 @@ const Home = () => {
                 vehicle={vehicle}
             />
 
-            <main>
-                {/* Product Area */}
-                <div className="prodcut_wrapper">
-                    <div className="one_row">
+            {/* <main> */}
+            {/* Product Area */}
+            <div className="prodcut_wrapper">
+                <div className="one_row">
 
-                        <div className="container">
-                            <div className="row ">
+                    <div className="container">
+                        <div className="row ">
 
-                                {/* Home Lottery */}
-                                <div className="first_row_title">
-                                    <h2>House & Apartments</h2>
-                                </div>
-                                {
-                                    house?.map((item, index) => {
-                                        return <HomeLottery
-                                            item={item}
-                                            key={item._id}
-                                            index={index}
-                                        />
-                                    }).slice(0, 8)
-                                }
+                            {/* Home Lottery */}
+                            <div className="first_row_title">
+                                <h2>House & Apartments</h2>
+                            </div>
+                            {
+                                house?.map((item, index) => {
+                                    return <HomeLottery
+                                        item={item}
+                                        key={item._id}
+                                        index={index}
+                                    />
+                                }).slice(0, 8)
+                            }
 
-                                {/* divider */}
-                                <div className="divider"></div>
+                            {/* divider */}
+                            <div className="divider"></div>
 
-                                {/* <!-- car bike --> */}
-                                <div className="first_row_title">
-                                    <h2>Cars & Bikes</h2>
-                                </div>
-                                {
-                                    vehicle?.map((item, index) => {
-                                        return <CarsBike
-                                            item={item}
-                                            key={item._id}
-                                            index={index}
-                                        />
-                                    }).slice(0, 8)
-                                }
+                            {/* <!-- car bike --> */}
+                            <div className="first_row_title">
+                                <h2>Cars & Bikes</h2>
+                            </div>
+                            {
+                                vehicle?.map((item, index) => {
+                                    return <CarsBike
+                                        item={item}
+                                        key={item._id}
+                                        index={index}
+                                    />
+                                }).slice(0, 8)
+                            }
 
-                                {/* divider */}
-                                <div className="divider"></div>
-                                {/* <!-- stydy travel --> */}
-                                <div className="first_row_title">
-                                    <h2>Study & Travel</h2>
-                                </div>
-                                {
-                                    study_travel?.map((item, index) => {
-                                        return <StudyTravel
-                                            item={item}
-                                            key={item._id}
-                                            index={index}
-                                        />
-                                    }).slice(0, 8)
-                                }
+                            {/* divider */}
+                            <div className="divider"></div>
+                            {/* <!-- stydy travel --> */}
+                            <div className="first_row_title">
+                                <h2>Study & Travel</h2>
+                            </div>
+                            {
+                                study_travel?.map((item, index) => {
+                                    return <StudyTravel
+                                        item={item}
+                                        key={item._id}
+                                        index={index}
+                                    />
+                                }).slice(0, 8)
+                            }
 
-                                {/* divider */}
-                                <div className="divider"></div>
+                            {/* divider */}
+                            <div className="divider"></div>
 
-                                {/* <!-- computers & phones --> */}
-                                <div className="first_row_title">
-                                    <h2>Computer & Phones</h2>
-                                </div>
-                                {
-                                    comp_phn?.map((item, index) => {
-                                        return <ComputersPhones
-                                            item={item}
-                                            key={item._id}
-                                            index={index}
-                                        />
-                                    }).slice(0, 8)
-                                }
+                            {/* <!-- computers & phones --> */}
+                            <div className="first_row_title">
+                                <h2>Computer & Phones</h2>
+                            </div>
+                            {
+                                comp_phn?.map((item, index) => {
+                                    return <ComputersPhones
+                                        item={item}
+                                        key={item._id}
+                                        index={index}
+                                    />
+                                }).slice(0, 8)
+                            }
 
-                                {/* divider */}
-                                <div className="divider"></div>
+                            {/* divider */}
+                            <div className="divider"></div>
 
-                                {/* <!-- cosmetic --> */}
-                                <div className="first_row_title">
-                                    <h2>Cosmetics</h2>
-                                </div>
-                                {
-                                    cosmetics?.map((item, index) => {
-                                        return <Cosmetics
-                                            item={item}
-                                            key={item._id}
-                                            index={index}
-                                        />
-                                    }).slice(0, 8)
-                                }
+                            {/* <!-- cosmetic --> */}
+                            <div className="first_row_title">
+                                <h2>Cosmetics</h2>
+                            </div>
+                            {
+                                cosmetics?.map((item, index) => {
+                                    return <Cosmetics
+                                        item={item}
+                                        key={item._id}
+                                        index={index}
+                                    />
+                                }).slice(0, 8)
+                            }
 
-                                {/* <div className="text-center ">
+                            {/* <div className="text-center ">
                                 <button className="btn3">Load More</button>
                             </div> */}
 
-                                {/* trused payment */}
-                                <TrustedPayment />
-
-                            </div>
+                            {/* trused payment */}
+                            <TrustedPayment />
 
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-            </main>
+
+            </div>
+            {/* </main> */}
         </>
     )
 }

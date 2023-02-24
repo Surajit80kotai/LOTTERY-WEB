@@ -116,7 +116,7 @@ const Wallet = ({ dueAmount }) => {
                                                 {
                                                     formValue?.amount >= 100 ?
                                                         <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Money</button>
-                                                        : <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled style={{ "backgroundColor": "#e7e7e7" }}>Add Money</button>
+                                                        : <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled style={{ "backgroundColor": "#00000078" }}>Add Money</button>
                                                 }
                                             </div>
                                         </div>
