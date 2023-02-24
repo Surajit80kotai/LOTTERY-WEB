@@ -16,6 +16,9 @@ const VerifyPhone = () => {
     const dispatch = useDispatch()
     const { reg_otp, verify_otp } = useSelector((state) => state.authslice)
 
+    // console.log(reg_otp);
+    // console.log(verify_otp);
+
     // button style
     const active = "btn_one"
     const deactive = "btn_deactive"
@@ -25,6 +28,7 @@ const VerifyPhone = () => {
         const data = { phone_number: "+91" + phone.phone }
         dispatch(registerOTP(data))
         setTimeout(() => {
+            // console.log("inside condition", reg_otp);
             if (reg_otp !== "Failed to send OTP") {
                 toast.success("OTP Sent Successfully")
                 setFlag(true)
@@ -43,6 +47,7 @@ const VerifyPhone = () => {
         console.log(data);
         dispatch(verifyOTP(data))
         setTimeout(() => {
+            // console.log("inside condition", verify_otp);
             if (verify_otp !== "Invalid OTP!") {
                 setFlag(false)
                 setOtp({ otp: "" })
@@ -61,7 +66,7 @@ const VerifyPhone = () => {
             dispatch(clearVerifyOtp())
         }
     }, [dispatch, reg_otp, verify_otp])
-    
+
 
     return (
         <>

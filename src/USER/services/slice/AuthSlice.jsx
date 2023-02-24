@@ -67,8 +67,8 @@ export const registerOTP = createAsyncThunk("/system/register/otp", async (data,
         console.log("register otp API try", res?.data);
         return res?.data
     } catch (err) {
-        console.log("register otp API catch", err);
-        return rejectWithValue(err)
+        console.log("register otp API catch", err?.response?.data);
+        return rejectWithValue(err?.response?.data)
     }
 })
 
@@ -80,8 +80,8 @@ export const verifyOTP = createAsyncThunk("/system/register/otp/verify", async (
         console.log("verify otp API try", res?.data);
         return res?.data
     } catch (err) {
-        console.log("verify otp API catch", err);
-        return rejectWithValue(err)
+        console.log("verify otp API catch", err?.response?.data);
+        return rejectWithValue(err?.response?.data)
     }
 })
 
@@ -113,6 +113,9 @@ export const AuthSlice = createSlice({
             window.localStorage.removeItem("user")
             state.user = null
             state.token = ""
+        },
+        clearRegOtp(state) {
+            state.reg_otp = ""
         },
         clearVerifyOtp(state) {
             state.verify_otp = ""
@@ -216,5 +219,5 @@ export const AuthSlice = createSlice({
     }
 })
 
-export const { doLogOut, clearVerifyOtp } = AuthSlice.actions
+export const { doLogOut, clearVerifyOtp, clearRegOtp } = AuthSlice.actions
 export default AuthSlice.reducer
