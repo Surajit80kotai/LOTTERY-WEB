@@ -132,7 +132,7 @@ main {
 	padding-top: 10rem;
 }
 
-.mar_top{
+.mar_top {
 	margin-top: 10.6rem;
 }
 
@@ -2109,7 +2109,7 @@ margin: 0.5rem;
 	box-shadow: -3px 5px 45px -1px rgba(0, 0, 0, 0.38);
 	border-radius: 1rem;
 	padding: 1rem;
-	
+
 }
 
 .price_title {
@@ -2182,9 +2182,9 @@ margin: 0.5rem;
 	background: var(--white);
 	border-radius: 1rem;
 	padding: 3rem 2rem;
-	-webkit-box-shadow: -3px 5px 45px -1px rgba(0,0,0,0.38);
-	-moz-box-shadow: -3px 5px 45px -1px rgba(0,0,0,0.38);
-	box-shadow: -3px 5px 45px -1px rgba(0,0,0,0.38);
+	-webkit-box-shadow: -3px 5px 45px -1px rgba(0, 0, 0, 0.38);
+	-moz-box-shadow: -3px 5px 45px -1px rgba(0, 0, 0, 0.38);
+	box-shadow: -3px 5px 45px -1px rgba(0, 0, 0, 0.38);
 	margin: 1rem 0;
 }
 

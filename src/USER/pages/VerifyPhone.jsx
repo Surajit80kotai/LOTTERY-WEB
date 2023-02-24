@@ -24,26 +24,33 @@ const VerifyPhone = () => {
     const sendOtp = () => {
         const data = { phone_number: "+91" + phone.phone }
         dispatch(registerOTP(data))
-        setFlag(true)
-        toast.success("OTP Send To Your Number")
-        // setTimeout(() => {
-        //     setPhone({ phone: "" })
-        //     setFlag(false)
-        // }, 10000)
+        setTimeout(() => {
+            if (reg_otp !== "Failed to send OTP") {
+                toast.success("OTP Sent Successfully")
+                setFlag(true)
+                // setPhone({ phone: "" })
+                setOtp({ otp: "" })
+            } else if (reg_otp === "Failed to send OTP") {
+                toast.error("Something Went Wrong Please Try Again")
+                setFlag(false)
+            }
+        }, 10000)
     }
 
     // onVerify func.
     const onVerify = () => {
         const data = { phone_number: "+91" + phone.phone, otp: otp.otp }
+        console.log(data);
         dispatch(verifyOTP(data))
         setTimeout(() => {
             if (verify_otp !== "Invalid OTP!") {
                 setFlag(false)
                 setOtp({ otp: "" })
-                toast.success("Verified Successfully")
+                toast.success("OTP Verification Successfull. Please Continue")
                 navigate('/signup')
             } else {
-                toast.error("Otp Not Matched")
+                toast.error("Invalid OTP!")
+                navigate('/verifyphone')
             }
         }, 2000)
     }
@@ -54,6 +61,7 @@ const VerifyPhone = () => {
             dispatch(clearVerifyOtp())
         }
     }, [dispatch, reg_otp, verify_otp])
+    
 
     return (
         <>

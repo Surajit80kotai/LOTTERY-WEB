@@ -64,9 +64,10 @@ export const fetchForgetPass = createAsyncThunk(
 export const registerOTP = createAsyncThunk("/system/register/otp", async (data, { rejectWithValue }) => {
     try {
         const res = await GETOTP(data)
-        console.log(res?.data);
+        console.log("register otp API try", res?.data);
         return res?.data
     } catch (err) {
+        console.log("register otp API catch", err);
         return rejectWithValue(err)
     }
 })
@@ -76,9 +77,10 @@ export const registerOTP = createAsyncThunk("/system/register/otp", async (data,
 export const verifyOTP = createAsyncThunk("/system/register/otp/verify", async (data, { rejectWithValue }) => {
     try {
         const res = await VERIFYOTP(data)
-        console.log(res?.data);
+        console.log("verify otp API try", res?.data);
         return res?.data
     } catch (err) {
+        console.log("verify otp API catch", err);
         return rejectWithValue(err)
     }
 })
@@ -184,13 +186,13 @@ export const AuthSlice = createSlice({
             state.msg = "Success"
             state.loading = false
             state.reg_otp = payload?.message
-            console.log("reg otp success", typeof payload);
+            console.log("reg otp success", payload?.message);
         })
         builder.addCase(registerOTP.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
             state.reg_otp = payload?.message
-            console.log("reg otp error", typeof payload);
+            console.log("reg otp error", payload?.message);
         })
 
 
@@ -203,13 +205,13 @@ export const AuthSlice = createSlice({
             state.msg = "Success"
             state.loading = false
             state.verify_otp = payload?.message
-            console.log("verify otp success", payload);
+            console.log("verify otp success", payload?.message);
         })
         builder.addCase(verifyOTP.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
             state.verify_otp = payload?.message
-            console.log("verify otp error", payload);
+            console.log("verify otp error", payload?.message);
         })
     }
 })

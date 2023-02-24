@@ -31,7 +31,7 @@ const StudyTravel = ({ item, index }) => {
                                     <div className="pro_img">
                                         {/* Image Condition */}
                                         {
-                                            (is_image?.length) ? <img src={main_image} alt="" className="img-fluid " />
+                                            (is_image?.length) ? <img src={baseUrl + main_image} alt="" className="img-fluid " />
                                                 : <img src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
                                         }
                                     </div>

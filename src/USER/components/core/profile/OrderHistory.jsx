@@ -7,6 +7,7 @@ import { userOrderHistory } from '../../../services/slice/UserSlice'
 import PreLoader from '../preloader/PreLoader'
 
 const OrderHistory = () => {
+    const baseUrl = process.env.REACT_APP_NODE_HOST
     const [pageNumber, setPageNumber] = useState(0)
     const { order_history_data, loading } = useSelector(state => state.userslice)
     const dispatch = useDispatch()
@@ -26,7 +27,7 @@ const OrderHistory = () => {
         setPageNumber(data?.selected)
     }
 
-    
+
     useEffect(() => {
         dispatch(userOrderHistory())
     }, [dispatch])
@@ -54,7 +55,7 @@ const OrderHistory = () => {
 
                                             <div className="pro_im_t">
                                                 <div className="product_history_img">
-                                                    <img src={item?.image_link} alt="" className="img-fluid" />
+                                                    <img src={baseUrl + item?.image_link} alt="" className="img-fluid" />
                                                 </div>
                                                 <div className="info_pro_title">
                                                     <h4>{item?.ticket_name}</h4>

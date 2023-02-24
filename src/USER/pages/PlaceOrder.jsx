@@ -20,7 +20,7 @@ const PlaceOrder = () => {
     const { ordered_data, buy_now_data, loading } = useSelector((state) => state.paymentslice)
     const dispatch = useDispatch()
 
-    const image = process.env.REACT_APP_NODE_HOST
+    const baseUrl = process.env.REACT_APP_NODE_HOST
     const dueAmount = Number(amount?.total - balance?.balance)
 
     const buyNowDataObj = Object.keys(buy_now_data)
@@ -156,7 +156,7 @@ const PlaceOrder = () => {
                                             <div className="cart_list_item">
                                                 <Link to={`/info/${buy_now_data?.ticket?._id}`}>
                                                     <div className="cart_item_img">
-                                                        <img src={image + buy_now_data?.ticket?.is_image} alt="" className="img-fluid" />
+                                                        <img src={baseUrl + buy_now_data?.ticket?.is_image} alt="" className="img-fluid" />
                                                     </div>
                                                 </Link>
                                                 <div className="cart_item_content">
@@ -191,7 +191,7 @@ const PlaceOrder = () => {
                                                             <div className="cart_list_item" key={item.resp._id} id={item.resp._id}>
                                                                 <Link to={`/info/${item?.info[0]?._id}`}>
                                                                     <div className="cart_item_img">
-                                                                        <img src={image + item?.info[0]?.main_image} alt="" className="img-fluid" />
+                                                                        <img src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                                                                     </div>
                                                                 </Link>
                                                                 <div className="cart_item_content">

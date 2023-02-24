@@ -141,12 +141,20 @@ const Wallet = ({ dueAmount }) => {
                                                 <tbody>
                                                     {
                                                         transaction_data?.map((item) => {
+                                                            // let newDate = new Date(item.createdAt)
                                                             return (
                                                                 <tr key={item._id}>
-                                                                    <td>{item.payment_date}</td>
+                                                                    {
+                                                                        item.status_code === "662" ?
+                                                                            <td>
+                                                                                {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
+                                                                            </td>
+                                                                            : <td>{item.payment_date}</td>
+                                                                    }
                                                                     <td>{item.merchant}</td>
-                                                                    <td>{item.currency} {item.amount}</td>
+                                                                    <td>{userCurrency_symbol} {item.amount}</td>
                                                                     <td>{item.status}</td>
+
                                                                 </tr>
                                                             )
                                                         }).reverse()

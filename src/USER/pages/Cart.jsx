@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 
-const image = process.env.REACT_APP_NODE_HOST
+const baseUrl = process.env.REACT_APP_NODE_HOST
 
 const Cart = () => {
   const { cart_data, update_status, delete_status, loading } = useSelector((state) => state.cartslice)
@@ -110,7 +110,7 @@ const Cart = () => {
                             {/* Image */}
                             <Link to={`/info/${item?.info[0]?._id}`}>
                               <div className="cart_item_img">
-                                <img src={image + item?.info[0]?.main_image} alt="" className="img-fluid" />
+                                <img src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                               </div>
                             </Link>
 
