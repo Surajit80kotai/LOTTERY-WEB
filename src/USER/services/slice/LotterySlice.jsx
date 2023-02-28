@@ -30,7 +30,8 @@ const initialState = {
     fetch_lott_status: "",
     category_data: [],
     category_status: "",
-    loading: false
+    loading: false,
+    status: false
 }
 
 // Creating Slice
@@ -43,16 +44,19 @@ export const LotterySlice = createSlice({
         builder.addCase(fetchLottery.pending, (state) => {
             state.fetch_lott_status = "Loading"
             state.loading = true
+            state.status = true
         })
         builder.addCase(fetchLottery.fulfilled, (state, { payload }) => {
             state.fetch_lott_status = "Success"
             state.loading = false
+            state.status = false
             state.fetch_lott_data = payload
             window.localStorage.setItem("data", JSON.stringify(payload))
         })
         builder.addCase(fetchLottery.rejected, (state) => {
             state.fetch_lott_status = "Failed"
             state.loading = false
+            state.status = false
         })
 
 
@@ -60,16 +64,19 @@ export const LotterySlice = createSlice({
         builder.addCase(fetchCategory.pending, (state) => {
             state.category_status = "Loading"
             state.loading = true
+            state.status = true
         })
         builder.addCase(fetchCategory.fulfilled, (state, { payload }) => {
             state.category_status = "Success"
             state.loading = false
+            state.status = false
             state.category_data = payload
             window.localStorage.setItem("categoryData", JSON.stringify(payload))
         })
         builder.addCase(fetchCategory.rejected, (state) => {
             state.category_status = "Failed"
             state.loading = false
+            state.status = false
         })
     }
 })

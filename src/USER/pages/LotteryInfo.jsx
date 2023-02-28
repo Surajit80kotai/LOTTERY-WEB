@@ -19,7 +19,8 @@ const LotteryInfo = () => {
     const { cart_data, add_cart_status } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
     const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
-    const { loading } = useSelector((state) => state.lotteryslice)
+    const { loading } = useSelector((state) => state.cartslice)
+    const { status } = useSelector((state) => state.lotteryslice)
 
     // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
@@ -101,7 +102,7 @@ const LotteryInfo = () => {
     return (
         <>
             {/* PreLoader */}
-            {loading && <PreLoader />}
+            {status && loading && <PreLoader />}
 
             <main>
                 {/* Product Info */}

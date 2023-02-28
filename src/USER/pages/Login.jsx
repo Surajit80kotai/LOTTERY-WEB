@@ -160,7 +160,7 @@ const Login = () => {
                             </div>
                             <h2 className="log_title">Welcome To Login</h2>
                             <h6 className="dont">Don't Have Account?</h6>
-                            <Link to="/signup" className="Signup">Sing Up</Link>
+                            <Link to="/verifyphone" className="Signup">Sing Up</Link>
                         </div>
                     </div>
                 </div>
