@@ -303,7 +303,7 @@ const LotteryInfo = () => {
                         <div className="row">
                             <div className="description_wrapper">
                                 {/* Description Section */}
-                                <div>
+                                <div style={{ "marginTop": "50px" }} >
                                     <div className="des_title">
                                         <h3>DESCRIPTION</h3>
                                     </div>
@@ -339,8 +339,8 @@ const LotteryInfo = () => {
                                                         )
                                                     })
                                                 }
-                                                <hr />
                                             </div>
+                                            <hr />
                                         </div>
                                         : null
                                 }
