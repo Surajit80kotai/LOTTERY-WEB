@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart } from '../services/slice/CartSlice'
+import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart, updateCartQuantity, updateQTY } from '../services/slice/CartSlice'
 import { useEffect } from 'react'
 import { emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
@@ -22,24 +22,29 @@ const Cart = () => {
 
   // CalculateSum Function
   const calculateSum = () => {
-    let st = 0
-    let dc = 0
-    cart_data?.map(({ resp, info }) => {
-      if (info[0].discount_percentage) {
-        st += (Number((info[0].ticket_price * resp.quantity)))
-        dc += (Number(((info[0].ticket_price) * (info[0].discount_percentage) / 100) * resp.quantity))
-        return Number(st)
-      } else {
-        st += Number(info[0].ticket_price * resp.quantity)
-        return st
-      }
-    })
-    return setAmount({
-      ...amount,
-      subtotal: st,
-      discount: dc,
-      total: st - dc
-    })
+    console.log("calculate sum");
+    // setTimeout(() => {
+      let st = 0
+      let dc = 0
+      cart_data?.map(({ resp, info }) => {
+        console.log(resp.quantity);
+        if (info[0].discount_percentage) {
+          st += (Number((info[0].ticket_price * resp.quantity)))
+          dc += (Number(((info[0].ticket_price) * (info[0].discount_percentage) / 100) * resp.quantity))
+          return Number(st)
+        } else {
+          st += Number(info[0].ticket_price * resp.quantity)
+          return st
+        }
+      })
+      return setAmount({
+        ...amount,
+        subtotal: st,
+        discount: dc,
+        total: st - dc
+      })
+    // }, 1000)
+
   }
 
 
@@ -48,12 +53,19 @@ const Cart = () => {
     const u_qty = qty + 1
     const data = { id: c_id, qty: u_qty }
     dispatch(updateCart(data))
+    setTimeout(()=>{
+      dispatch(updateQTY(data))
+    }, 1000)
   }
+
   // DecQty function
   const DecQty = (qty, c_id) => {
     const u_qty = qty - 1
     const data = { id: c_id, qty: u_qty }
     dispatch(updateCart(data))
+    setTimeout(()=>{
+      dispatch(updateQTY(data))
+    }, 1000)
   }
 
   // removeItem function
@@ -65,8 +77,12 @@ const Cart = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    calculateSum()
     dispatch(getCart())
+
+    // if (update_status) {
+      calculateSum()
+    // }
+
     // cleanUp
     return () => {
       dispatch(clearUpdateStatus())
@@ -74,6 +90,10 @@ const Cart = () => {
     }
   }, [dispatch, cartLength, update_status, delete_status])
 
+
+  // useEffect(() => {
+  //   calculateSum()
+  // }, [cartLength])
 
 
   return (

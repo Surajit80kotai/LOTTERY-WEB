@@ -8,7 +8,7 @@ export const useTimer = () => {
 
     const startTimer = (time_left) => {
         const countDownDate = new Date(time_left).getTime()
-        var interval = setInterval(() => {
+        var interval = setTimeout(() => {
             const now = new Date().getTime()
             const distance = countDownDate - now
             const days = Math.floor(distance / (24 * 60 * 60 * 1000))
@@ -18,7 +18,7 @@ export const useTimer = () => {
 
             if (distance < 0) {
                 // stop timer
-                clearInterval(interval.current)
+                clearTimeout(interval.current)
             } else {
                 // update timer
                 setTimerDays(days)
@@ -26,7 +26,7 @@ export const useTimer = () => {
                 setTimerMinutes(minutes)
                 setTimerSeconds(seconds)
             }
-        },1000)
+        }, 1000)
     }
 
     return [

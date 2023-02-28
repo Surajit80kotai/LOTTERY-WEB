@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { ADDTOCART, DELCART, FETCHCART, UPDATECART } from "../api/Api";
 import { toast } from 'react-toastify'
 
@@ -98,6 +98,30 @@ export const CartSlice = createSlice({
         },
         clearDeleteStatus(state) {
             state.delete_status = ""
+        },
+        updateQTY(state, { payload }) {
+            const newCartData = (current(state.cart_data)).map(item => {
+                const { resp } = item;
+                if (payload.id === resp._id) {
+                    var newResp = resp;
+                    Object.defineProperty(newResp, 'quantity', {
+                        value: payload.qty,
+                        writable: false
+                    });
+                    console.log(newResp);
+                    // newResp.quantity= payload.qty
+                }
+                console.log("item=>", item);
+                return {
+                    ...item,
+                    resp: newResp,
+                };
+            })
+            console.log("newcartdata=>", newCartData);
+            return {
+                ...state,
+                cart_data: newCartData
+            }
         }
     },
     extraReducers: (builder) => {
@@ -159,7 +183,7 @@ export const CartSlice = createSlice({
             state.status = "Success"
             state.loading = false
             state.update_status = payload
-            if (payload.quantity > 5) {
+            if (payload?.quantity > 5) {
                 toast.warning(payload.message)
             }
         })
@@ -170,5 +194,5 @@ export const CartSlice = createSlice({
     }
 })
 
-export const { emptyCart, clearUpdateStatus, clearDeleteStatus, clearAddStatus } = CartSlice.actions
+export const { emptyCart, clearUpdateStatus, clearDeleteStatus, clearAddStatus, updateQTY } = CartSlice.actions
 export default CartSlice.reducer
