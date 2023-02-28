@@ -16,6 +16,9 @@ const VerifyPhone = () => {
     const dispatch = useDispatch()
     const { reg_otp, verify_otp } = useSelector((state) => state.authslice)
 
+    // console.log(reg_otp);
+    // console.log(verify_otp);
+
     // button style
     const active = "btn_one"
     const deactive = "btn_deactive"
@@ -24,7 +27,10 @@ const VerifyPhone = () => {
     const sendOtp = () => {
         const data = { phone_number: "+91" + phone.phone }
         dispatch(registerOTP(data))
+        // const regOtp = reg_otp
+        // const verifyOtp = verify_otp
         setTimeout(() => {
+            // console.log("inside condition", regOtp);
             if (reg_otp !== "Failed to send OTP") {
                 toast.success("OTP Sent Successfully")
                 setFlag(true)
@@ -43,6 +49,7 @@ const VerifyPhone = () => {
         console.log(data);
         dispatch(verifyOTP(data))
         setTimeout(() => {
+            // console.log("inside condition", verify_otp);
             if (verify_otp !== "Invalid OTP!") {
                 setFlag(false)
                 setOtp({ otp: "" })
@@ -61,7 +68,7 @@ const VerifyPhone = () => {
             dispatch(clearVerifyOtp())
         }
     }, [dispatch, reg_otp, verify_otp])
-    
+
 
     return (
         <>
@@ -74,9 +81,9 @@ const VerifyPhone = () => {
                     <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Home</h3>
                 </Link>
 
-                <div className='mt-5'>
+                {/* <div className='mt-5'>
                     <h2 className='text-decoration-underline text-center fw-bold' style={{ "color": "#f9772b" }}>Verify Your Phone  Number First</h2>
-                </div>
+                </div> */}
 
                 <div className="wrapper_area margin-top">
                     <div className="log_area">
@@ -147,10 +154,13 @@ const VerifyPhone = () => {
                                 </form>
                             </div>
                         </div>
-                        <div className="left_part">
+                        <div className="left_part mb-5">
                             <div className="company_logo text-center">
                                 <Link to="/"><img src="/assets/img/logo.png" alt="" className="img-fluid" /></Link>
                             </div>
+                            <h2 className="log_title">Welcome Phone Number Verification</h2>
+                            <h6 className="dont">Already Have An Account?</h6>
+                            <Link to="/login" className="Signup">Sing In</Link>
                         </div>
                     </div>
                 </div>

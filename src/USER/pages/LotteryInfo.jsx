@@ -296,6 +296,27 @@ const LotteryInfo = () => {
                                         <div data-progress={ticketInfo[0]?.ticket_quantity}></div>
                                     </div> */}
 
+                                        {/* Description Section */}
+                                        <div>
+                                            <div className="des_title">
+                                                <h3>DESCRIPTION</h3>
+                                            </div>
+                                            <div className="description_item">
+                                                <div className="describe_heading">
+                                                    <h4>{ticketInfo[0]?.ticket_name}</h4>
+                                                </div>
+                                                {
+                                                    (ticketInfo[0]?.description) ?
+                                                        <p className="description_para">
+                                                            {ticketInfo[0]?.description}
+                                                        </p>
+                                                        : null
+                                                }
+
+                                            </div>
+                                            {/* <hr /> */}
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -303,7 +324,7 @@ const LotteryInfo = () => {
                         <div className="row">
                             <div className="description_wrapper">
                                 {/* Description Section */}
-                                <div style={{ "marginTop": "50px" }} >
+                                {/* <div>
                                     <div className="des_title">
                                         <h3>DESCRIPTION</h3>
                                     </div>
@@ -321,7 +342,7 @@ const LotteryInfo = () => {
 
                                     </div>
                                     <hr />
-                                </div>
+                                </div> */}
 
                                 {/* Key feature body section */}
                                 {
