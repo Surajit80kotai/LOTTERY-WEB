@@ -10,7 +10,6 @@ import Profile from './USER/pages/Profile';
 import Cart from './USER/pages/Cart';
 import PlaceOrder from './USER/pages/PlaceOrder';
 import Contact from './USER/pages/Contact';
-// import { Flip, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import ViewAllStudyTravel from './USER/components/core/viewAllLottery/ViewAllStudyTravel';
 import ViewAllCompPhn from './USER/components/core/viewAllLottery/ViewAllCompPhn';
@@ -19,13 +18,11 @@ import AboutUs from './USER/pages/AboutUs';
 import HowToPlay from './USER/pages/HowToPlay';
 import Charities from './USER/pages/Charities';
 import OrderSuccess from './USER/pages/OrderSuccess';
-import TestThree from './USER/pages/test/TestThree';
 
 
 function App() {
   return (
     <div>
-      {/* <PreLoader /> */}
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} exact />
@@ -39,7 +36,6 @@ function App() {
         <Route path='/viewallstud_trv' element={<ViewAllStudyTravel />} />
         <Route path='/viewallcomp_phn' element={<ViewAllCompPhn />} />
         <Route path='/viewallcosmetics' element={<ViewAllCosmetics />} />
-        <Route path='/test' element={<TestThree />} />
 
         {/* Private Route Part */}
         <Route element={<PrivateRoute />}>
@@ -51,7 +47,6 @@ function App() {
         </Route>
       </Routes>
       <FooterMain />
-      {/* <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} /> */}
     </div>
   );
 }

@@ -15,7 +15,8 @@ const OrderHistory = () => {
     // for pagination
     const userPerPage = 8
     const pagesVisited = pageNumber * userPerPage
-    const orderHistoryData = order_history_data?.slice(pagesVisited, pagesVisited + userPerPage)
+    const data = [...order_history_data]
+    const orderHistoryData = data?.reverse().slice(pagesVisited, pagesVisited + userPerPage)
     const pageCount = Math.ceil(order_history_data?.length / userPerPage)
 
     // currency variables
@@ -46,7 +47,7 @@ const OrderHistory = () => {
                         {/* order his item  */}
                         {
                             orderHistoryData?.length ?
-                                orderHistoryData?.reverse().map((item) => {
+                                orderHistoryData?.map((item) => {
                                     return (
                                         <div className="orderhistroy_item" key={item?._id}>
                                             <div className="ribbon-wrapper-green">
