@@ -151,7 +151,7 @@ const NavBar = () => {
                       <ul className="dropdown-menu">
                         <li className="user-menu__item">
                           <Link className="user-menu-link dropdown-item" to="/profile">
-                            <div><i className="fas fa-user mx-1"></i><span className='fw-bolder'>My Profile</span></div>
+                            <div><i className="fas fa-user mx-1"></i><span className='fw-bolder'>My Account</span></div>
                           </Link>
                         </li>
                         <li className="user-menu__item">
