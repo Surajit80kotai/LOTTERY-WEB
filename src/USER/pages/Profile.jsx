@@ -34,7 +34,7 @@ const Profile = () => {
                             <li className="menu-item active">
                                 <Link onClick={() => setPageName("dashboard")} to="#!" className="menu-link">
                                     <i className="menu-icon fas fa-user"></i>
-                                    <div data-i18n="Analytics">My Profile</div>
+                                    <div data-i18n="Analytics">My Account</div>
                                 </Link>
                             </li>
 
