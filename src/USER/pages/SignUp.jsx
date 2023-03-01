@@ -8,11 +8,11 @@ import PreLoader from '../components/core/preloader/PreLoader';
 import { toast } from 'react-toastify'
 
 
-
+const verified_phone_number = window.localStorage.getItem("verified_phone_number")
 const initialState = {
     full_name: "",
     email: "",
-    phone: "",
+    phone: verified_phone_number,
     dob: "",
     country: "",
     password: "",
@@ -26,7 +26,7 @@ const SignUp = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [formValues, setFormValues] = useState(initialState)
-    const { full_name, email, phone, dob, country, password, confirmPassword } = formValues
+    const { full_name, email, dob, country, password, confirmPassword } = formValues
     const [error, setError] = useState("")
 
     // handleChange Function for input change
@@ -84,9 +84,14 @@ const SignUp = () => {
 
             <main className="main">
                 {/* Back to home button */}
-                <Link className='text-secondary' to='/'>
-                    <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Home</h3>
-                </Link>
+                <div className='d-flex justify-content-between' style={{ "margin": "0 340px 0 340px" }}>
+                    <Link className='text-secondary' to='/verifyphone'>
+                        <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Back</h3>
+                    </Link>
+                    <Link className='text-secondary' to='/'>
+                        <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                    </Link>
+                </div>
 
                 <div className="wrapper_area margin-top-5">
                     <div className="log_area">
@@ -123,8 +128,8 @@ const SignUp = () => {
                                             id="email"
                                             name="email"
                                             aria-describedby="emailHelp"
-                                            // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                            // title="Accept Email Format Only"
+                                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                            title="Accept Email Format Only"
                                             placeholder="Enter Your Email Id"
                                             value={email}
                                             onChange={handleChange}
@@ -135,7 +140,7 @@ const SignUp = () => {
                                     </div>
 
                                     {/* Phone */}
-                                    <div className="m_gap">
+                                    {/* <div className="m_gap">
                                         <label htmlFor="mobile_code" className="form-label label_style">Phone</label>
                                         <input
                                             type="tel"
@@ -151,9 +156,9 @@ const SignUp = () => {
                                             maxLength={10}
                                             required
                                         />
-                                        {/* Phone Vaidation */}
+                                        Phone Vaidation
                                         <p className='text-danger fs-4 mt-2'>{signupErr?.phone?.message}</p>
-                                    </div>
+                                    </div> */}
 
                                     <div className="row">
 

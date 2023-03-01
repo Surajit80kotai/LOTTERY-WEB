@@ -75,9 +75,11 @@ const VerifyPhone = () => {
 
             <main className="main">
                 {/* Back to home button */}
-                <Link className='text-secondary' to='/'>
-                    <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Home</h3>
-                </Link>
+                <div className='d-flex justify-content-end' style={{ "margin": "0 340px 0 340px" }}>
+                    <Link className='text-secondary' to='/'>
+                        <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                    </Link>
+                </div>
 
                 <div className="wrapper_area margin-top">
                     <div className="log_area">

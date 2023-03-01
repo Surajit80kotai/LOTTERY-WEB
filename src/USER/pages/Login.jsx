@@ -15,7 +15,7 @@ const Login = () => {
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [click, setClick] = useState(false)
+    // const [click, setClick] = useState(false)
     const [formValues, setFormValues] = useState({ email: "", password: "" })
 
 
@@ -35,15 +35,15 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(fetchLogin({ formValues, navigate, toast }))
-        if (click) {
-            // formValues.email = cookies.get("email")
-            // formValues.password = cookies.get("password")
-            // console.log(formValues.email)
-            setFormValues({ email: formValues.email, password: formValues.password })
-        }
-        else {
-            setFormValues({ email: "", password: "" })
-        }
+        // if (click) {
+        // formValues.email = cookies.get("email")
+        // formValues.password = cookies.get("password")
+        // console.log(formValues.email)
+        // setFormValues({ email: formValues.email, password: formValues.password })
+        // }
+        // else {
+        //     setFormValues({ email: "", password: "" })
+        // }
     }
 
     // socailLogin function
@@ -70,9 +70,14 @@ const Login = () => {
 
             <main className="main">
                 {/* Back to home button */}
-                <Link className='text-secondary' to='/'>
-                    <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Home</h3>
-                </Link>
+                <div className='d-flex justify-content-between' style={{ "margin": "0 340px 0 340px" }}>
+                    <Link className='text-secondary' to='/signup'>
+                        <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Back</h3>
+                    </Link>
+                    <Link className='text-secondary' to='/'>
+                        <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                    </Link>
+                </div>
 
                 <div className="wrapper_area margin-top">
                     <div className="log_area">
@@ -132,7 +137,7 @@ const Login = () => {
                                     <div className="bottom_form">
 
                                         {/* Remember Me section */}
-                                        <div className="mb-3 form-check">
+                                        {/* <div className="mb-3 form-check">
                                             <input
                                                 type="checkbox"
                                                 className="form-check-input check_input"
@@ -141,15 +146,16 @@ const Login = () => {
                                                 onChange={() => setClick(!click)}
                                             />
                                             <label className="form-check-label check_label" htmlFor="exampleCheck1">Remember Me</label>
-                                        </div>
-
-                                        {/* Forget password Link */}
-                                        <div className="forget_password">
-                                            <Link to="/f_password" className="forget_pass">Forget Password?</Link>
-                                        </div>
+                                        </div> */}
                                     </div>
+                                    
                                     <div className="text-center">
                                         <button type="submit" className="btn_one">Login</button>
+                                    </div>
+
+                                    {/* Forget password Link */}
+                                    <div className="forget_password d-flex justify-content-center mt-5">
+                                        <span className='forget_pass mx-2'>Forget Password?</span><Link to="/f_password" className="forget_pass text-decoration-underline text-primary">Click Here</Link>
                                     </div>
                                 </form>
                             </div>
