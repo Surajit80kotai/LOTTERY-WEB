@@ -101,7 +101,7 @@ const Cart = () => {
           <div className="container pt-5">
             <div className="bred">
               <div className="product_title_top">
-                <h3>Your Order List</h3>
+                <h3>Your Cart Items</h3>
               </div>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">

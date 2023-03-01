@@ -273,7 +273,7 @@ const LotteryInfo = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            : <h4 className='text-dark my-5'>Ticket is unavailabe right now</h4>
+                                            : <h3 className='text-danger my-5'>Ticket is unavailabe right now</h3>
                                     }
 
                                     {/* Ticket quantity Slider */}

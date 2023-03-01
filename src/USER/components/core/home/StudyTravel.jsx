@@ -91,7 +91,7 @@ const StudyTravel = ({ item, index }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            : <h4 className='text-dark'>Ticket is unavailabe right now</h4>
+                                            : <h3 className='text-danger mt-3'>Ticket is unavailabe right now</h3>
                                     }
 
                                 </div>
