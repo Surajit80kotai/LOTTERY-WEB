@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ADDTOCART, DELCART, FETCHCART, UPDATECART } from "../api/Api";
 import { toast } from 'react-toastify'
 
@@ -100,29 +100,53 @@ export const CartSlice = createSlice({
             state.delete_status = ""
         },
         updateQTY(state, { payload }) {
-            const newCartData = (current(state.cart_data)).map(item => {
-                const { resp } = item;
-                if (payload.id === resp._id) {
-                    var newResp = resp;
-                    Object.defineProperty(newResp, 'quantity', {
-                        value: payload.qty,
-                        writable: false
-                    });
-                    console.log(newResp);
-                    // newResp.quantity= payload.qty
-                }
-                console.log("item=>", item);
+            if (payload.qty > 0 && payload.qty < 6) {
+                const newCartData = state.cart_data.map(item => {
+                    if (payload.id === item.resp._id) {
+                        return {
+                            ...item,
+                            resp: {
+                                ...item.resp,
+                                quantity: payload.qty,
+                            },
+                        };
+                    } else {
+                        return item;
+                    }
+                });
+                // console.log(newCartData);    
+
                 return {
-                    ...item,
-                    resp: newResp,
+                    ...state,
+                    cart_data: newCartData,
                 };
-            })
-            console.log("newcartdata=>", newCartData);
-            return {
-                ...state,
-                cart_data: newCartData
             }
         }
+
+        // updateQTY(state, { payload }) {
+        //     const newCartData = (current(state.cart_data)).map(item => {
+        //         const { resp } = item;
+        //         if (payload.id === resp._id) {
+        //             var newResp = resp;
+        //             Object.defineProperty(newResp, 'quantity', {
+        //                 value: payload.qty,
+        //                 writable: false
+        //             });
+        //             console.log(newResp);
+        //             // newResp.quantity= payload.qty
+        //         }
+        //         console.log("item=>", item);
+        //         return {
+        //             ...item,
+        //             resp: newResp,
+        //         };
+        //     })
+        //     console.log("newcartdata=>", newCartData);
+        //     return {
+        //         ...state,
+        //         cart_data: newCartData
+        //     }
+        // }
     },
     extraReducers: (builder) => {
         // Post request states for Addcart system

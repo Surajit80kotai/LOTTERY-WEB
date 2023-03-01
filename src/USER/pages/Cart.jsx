@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart, updateCartQuantity, updateQTY } from '../services/slice/CartSlice'
+import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart, updateQTY } from '../services/slice/CartSlice'
 import { useEffect } from 'react'
 import { emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
@@ -22,8 +22,8 @@ const Cart = () => {
 
   // CalculateSum Function
   const calculateSum = () => {
-    console.log("calculate sum");
-    // setTimeout(() => {
+    // console.log("calculate sum");
+    setTimeout(() => {
       let st = 0
       let dc = 0
       cart_data?.map(({ resp, info }) => {
@@ -43,7 +43,7 @@ const Cart = () => {
         discount: dc,
         total: st - dc
       })
-    // }, 1000)
+    }, 1000)
 
   }
 
@@ -53,9 +53,9 @@ const Cart = () => {
     const u_qty = qty + 1
     const data = { id: c_id, qty: u_qty }
     dispatch(updateCart(data))
-    setTimeout(()=>{
-      dispatch(updateQTY(data))
-    }, 1000)
+    // setTimeout(()=>{
+    dispatch(updateQTY(data))
+    // }, 1000)
   }
 
   // DecQty function
@@ -63,9 +63,9 @@ const Cart = () => {
     const u_qty = qty - 1
     const data = { id: c_id, qty: u_qty }
     dispatch(updateCart(data))
-    setTimeout(()=>{
-      dispatch(updateQTY(data))
-    }, 1000)
+    // setTimeout(()=>{
+    dispatch(updateQTY(data))
+    // }, 1000)
   }
 
   // removeItem function
@@ -79,9 +79,9 @@ const Cart = () => {
     window.scrollTo(0, 0)
     dispatch(getCart())
 
-    // if (update_status) {
+    if (update_status) {
       calculateSum()
-    // }
+    }
 
     // cleanUp
     return () => {
@@ -91,9 +91,9 @@ const Cart = () => {
   }, [dispatch, cartLength, update_status, delete_status])
 
 
-  // useEffect(() => {
-  //   calculateSum()
-  // }, [cartLength])
+  useEffect(() => {
+    calculateSum()
+  }, [cartLength])
 
 
   return (
