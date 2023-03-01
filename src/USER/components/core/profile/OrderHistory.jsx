@@ -80,7 +80,7 @@ const OrderHistory = () => {
                                         </div>
                                     )
                                 })
-                                : <h1>No order history present</h1>
+                                : <h1 className='text-center'>No order history present</h1>
                         }
                     </div>
                     {/* Pagination */}

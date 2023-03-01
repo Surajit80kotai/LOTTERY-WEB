@@ -153,7 +153,7 @@ const Wallet = ({ dueAmount }) => {
                                                                     }
                                                                     <td>{item.merchant}</td>
                                                                     <td>{userCurrency_symbol} {item.amount}</td>
-                                                                    <td>{item.status}</td>
+                                                                    <td>{(item.status).replace(/_/g," ")}</td>
 
                                                                 </tr>
                                                             )

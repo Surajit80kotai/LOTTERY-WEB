@@ -158,7 +158,7 @@ main {
 .btn2_disabled {
 	text-align: center;
 	padding: 0.6rem 3rem;
-	background-color: #d4d4d4;
+	background-color: #49494978;
 	font-size: 1.5rem;
 	color: var(--white);
 	border-radius: 0.5rem;
@@ -2565,11 +2565,11 @@ margin: 0.5rem;
 }
 
 .addmoney {
-	width: 100%;
+	width: 55%;
 	padding: 1.4rem 3rem;
 	background: var(--primary-color);
 	color: var(--white);
-	font-size: 1.5rem;
+	font-size: 1.6rem;
 	border-radius: 0.5rem;
 }
 
@@ -2817,8 +2817,7 @@ margin: 0.5rem;
 .btn_deactive {
 	text-align: center;
 	padding: 0.8rem 5rem;
-	background: #b4b4b4;
-	;
+	background: #30303078;
 	font-size: 1.5rem;
 	color: var(--white);
 	border-radius: 5rem;
