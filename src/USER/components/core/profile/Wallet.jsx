@@ -153,7 +153,21 @@ const Wallet = ({ dueAmount }) => {
                                                                     }
                                                                     <td>{item.merchant}</td>
                                                                     <td>{userCurrency_symbol} {item.amount}</td>
-                                                                    <td>{(item.status).replace(/_/g," ")}</td>
+                                                                    {/* <td>{(item.status).replace(/_/g," ")}</td> */}
+                                                                    <td>
+                                                                        {
+                                                                            // WAITING_CUSTOMER_PAYMENT
+                                                                            (item.status) === "WAITING_CUSTOMER_PAYMENT" ?
+                                                                                <span className='text-warning'><i className="fa-solid fa-clock-rotate-left mx-3"></i>{(item.status).replace(/_/g, " ")}</span>
+                                                                                // PAYMENT_FAILED
+                                                                                : (item.status) === "PAYMENT_FAILED" ?
+                                                                                    <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{(item.status).replace(/_/g, " ")}</span>
+                                                                                    // SUCCES
+                                                                                    : (item.status) === "SUCCES" ?
+                                                                                        <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{(item.status).replace(/_/g, " ")}S</span>
+                                                                                        : null
+                                                                        }
+                                                                    </td>
 
                                                                 </tr>
                                                             )
