@@ -128,7 +128,7 @@ const Wallet = ({ dueAmount }) => {
                                 {
                                     transaction_data?.length ?
                                         <div className="transaction_area">
-                                            <h3 className="tranhis">Transaction History</h3>
+                                            <h1 className="text-center text-secondary tranhis">Transaction History</h1>
                                             <table className="table mt-4">
                                                 <thead className="table_head sticky-top ">
                                                     <tr>
