@@ -22,12 +22,10 @@ const Cart = () => {
 
   // CalculateSum Function
   const calculateSum = () => {
-    // console.log("calculate sum");
     setTimeout(() => {
       let st = 0
       let dc = 0
       cart_data?.map(({ resp, info }) => {
-        console.log(resp.quantity);
         if (info[0].discount_percentage) {
           st += (Number((info[0].ticket_price * resp.quantity)))
           dc += (Number(((info[0].ticket_price) * (info[0].discount_percentage) / 100) * resp.quantity))
@@ -53,9 +51,7 @@ const Cart = () => {
     const u_qty = qty + 1
     const data = { id: c_id, qty: u_qty }
     dispatch(updateCart(data))
-    // setTimeout(()=>{
     dispatch(updateQTY(data))
-    // }, 1000)
   }
 
   // DecQty function
@@ -63,9 +59,7 @@ const Cart = () => {
     const u_qty = qty - 1
     const data = { id: c_id, qty: u_qty }
     dispatch(updateCart(data))
-    // setTimeout(()=>{
     dispatch(updateQTY(data))
-    // }, 1000)
   }
 
   // removeItem function
@@ -91,10 +85,12 @@ const Cart = () => {
   }, [dispatch, cartLength, update_status, delete_status])
 
 
+
   useEffect(() => {
     calculateSum()
   }, [cartLength])
 
+  
 
   return (
     <>

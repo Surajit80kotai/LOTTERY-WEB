@@ -88,7 +88,6 @@ export const CartSlice = createSlice({
     reducers: {
         emptyCart(state, { payload }) {
             state.cart_data = []
-            // console.log("empty cart")
         },
         clearAddStatus(state) {
             state.add_cart_status = ""
@@ -114,7 +113,6 @@ export const CartSlice = createSlice({
                         return item;
                     }
                 });
-                // console.log(newCartData);    
 
                 return {
                     ...state,
@@ -122,31 +120,6 @@ export const CartSlice = createSlice({
                 };
             }
         }
-
-        // updateQTY(state, { payload }) {
-        //     const newCartData = (current(state.cart_data)).map(item => {
-        //         const { resp } = item;
-        //         if (payload.id === resp._id) {
-        //             var newResp = resp;
-        //             Object.defineProperty(newResp, 'quantity', {
-        //                 value: payload.qty,
-        //                 writable: false
-        //             });
-        //             console.log(newResp);
-        //             // newResp.quantity= payload.qty
-        //         }
-        //         console.log("item=>", item);
-        //         return {
-        //             ...item,
-        //             resp: newResp,
-        //         };
-        //     })
-        //     console.log("newcartdata=>", newCartData);
-        //     return {
-        //         ...state,
-        //         cart_data: newCartData
-        //     }
-        // }
     },
     extraReducers: (builder) => {
         // Post request states for Addcart system
