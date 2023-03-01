@@ -15,11 +15,11 @@ const MyProfile = () => {
     const newDOB = `${date_of_birth.getUTCDate()}-${month[date_of_birth.getUTCMonth()]}-${date_of_birth.getUTCFullYear()}`
     const [formValues, setFormValues] = useState({
         full_name: user?.full_name,
-        phone: user?.phone
+        email: user?.email
     })
-    
+
     const dispatch = useDispatch()
-    
+
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
     // console.log(social_user?.photoURL)
 
@@ -99,6 +99,8 @@ const MyProfile = () => {
                                                         className="form-control form_input in_disa"
                                                         id="full_name"
                                                         name="full_name"
+                                                        title="Accept Alphabets & Whitespaces Only"
+                                                        pattern='^[a-zA-Z ]+$'
                                                         placeholder={user?.full_name}
                                                         value={formValues.full_name}
                                                         onChange={handleChange} disabled
@@ -125,9 +127,11 @@ const MyProfile = () => {
                                                         id="email"
                                                         name="email"
                                                         aria-describedby="emailHelp"
-                                                        placeholder={user?.email} disabled
-                                                        onChange={handleChange}
-                                                        readOnly
+                                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                        title="Accept Email Format Only"
+                                                        placeholder={user?.email}
+                                                        value={formValues?.email}
+                                                        onChange={handleChange} disabled
                                                     />
                                                     :
                                                     <input
@@ -137,8 +141,7 @@ const MyProfile = () => {
                                                         name="email"
                                                         aria-describedby="emailHelp"
                                                         placeholder={social_user?.email}
-                                                        onChange={handleChange}
-                                                        readOnly
+                                                        onChange={handleChange} disabled
                                                     />
                                             }
                                         </div>
@@ -154,10 +157,11 @@ const MyProfile = () => {
                                                         id="phone"
                                                         name="phone"
                                                         aria-describedby="emailHelp"
-                                                        placeholder={user?.phone} disabled
-                                                        value={formValues.phone}
+                                                        placeholder={user?.phone}
                                                         onChange={handleChange}
                                                         maxLength={10}
+                                                        disabled
+                                                        readOnly
                                                     />
                                                     :
                                                     <input
@@ -186,9 +190,10 @@ const MyProfile = () => {
                                                         name="dob"
                                                         aria-describedby="emailHelp"
                                                         placeholder={newDOB}
-                                                        value={formValues.dob} disabled
+                                                        value={formValues.dob}
                                                         onChange={handleChange}
                                                         readOnly
+                                                        disabled
                                                     />
                                                     :
                                                     <input
@@ -218,6 +223,7 @@ const MyProfile = () => {
                                                         value={formValues.country}
                                                         onChange={handleChange}
                                                         disabled
+                                                        readOnly
                                                     >
                                                         <option readOnly>{user?.country}</option>
                                                     </select>
@@ -227,7 +233,9 @@ const MyProfile = () => {
                                                         aria-label="Default select example"
                                                         id="selects"
                                                         name='country'
-                                                        disabled >
+                                                        disabled
+                                                        readOnly
+                                                    >
                                                         <option readOnly>Country did not registered</option>
                                                     </select>
                                             }
