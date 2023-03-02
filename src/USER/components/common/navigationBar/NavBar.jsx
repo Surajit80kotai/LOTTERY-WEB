@@ -6,6 +6,8 @@ import { emptyCart, getCart } from '../../../services/slice/CartSlice'
 import { auth } from '../../../config/firebase'
 import { signOut } from 'firebase/auth'
 
+
+
 const NavBar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -16,6 +18,7 @@ const NavBar = () => {
   const { cart_data } = useSelector((state) => state.cartslice)
   const cartLength = cart_data?.length
 
+  // Log Out Function
   const logOut = async () => {
     await signOut(auth)
     window.localStorage.removeItem("social_user")
@@ -53,15 +56,15 @@ const NavBar = () => {
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   {/* Home */}
                   <li className="nav-item">
-                    <Link className="nav-link" to="/">Home</Link>
+                    <Link className="nav-link nav-link-active" to="/">Home</Link>
                   </li>
                   {/* About Us */}
                   <li className="nav-item">
-                    <Link className="nav-link" to="/aboutus">About Us</Link>
+                    <Link className="nav-link nav-link-active" to="/aboutus">About Us</Link>
                   </li>
                   {/* Product Dropdown */}
                   <li className="nav-item dropdown">
-                    <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products <i className="bi bi-chevron-down" style={{ "fontSize": "12px" }}></i></Link>
+                    <Link className="nav-link nav-link-active dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products <i className="bi bi-chevron-down" style={{ "fontSize": "12px" }}></i></Link>
                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><Link className="dropdown-item text-dark" to="/viewallhome">House & Apartments</Link></li>
                       <li><Link className="dropdown-item text-dark" to="/viewallcars">Cars & Bikes</Link></li>
@@ -72,15 +75,15 @@ const NavBar = () => {
                   </li>
                   {/* How to play */}
                   <li className="nav-item">
-                    <Link className="nav-link" to="/howtoplay">How To play</Link>
+                    <Link className="nav-link nav-link-active" to="/howtoplay">How To play</Link>
                   </li>
                   {/* Charities */}
                   <li className="nav-item">
-                    <Link className="nav-link" to="/charities">Charities</Link>
+                    <Link className="nav-link nav-link-active" to="/charities">Charities</Link>
                   </li>
                   {/* Contact */}
                   <li className="nav-item">
-                    <Link className="nav-link" to="/contact">Contact</Link>
+                    <Link className="nav-link nav-link-active" to="/contact">Contact</Link>
                   </li>
                 </ul>
               </div>
@@ -184,10 +187,10 @@ const NavBar = () => {
                   <div className="collapse navbar-collapse mx-5" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                       <li className="nav-item">
-                        <Link className="nav-link" to="/verifyphone"><i className="bi bi-person-add mx-2"></i>Sign Up</Link>
+                        <Link className="nav-link nav-link-active" to="/verifyphone"><i className="bi bi-person-add mx-2"></i>Sign Up</Link>
                       </li>
                       <li className="nav-item">
-                        <Link className="nav-link" to="/login"><i className="bi bi-box-arrow-in-right mx-2"></i>Log In</Link>
+                        <Link className="nav-link nav-link-active" to="/login"><i className="bi bi-box-arrow-in-right mx-2"></i>Log In</Link>
                       </li>
                     </ul>
                   </div>

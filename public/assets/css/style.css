@@ -89,8 +89,8 @@ button {
 	background: transparent;
 }
 
-nav .nav-item .nav-link.active {
-	color: #1c8a66 !important;
+nav .nav-item .nav-link :active {
+	color: var(--primary-color) !important;
 }
 
 
@@ -2147,6 +2147,10 @@ margin: 0.5rem;
 	color: rgb(177, 25, 248);
 }
 
+.dropdown-menu.show {
+	display: block;
+	border-radius: 4px;
+}
 
 .product_information_area {
 	margin-left: 2rem;
