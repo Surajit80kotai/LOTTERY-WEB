@@ -99,7 +99,8 @@ const initialState = {
     signupErr: {},
     loading: false,
     reg_otp: null,
-    verify_otp: null
+    verify_otp: null,
+    validPhoneNumber: null
 }
 
 // Creating Slice
@@ -117,7 +118,11 @@ export const AuthSlice = createSlice({
         clearVerifyOtp(state) {
             state.reg_otp = null;
             state.verify_otp = null;
+        },
+        storePhoneNumber(state, { payload }) {
+            state.validPhoneNumber = payload
         }
+
     },
     extraReducers: (builder) => {
         //States for Signup
@@ -186,14 +191,14 @@ export const AuthSlice = createSlice({
         builder.addCase(registerOTP.fulfilled, (state, { payload }) => {
             state.msg = "Success"
             state.loading = false
-            state.reg_otp = payload?.status
-            // console.log("reg otp success", payload?.status);
+            state.reg_otp = payload.status
+            // console.log("reg otp success", payload.status);
         })
         builder.addCase(registerOTP.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
-            state.reg_otp = payload?.status
-            // console.log("reg otp error", payload?.status);
+            state.reg_otp = payload.status
+            // console.log("reg otp error", payload.status);
         })
 
 
@@ -205,17 +210,17 @@ export const AuthSlice = createSlice({
         builder.addCase(verifyOTP.fulfilled, (state, { payload }) => {
             state.msg = "Success"
             state.loading = false
-            state.verify_otp = payload?.status
-            // console.log("verify otp success", payload?.status);
+            state.verify_otp = payload.status
+            // console.log("verify otp success", payload.status);
         })
         builder.addCase(verifyOTP.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
-            state.verify_otp = payload?.status
-            // console.log("verify otp error", payload?.status);
+            state.verify_otp = payload.status
+            // console.log("verify otp error", payload.status);
         })
     }
 })
 
-export const { doLogOut, clearVerifyOtp } = AuthSlice.actions
+export const { doLogOut, clearVerifyOtp, storePhoneNumber } = AuthSlice.actions
 export default AuthSlice.reducer

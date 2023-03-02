@@ -93,6 +93,27 @@ nav .nav-item .nav-link :active {
 	color: var(--primary-color) !important;
 }
 
+.react-tel-input .form-control {
+	position: relative;
+	font-size: 14px;
+	letter-spacing: .01rem;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	padding-left: 48px;
+	margin-left: 0;
+	background: transparent !important;
+	border: 1px solid #CACACA;
+	border-radius: 6px !important;
+	line-height: 25px;
+	height: 47px !important;
+	width: 395px !important;
+	outline: none;
+}
+
+.react-tel-input .form-control::placeholder {
+	color: #303030;
+	font-size: 16px;
+  }
 
 .m_gap {
 	margin: 1rem 0;
@@ -314,7 +335,6 @@ main {
 .Signup {
 	display: inline-block;
 	padding: 0.8rem 5rem;
-	;
 	border-radius: 2rem;
 	border: 1px solid var(--primary-color);
 	color: var(--primary-color);
@@ -346,8 +366,6 @@ main {
 	font-family: var(--primary-font);
 	font-weight: 600;
 	text-align: center;
-
-
 }
 
 .form_area {

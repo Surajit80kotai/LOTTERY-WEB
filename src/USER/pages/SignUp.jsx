@@ -2,29 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSignUp } from '../services/slice/AuthSlice'
 import "slick-carousel/slick/slick.css";
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { fetchCountry, fetchStates } from '../services/slice/CountryStateSlice';
 import PreLoader from '../components/core/preloader/PreLoader';
 import { toast } from 'react-toastify'
 
 
-const verified_phone_number = window.localStorage.getItem("verified_phone_number")
-const initialState = {
-    full_name: "",
-    email: "",
-    phone: verified_phone_number,
-    dob: "",
-    country: "",
-    password: "",
-    confirmPassword: ""
-}
+
 
 const SignUp = () => {
     const { signupErr, loading } = useSelector((state) => state.authslice)
-    // console.log(signupErr);
     const { countryData } = useSelector((state) => state.countrystateslice)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const { phone_number } = useParams()
+    const initialState = {
+        full_name: "",
+        email: "",
+        phone: phone_number,
+        dob: "",
+        country: "",
+        password: "",
+        confirmPassword: ""
+    }
     const [formValues, setFormValues] = useState(initialState)
     const { full_name, email, dob, country, password, confirmPassword } = formValues
     const [error, setError] = useState("")
@@ -34,12 +35,9 @@ const SignUp = () => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value })
         const countryId = e.target.value
 
-        // console.log(formValues);
-
         if (countryId) {
             getCountryId(countryId)
         }
-        // console.log(countryId)
     }
 
 
@@ -50,7 +48,6 @@ const SignUp = () => {
             return setError("Pasword did not matched")
         } else {
             dispatch(fetchSignUp({ formValues, navigate, toast }))
-            // toast.success('Registered Successfully. Please login to continue')
             setError("")
         }
     }
@@ -58,7 +55,6 @@ const SignUp = () => {
 
     // getCountryId
     const getCountryId = (name) => {
-        // console.log(name);
         const c_Id = countryData.filter((item) => {
             if (item.name === name) {
                 return item?.countries_id

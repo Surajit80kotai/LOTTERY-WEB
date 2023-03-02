@@ -5,9 +5,9 @@ import { fetchLogin } from '../services/slice/AuthSlice'
 import { toast } from 'react-toastify'
 import { auth, google, facebook } from '../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
-// import { Flip, ToastContainer } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader';
-// import Cookies from 'universal-cookie';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 
 const Login = () => {
@@ -15,35 +15,20 @@ const Login = () => {
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const [click, setClick] = useState(false)
-    const [formValues, setFormValues] = useState({ email: "", password: "" })
+    // const [formValues, setFormValues] = useState({ phone: "", password: "" })
+    const [phone, setPhone] = useState({ phone: "" })
+    const [password, setPassword] = useState({ password: "" })
 
-
-    // handleChange Function for input change
-    const handleChange = (e) => {
-        setFormValues({ ...formValues, [e.target.name]: e.target.value })
-        // console.log(formValues);
-    }
-
-    // cookies setup for remeberMe
-    // const cookies = new Cookies()
-    // cookies.set("email", formValues.email, { path: "/", secure: true })
-    // cookies.set("password", formValues.password, { path: "/", secure: true })
-
+    // button style
+    const active = "btn_one"
+    const deactive = "btn_deactive"
 
     // handleSubmit Function for form submit
     const handleSubmit = (e) => {
         e.preventDefault()
+        const formValues = { phone: phone, password: password }
+        console.log(formValues);
         dispatch(fetchLogin({ formValues, navigate, toast }))
-        // if (click) {
-        // formValues.email = cookies.get("email")
-        // formValues.password = cookies.get("password")
-        // console.log(formValues.email)
-        // setFormValues({ email: formValues.email, password: formValues.password })
-        // }
-        // else {
-        //     setFormValues({ email: "", password: "" })
-        // }
     }
 
     // socailLogin function
@@ -94,10 +79,10 @@ const Login = () => {
                             <div className="form_area">
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
 
-                                    {/* Email Input */}
+                                    {/* Phone Input */}
                                     <div className="mb-5">
-                                        <label htmlFor="email" className="form-label label_style">Email</label>
-                                        <input
+                                        <label htmlFor="email" className="form-label label_style">Phone Number</label>
+                                        {/* <input
                                             type="email"
                                             className="form-control form_input"
                                             id="email"
@@ -107,12 +92,17 @@ const Login = () => {
                                             value={formValues.email}
                                             onChange={handleChange}
                                             required
+                                        /> */}
+                                        <PhoneInput
+                                            inputProps={{ required: true }}
+                                            placeholder="Enter Your Phone Number"
+                                            country={"cm"}
+                                            enableSearch={true}
+                                            value={phone.phone}
+                                            onChange={(phone) => setPhone(phone)}
                                         />
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_user.error}</p>
-                                        {/*  <div className="alert alert-danger mt-2" role="alert">
-                                                Please Enter Email Or Phone Number
-                                            </div>  */}
                                     </div>
 
                                     {/* Password input */}
@@ -124,15 +114,12 @@ const Login = () => {
                                             id="password"
                                             name="password"
                                             placeholder="Enter Password"
-                                            value={formValues.password}
-                                            onChange={handleChange}
+                                            value={password.password}
+                                            onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                                             required
                                         />
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_password.error}</p>
-                                        {/* <div className="alert alert-danger mt-2" role="alert">
-                                                Passwordis wrong
-                                            </div> */}
                                     </div>
                                     <div className="bottom_form">
 
@@ -148,9 +135,13 @@ const Login = () => {
                                             <label className="form-check-label check_label" htmlFor="exampleCheck1">Remember Me</label>
                                         </div> */}
                                     </div>
-                                    
+
                                     <div className="text-center">
-                                        <button type="submit" className="btn_one">Login</button>
+                                        <button
+                                            type="submit"
+                                            className={(phone?.length) ? active : deactive}
+                                            disabled={(phone?.length) ? false : true}
+                                        >Login</button>
                                     </div>
 
                                     {/* Forget password Link */}

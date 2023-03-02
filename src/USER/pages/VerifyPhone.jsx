@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader'
-import { clearVerifyOtp, registerOTP, verifyOTP } from '../services/slice/AuthSlice'
+import { clearVerifyOtp, registerOTP, storePhoneNumber, verifyOTP } from '../services/slice/AuthSlice'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
@@ -18,54 +18,49 @@ const VerifyPhone = () => {
     const dispatch = useDispatch()
     const { reg_otp, verify_otp } = useSelector((state) => state.authslice)
 
+
     // button style
     const active = "btn_one"
     const deactive = "btn_deactive"
 
     // sendOtp func.
-    const sendOtp = (regOtp) => {
-        // console.log("inside function", regOtp);
+    const sendOtp = () => {
         const data = { phone_number: "+" + phone }
         dispatch(registerOTP(data))
-        setTimeout(() => {
-            // console.log("inside condition", regOtp);
-            if (regOtp) {
-                toast.success("OTP Sent Successfully")
-                setFlag(true)
-            } else {
-                toast.error("Something Went Wrong Please Try Again")
-                setFlag(false)
-            }
-        }, 2000)
     }
 
     // onVerify func.
-    const onVerify = (verifyOtp) => {
+    const onVerify = () => {
         const data = { phone_number: "+" + phone, otp: otp.otp }
         dispatch(verifyOTP(data))
-        // console.log(data);
-        setTimeout(() => {
-            // console.log("inside condition", verifyOtp);
-            if (verifyOtp) {
-                setFlag(false)
-                toast.success("OTP Verification Successfull. Please Continue")
-                navigate('/signup')
-                window.localStorage.setItem("verified_phone_number", JSON.stringify(data?.phone_number))
-                setOtp({ otp: "" })
-                setPhone({ phone: "" })
-            } else {
-                toast.error("Invalid OTP!")
-                navigate('/verifyphone')
-            }
-        }, 2000)
     }
 
 
+
     useEffect(() => {
-        return () => {
+        if (reg_otp === true) {
+            setFlag(true)
+            toast.success("OTP Sent Successfully. Enter Your OTP")
             dispatch(clearVerifyOtp())
+        } else if (reg_otp === false) {
+            setFlag(false)
+            toast.error("Opps!! Something Went Wrong. Please Try Again")
         }
-    }, [dispatch, reg_otp, verify_otp])
+
+        if (verify_otp === true) {
+            const data = { phone_number: "+" + phone, otp: otp.otp }
+            setFlag(false)
+            toast.success("OTP Verification Successfull. Please Continue")
+            dispatch(storePhoneNumber(data.phone_number))
+            navigate("/signup")
+            setOtp({ otp: "" })
+            setPhone({ phone: "" })
+            dispatch(clearVerifyOtp())
+        } else if (verify_otp === false) {
+            toast.error("Invalid OTP!!")
+            navigate('/verifyphone')
+        }
+    }, [dispatch, navigate, otp.otp, reg_otp, verify_otp])
 
 
     return (
@@ -109,22 +104,21 @@ const VerifyPhone = () => {
                                             required
                                         /> */}
                                         <PhoneInput
+                                            inputProps={{ required: true }}
+                                            placeholder="Enter Your Phone Number"
                                             country={"cm"}
                                             enableSearch={true}
                                             value={phone.phone}
                                             onChange={(phone) => setPhone(phone)}
-                                            placeholder="Enter Your Phone Number"
                                         />
-                                        {/* Form Vaidation */}
-                                        {/* <p className='text-danger fs-4 mt-2'>{error_user.error}</p> */}
                                     </div>
 
                                     <div className="text-center" style={{ "display": !flag ? "block" : "none" }}>
                                         <button
-                                            onClick={() => sendOtp(reg_otp)}
+                                            onClick={sendOtp}
                                             type="submit"
-                                            className={phone?.length ? active : deactive}
-                                            disabled={phone?.length ? false : true}
+                                            className={(phone?.length) ? active : deactive}
+                                            disabled={(phone?.length) ? false : true}
                                         >Send OTP</button>
                                     </div>
 
@@ -145,16 +139,14 @@ const VerifyPhone = () => {
                                             maxLength={6}
                                             required
                                         />
-                                        {/* Form Vaidation */}
-                                        {/* <p className='text-danger fs-4 mt-2'>{error_user.error}</p> */}
                                     </div>
 
                                     <div className="text-center" style={{ "display": flag ? "block" : "none" }}>
                                         <button
-                                            onClick={() => onVerify(verify_otp)}
+                                            onClick={onVerify}
                                             type="submit"
-                                            className={otp.otp.length === 6 ? active : deactive}
-                                            disabled={otp.otp.length === 6 ? false : true}
+                                            className={(otp.otp.length) === 6 ? active : deactive}
+                                            disabled={(otp.otp.length) === 6 ? false : true}
                                         >Verify</button>
                                     </div>
                                 </form>
