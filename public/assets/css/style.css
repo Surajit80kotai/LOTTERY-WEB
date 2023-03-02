@@ -113,7 +113,7 @@ nav .nav-item .nav-link :active {
 .react-tel-input .form-control::placeholder {
 	color: #303030;
 	font-size: 16px;
-  }
+}
 
 .m_gap {
 	margin: 1rem 0;
@@ -2845,6 +2845,193 @@ margin: 0.5rem;
 	font-size: 1.5rem;
 	color: var(--white);
 	border-radius: 5rem;
+}
+
+
+
+/* / -----------about us---------- / */
+
+.inner_pages_title_banner {
+	position: relative;
+	/* margin-top: 5px; */
+
+}
+
+.page_title_banner {
+	position: relative;
+}
+
+.page_title_banner::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	left: 0;
+	top: 0;
+}
+
+.page_title {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.page_title h2 {
+	font-size: 3rem;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: var(--white);
+}
+
+.bradcramp_area {
+	background: #e2e1e1;
+	margin-bottom: 3rem;
+	padding: 1rem;
+}
+
+.title_about {
+
+	font-size: 2.5rem;
+	font-weight: bolder;
+	color: var(--primary-color);
+	text-transform: capitalize;
+
+}
+
+.ab_title h3 {
+	font-size: 2rem;
+	color: var(--black);
+	text-transform: capitalize;
+	font-weight: 600;
+	margin: 1rem 0;
+}
+
+.main_about_content p {
+	font-size: 1.5rem;
+	line-height: 2.5rem;
+
+}
+
+.about_img {
+	margin-bottom: 3rem;
+}
+
+.about_img img {
+	border-radius: 2rem;
+}
+
+
+
+/* / how to play / */
+
+.step_area {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	-webkit-box-shadow: 1px 0px 11px 0px rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 1px 0px 11px 0px rgba(0, 0, 0, 0.19);
+	box-shadow: 1px 0px 11px 0px rgba(0, 0, 0, 0.19);
+	border-radius: 1rem;
+	padding: 1rem;
+}
+
+.img_icon img {
+	border-radius: 1rem;
+}
+
+.step_details h6 {
+	font-size: 1.8rem;
+	color: #3C3B3A;
+}
+
+.step_details h6 a {
+	text-decoration: underline;
+}
+
+/* / faq / */
+
+.faq_area h1 {
+	margin: 50px 0 30px;
+	text-align: center;
+	color: var(--accent-color);
+}
+
+.faq-container {
+	max-width: 600px;
+	margin: 0 auto;
+	border-radius: 10px;
+	background-color: #fff;
+	overflow: hidden;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.faq {
+	box-sizing: border-box;
+	background: transparent;
+	padding: 30px;
+	position: relative;
+	overflow: hidden;
+}
+
+.faq:not(:first-child) {
+	border-top: 1px solid #e6e6e6;
+}
+
+.faq-title {
+	margin: 0 35px 0 0;
+}
+
+.faq-text {
+	margin: 30px 0 0;
+	display: none;
+	line-height: 1.5rem;
+}
+
+.faq.active {
+	background-color: #f8f8f8;
+	box-shadow: inset 4px 0px 0px 0px var(--purple);
+}
+
+.faq.active .faq-title {
+	color: var(--purple);
+}
+
+.faq.active .faq-text {
+	display: block;
+	font-size: 1.2rem;
+}
+
+.faq-toggle {
+	background-color: transparent;
+	border: 1px solid #e6e6e6;
+	color: inherit;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	padding-top: 3px;
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	height: 30px;
+	width: 30px;
+	transition: 0.3s ease;
+}
+
+.faq-toggle:focus {
+	outline: none;
+}
+
+.faq.active .faq-toggle {
+	transform: rotate(180deg);
+	background-color: var(--purple);
+	border-color: var(--purple);
+	color: #fff;
 }
 
 

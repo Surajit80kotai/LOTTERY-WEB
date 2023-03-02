@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const AboutUs = () => {
 
@@ -11,15 +12,63 @@ const AboutUs = () => {
     return (
         <>
             <main>
-                <div className='contact_wrapper'>
-                    <h2 className="text-center contact_title">About Us</h2>
-                    <h4 className='container'>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. At est quia illo rem, recusandae asperiores nostrum consequuntur accusantium aliquam vitae eos rerum inventore quae quaerat nulla quas? Facilis molestiae optio at perferendis qui quae nostrum? Laboriosam, ab laudantium expedita ducimus quae perferendis nostrum qui illo deserunt sapiente possimus incidunt dolores aperiam officia hic sequi distinctio! Quod vero molestiae exercitationem nulla minima quibusdam ratione laborum temporibus eum explicabo molestias quaerat recusandae dignissimos modi amet asperiores voluptas reiciendis ipsa unde, earum expedita. Nobis sed, accusantium vel corrupti maiores ipsum debitis possimus quod voluptatibus asperiores alias aliquid vero odio rem expedita nostrum facilis.
-                    </h4>
-                    <br />
-                    <h4 className='container'>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit rem possimus itaque minus harum a officia consequuntur impedit fugit explicabo non omnis voluptatibus voluptatum iusto commodi aut, obcaecati doloribus eius numquam sunt tenetur incidunt veritatis. Autem molestiae ipsam ex libero delectus. Animi ea veritatis voluptas autem molestiae voluptates vero porro ad tenetur totam. Dolore velit rerum cupiditate, minima atque temporibus sed animi a quisquam magni, incidunt aperiam quibusdam autem ullam doloribus? Deserunt illo unde molestias tempora suscipit cupiditate iusto ab. Neque dolorem itaque beatae, aspernatur sint dolor voluptates quae sequi tenetur obcaecati aliquam velit rerum explicabo architecto earum facere unde cumque optio eaque fugit sit distinctio. Quae debitis mollitia pariatur, sint dolorum autem corporis deleniti perspiciatis, optio enim iste iure nostrum libero similique voluptas saepe possimus delectus numquam blanditiis repellendus illo sit a quo. Perspiciatis doloribus molestias autem exercitationem molestiae? Porro cumque magni possimus dolore maiores alias velit. Tenetur qui temporibus porro. Voluptate saepe placeat hic? Consectetur in beatae eveniet, perferendis sunt voluptatum hic cumque fugit facilis non consequuntur repellat magnam rem fuga ducimus eaque dolor dolore vitae tenetur repudiandae amet. Voluptates, ad eius! Optio error nulla perferendis accusamus cupiditate, magni corporis cum vel dolore distinctio natus sit voluptatum inventore.
-                    </h4>
+                <div className="inner_pages_title_banner">
+                    <div className="page_title_banner">
+                        <img src="/assets/img/Untitled-1.jpg" alt="" className="img-fluid" />
+                    </div>
+
+                    <div className="page_title">
+                        <h2>About Us</h2>
+                    </div>
+
+                </div>
+                {/* <!-- breadcramp --> */}
+
+                <div className="bradcramp_area">
+                    <div className="container">
+                        <nav aria-label="breadcrumb">
+                            <ol className="breadcrumb">
+                                <li className="breadcrumb-item"><Link to="/" className="text-color">Home</Link></li>
+                                <li className="breadcrumb-item active" aria-current="page">About</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+
+
+                {/* <!-- about section start --> */}
+
+                <div className="container ">
+
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="ab_title">
+                                <h2 className="title_about">About Es-Play</h2>
+                                <h3>Who We Are?</h3>
+                            </div>
+                            <div className="main_about_content">
+                                <p>
+                                    We are an online lottery ticket messenger service providing customers with the opportunity to play the
+                                    biggest lottery draws, with official lottery tickets, from anywhere in the world. As an independent
+                                    third-party ticket purchasing service, we have been leading the online lottery industry since 2002,
+                                    serving as the industry standard with a stellar reputation and professional 24/7 customer service.
+                                    <br />
+                                    <br />
+                                    The website is operated by Serlo Limited, a company registered in the Isle of Man (registration number:
+                                    134824C) having its registered office at Peveril Buildings, Peveril Square, Douglas, Isle of Man, IM99
+                                    1RZ. Serlo Limited is licensed and regulated by the Isle of Man Gambling Supervision Commission under a
+                                    license issued under the Online Gambling Regulation Act 2001 on 25 February 2022.
+                                </p>
+
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="about_img">
+                                <img src="/assets/img/about.jpg" alt="" className="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </>

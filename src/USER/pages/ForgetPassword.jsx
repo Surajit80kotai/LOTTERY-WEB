@@ -30,16 +30,11 @@ const ForgetPassword = () => {
 
             <main className="main">
                 {/* Back to home button */}
-                <div className='d-flex justify-content-between' style={{ "margin": "0 340px 0 340px" }}>
-                    <Link className='text-secondary' to='/login'>
-                        <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Back</h3>
-                    </Link>
-                    <Link className='text-secondary' to='/'>
-                        <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
-                    </Link>
-                </div>
+                <Link className='text-secondary' to='/'>
+                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                </Link>
 
-                <div className="container wrapper_area" style={{"marginTop":"50px"}}>
+                <div className="container wrapper_area" style={{ "marginTop": "50px" }}>
 
                     <div className="forgetwrapper">
                         <div className="forget_icon">
@@ -69,7 +64,7 @@ const ForgetPassword = () => {
 
                             {/* Button */}
                             <div className="text-center">
-                                <button type="submit" className="btn_one"  style={{"margin" : "30px 0 30px 0"}}>Recover Password</button>
+                                <button type="submit" className="btn_one" style={{ "margin": "30px 0 30px 0" }}>Recover Password</button>
                             </div>
                         </form>
                     </div>

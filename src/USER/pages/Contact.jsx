@@ -93,12 +93,12 @@ const Contact = () => {
                                                                         name="phone"
                                                                         aria-describedby="emailHelp"
                                                                         placeholder="Enter Your Mobile Number"
-                                                                        maxLength={10}
+                                                                        // maxLength={10}
                                                                         value={formData.phone}
                                                                         onChange={handleChange}
                                                                         required
                                                                         title="Accept Numbers Only"
-                                                                        pattern="[0-9]{10}"
+                                                                        pattern="[0-9]"
                                                                     />
 
                                                                 </div>

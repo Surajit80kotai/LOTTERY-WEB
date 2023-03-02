@@ -80,14 +80,9 @@ const SignUp = () => {
 
             <main className="main">
                 {/* Back to home button */}
-                <div className='d-flex justify-content-between' style={{ "margin": "0 340px 0 340px" }}>
-                    <Link className='text-secondary' to='/verifyphone'>
-                        <h3 className='container text-end'><i className="fa-solid fa-right-from-bracket mx-2"></i>Back</h3>
-                    </Link>
-                    <Link className='text-secondary' to='/'>
-                        <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
-                    </Link>
-                </div>
+                <Link className='text-secondary' to='/'>
+                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                </Link>
 
                 <div className="wrapper_area margin-top-5">
                     <div className="log_area">
