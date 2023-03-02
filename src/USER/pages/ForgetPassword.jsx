@@ -34,7 +34,7 @@ const ForgetPassword = () => {
                     <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
                 </Link>
 
-                <div className="container wrapper_area" style={{ "marginTop": "50px" }}>
+                <div className="container">
 
                     <div className="forgetwrapper">
                         <div className="forget_icon">
