@@ -98,65 +98,48 @@ const HowToPlay = () => {
 
                     <div className="faq_area">
                         <h1>Frequently Asked Questions</h1>
-                        <div className="faq-container">
-                            <div className="faq">
-                                <h3 className="faq-title">
-                                    Lorem ipsum dolor sit amet.
-                                </h3>
-                                <p className="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non
-                                    dicta
-                                    fugiat veritatis sit delectus perspiciatis quis?</p>
-                                <button className="faq-toggle">
-                                    <i className="fas fa-angle-down"></i>
-                                </button>
+                        <div className="accordion accordion-flush faq-container" id="accordionFlushExample">
+                            <div className="accordion-item">
+                                <h2 className="accordion-header" id="flush-headingOne">
+                                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <span className='faq-title fs-2 py-2 px-3'>Accordion Item #1</span>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div className="accordion-body fs-4">
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                    </div>
+                                </div>
                             </div>
-
-                            <div className="faq active">
-                                <h3 className="faq-title">
-                                    Lorem ipsum dolor sit amet.
-                                </h3>
-                                <p className="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non
-                                    dicta
-                                    fugiat veritatis sit delectus perspiciatis quis?</p>
-                                <button className="faq-toggle">
-                                    <i className="fas fa-angle-down"></i>
-                                </button>
+                            <div className="accordion-item">
+                                <h2 className="accordion-header" id="flush-headingTwo">
+                                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                        <span className='faq-title fs-2 py-2 px-3'>Accordion Item #2</span>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div className="accordion-body fs-4">
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.
+                                    </div>
+                                </div>
                             </div>
-
-                            <div className="faq">
-                                <h3 className="faq-title">
-                                    Lorem ipsum dolor sit amet.
-                                </h3>
-                                <p className="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non
-                                    dicta
-                                    fugiat veritatis sit delectus perspiciatis quis?</p>
-                                <button className="faq-toggle">
-                                    <i className="fas fa-angle-down"></i>
-                                </button>
-                            </div>
-
-                            <div className="faq">
-                                <h3 className="faq-title">
-                                    Lorem ipsum dolor sit amet.
-                                </h3>
-                                <p className="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non
-                                    dicta
-                                    fugiat veritatis sit delectus perspiciatis quis?</p>
-                                <button className="faq-toggle">
-                                    <i className="fas fa-angle-down"></i>
-                                </button>
-                            </div>
-
-                            <div className="faq">
-                                <h3 className="faq-title">
-                                    Lorem ipsum dolor sit amet.
-                                </h3>
-                                <p className="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis, repellat neque non
-                                    dicta
-                                    fugiat veritatis sit delectus perspiciatis quis?</p>
-                                <button className="faq-toggle">
-                                    <i className="fas fa-angle-down"></i>
-                                </button>
+                            <div className="accordion-item">
+                                <h2 className="accordion-header" id="flush-headingThree">
+                                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                        <span className='faq-title fs-2 py-2 px-3'>Accordion Item #3</span>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div className="accordion-body fs-4">
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                        Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
