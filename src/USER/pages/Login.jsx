@@ -6,8 +6,8 @@ import { toast } from 'react-toastify'
 import { auth, google, facebook } from '../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import PreLoader from '../components/core/preloader/PreLoader';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+// import PhoneInput from 'react-phone-input-2'
+// import 'react-phone-input-2/lib/style.css'
 
 
 const Login = () => {
@@ -15,9 +15,13 @@ const Login = () => {
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const [formValues, setFormValues] = useState({ phone: "", password: "" })
+    const [formValues, setFormValues] = useState({ phone: "", password: "" })
     const [phone, setPhone] = useState({ phone: "" })
     const [password, setPassword] = useState({ password: "" })
+
+    const handleChange = (e) => {
+        setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    }
 
     // button style
     const active = "btn_one"
@@ -26,8 +30,8 @@ const Login = () => {
     // handleSubmit Function for form submit
     const handleSubmit = (e) => {
         e.preventDefault()
-        const formValues = { phone: phone, password: password }
-        console.log(formValues);
+        // const formValues = { phone: phone, password: password }
+        // console.log(formValues);
         dispatch(fetchLogin({ formValues, navigate, toast }))
     }
 
@@ -76,8 +80,8 @@ const Login = () => {
 
                                     {/* Phone Input */}
                                     <div className="mb-5">
-                                        <label htmlFor="email" className="form-label label_style">Phone Number</label>
-                                        {/* <input
+                                        <label htmlFor="email" className="form-label label_style">Email</label>
+                                        <input
                                             type="email"
                                             className="form-control form_input"
                                             id="email"
@@ -87,15 +91,16 @@ const Login = () => {
                                             value={formValues.email}
                                             onChange={handleChange}
                                             required
-                                        /> */}
-                                        <PhoneInput
+                                        />
+                                        {/* <label htmlFor="email" className="form-label label_style">Phone Number</label> */}
+                                        {/* <PhoneInput
                                             inputProps={{ required: true }}
                                             placeholder="Enter Your Phone Number"
                                             country={"cm"}
                                             enableSearch={true}
                                             value={phone.phone}
                                             onChange={(phone) => setPhone(phone)}
-                                        />
+                                        /> */}
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_user.error}</p>
                                     </div>
@@ -109,10 +114,21 @@ const Login = () => {
                                             id="password"
                                             name="password"
                                             placeholder="Enter Password"
+                                            value={formValues.password}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                        {/* <label htmlFor="password" className="form-label label_style">Password</label>
+                                        <input
+                                            type="password"
+                                            className="form-control form_input"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Enter Password"
                                             value={password.password}
                                             onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                                             required
-                                        />
+                                        /> */}
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_password.error}</p>
                                     </div>
@@ -132,11 +148,12 @@ const Login = () => {
                                     </div>
 
                                     <div className="text-center">
-                                        <button
+                                        <button type="submit" className="btn_one">Login</button>
+                                        {/* <button
                                             type="submit"
                                             className={(phone?.length) ? active : deactive}
                                             disabled={(phone?.length) ? false : true}
-                                        >Login</button>
+                                        >Login</button> */}
                                     </div>
 
                                     {/* Forget password Link */}
@@ -157,7 +174,7 @@ const Login = () => {
                     </div>
                 </div>
                 {/* <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} /> */}
-            </main>
+            </main >
         </>
     )
 }
