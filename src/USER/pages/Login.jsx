@@ -16,16 +16,16 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [formValues, setFormValues] = useState({ phone: "", password: "" })
-    const [phone, setPhone] = useState({ phone: "" })
-    const [password, setPassword] = useState({ password: "" })
+    // const [phone, setPhone] = useState({ phone: "" })
+    // const [password, setPassword] = useState({ password: "" })
 
     const handleChange = (e) => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value })
     }
 
     // button style
-    const active = "btn_one"
-    const deactive = "btn_deactive"
+    // const active = "btn_one"
+    // const deactive = "btn_deactive"
 
     // handleSubmit Function for form submit
     const handleSubmit = (e) => {
