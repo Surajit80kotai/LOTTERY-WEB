@@ -140,7 +140,7 @@ const NavBar = () => {
             {/* Search Bar */}
             <form className="d-flex">
               <input className="form-control me-2 fs-4" type="search" placeholder="Search" aria-label="Search" style={{ "width": "250px" }} />
-              <button className="btn btn-secondary fs-4" type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
+              <button className="btn fs-4" type="submit" style={{ "background": "#f9772b" }}><i className="fa-solid fa-magnifying-glass"></i></button>
             </form>
 
             {/* User Dropdown */}

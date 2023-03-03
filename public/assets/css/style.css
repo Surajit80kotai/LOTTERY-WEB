@@ -161,7 +161,7 @@ main {
 .btn2 {
 	text-align: center;
 	padding: 0.8rem 3rem;
-	background: var(--gradient1);
+	background: var(--primary-color);
 	font-size: 1.5rem;
 	color: var(--white);
 	border-radius: 0.5rem;
@@ -1072,8 +1072,15 @@ z-index: 999; */
 	display:none;
 } */
 
+
+.product_btn{
+	position: absolute;
+	bottom: 10px;
+	left: 24px;
+}
+
 .product_item_one {
-	height: 330px;
+	height: 380px;
 	background: #fff;
 	box-shadow: 7px 9px 52px -33px rgba(0, 0, 0, 0.35);
 	-webkit-box-shadow: 7px 9px 52px -33px rgba(0, 0, 0, 0.35);
@@ -1082,6 +1089,7 @@ z-index: 999; */
 	text-align: left;
 	margin-bottom: 1rem;
 	border-bottom: 3px solid var(--primary-color);
+	position: relative;
 }
 
 .card_title {
@@ -1226,17 +1234,7 @@ margin: 0.5rem;
 	text-transform: uppercase;
 }
 
-.product_item_one {
-	height: 330px;
-	background: #fff;
-	box-shadow: 7px 9px 52px -33px rgba(0, 0, 0, 0.35);
-	-webkit-box-shadow: 7px 9px 52px -33px rgba(0, 0, 0, 0.35);
-	-moz-box-shadow: 7px 9px 52px -33px rgba(0, 0, 0, 0.35);
-	border-radius: 0.5rem;
-	text-align: left;
-	margin-bottom: 1rem;
-	border-bottom: 3px solid var(--primary-color);
-}
+
 
 .card_title {
 	display: inline-block;

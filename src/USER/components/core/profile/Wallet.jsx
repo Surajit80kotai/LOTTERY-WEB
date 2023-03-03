@@ -27,7 +27,9 @@ const Wallet = ({ dueAmount }) => {
 
     // function for selecting pay option
     const selectPayOption = (value) => {
-        if (value === "CinetPay") {
+        if (value === "Orange") {
+            dispatch(cinetPay(formValue))
+        } else if (value === "MTN") {
             dispatch(cinetPay(formValue))
         } else if (value === "Master") {
             console.log(value)
@@ -158,7 +160,7 @@ const Wallet = ({ dueAmount }) => {
                                                                         {
                                                                             // WAITING_CUSTOMER_PAYMENT
                                                                             (item.status) === "WAITING_CUSTOMER_PAYMENT" ?
-                                                                                <span style={{"color":"#ff9900"}}><i className="fa-solid fa-clock-rotate-left mx-3"></i>PENDING</span>
+                                                                                <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>PENDING</span>
                                                                                 // PAYMENT_FAILED
                                                                                 : (item.status) === "PAYMENT_FAILED" ?
                                                                                     <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
@@ -195,20 +197,38 @@ const Wallet = ({ dueAmount }) => {
                                 <h4 className="option_title">Payment Option</h4>
                                 <div className="payment_section">
 
-                                    {/* Pay with cinet Pay */}
+                                    {/* Pay with Orange Pay */}
                                     <div className="payment_item">
                                         <input
                                             type="radio"
                                             id="control_01"
                                             name="select"
-                                            value="CinetPay"
+                                            value="Orange"
                                             onChange={(e) => selectPayOption(e.target.value)}
                                         />
                                         <label htmlFor="control_01">
                                             <div className="pay_icon">
-                                                <img src="/assets/img/pay(1).png" alt="" className="img-fluid" />
+                                                <img src="/assets/img/orange.png" alt="" className="img-fluid" />
                                             </div>
-                                            <p>Pay with cinet Pay</p>
+                                            <p className='my-4'>Pay with Orange Pay</p>
+                                        </label>
+
+                                    </div>
+
+                                    {/* Pay with Mtn Money */}
+                                    <div className="payment_item">
+                                        <input
+                                            type="radio"
+                                            id="control_02"
+                                            name="select"
+                                            value="MTN"
+                                            onChange={(e) => selectPayOption(e.target.value)}
+                                        />
+                                        <label htmlFor="control_01">
+                                            <div className="pay_icon">
+                                                <img src="/assets/img/mtn.png" alt="" className="img-fluid" />
+                                            </div>
+                                            <p className='my-4'>Pay MTN Money</p>
                                         </label>
 
                                     </div>
@@ -217,16 +237,16 @@ const Wallet = ({ dueAmount }) => {
                                     <div className="payment_item">
                                         <input
                                             type="radio"
-                                            id="control_02"
+                                            id="control_03"
                                             name="select"
                                             value="Master"
                                             onChange={(e) => selectPayOption(e.target.value)}
                                         />
                                         <label htmlFor="control_02">
                                             <div className="pay_icon">
-                                                <img src="/assets/img/pay(2).png" alt="" className="img-fluid" />
+                                                <img src="/assets/img/master.png" alt="" className="img-fluid" />
                                             </div>
-                                            <p>Pay with Master Card</p>
+                                            <p className='my-4'>Pay with Master Card</p>
                                         </label>
                                     </div>
 
@@ -234,16 +254,16 @@ const Wallet = ({ dueAmount }) => {
                                     <div className="payment_item">
                                         <input
                                             type="radio"
-                                            id="control_03"
+                                            id="control_04"
                                             name="select"
                                             value="Paypal"
                                             onChange={(e) => selectPayOption(e.target.value)}
                                         />
                                         <label htmlFor="control_03">
                                             <div className="pay_icon">
-                                                <img src="/assets/img/pay(3).png" alt="" className="img-fluid" />
+                                                <img src="/assets/img/paypal.png" alt="" className="img-fluid" />
                                             </div>
-                                            <p>Pay with Paypal</p>
+                                            <p className='my-4'>Pay with Paypal</p>
                                         </label>
                                     </div>
                                 </div>

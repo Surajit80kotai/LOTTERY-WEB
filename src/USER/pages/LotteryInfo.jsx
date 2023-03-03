@@ -18,16 +18,16 @@ const LotteryInfo = () => {
     const discountedPrice = Number((ticketInfo[0]?.ticket_price - ((ticketInfo[0]?.ticket_price * ticketInfo[0]?.discount_percentage) / 100)))
     const { cart_data, add_cart_status } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
-    const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
     const { loading } = useSelector((state) => state.cartslice)
     // const { loading } = useSelector((state) => state.lotteryslice)
-
+    
     // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
     const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
-
+    
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
+    const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
 
     const mainimage = ticketInfo[0]?.main_image
     const is_image = ticketInfo[0]?.is_image

@@ -78,7 +78,6 @@ const Home = () => {
                                     />
                                 }).slice(0, 8)
                             }
-
                             {/* divider */}
                             <div className="divider"></div>
 
