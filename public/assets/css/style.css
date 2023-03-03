@@ -2815,9 +2815,10 @@ margin: 0.5rem;
 
 .pagination {
 	display: flex;
-	justify-content: center;
+	justify-content: end;
 	align-items: center;
-	margin: 20px, 0;
+	/* margin: 20px, 0; */
+	padding-top: 1.5rem;
 }
 
 .pagination-style-three a {
@@ -3033,6 +3034,84 @@ margin: 0.5rem;
 	border-color: var(--purple);
 	color: #fff;
 }
+
+/* accordion style */
+
+.bg-white {
+	background-color: #ffffff;
+}
+
+.bg-primary {
+	background-color: var(--bs-primary) !important;
+}
+
+.text-primary {
+	color: var(--bs-primary) !important;
+}
+
+
+.accordion-item {
+	background-color: #fff;
+	border: none;
+
+}
+
+.accordion-button {
+	background-color: #f2F2F2;
+	box-shadow: none;
+	border: none;
+	padding: 20px 50px;
+	margin: 4px 0;
+}
+
+.accordion-button:not(.collapsed) {
+	border-bottom: 4px solid var(--purple);
+	color: var(--purple);
+	font-weight: bold;
+	background-color: #f2F2F2;
+}
+
+.accordion-button:focus {
+	z-index: 3;
+	border-color: none;
+	outline: 0;
+	box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+	background-image: url("https://nsm09.casimages.com/img/2021/06/17//21061710471725998217466601.png");
+	transform: rotate(-180deg);
+}
+
+.accordion-button::after {
+	flex-shrink: 0;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-left: auto;
+	content: "";
+	background-image: url("https://nsm09.casimages.com/img/2021/06/17//21061710471725998217466600.png");
+	background-repeat: no-repeat;
+	background-size: 1.25rem;
+	transition: transform .2s ease-in-out;
+
+}
+
+.accordion-body {
+	padding: 1rem 1.25rem;
+	height: 200px;
+	overflow: scroll;
+}
+
+
+.accordion-body::-webkit-scrollbar {
+	display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge add Firefox */
+  .accordion-body {
+	-ms-overflow-style: none;
+	scrollbar-width: none; /* Firefox */
+  }
 
 
 /* =======================media quries================== */
@@ -3642,7 +3721,7 @@ margin: 0.5rem;
 }
 
 .order_histry_wrapper {
-	margin: 5rem 10rem;
+	margin: 2rem 0rem;
 }
 
 .scroll {

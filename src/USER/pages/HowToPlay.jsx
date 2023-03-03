@@ -97,8 +97,75 @@ const HowToPlay = () => {
                 <div className="container mb-5">
 
                     <div className="faq_area">
-                        <h1>Frequently Asked Questions</h1>
-                        <div className="accordion accordion-flush faq-container" id="accordionFlushExample">
+                        <section id="info-utile" className="bg-white faq-container py-5">
+                            <div className="container">
+                                <h3 className="text-center text-uppercase mb-5 lead-h-text text-primary">Frequently Asked <span className="text-font-light text-dark">Questions</span></h3>
+
+                                <div className="accordion" id="accordionExample">
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header" id="headingOne">
+                                            <button className="accordion-button fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Lorem Ipsum
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div className="accordion-body fs-4">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                                <br />
+                                                <br />
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                                <br />
+                                                <br />
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header" id="headingTwo">
+                                            <button className="accordion-button collapsed fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Lorem Ipsum
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div className="accordion-body fs-4">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                                <br />
+                                                <br />
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                                <br />
+                                                <br />
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="accordion-item">
+                                        <h2 className="accordion-header" id="headingThree">
+                                            <button className="accordion-button collapsed fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Lorem Ipsum
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                            <div className="accordion-body fs-4">
+                                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi explicabo quasi quia. Quis, totam rem! Ab, perspiciatis laboriosam quo maiores amet provident quod exercitationem obcaecati sunt odio accusamus, pariatur distinctio.
+                                                <br />
+                                                <br />
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                                <br />
+                                                <br />
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                                <br />
+                                                <br />
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero alias neque repellendus unde recusandae possimus harum similique nulla? Temporibus laboriosam ea natus asperiores fugiat eum amet nostrum nam unde.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+
+                        {/* <div className="accordion accordion-flush faq-container" id="accordionFlushExample">
                             <div className="accordion-item">
                                 <h2 className="accordion-header" id="flush-headingOne">
                                     <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -141,7 +208,7 @@ const HowToPlay = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                 </div>

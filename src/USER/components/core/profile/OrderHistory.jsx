@@ -84,24 +84,24 @@ const OrderHistory = () => {
                         }
                     </div>
                     {/* Pagination */}
-                    {/* <div className="pagination pagination-style-three"> */}
-                    <ReactPaginate
-                        breakLabel="..."
-                        previousLabel="&#11164;"
-                        nextLabel="&#11166;"
-                        pageCount={pageCount}
-                        onPageChange={changePage}
-                        containerClassName={"pagination pagination-style-three"}
-                        // pageClassName={"page-item"}
-                        // pageLinkClassName={"page-link"}
-                        // previousClassName={"page-item"}
-                        // previousLinkClassName={"page-link"}
-                        // nextClassName={"page-item"}
-                        // nextLinkClassName={"page-link"}
-                        activeClassName={"active"}
-                        renderOnZeroPageCount={null}
-                    />
-                    {/* </div> */}
+                    <div className="pagination pagination-style-three">
+                        <ReactPaginate
+                            breakLabel="..."
+                            previousLabel="&#11164;"
+                            nextLabel="&#11166;"
+                            pageCount={pageCount}
+                            onPageChange={changePage}
+                            containerClassName={"pagination pagination-style-three"}
+                            // pageClassName={"page-item"}
+                            // pageLinkClassName={"page-link"}
+                            // previousClassName={"page-item"}
+                            // previousLinkClassName={"page-link"}
+                            // nextClassName={"page-item"}
+                            // nextLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                            renderOnZeroPageCount={null}
+                        />
+                    </div>
                 </div>
             </div>
         </>
