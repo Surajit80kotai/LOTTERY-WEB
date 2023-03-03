@@ -6,8 +6,8 @@ import { toast } from 'react-toastify'
 import { auth, google, facebook } from '../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import PreLoader from '../components/core/preloader/PreLoader';
-// import PhoneInput from 'react-phone-input-2'
-// import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 
 const Login = () => {
@@ -15,23 +15,23 @@ const Login = () => {
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [formValues, setFormValues] = useState({ phone: "", password: "" })
-    // const [phone, setPhone] = useState({ phone: "" })
-    // const [password, setPassword] = useState({ password: "" })
+    // const [formValues, setFormValues] = useState({ phone: "", password: "" })
+    const [phone, setPhone] = useState({ phone: "" })
+    const [password, setPassword] = useState({ password: "" })
 
-    const handleChange = (e) => {
-        setFormValues({ ...formValues, [e.target.name]: e.target.value })
-    }
+    // const handleChange = (e) => {
+    //     setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    // }
 
     // button style
-    // const active = "btn_one"
-    // const deactive = "btn_deactive"
+    const active = "btn_one"
+    const deactive = "btn_deactive"
 
     // handleSubmit Function for form submit
     const handleSubmit = (e) => {
         e.preventDefault()
-        // const formValues = { phone: phone, password: password }
-        // console.log(formValues);
+        const formValues = { phone: "+" + phone, password: password.password }
+        console.log(formValues);
         dispatch(fetchLogin({ formValues, navigate, toast }))
     }
 
@@ -80,7 +80,7 @@ const Login = () => {
 
                                     {/* Phone Input */}
                                     <div className="mb-5">
-                                        <label htmlFor="email" className="form-label label_style">Email</label>
+                                        {/* <label htmlFor="email" className="form-label label_style">Email</label>
                                         <input
                                             type="email"
                                             className="form-control form_input"
@@ -91,23 +91,23 @@ const Login = () => {
                                             value={formValues.email}
                                             onChange={handleChange}
                                             required
-                                        />
-                                        {/* <label htmlFor="email" className="form-label label_style">Phone Number</label> */}
-                                        {/* <PhoneInput
+                                        /> */}
+                                        <label htmlFor="email" className="form-label label_style">Phone Number</label>
+                                        <PhoneInput
                                             inputProps={{ required: true }}
                                             placeholder="Enter Your Phone Number"
                                             country={"cm"}
                                             enableSearch={true}
                                             value={phone.phone}
                                             onChange={(phone) => setPhone(phone)}
-                                        /> */}
+                                        />
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_user.error}</p>
                                     </div>
 
                                     {/* Password input */}
                                     <div className="">
-                                        <label htmlFor="password" className="form-label label_style">Password</label>
+                                        {/* <label htmlFor="password" className="form-label label_style">Password</label>
                                         <input
                                             type="password"
                                             className="form-control form_input"
@@ -117,8 +117,8 @@ const Login = () => {
                                             value={formValues.password}
                                             onChange={handleChange}
                                             required
-                                        />
-                                        {/* <label htmlFor="password" className="form-label label_style">Password</label>
+                                        /> */}
+                                        <label htmlFor="password" className="form-label label_style">Password</label>
                                         <input
                                             type="password"
                                             className="form-control form_input"
@@ -128,7 +128,7 @@ const Login = () => {
                                             value={password.password}
                                             onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                                             required
-                                        /> */}
+                                        />
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_password.error}</p>
                                     </div>
@@ -148,12 +148,12 @@ const Login = () => {
                                     </div>
 
                                     <div className="text-center">
-                                        <button type="submit" className="btn_one">Login</button>
-                                        {/* <button
+                                        {/* <button type="submit" className="btn_one">Login</button> */}
+                                        <button
                                             type="submit"
                                             className={(phone?.length) ? active : deactive}
                                             disabled={(phone?.length) ? false : true}
-                                        >Login</button> */}
+                                        >Login</button>
                                     </div>
 
                                     {/* Forget password Link */}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSignUp } from '../services/slice/AuthSlice'
 import "slick-carousel/slick/slick.css";
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { fetchCountry, fetchStates } from '../services/slice/CountryStateSlice';
 import PreLoader from '../components/core/preloader/PreLoader';
 import { toast } from 'react-toastify'
@@ -16,11 +16,11 @@ const SignUp = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { phone_number } = useParams()
+    const { validPhoneNumber } = useSelector((state) => state.authslice)
     const initialState = {
         full_name: "",
         email: "",
-        phone: phone_number,
+        phone: validPhoneNumber,
         dob: "",
         country: "",
         password: "",
@@ -124,7 +124,6 @@ const SignUp = () => {
                                             placeholder="Enter Your Email Id"
                                             value={email}
                                             onChange={handleChange}
-
                                         />
                                         {/* Email Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{signupErr?.email?.message}</p>

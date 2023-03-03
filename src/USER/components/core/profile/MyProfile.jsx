@@ -121,20 +121,31 @@ const MyProfile = () => {
                                             <label htmlFor="email" className="form-label label_style">Email</label>
                                             {
                                                 user ?
-                                                    <input
-                                                        type="email"
-                                                        className="form-control form_input in_disa"
-                                                        id="email"
-                                                        name="email"
-                                                        aria-describedby="emailHelp"
-                                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                                        title="Accept Email Format Only"
-                                                        placeholder={user?.email}
-                                                        value={formValues?.email}
-                                                        onChange={handleChange} disabled
-                                                    />
-                                                    :
-                                                    <input
+                                                    user.email ?
+                                                        <input
+                                                            type="email"
+                                                            className="form-control form_input in_disa"
+                                                            id="email"
+                                                            name="email"
+                                                            aria-describedby="emailHelp"
+                                                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                            title="Accept Email Format Only"
+                                                            placeholder={user?.email}
+                                                            value={formValues?.email}
+                                                            onChange={handleChange} disabled
+                                                            readOnly
+                                                        />
+                                                        : <input
+                                                            type="email"
+                                                            className="form-control form_input in_disa"
+                                                            id="email"
+                                                            name="email"
+                                                            aria-describedby="emailHelp"
+                                                            placeholder="Add Email ID"
+                                                            onChange={handleChange} disabled
+                                                            readOnly
+                                                        />
+                                                    : <input
                                                         type="email"
                                                         className="form-control form_input in_disa"
                                                         id="email"
@@ -142,6 +153,7 @@ const MyProfile = () => {
                                                         aria-describedby="emailHelp"
                                                         placeholder={social_user?.email}
                                                         onChange={handleChange} disabled
+                                                        readOnly
                                                     />
                                             }
                                         </div>
@@ -247,7 +259,7 @@ const MyProfile = () => {
                                                 id="remEdit"
                                                 onClick={enabledEdit}
                                             ><i className="fas fa-edit"></i> Edit</button>
-                                            <button className="btn2 hidden" id="saveChanges" >Save Changes</button>
+                                            <button type="button" className="btn2 hidden" id="saveChanges">Save Changes</button>
 
                                         </div>
                                     </form>
