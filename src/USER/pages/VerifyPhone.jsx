@@ -38,27 +38,29 @@ const VerifyPhone = () => {
 
 
     useEffect(() => {
-        if (reg_otp === true) {
+        if (reg_otp?.status === true) {
             setFlag(true)
-            toast.success("OTP Sent Successfully. Enter Your OTP")
-            dispatch(clearVerifyOtp())
-        } else if (reg_otp === false) {
+            toast.success(reg_otp?.message)
+            dispatch(clearVerifyOtp(reg_otp?.message))
+        } else if (reg_otp?.status === false) {
             setFlag(false)
-            toast.error("Opps!! Something Went Wrong. Please Try Again")
+            toast.error(reg_otp?.message)
+            dispatch(clearVerifyOtp())
         }
 
-        if (verify_otp === true) {
+        if (verify_otp?.status === true) {
             const data = { phone_number: "+" + phone, otp: otp.otp }
             setFlag(false)
-            toast.success("OTP Verification Successfull. Please Continue")
+            toast.success(verify_otp?.message)
             dispatch(storePhoneNumber(data.phone_number))
             navigate("/signup")
             setOtp({ otp: "" })
             setPhone({ phone: "" })
             dispatch(clearVerifyOtp())
-        } else if (verify_otp === false) {
-            toast.error("Invalid OTP!!")
+        } else if (verify_otp?.status === false) {
+            toast.error(verify_otp?.message)
             navigate('/verifyphone')
+            dispatch(clearVerifyOtp())
         }
     }, [dispatch, navigate, otp.otp, reg_otp, verify_otp])
 

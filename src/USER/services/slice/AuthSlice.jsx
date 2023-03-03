@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { FORGETPASSWORD, GETOTP, LOGIN, SIGNUP, VERIFYOTP } from "../api/Api";
+import { FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SIGNUP, VERIFYOTP } from "../api/Api";
 
 
 //AsyncThunk For SignUp 
@@ -84,6 +84,20 @@ export const verifyOTP = createAsyncThunk("/system/register/otp/verify", async (
         return rejectWithValue(err?.response?.data)
     }
 })
+
+
+// forget password otp
+export const fetchForgetPassOTP = createAsyncThunk(
+    "/system/forget/password/otp", async (data, { rejectWithValue }) => {
+        try {
+            const res = await FORGETPASSWORDOTP(data)
+            return res?.data
+        } catch (err) {
+            // console.log(rejectWithValue(err.response.data));
+            return rejectWithValue(err.response.data)
+        }
+
+    })
 
 
 // defining initialState
@@ -191,13 +205,13 @@ export const AuthSlice = createSlice({
         builder.addCase(registerOTP.fulfilled, (state, { payload }) => {
             state.msg = "Success"
             state.loading = false
-            state.reg_otp = payload.status
+            state.reg_otp = payload
             // console.log("reg otp success", payload.status);
         })
         builder.addCase(registerOTP.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
-            state.reg_otp = payload.status
+            state.reg_otp = payload
             // console.log("reg otp error", payload.status);
         })
 
@@ -210,14 +224,32 @@ export const AuthSlice = createSlice({
         builder.addCase(verifyOTP.fulfilled, (state, { payload }) => {
             state.msg = "Success"
             state.loading = false
-            state.verify_otp = payload.status
+            state.verify_otp = payload
             // console.log("verify otp success", payload.status);
         })
         builder.addCase(verifyOTP.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
-            state.verify_otp = payload.status
+            state.verify_otp = payload
             // console.log("verify otp error", payload.status);
+        })
+
+        //States for Register OTP
+        builder.addCase(fetchForgetPassOTP.pending, (state) => {
+            state.msg = "Loading"
+            state.loading = true
+        })
+        builder.addCase(fetchForgetPassOTP.fulfilled, (state, { payload }) => {
+            state.msg = "Success"
+            state.loading = false
+            state.reg_otp = payload
+            // console.log("reg otp success", payload.status);
+        })
+        builder.addCase(fetchForgetPassOTP.rejected, (state, { payload }) => {
+            state.msg = "Failed"
+            state.loading = false
+            state.reg_otp = payload
+            // console.log("reg otp error", payload.status);
         })
     }
 })

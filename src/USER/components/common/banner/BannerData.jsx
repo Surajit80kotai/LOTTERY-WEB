@@ -1,9 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 
-const BannerData = ({ item }) => {
-
+const BannerData = ({ item, id }) => {
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
 
     // currency variables
@@ -28,7 +28,9 @@ const BannerData = ({ item }) => {
                     (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                         <div>
                             <div className="time_counter">
-                                <h1 className="banner_title">{item?.ticket_name}</h1>
+                                <Link to={`/info/${id}`}>
+                                    <h1 className="banner_title">{item?.ticket_name}</h1>
+                                </Link>
                                 <h3>Timeleft</h3>
                                 <div id="coundown" className="countdown">
                                     <div className="one_time">

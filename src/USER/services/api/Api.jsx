@@ -11,6 +11,9 @@ export const SIGNUP = (signupData) => API.post('/auth/signup', signupData)
 // forgetpassword api function
 export const FORGETPASSWORD = (formValue) => API.post('/auth/forget', formValue)
 
+// forgetpassword api function
+export const FORGETPASSWORDOTP = (phone) => API.post('/system/forget/password/otp', phone)
+
 // country & state api function
 export const COUNTRY = () => API.get('/countries')
 export const STATE = (id) => API.get('/state/' + id)

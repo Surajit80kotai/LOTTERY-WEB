@@ -22,7 +22,7 @@ const Banner = () => {
                                 }
                                 return (
                                     <div className={`carousel-item ${act}`} key={index}>
-                                        <BannerData item={item} />
+                                        <BannerData item={item} id={item?._id} />
                                     </div>
                                 )
                             })
