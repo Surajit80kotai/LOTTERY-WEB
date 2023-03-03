@@ -1,22 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Banner from '../components/core/home/Banner'
-import CarsBike from '../components/core/home/CarsBike'
-import ComputersPhones from '../components/core/home/ComputersPhones'
-import Cosmetics from '../components/core/home/Cosmetics'
-import HomeLottery from '../components/core/home/HomeLottery'
-import StudyTravel from '../components/core/home/StudyTravel'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { fetchCategory, fetchLottery } from '../services/slice/LotterySlice'
 import { getCart } from '../services/slice/CartSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
+import CommonCard from '../components/core/home/CommonCard'
 
 
 const Home = () => {
     const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
-    // const token = JSON.parse(window.localStorage.getItem("token"))
-    // const { cart_data } = useSelector((state) => state.cartslice)
-    // const cartLength = cart_data?.length
     const dispatch = useDispatch()
 
     // Getting category_name & category_id
@@ -33,7 +26,6 @@ const Home = () => {
     const cosmetics = fetch_lott_data?.filter((item) => item.category === categoryObj["Cosmetic"])
     const study_travel = fetch_lott_data?.filter((item) => item.category === categoryObj["Study & abroad"])
     const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
-
 
 
     // mount cycle
@@ -71,10 +63,11 @@ const Home = () => {
                             </div>
                             {
                                 house?.map((item, index) => {
-                                    return <HomeLottery
+                                    return <CommonCard
                                         item={item}
                                         key={item._id}
                                         index={index}
+                                        category={item.category}
                                     />
                                 }).slice(0, 8)
                             }
@@ -87,10 +80,11 @@ const Home = () => {
                             </div>
                             {
                                 vehicle?.map((item, index) => {
-                                    return <CarsBike
+                                    return <CommonCard
                                         item={item}
                                         key={item._id}
                                         index={index}
+                                        category={item.category}
                                     />
                                 }).slice(0, 8)
                             }
@@ -103,10 +97,11 @@ const Home = () => {
                             </div>
                             {
                                 study_travel?.map((item, index) => {
-                                    return <StudyTravel
+                                    return <CommonCard
                                         item={item}
                                         key={item._id}
                                         index={index}
+                                        category={item.category}
                                     />
                                 }).slice(0, 8)
                             }
@@ -120,10 +115,11 @@ const Home = () => {
                             </div>
                             {
                                 comp_phn?.map((item, index) => {
-                                    return <ComputersPhones
+                                    return <CommonCard
                                         item={item}
                                         key={item._id}
                                         index={index}
+                                        category={item.category}
                                     />
                                 }).slice(0, 8)
                             }
@@ -137,10 +133,11 @@ const Home = () => {
                             </div>
                             {
                                 cosmetics?.map((item, index) => {
-                                    return <Cosmetics
+                                    return <CommonCard
                                         item={item}
                                         key={item._id}
                                         index={index}
+                                        category={item.category}
                                     />
                                 }).slice(0, 8)
                             }

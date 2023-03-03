@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
-import { addCart } from '../../../services/slice/CartSlice'
+import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSlice'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
 
-const HomeLottery = ({ item, index }) => {
-    const navigate = useNavigate()
+const CommonCard = ({ item, index, category }) => {
     const { time_left, ticket_name, ticket_price, ticket_quantity, discount_percentage, main_image, is_image, _id } = item
+    // discount calculation
     const discountedPrice = Number((ticket_price - ((ticket_price * discount_percentage) / 100)))
     // defining states timer
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     const dispatch = useDispatch()
+
+    // states from cartslice
+    const { cart_data, add_cart_status } = useSelector((state) => state.cartslice)
+    const cartLength = cart_data?.length
 
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
@@ -23,7 +27,11 @@ const HomeLottery = ({ item, index }) => {
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
     const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
 
+    // baseUrl For Images
     const baseUrl = process.env.REACT_APP_NODE_HOST
+
+
+
 
     // add to cart
     const addToCart = () => {
@@ -55,10 +63,17 @@ const HomeLottery = ({ item, index }) => {
     }
 
 
+
     useEffect(() => {
-        // console.log("render");
         startTimer(Number(time_left))
-    })
+        // window.scrollTo(0, 0)
+        return () => {
+            dispatch(getCart())
+            dispatch(clearAddStatus())
+        }
+    }, [dispatch, cartLength, add_cart_status])
+
+
 
     return (
         <>
@@ -168,7 +183,7 @@ const HomeLottery = ({ item, index }) => {
                                 <img src="/assets/img/viewmorecard.png" alt="" className="img-fluid" />
                                 <div className="viewall_btn">
                                     <h6>Looking More? Click Here</h6>
-                                    <button className="btn2" onClick={() => navigate('/viewallhome')}>View All</button>
+                                    <Link className="btn2" to={`/viewall/${category}`}>View All</Link>
                                 </div>
                             </div>
                         </div>
@@ -179,4 +194,4 @@ const HomeLottery = ({ item, index }) => {
     )
 }
 
-export default HomeLottery
+export default CommonCard
