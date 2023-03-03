@@ -9,11 +9,31 @@ import PreLoader from '../preloader/PreLoader'
 
 const ViewAll = () => {
     const { categoryID } = useParams()
-    const { fetch_lott_data, loading } = useSelector((state) => state.lotteryslice)
+    const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
     const dispatch = useDispatch()
+
+    const categoryObj = category_data?.reduce((acc, cur) => {
+        return {
+            ...acc,
+            [cur.name]: cur._id
+        }
+    }, {});
+
+    // finding a key from an object
+    const getKey = (obj, value) => {
+        for (const key in obj) {
+            if (obj[key] === value) {
+                return key
+            }
+        }
+        return null
+    }
+    // category name
+    const categoryName = getKey(categoryObj, categoryID)
 
     // Filtering category from data
     const LotteryCategory = fetch_lott_data?.filter((item) => item.category === categoryID)
+    // console.log(LotteryCategory);
 
     useEffect(() => {
         dispatch(fetchLottery())
@@ -35,7 +55,7 @@ const ViewAll = () => {
 
                                 {/* Home Lottery */}
                                 <div className="first_row_title">
-                                    <h2>House & Apartments</h2>
+                                    <h2>{categoryName?.toUpperCase()}</h2>
                                 </div>
                                 {
                                     LotteryCategory?.map((item) => {

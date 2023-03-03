@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSlice'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
@@ -63,9 +63,11 @@ const CommonCard = ({ item, index, category }) => {
     }
 
 
-
     useEffect(() => {
         startTimer(Number(time_left))
+    })
+
+    useEffect(() => {
         // window.scrollTo(0, 0)
         return () => {
             dispatch(getCart())
@@ -77,6 +79,9 @@ const CommonCard = ({ item, index, category }) => {
 
     return (
         <>
+            {/* <div className="first_row_title">
+                <h2>House & Apartments</h2>
+            </div> */}
             {
                 !index || index < 7 ?
                     <div className="col-md-3 product_item">

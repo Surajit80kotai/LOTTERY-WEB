@@ -1068,9 +1068,10 @@ z-index: 999; */
 	font-family: var(--secondary-font);
 }
 
-/* .product_item{
-	display:none;
-} */
+.product_item {
+	display: inline-block;
+	justify-content: space-around;
+}
 
 
 .product_btn {
