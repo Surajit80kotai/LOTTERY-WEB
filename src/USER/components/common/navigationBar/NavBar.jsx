@@ -5,6 +5,7 @@ import { doLogOut } from '../../../services/slice/AuthSlice'
 import { emptyCart, getCart } from '../../../services/slice/CartSlice'
 import { auth } from '../../../config/firebase'
 import { signOut } from 'firebase/auth'
+import PreLoader from '../../core/preloader/PreLoader'
 
 
 
@@ -17,6 +18,8 @@ const NavBar = () => {
   const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
   const { cart_data } = useSelector((state) => state.cartslice)
   const cartLength = cart_data?.length
+  const { category_data, loading } = useSelector((state) => state.lotteryslice)
+
 
   // Log Out Function
   const logOut = async () => {
@@ -28,12 +31,17 @@ const NavBar = () => {
     navigate('/')
   }
 
+
   useEffect(() => {
     dispatch(getCart())
   }, [dispatch, cartLength])
 
+  
   return (
     <>
+      {/* PreLoader */}
+      {loading && <PreLoader />}
+
       {/* <main> */}
       <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark fixed-top">
         <div className="container-fluid">
@@ -66,11 +74,15 @@ const NavBar = () => {
                 <li className="nav-item dropdown">
                   <Link className="nav-link nav-link-active dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products <i className="bi bi-chevron-down" style={{ "fontSize": "12px" }}></i></Link>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link className="dropdown-item text-dark" to="/viewallhome">House & Apartments</Link></li>
-                    <li><Link className="dropdown-item text-dark" to="/viewallcars">Cars & Bikes</Link></li>
-                    <li><Link className="dropdown-item text-dark" to="/viewallstud_trv">Study & Travel</Link></li>
-                    <li><Link className="dropdown-item text-dark" to="/viewallcomp_phn">Computer & Phones</Link></li>
-                    <li><Link className="dropdown-item text-dark" to="/viewallcosmetics">Cosmetics</Link></li>
+                    {
+                      category_data?.map((category) => {
+                        return (
+                          <li key={category._id} className="px-2">
+                            <Link className="dropdown-item text-dark fs-5" to={`/viewall/${category._id}`}>{(category.name).toUpperCase()}</Link>
+                          </li>
+                        )
+                      })
+                    }
                   </ul>
                 </li>
                 {/* How to play */}

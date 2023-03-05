@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { fetchLogin } from '../services/slice/AuthSlice'
@@ -8,16 +8,20 @@ import { signInWithPopup } from 'firebase/auth'
 import PreLoader from '../components/core/preloader/PreLoader';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { fetchCountry } from '../services/slice/CountryStateSlice'
 
 
 const Login = () => {
     const { login, loading } = useSelector((state) => state.authslice)
+    // const { countryData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
     // const [formValues, setFormValues] = useState({ phone: "", password: "" })
     const [phone, setPhone] = useState({ phone: "" })
     const [password, setPassword] = useState({ password: "" })
+
+    // console.log(countryData);
 
     // const handleChange = (e) => {
     //     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -31,7 +35,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const formValues = { phone: "+" + phone, password: password.password }
-        console.log(formValues);
+        // console.log(formValues);
         dispatch(fetchLogin({ formValues, navigate, toast }))
     }
 
@@ -50,6 +54,11 @@ const Login = () => {
 
         console.log(result);
     }
+
+
+    useEffect(() => {
+        dispatch(fetchCountry())
+    }, [dispatch])
 
 
     return (
@@ -78,20 +87,38 @@ const Login = () => {
                             <div className="form_area">
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
 
-                                    {/* Phone Input */}
+                                    {/* Phone & Email Input */}
                                     <div className="mb-5">
-                                        {/* <label htmlFor="email" className="form-label label_style">Email</label>
-                                        <input
-                                            type="email"
-                                            className="form-control form_input"
-                                            id="email"
-                                            name="email"
-                                            aria-describedby="emailHelp"
-                                            placeholder="Enter Email Id"
-                                            value={formValues.email}
-                                            onChange={handleChange}
-                                            required
-                                        /> */}
+                                        {/* <label htmlFor="contact" className="form-label label_style">Enter Phone Or Email ID</label>
+                                        <div className='row'>
+                                            <div className='col-3'>
+                                                <select className="form-select form_input form_select" aria-label="Default select example" id="selects" name='phone_code'>
+                                                    {
+                                                        countryData?.map((country) => {
+                                                            return (
+                                                                <option value={country.phonecode} key={country._id}>{country.phonecode}</option>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
+
+
+                                            <div className='col-9'>
+                                                <input
+                                                    type="text"
+                                                    className="form-control form_input"
+                                                    id="contact"
+                                                    name="contact"
+                                                    aria-describedby="emailHelp"
+                                                    placeholder="Enter Phone Or Email ID"
+                                                    pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                    title="Enter a valid email or phone number"
+                                                    required
+                                                />
+                                            </div>
+                                        </div> */}
+
                                         <label htmlFor="email" className="form-label label_style">Phone Number</label>
                                         <PhoneInput
                                             inputProps={{ required: true }}
@@ -172,7 +199,7 @@ const Login = () => {
                             <Link to="/verifyphone" className="Signup">Sing Up</Link>
                         </div>
                     </div>
-                </div>
+                </div >
                 {/* <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} /> */}
             </main >
         </>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSlice'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
+import PreLoader from '../preloader/PreLoader'
 
 const CommonCard = ({ item, index, category }) => {
     const { time_left, ticket_name, ticket_price, ticket_quantity, discount_percentage, main_image, is_image, _id } = item
@@ -14,7 +15,7 @@ const CommonCard = ({ item, index, category }) => {
     const dispatch = useDispatch()
 
     // states from cartslice
-    const { cart_data, add_cart_status } = useSelector((state) => state.cartslice)
+    const { cart_data, add_cart_status, loading } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
 
     // userID
@@ -79,6 +80,9 @@ const CommonCard = ({ item, index, category }) => {
 
     return (
         <>
+            {/* PreLoader */}
+            {loading && <PreLoader />}
+            
             {/* <div className="first_row_title">
                 <h2>House & Apartments</h2>
             </div> */}
