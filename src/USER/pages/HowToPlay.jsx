@@ -56,7 +56,7 @@ const HowToPlay = () => {
                                         </div>
                                         <div className="step_details">
                                             <h6>
-                                                <Link to="/signup">Sign-up</Link> for a
+                                                <Link to="/verifyphone">Sign-up</Link> for a
                                                 free account.
                                             </h6>
                                         </div>
