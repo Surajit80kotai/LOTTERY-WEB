@@ -10,6 +10,7 @@ import PreLoader from '../../core/preloader/PreLoader'
 
 
 const NavBar = () => {
+  // const [search, setSearch] = useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const token = JSON.parse(window.localStorage.getItem("token"))
@@ -24,8 +25,8 @@ const NavBar = () => {
   // Log Out Function
   const logOut = async () => {
     await signOut(auth)
-    window.localStorage.removeItem("social_user")
-    window.localStorage.removeItem("accessToken")
+    window.localStorage.removeItem("user")
+    window.localStorage.removeItem("token")
     dispatch(doLogOut())
     dispatch(emptyCart())
     navigate('/')
@@ -36,7 +37,7 @@ const NavBar = () => {
     dispatch(getCart())
   }, [dispatch, cartLength])
 
-  
+
   return (
     <>
       {/* PreLoader */}
@@ -150,9 +151,20 @@ const NavBar = () => {
             } */}
 
             {/* Search Bar */}
-            <form className="d-flex">
-              <input className="form-control me-2 fs-4" type="search" placeholder="Search" aria-label="Search" style={{ "width": "250px" }} />
-              <button className="btn fs-4" type="submit" style={{ "background": "#f9772b" }}><i className="fa-solid fa-magnifying-glass"></i></button>
+            <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+              <input
+                className="form-control me-2 fs-4"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                style={{ "width": "250px" }}
+              />
+              <button
+                className="btn fs-4"
+                type="submit"
+                style={{ "background": "#f9772b" }}
+              ><i className="fa-solid fa-magnifying-glass"></i></button>
+
             </form>
 
             {/* User Dropdown */}

@@ -4,15 +4,10 @@ import { toast } from 'react-toastify'
 
 
 // from socialuser
-const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
-const socialuserID = (JSON.parse(window.localStorage.getItem("social_user")))?.uid
+const socialuserID = (JSON.parse(window.localStorage.getItem("user")))?.uid
 
 // Defining header
-const header = accessToken ? {
-    headers: {
-        Authorization: `Bearer ${accessToken}`
-    }
-} : {
+const header = {
     headers: {
         Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("token"))}`
     }

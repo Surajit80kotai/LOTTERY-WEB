@@ -42,8 +42,8 @@ const Login = () => {
     // socailLogin function
     const socialLogin = async (provider) => {
         const result = await signInWithPopup(auth, provider)
-        window.localStorage.setItem("social_user", JSON.stringify(result?.user))
-        window.localStorage.setItem("accessToken", JSON.stringify(result?.user?.accessToken))
+        window.localStorage.setItem("user", JSON.stringify(result?.user))
+        window.localStorage.setItem("token", JSON.stringify(result?.user?.accessToken))
         navigate('/')
         toast.success('Loged In Successfully')
 
