@@ -7,7 +7,6 @@ import { auth } from '../../../config/firebase'
 import { signOut } from 'firebase/auth'
 import PreLoader from '../../core/preloader/PreLoader'
 import SearchDesk from '../../../util/SearchDesk'
-import { fetchLottery } from '../../../services/slice/LotterySlice'
 
 
 
@@ -23,7 +22,6 @@ const NavBar = () => {
   const cartLength = cart_data?.length
   const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
 
-  // console.log(fetch_lott_data);
 
   // Log Out Function
   const logOut = async () => {
@@ -155,26 +153,30 @@ const NavBar = () => {
 
             {/* Search Bar */}
             <div style={{ "display": "flex", "flexDirection": "column" }}>
-              <form className="d-flex" onSubmit={(e) => e.preventDefault()} style={{ "marginTop": "25px" }}>
+              <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
                 <input
                   className="form-control me-2 fs-4"
                   type="search"
-                  placeholder="Search"
+                  placeholder="Search..."
                   aria-label="Search"
                   // name='search'
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  style={{ "width": "250px" }}
+                  style={{ "width": "390px" }}
                 />
                 <button
-                  className="btn fs-4"
+                  className="btn fs-4 "
                   type="submit"
                   style={{ "background": "#f9772b" }}
-                ><i className="fa-solid fa-magnifying-glass"></i></button>
+                ><i className="fa-solid fa-magnifying-glass d-flex"></i></button>
               </form>
-              <div style={{ "border": "1px solid red", "marginTop": "5px", "width": "350px", "height": "auto" }}>
-                <SearchDesk ticketList={fetch_lott_data} search={search} />
-              </div>
+              {
+                search.length > 0 ?
+                  <div style={{ "width": "350px", "height": "auto", "backgroundColor": "white" }}>
+                    <SearchDesk ticketList={fetch_lott_data} search={search} setSearch={setSearch} />
+                  </div>
+                  : null
+              }
             </div>
 
             {/* User Dropdown */}

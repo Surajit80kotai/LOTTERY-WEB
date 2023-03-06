@@ -3797,3 +3797,45 @@ margin: 0.5rem;
 .scroll::-webkit-scrollbar {
 	display: none;
 }
+
+.search_list {
+	position: absolute;
+	top: 86px;
+    right: 328px;
+    width: 427px;
+	background: #f1f1f1;
+	height: 300px;
+	z-index: 99;
+	padding: 1.5rem;
+	overflow: scroll;
+}
+
+.search_list {
+	-ms-overflow-style: none;
+	/* Internet Explorer 10+ */
+	scrollbar-width: none;
+	/* Firefox */
+}
+
+.search_list::-webkit-scrollbar {
+	display: none;
+	/* Safari and Chrome */
+}
+
+
+
+
+
+.search_list ul p {
+	color: var(--black);
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid rgb(204, 203, 203);
+}
+
+.dropdown-toggle::after {
+	display: inline-block;
+	margin-left: .255em;
+	vertical-align: .255em;
+	content: "";
+	border-top: 0 !important;
+}

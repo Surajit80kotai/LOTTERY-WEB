@@ -22,9 +22,10 @@ export const fetchSignUp = createAsyncThunk(
 
 //AsyncThunk For Login 
 export const fetchLogin = createAsyncThunk(
-    "login", async ({ formValues, navigate, toast }, { rejectWithValue }) => {
+    "login", async ({ data, navigate, toast }, { rejectWithValue }) => {
+        // console.log(data)
         try {
-            const result = await LOGIN(formValues)
+            const result = await LOGIN(data)
             window.localStorage.setItem("token", JSON.stringify(result?.data?.token))
             window.localStorage.setItem("user", JSON.stringify(result?.data?.user_details))
             navigate('/')

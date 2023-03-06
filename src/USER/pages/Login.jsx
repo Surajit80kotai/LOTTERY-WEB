@@ -17,7 +17,7 @@ const Login = () => {
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [formValues, setFormValues] = useState({ phone_code: "", contact: "", password: "" })
+    const [formValues, setFormValues] = useState({ phone_code: "", phone: "", password: "" })
 
     const handleChange = (e) => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -30,7 +30,7 @@ const Login = () => {
     // handleSubmit Function for form submit
     const handleSubmit = (e) => {
         e.preventDefault()
-        const data = { phone_code: formValues.phone_code, contact: formValues.phone_code + formValues.contact, password: formValues.password }
+        const data = { phone_code: formValues.phone_code, phone: formValues.phone_code + formValues.phone, password: formValues.password }
         console.log(data);
         dispatch(fetchLogin({ data, navigate, toast }))
     }
@@ -110,13 +110,13 @@ const Login = () => {
                                                 <input
                                                     type="text"
                                                     className="form-control form_input"
-                                                    id="contact"
-                                                    name="contact"
+                                                    id="phone"
+                                                    name="phone"
                                                     aria-describedby="emailHelp"
                                                     placeholder="Enter Phone Or Email ID"
                                                     pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
                                                     title="Enter a valid email or phone number"
-                                                    value={formValues.contact}
+                                                    value={formValues.phone}
                                                     onChange={handleChange}
                                                     required
                                                 />
