@@ -6,8 +6,10 @@ import BannerData from '../../common/banner/BannerData';
 const Banner = () => {
     const { fetch_lott_data } = useSelector((state) => state.lotteryslice)
     const bannerData = fetch_lott_data?.map(item => {
-        return item?.is_banner ? item : null
+        return item?.is_banner === true ? item : null
     })
+
+    // console.log(bannerData);
 
     return (
         <>

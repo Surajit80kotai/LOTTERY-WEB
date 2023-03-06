@@ -17,6 +17,7 @@ export const FORGETPASSWORDOTP = (phone) => API.post('/system/forget/password/ot
 // country & state api function
 export const COUNTRY = () => API.get('/countries')
 export const STATE = (id) => API.get('/state/' + id)
+export const PHONECODE = () => API.get('/phone/code')
 
 // get Category api function
 export const CATEGORY = () => API.get('/admin/get-category')

@@ -6,35 +6,46 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { clearVerifyOtp, registerOTP, storePhoneNumber, verifyOTP } from '../services/slice/AuthSlice'
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import { getPhoneCode } from '../services/slice/CountryStateSlice'
+// import PhoneInput from 'react-phone-input-2'
+// import 'react-phone-input-2/lib/style.css'
 
 const VerifyPhone = () => {
-    const [phone, setPhone] = useState({ phone: "" })
+    const [phone, setPhone] = useState({ phone_code: "", phone: "" })
     const [otp, setOtp] = useState({ otp: "" })
     const [flag, setFlag] = useState(false)
     const { loading } = useSelector((state) => state.authslice)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { reg_otp, verify_otp } = useSelector((state) => state.authslice)
+    const { phoneCodeData } = useSelector((state) => state.countrystateslice)
 
 
     // button style
     const active = "btn_one"
     const deactive = "btn_deactive"
 
+    const handleChange = (e) => {
+        setPhone({ ...phone, [e.target.name]: e.target.value })
+        console.log(phone);
+    }
+
     // sendOtp func.
     const sendOtp = () => {
-        const data = { phone_number: "+" + phone }
+        const data = { phone_number: phone.phone_code + phone.phone }
         dispatch(registerOTP(data))
     }
 
     // onVerify func.
     const onVerify = () => {
-        const data = { phone_number: "+" + phone, otp: otp.otp }
+        const data = { phone_number: phone.phone_code + phone.phone, otp: otp.otp }
         dispatch(verifyOTP(data))
     }
 
+
+    useEffect(() => {
+        dispatch(getPhoneCode())
+    }, [dispatch])
 
 
     useEffect(() => {
@@ -49,13 +60,13 @@ const VerifyPhone = () => {
         }
 
         if (verify_otp?.status === true) {
-            const data = { phone_number: "+" + phone, otp: otp.otp }
+            const data = { phone_number: phone.phone_code + phone.phone, otp: otp.otp }
             setFlag(false)
             toast.success(verify_otp?.message)
             dispatch(storePhoneNumber(data.phone_number))
             navigate("/signup")
             setOtp({ otp: "" })
-            setPhone({ phone: "" })
+            setPhone({ ...phone, phone: "" })
             dispatch(clearVerifyOtp())
         } else if (verify_otp?.status === false) {
             toast.error(verify_otp?.message)
@@ -84,41 +95,63 @@ const VerifyPhone = () => {
                                 <h2 className="heading_form mt-3">Verify Your Phone  Number</h2>
                             </div>
                             <div className="form_area mt-5">
-                                <form method="post" encType="multipart/form-data" onSubmit={e => e.preventDefault()}>
+                                <div>
 
                                     {/* Phone Number */}
-                                    <div className="mb-5" style={{ "display": !flag ? "block" : "none" }}>
+                                    <div className="row d-flex mb-5" style={{ "display": !flag ? "block" : "none" }}>
                                         <label htmlFor="phone" className="form-label label_style">Enter Phone Number</label>
-                                        {/* <input
-                                            type="tel"
-                                            className="form-control form_input"
-                                            id="phone"
-                                            name="phone"
-                                            aria-describedby="emailHelp"
-                                            placeholder="Enter Your Phone Number"
-                                            pattern="[0-9]{10}"
-                                            title="Accept Phone Numbers With Country Code"
-                                            value={phone.phone}
-                                            onChange={(e) => setPhone({ ...phone, [e.target.name]: e.target.value })}
-                                            maxLength={10}
-                                            required
-                                        /> */}
-                                        <PhoneInput
+
+                                        <div className='col-2'>
+                                            <select
+                                                className="form-select form_input form_select"
+                                                aria-label="Default select example"
+                                                id="selects"
+                                                name='phone_code'
+                                                value={phone.phone_code}
+                                                onChange={handleChange}
+                                            >
+                                                {
+                                                    phoneCodeData?.map((country) => {
+                                                        return (
+                                                            <option value={country.dial_code} key={country._id}>{country.dial_code} {country.name}</option>
+                                                        )
+                                                    })
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div className='col-10'>
+                                            <input
+                                                type="tel"
+                                                className="form-control form_input"
+                                                id="phone"
+                                                name="phone"
+                                                aria-describedby="emailHelp"
+                                                placeholder="Enter Phone Or Email ID"
+                                                pattern="[0-9]{10}"
+                                                title="Enter a valid phone number"
+                                                maxLength={10}
+                                                value={phone.phone}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        {/* <PhoneInput
                                             inputProps={{ required: true }}
                                             placeholder="Enter Your Phone Number"
                                             country={"cm"}
                                             enableSearch={true}
                                             value={phone.phone}
                                             onChange={(phone) => setPhone(phone)}
-                                        />
+                                        /> */}
                                     </div>
 
                                     <div className="text-center" style={{ "display": !flag ? "block" : "none" }}>
                                         <button
                                             onClick={sendOtp}
                                             type="submit"
-                                            className={(phone?.length) ? active : deactive}
-                                            disabled={(phone?.length) ? false : true}
+                                            className={(phone?.phone?.length) ? active : deactive}
+                                            disabled={(phone?.phone?.length) ? false : true}
                                         >Send OTP</button>
                                     </div>
 
@@ -149,7 +182,7 @@ const VerifyPhone = () => {
                                             disabled={(otp.otp.length) === 6 ? false : true}
                                         >Verify</button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                         <div className="left_part mb-5">

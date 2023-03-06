@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { doLogOut } from '../../../services/slice/AuthSlice'
@@ -6,11 +6,13 @@ import { emptyCart, getCart } from '../../../services/slice/CartSlice'
 import { auth } from '../../../config/firebase'
 import { signOut } from 'firebase/auth'
 import PreLoader from '../../core/preloader/PreLoader'
+import SearchDesk from '../../../util/SearchDesk'
+import { fetchLottery } from '../../../services/slice/LotterySlice'
 
 
 
 const NavBar = () => {
-  // const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const token = JSON.parse(window.localStorage.getItem("token"))
@@ -19,8 +21,9 @@ const NavBar = () => {
   const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
   const { cart_data } = useSelector((state) => state.cartslice)
   const cartLength = cart_data?.length
-  const { category_data, loading } = useSelector((state) => state.lotteryslice)
+  const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
 
+  // console.log(fetch_lott_data);
 
   // Log Out Function
   const logOut = async () => {
@@ -151,27 +154,34 @@ const NavBar = () => {
             } */}
 
             {/* Search Bar */}
-            <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
-              <input
-                className="form-control me-2 fs-4"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                style={{ "width": "250px" }}
-              />
-              <button
-                className="btn fs-4"
-                type="submit"
-                style={{ "background": "#f9772b" }}
-              ><i className="fa-solid fa-magnifying-glass"></i></button>
-
-            </form>
+            <div style={{ "display": "flex", "flexDirection": "column" }}>
+              <form className="d-flex" onSubmit={(e) => e.preventDefault()} style={{ "marginTop": "25px" }}>
+                <input
+                  className="form-control me-2 fs-4"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  // name='search'
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  style={{ "width": "250px" }}
+                />
+                <button
+                  className="btn fs-4"
+                  type="submit"
+                  style={{ "background": "#f9772b" }}
+                ><i className="fa-solid fa-magnifying-glass"></i></button>
+              </form>
+              <div style={{ "border": "1px solid red", "marginTop": "5px", "width": "350px", "height": "auto" }}>
+                <SearchDesk ticketList={fetch_lott_data} search={search} />
+              </div>
+            </div>
 
             {/* User Dropdown */}
             <div className="area_profile">
               <div className="dropdown">
                 {
-                  token || accessToken ?
+                  token ?
                     <Link className=" dropdown-toggle userbtn mx-2" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       {token ? user?.full_name : social_user?.displayName}
                       <i className="fas fa-user mx-2"></i>
@@ -180,7 +190,7 @@ const NavBar = () => {
                 }
 
                 {
-                  token || accessToken ?
+                  token ?
                     <ul className="dropdown-menu">
                       <li className="user-menu__item">
                         <Link className="user-menu-link dropdown-item" to="/profile">
@@ -203,7 +213,7 @@ const NavBar = () => {
 
             {/* Cart Icon */}
             {
-              token || accessToken ?
+              token ?
                 <div className="cart">
                   <Link to="/cart" className="cartbtn"><i className="fas fa-shopping-cart"></i>
                     {cartLength > 0 ? <span className="label">{cartLength}</span> : null}</Link>

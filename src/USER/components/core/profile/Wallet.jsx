@@ -224,7 +224,7 @@ const Wallet = ({ dueAmount }) => {
                                             value="MTN"
                                             onChange={(e) => selectPayOption(e.target.value)}
                                         />
-                                        <label htmlFor="control_01">
+                                        <label htmlFor="control_02">
                                             <div className="pay_icon">
                                                 <img src="/assets/img/mtn.png" alt="" className="img-fluid" />
                                             </div>
@@ -242,7 +242,7 @@ const Wallet = ({ dueAmount }) => {
                                             value="Master"
                                             onChange={(e) => selectPayOption(e.target.value)}
                                         />
-                                        <label htmlFor="control_02">
+                                        <label htmlFor="control_03">
                                             <div className="pay_icon">
                                                 <img src="/assets/img/master.png" alt="" className="img-fluid" />
                                             </div>
@@ -259,7 +259,7 @@ const Wallet = ({ dueAmount }) => {
                                             value="Paypal"
                                             onChange={(e) => selectPayOption(e.target.value)}
                                         />
-                                        <label htmlFor="control_03">
+                                        <label htmlFor="control_04">
                                             <div className="pay_icon">
                                                 <img src="/assets/img/paypal.png" alt="" className="img-fluid" />
                                             </div>
