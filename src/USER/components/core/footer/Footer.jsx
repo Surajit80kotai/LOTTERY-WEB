@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
 
     const token = JSON.parse(window.localStorage.getItem("token"))
-    const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
 
     return (
         <>
@@ -25,10 +24,10 @@ const Footer = () => {
                         <li><Link to="/howtoplay"><span><i className="fas fa-caret-right"></i></span>How to Play</Link></li>
                         <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>How to Deposit</Link></li>
                         <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Betting Rule</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>How to Collect</Link></li>
+                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>How to Collect</Link></li> */}
                         <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>How to Register</Link></li>
                         {
-                            token || accessToken ?
+                            token ?
                                 <li><Link to="/profile"><span><i className="fas fa-caret-right"></i></span>Balance Check</Link></li>
                                 : <li><Link to="/login"><span><i className="fas fa-caret-right"></i></span>Balance Check</Link></li>
                         }

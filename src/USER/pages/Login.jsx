@@ -13,7 +13,7 @@ import { fetchCountry } from '../services/slice/CountryStateSlice'
 
 const Login = () => {
     const { login, loading } = useSelector((state) => state.authslice)
-    // const { countryData } = useSelector((state) => state.countrystateslice)
+    const { countryData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()

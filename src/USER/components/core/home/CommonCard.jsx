@@ -22,7 +22,6 @@ const CommonCard = ({ item, index, category }) => {
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
-    const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
 
     // currency variables
     const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
@@ -82,7 +81,7 @@ const CommonCard = ({ item, index, category }) => {
         <>
             {/* PreLoader */}
             {loading && <PreLoader />}
-            
+
             {/* <div className="first_row_title">
                 <h2>House & Apartments</h2>
             </div> */}
@@ -155,7 +154,27 @@ const CommonCard = ({ item, index, category }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            : <h3 className='text-danger mt-3'>Ticket is unavailabe right now</h3>
+                                            :
+                                            <div className="time_left">
+                                                <div id="coundown" className="countdown text-center">
+                                                    <div className="timeleftarea">
+                                                        <div id="days" className=" days"></div>
+                                                        <br /><span className='text-danger fs-4'>Ticket is unavailabe right now</span>
+                                                    </div>
+                                                    <div className="timeleftarea">
+                                                        <div id="hours" className=" hours"></div>
+                                                        <br /><span></span>
+                                                    </div>
+                                                    <div className="timeleftarea">
+                                                        <div id="minutes" className=" minutes"></div>
+                                                        <br /><span></span>
+                                                    </div>
+                                                    <div className="timeleftarea">
+                                                        <div id="seconds" className=" seconds"></div>
+                                                        <br /><span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     }
                                 </Link>
                                 <div className="product_btn">
@@ -163,7 +182,7 @@ const CommonCard = ({ item, index, category }) => {
                                     {
                                         (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                                             ticket_quantity > 0 ?
-                                                token || accessToken ?
+                                                token ?
                                                     <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
                                                     : <Link to="/login" className="btn2">Add To Cart</Link>
                                                 : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
@@ -174,7 +193,7 @@ const CommonCard = ({ item, index, category }) => {
                                     {
                                         (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                                             (ticket_quantity) > 0 ?
-                                                token || accessToken ?
+                                                token ?
                                                     <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
                                                     : <Link to="/login" className="btn2">Buy Ticket</Link>
                                                 : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
