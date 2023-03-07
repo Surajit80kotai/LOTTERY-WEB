@@ -50,13 +50,13 @@ const Profile = () => {
 
                     {/* Right Side */}
                     {/* Wallet */}
-                    {pageName === "wallet" ? <Wallet dueAmount={dueAmount} /> : null}
+                    {/* {pageName === "wallet" ? <Wallet dueAmount={dueAmount} /> : null} */}
 
                     {/* Dashboard */}
-                    {pageName === "dashboard" ? <MyProfile /> : null}
+                    {/* {pageName === "dashboard" ? <MyProfile /> : null} */}
 
                     {/* Order History */}
-                    {pageName === "orderhistory" ? <OrderHistory /> : null}
+                    {/* {pageName === "orderhistory" ? <OrderHistory /> : null} */}
                 </div>
             </main>
         </>

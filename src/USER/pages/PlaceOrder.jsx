@@ -338,7 +338,7 @@ const PlaceOrder = () => {
                                         {
                                             ((amount.total).toFixed(2) < balance?.balance) ?
                                                 <button onClick={procced} className="btn2">Procced</button>
-                                                : <Link to={`/profile/${dueAmount}`} className="btn2">Recharge Wallet</Link>
+                                                : <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
                                         }
                                     </div>
                                 </div>

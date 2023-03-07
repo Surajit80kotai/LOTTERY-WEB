@@ -159,7 +159,7 @@ const CommonCard = ({ item, index, category }) => {
                                                 <div id="coundown" className="countdown text-center">
                                                     <div className="timeleftarea">
                                                         <div id="days" className=" days"></div>
-                                                        <br /><span className='text-danger fs-4'>Ticket is unavailabe right now</span>
+                                                        <br /><span className='text-danger fs-5'>Ticket is unavailabe right now</span>
                                                     </div>
                                                     <div className="timeleftarea">
                                                         <div id="hours" className=" hours"></div>
@@ -177,29 +177,32 @@ const CommonCard = ({ item, index, category }) => {
                                             </div>
                                     }
                                 </Link>
-                                <div className="product_btn">
-                                    {/* Add Cart Button */}
-                                    {
-                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                            ticket_quantity > 0 ?
-                                                token ?
-                                                    <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                                    : <Link to="/login" className="btn2">Add To Cart</Link>
+                                
+                                <div className="add_buy_button">
+                                    <div className="product_btn">
+                                        {/* Add Cart Button */}
+                                        {
+                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                                ticket_quantity > 0 ?
+                                                    token ?
+                                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
+                                                        : <Link to="/login" className="btn2">Add To Cart</Link>
+                                                    : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
                                                 : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
-                                            : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
 
-                                    }
-                                    {/* Buy Now Button */}
-                                    {
-                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                            (ticket_quantity) > 0 ?
-                                                token ?
-                                                    <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
-                                                    : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                        }
+                                        {/* Buy Now Button */}
+                                        {
+                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                                (ticket_quantity) > 0 ?
+                                                    token ?
+                                                        <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
+                                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                                    : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
                                                 : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
-                                            : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
 
-                                    }
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>

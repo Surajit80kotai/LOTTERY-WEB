@@ -20,6 +20,9 @@ import Charities from './USER/pages/Charities';
 import OrderSuccess from './USER/pages/OrderSuccess';
 import 'react-toastify/dist/ReactToastify.css';
 import ViewAll from './USER/components/core/viewAllLottery/ViewAll';
+import MyProfile from './USER/components/core/profile/MyProfile';
+import Wallet from './USER/components/core/profile/Wallet';
+import OrderHistory from './USER/components/core/profile/OrderHistory';
 
 
 function App() {
@@ -42,8 +45,11 @@ function App() {
 
         {/* Private Route Part */}
         <Route element={<PrivateRoute />}>
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/:dueAmount' element={<Profile />} />
+          <Route path='/profile' element={<MyProfile />} />
+          {/* <Route path='/profile' element={<Profile />} /> */}
+          <Route path='/wallet' element={<Wallet />} />
+          <Route path='/wallet/:dueAmount' element={<Wallet />} />
+          <Route path='/orderhistory' element={<OrderHistory />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/placeorder' element={<PlaceOrder />} />
           <Route path='/ordersuccess' element={<OrderSuccess />} />

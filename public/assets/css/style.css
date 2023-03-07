@@ -655,13 +655,13 @@ main {
 	margin-left: 2rem;
 }
 
-.login_signup{
+.login_signup {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 }
 
-.login_signup .nav-item{
+.login_signup .nav-item {
 	margin-left: 0.5rem;
 }
 
@@ -1083,14 +1083,15 @@ z-index: 999; */
 	justify-content: space-around;
 }
 
+.add_buy_button {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
 
 .product_btn {
-	/* position: absolute; */
-	/* bottom: 10px; */
-	display: flex;
-	justify-content: space-around;
-	/* margin: 10px; */
-	align-items: flex-end;
+	position: absolute;
+	bottom: 10px;
 }
 
 .product_btn .btn2 {
@@ -1100,7 +1101,7 @@ z-index: 999; */
 	font-size: 1.5rem;
 	color: var(--white);
 	border-radius: 0.5rem;
-	margin: 10px 5px 0 5px;
+	margin: 0 5px 0 5px;
 	border: 1px solid transparent;
 	transition: 0.5s linear;
 }
@@ -1112,7 +1113,7 @@ z-index: 999; */
 	font-size: 1.5rem;
 	color: var(--white);
 	border-radius: 0.5rem;
-	margin: 10px 5px 0 5px;
+	margin: 5px 5px;
 	border: 1px solid transparent;
 	transition: 0.5s linear;
 }
@@ -1151,7 +1152,7 @@ z-index: 999; */
 }
 
 .product_item_one {
-	height: auto;
+	height: 380px;
 	background: #fff;
 	box-shadow: 7px 9px 52px -33px rgba(0, 0, 0, 0.35);
 	-webkit-box-shadow: 7px 9px 52px -33px rgba(0, 0, 0, 0.35);
@@ -3814,7 +3815,7 @@ margin: 0.5rem;
 }
 
 
-.search_bar{
+.search_bar {
 	/* border: 1px solid red; */
 	display: flex;
 	flex-wrap: wrap;
@@ -3861,6 +3862,6 @@ margin: 0.5rem;
 	border-top: 0 !important;
 }
 
-.forget-password-main{
+.forget-password-main {
 	margin-top: 5rem;
 }
