@@ -84,7 +84,7 @@ const ForgetPassword = () => {
             {/* PreLoader */}
             {loading && <PreLoader />}
 
-            <main className="main">
+            <div className="forget-password-main">
                 {/* Back to home button */}
                 <Link className='text-secondary' to='/'>
                     <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
@@ -198,7 +198,7 @@ const ForgetPassword = () => {
                     </div>
 
                 </div>
-            </main>
+            </div>
         </>
     )
 }
