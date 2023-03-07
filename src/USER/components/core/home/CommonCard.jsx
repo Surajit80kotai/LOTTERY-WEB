@@ -187,8 +187,8 @@ const CommonCard = ({ item, index, category }) => {
                                                     token ?
                                                         <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
                                                         : <Link to="/login" className="btn2">Add To Cart</Link>
-                                                    : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
-                                                : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
+                                                    : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
+                                                : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
 
                                         }
                                         {/* Buy Now Button */}
@@ -198,8 +198,8 @@ const CommonCard = ({ item, index, category }) => {
                                                     token ?
                                                         <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
                                                         : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                                    : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
-                                                : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+                                                    : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+                                                : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
 
                                         }
                                     </div>

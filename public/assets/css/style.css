@@ -1091,7 +1091,7 @@ z-index: 999; */
 
 .product_btn {
 	position: absolute;
-	bottom: 10px;
+	bottom: 14px;
 }
 
 .product_btn .btn2 {
@@ -2926,6 +2926,7 @@ margin: 0.5rem;
 	font-size: 1.5rem;
 	color: var(--white);
 	border-radius: 5rem;
+	cursor: not-allowed;
 }
 
 
