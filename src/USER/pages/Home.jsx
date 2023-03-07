@@ -150,7 +150,7 @@ const Home = () => {
                             <TrustedPayment />
 
                         </div>
-
+                                               
                     </div>
                 </div>
 

@@ -17,7 +17,6 @@ const NavBar = () => {
   const token = JSON.parse(window.localStorage.getItem("token"))
   const user = JSON.parse(window.localStorage.getItem("user"))
   const social_user = JSON.parse(window.localStorage.getItem("social_user"))
-  const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
   const { cart_data } = useSelector((state) => state.cartslice)
   const cartLength = cart_data?.length
   const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
@@ -105,6 +104,34 @@ const NavBar = () => {
           </div>
 
 
+          {/* Search Bar */}
+          <div className='search_bar'>
+            <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+              <input
+                className="form-control me-2 fs-4"
+                type="search"
+                placeholder="Search..."
+                aria-label="Search"
+                // name='search'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{ "width": "300px" }}
+              />
+              <button
+                className="btn fs-4 "
+                type="submit"
+                style={{ "background": "#f9772b" }}
+              ><i className="fa-solid fa-magnifying-glass d-flex"></i></button>
+            </form>
+            {
+              search.length > 0 ?
+                <div style={{ "width": "350px", "height": "auto", "backgroundColor": "white" }}>
+                  <SearchDesk ticketList={fetch_lott_data} search={search} setSearch={setSearch} />
+                </div>
+                : null
+            }
+          </div>
+
           <div className="nv_rt">
             {/* Currency Dropdown */}
             {/* {
@@ -151,33 +178,7 @@ const NavBar = () => {
                 : null
             } */}
 
-            {/* Search Bar */}
-            <div style={{ "display": "flex", "flexDirection": "column" }}>
-              <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  className="form-control me-2 fs-4"
-                  type="search"
-                  placeholder="Search..."
-                  aria-label="Search"
-                  // name='search'
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  style={{ "width": "390px" }}
-                />
-                <button
-                  className="btn fs-4 "
-                  type="submit"
-                  style={{ "background": "#f9772b" }}
-                ><i className="fa-solid fa-magnifying-glass d-flex"></i></button>
-              </form>
-              {
-                search.length > 0 ?
-                  <div style={{ "width": "350px", "height": "auto", "backgroundColor": "white" }}>
-                    <SearchDesk ticketList={fetch_lott_data} search={search} setSearch={setSearch} />
-                  </div>
-                  : null
-              }
-            </div>
+
 
             {/* User Dropdown */}
             <div className="area_profile">
@@ -225,9 +226,9 @@ const NavBar = () => {
 
             {/* Login SignUp */}
             {
-              !token && !accessToken ?
+              !token ?
                 <div className="collapse navbar-collapse mx-5" id="navbarSupportedContent">
-                  <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                  <ul className="navbar-nav me-auto mb-2 mb-lg-0 login_signup">
                     <li className="nav-item">
                       <Link className="nav-link nav-link-active" to="/verifyphone"><i className="bi bi-person-add mx-2"></i>Sign Up</Link>
                     </li>

@@ -6,17 +6,10 @@ const SearchDesk = ({ ticketList, search, setSearch }) => {
     const [newList, setNewList] = useState([])
     const onSearch = () => {
         if (search.length > 0) {
-            const data = ticketList.filter(item => {
-                if (item.ticket_name.toLowerCase().includes(search.toLowerCase())) {
-                    return item;
-                }
-                return item
-            });
+            const data = ticketList.filter(item => (item.ticket_name.toLowerCase().includes(search.toLowerCase())) ? item : null)
             setNewList(data);
         }
     }
-
-    console.log(newList);
 
     useEffect(() => {
         onSearch()

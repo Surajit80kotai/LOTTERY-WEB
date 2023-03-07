@@ -12,6 +12,7 @@ import { getPhoneCode } from '../services/slice/CountryStateSlice'
 
 
 const Login = () => {
+    const [search, setSearch] = useState("")
     const { login, loading } = useSelector((state) => state.authslice)
     const { phoneCodeData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
@@ -19,6 +20,8 @@ const Login = () => {
     const dispatch = useDispatch()
     const [formValues, setFormValues] = useState({ phone_code: "", phone: "", password: "" })
 
+
+    // handle change function
     const handleChange = (e) => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value })
     }
@@ -87,7 +90,7 @@ const Login = () => {
                                     <div className="mb-5">
                                         <label htmlFor="contact" className="form-label label_style">Enter Phone Or Email ID</label>
                                         <div className='row'>
-                                            <div className='col-2'>
+                                            <div className='col-2' style={{"width":"18%"}}>
                                                 <select
                                                     className="form-select form_input form_select"
                                                     aria-label="Default select example"
@@ -106,7 +109,7 @@ const Login = () => {
                                                 </select>
                                             </div>
 
-                                            <div className='col-10'>
+                                            <div className='col-10' style={{"width":"82%"}}>
                                                 <input
                                                     type="text"
                                                     className="form-control form_input"
