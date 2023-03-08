@@ -32,6 +32,9 @@ const Home = () => {
 
     // slider array
     const sliderArray = [0, 1]
+    // const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn]
+
+    // console.log(ticketArray);
 
     // mount cycle
     useEffect(() => {
@@ -60,6 +63,73 @@ const Home = () => {
                 <div className="one_row">
 
                     <div className="container-fluid">
+
+                        {/* {
+                            ticketArray?.map((curItem, index) => {
+                                return (
+                                    <div className='row' key={index}>
+                                        <div className="first_row_title">
+                                            <h2>House & Apartments</h2>
+                                        </div>
+                                        <div className="col-md-2">
+                                            <div className="view_all_bg">
+                                                <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                                                <div className="viewall_btn">
+                                                    <h6>Looking More? Click Here</h6>
+                                                    <Link to={`/viewall/${house[0]?.category}`} className="btn2">View All</Link>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div className="col-md-10">
+                                            <div id="carouselExampleControls-house" className="carousel slide" data-bs-ride="carousel">
+                                                <div className="carousel-inner">
+                                                    {
+                                                        sliderArray?.map((index) => {
+                                                            let act = ""
+                                                            if (index === 0) {
+                                                                act = "active";
+                                                            }
+                                                            return (
+                                                                <div className={`carousel-item ${act}`
+                                                                } key={index}>
+                                                                    <div className="mx-2">
+                                                                        <div className="cards-wrapper">
+                                                                            {
+                                                                                curItem?.map((item, index) => {
+                                                                                    return <CommonCard
+                                                                                        item={item}
+                                                                                        key={item._id}
+                                                                                        index={index}
+                                                                                        category={item.category}
+                                                                                    />
+                                                                                }).slice(0, 8)
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls-house"
+                                                        data-bs-slide="prev">
+                                                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span className="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls-house"
+                                                        data-bs-slide="next">
+                                                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span className="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                )
+                            })
+                        } */}
+
                         <div className='row'>
                             {/* Home Lottery */}
                             <div className="first_row_title">
@@ -123,8 +193,6 @@ const Home = () => {
                             </div>
 
                         </div>
-
-
 
                         {/* divider */}
                         <div className="divider"></div>

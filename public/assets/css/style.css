@@ -1068,7 +1068,7 @@ z-index: 999; */
 }
 
 .first_row_title {
-	margin: 5rem 0;
+	margin: 5rem 2.5rem;
 }
 
 .first_row_title h2 {
@@ -1474,7 +1474,7 @@ margin: 0.5rem;
 	text-align: center;
 }
 
-.viewall_btn .btn2 {
+.viewall_btn .btn2{
 	margin-top: 20px;
 }
 
