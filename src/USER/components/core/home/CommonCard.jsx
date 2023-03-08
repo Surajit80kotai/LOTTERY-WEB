@@ -85,141 +85,141 @@ const CommonCard = ({ item, index, category }) => {
             {/* <div className="first_row_title">
                 <h2>House & Apartments</h2>
             </div> */}
-            {
-                !index || index < 7 ?
-                    <div className="col-md-3 product_item">
-                        <div className="product_item_one">
-                            <Link to={`/info/${_id}`}>
-                                <div className="product_img">
-                                    <div className="pro_img">
-                                        {/* Image Condition */}
-                                        {
-                                            (is_image?.length) ? <img src={baseUrl + main_image} alt="" className="img-fluid " />
-                                                : <img src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
-                                        }
-                                    </div>
-                                </div>
-                            </Link>
-                            <div className="product_content">
-                                <Link to={`/info/${_id}`}>
-                                    <div className="product_price">
-                                        {
-                                            discount_percentage ?
-                                                <h3>
-                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span>
-                                                    <span className="text-decoration-line-through">&nbsp;{ticket_price}</span>&nbsp;&nbsp;
-                                                    <span className="discount_percent">{discount_percentage}% off</span>
-                                                </h3>
-                                                :
-                                                <h3>
-                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{ticket_price}</span>
-                                                </h3>
-                                        }
-                                    </div>
-                                    <div className="product_title">
-                                        <h2 className="card_title">{ticket_name}</h2>
-                                    </div>
-                                    {
-                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                            ticket_quantity > 0 ?
-                                                <h3 className="total_ticket">Ticket Quantity : {ticket_quantity}</h3>
-                                                : <h3 className="total_ticket">All tickets sold</h3>
-                                            : null
-                                    }
 
-                                    {/* Condition for timer run-out */}
-                                    {
-                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                            <div className="time_left">
-                                                <div id="coundown" className="countdown text-center">
-                                                    <div className="timeleftarea">
-                                                        <div id="days" className=" days">{timerDays}
-                                                        </div>
-                                                        <br /><span>Days</span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="hours" className=" hours">{timerHours}
-                                                        </div>
-                                                        <br /><span>Hours</span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="minutes" className=" minutes">{timerMinutes}
-                                                        </div>
-                                                        <br /><span>Mins</span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="seconds" className=" seconds">{timerSeconds}
-                                                        </div>
-                                                        <br /><span>Sec</span>
-                                                    </div>
+            {/* // !index || index < 7 ? */}
+            <div className="col-md-3 product_item">
+                <div className="product_item_one m-2">
+                    <Link to={`/info/${_id}`}>
+                        <div className="product_img">
+                            <div className="pro_img">
+                                {/* Image Condition */}
+                                {
+                                    (is_image?.length) ? <img src={baseUrl + main_image} alt="" className="img-fluid " />
+                                        : <img src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
+                                }
+                            </div>
+                        </div>
+                    </Link>
+                    <div className="product_content">
+                        <Link to={`/info/${_id}`}>
+                            <div className="product_price">
+                                {
+                                    discount_percentage ?
+                                        <h3>
+                                            <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span>
+                                            <span className="text-decoration-line-through">&nbsp;{ticket_price}</span>&nbsp;&nbsp;
+                                            <span className="discount_percent">{discount_percentage}% off</span>
+                                        </h3>
+                                        :
+                                        <h3>
+                                            <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{ticket_price}</span>
+                                        </h3>
+                                }
+                            </div>
+                            <div className="product_title">
+                                <h2 className="card_title">{ticket_name}</h2>
+                            </div>
+                            {
+                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                    ticket_quantity > 0 ?
+                                        <h3 className="total_ticket">Ticket Quantity : {ticket_quantity}</h3>
+                                        : <h3 className="total_ticket">All tickets sold</h3>
+                                    : null
+                            }
+
+                            {/* Condition for timer run-out */}
+                            {
+                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                    <div className="time_left">
+                                        <div id="coundown" className="countdown text-center">
+                                            <div className="timeleftarea">
+                                                <div id="days" className=" days">{timerDays}
                                                 </div>
+                                                <br /><span>Days</span>
                                             </div>
-                                            :
-                                            <div className="time_left">
-                                                <div id="coundown" className="countdown text-center">
-                                                    <div className="timeleftarea">
-                                                        <div id="days" className=" days"></div>
-                                                        <br /><span className='text-danger fs-5'>Ticket is unavailabe right now</span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="hours" className=" hours"></div>
-                                                        <br /><span></span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="minutes" className=" minutes"></div>
-                                                        <br /><span></span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="seconds" className=" seconds"></div>
-                                                        <br /><span></span>
-                                                    </div>
+                                            <div className="timeleftarea">
+                                                <div id="hours" className=" hours">{timerHours}
                                                 </div>
+                                                <br /><span>Hours</span>
                                             </div>
-                                    }
-                                </Link>
-                                
-                                <div className="add_buy_button">
-                                    <div className="product_btn">
-                                        {/* Add Cart Button */}
-                                        {
-                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                ticket_quantity > 0 ?
-                                                    token ?
-                                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                                        : <Link to="/login" className="btn2">Add To Cart</Link>
-                                                    : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
-                                                : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
-
-                                        }
-                                        {/* Buy Now Button */}
-                                        {
-                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                (ticket_quantity) > 0 ?
-                                                    token ?
-                                                        <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
-                                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                                    : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
-                                                : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
-
-                                        }
+                                            <div className="timeleftarea">
+                                                <div id="minutes" className=" minutes">{timerMinutes}
+                                                </div>
+                                                <br /><span>Mins</span>
+                                            </div>
+                                            <div className="timeleftarea">
+                                                <div id="seconds" className=" seconds">{timerSeconds}
+                                                </div>
+                                                <br /><span>Sec</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    :
+                                    <div className="time_left">
+                                        <div id="coundown" className="countdown text-center">
+                                            <div className="timeleftarea">
+                                                <div id="days" className=" days"></div>
+                                                <br /><span className='text-danger fs-5'>Ticket is unavailabe right now</span>
+                                            </div>
+                                            <div className="timeleftarea">
+                                                <div id="hours" className=" hours"></div>
+                                                <br /><span></span>
+                                            </div>
+                                            <div className="timeleftarea">
+                                                <div id="minutes" className=" minutes"></div>
+                                                <br /><span></span>
+                                            </div>
+                                            <div className="timeleftarea">
+                                                <div id="seconds" className=" seconds"></div>
+                                                <br /><span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
+                        </Link>
+
+                        <div className="add_buy_button">
+                            <div className="product_btn">
+                                {/* Add Cart Button */}
+                                {
+                                    (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                        ticket_quantity > 0 ?
+                                            token ?
+                                                <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
+                                                : <Link to="/login" className="btn2">Add To Cart</Link>
+                                            : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
+                                        : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
+
+                                }
+                                {/* Buy Now Button */}
+                                {
+                                    (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                        (ticket_quantity) > 0 ?
+                                            token ?
+                                                <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
+                                                : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                            : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+                                        : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+
+                                }
                             </div>
                         </div>
                     </div>
-                    :
-                    <div className="col-md-3 product_item">
-                        <div className="product_item_one">
-                            <div className="view_all_bg">
-                                <img src="/assets/img/viewmorecard.png" alt="" className="img-fluid" />
-                                <div className="viewall_btn">
-                                    <h6>Looking More? Click Here</h6>
-                                    <Link className="btn2" to={`/viewall/${category}`}>View All</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            }
+                </div>
+            </div>
+            {/* // :
+                // <div className="col-md-3 product_item">
+                //     <div className="product_item_one">
+                //         <div className="view_all_bg">
+                //             <img src="/assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                //             <div className="viewall_btn">
+                //                 <h6>Looking More? Click Here</h6>
+                //                 <Link className="btn2" to={`/viewall/${category}`}>View All</Link>
+                //             </div>
+                //         </div>
+                //     </div>
+                // </div> */}
+
 
         </>
     )

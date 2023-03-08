@@ -1453,8 +1453,9 @@ margin: 0.5rem;
 /* View All */
 
 .view_all_bg {
-	height: 372px;
+	height: 385px;
 	position: relative;
+	width: 255px;
 }
 
 .view_all_bg img {
@@ -1473,9 +1474,9 @@ margin: 0.5rem;
 	text-align: center;
 }
 
-/* .viewall_btn .btn2{
+.viewall_btn .btn2 {
 	margin-top: 20px;
-} */
+}
 
 .viewall_btn h6 {
 	font-size: 1.5rem;
@@ -3865,4 +3866,46 @@ margin: 0.5rem;
 
 .forget-password-main {
 	margin-top: 5rem;
+}
+
+/* .carousel-inner {
+	padding: 1em;
+} */
+
+.carousel-control-prev,
+.carousel-control-next {
+	background-color: #8f8d8d;
+	width: 6vh;
+	height: 6vh;
+	border-radius: 50%;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.carousel-control-prev span,
+.carousel-control-next span {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+@media screen and (min-width: 577px) {
+	.cards-wrapper {
+		display: flex;
+	}
+
+	.card {
+		margin: 0 0.5em;
+		width: calc(100% / 2);
+	}
+
+	.image-wrapper {
+		height: 20vw;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.card:not(:first-child) {
+		display: none;
+	}
 }

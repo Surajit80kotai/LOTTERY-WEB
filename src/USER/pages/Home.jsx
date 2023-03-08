@@ -6,6 +6,7 @@ import { fetchCategory, fetchLottery } from '../services/slice/LotterySlice'
 import { getCart } from '../services/slice/CartSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import CommonCard from '../components/core/home/CommonCard'
+import { Link } from 'react-router-dom'
 
 
 const Home = () => {
@@ -20,6 +21,8 @@ const Home = () => {
         }
     }, {});
 
+
+
     // Filtering category from data
     const house = fetch_lott_data?.filter((item) => item.category === categoryObj["House"])
     const vehicle = fetch_lott_data?.filter((item) => item.category === categoryObj["Cars & Bike"])
@@ -27,6 +30,8 @@ const Home = () => {
     const study_travel = fetch_lott_data?.filter((item) => item.category === categoryObj["Study & abroad"])
     const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
 
+    // slider array
+    const sliderArray = [0, 1]
 
     // mount cycle
     useEffect(() => {
@@ -54,106 +59,347 @@ const Home = () => {
             <div className="prodcut_wrapper">
                 <div className="one_row">
 
-                    <div className="container">
-                        <div className="row ">
-
+                    <div className="container-fluid">
+                        <div className='row'>
                             {/* Home Lottery */}
                             <div className="first_row_title">
                                 <h2>House & Apartments</h2>
                             </div>
-                            {
-                                house?.map((item, index) => {
-                                    return <CommonCard
-                                        item={item}
-                                        key={item._id}
-                                        index={index}
-                                        category={item.category}
-                                    />
-                                }).slice(0, 8)
-                            }
-                            {/* divider */}
-                            <div className="divider"></div>
+                            {/* View All Div */}
+                            <div className="col-md-2">
+                                <div className="view_all_bg">
+                                    <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                                    <div className="viewall_btn">
+                                        <h6>Looking More? Click Here</h6>
+                                        <Link to={`/viewall/${house[0]?.category}`} className="btn2">View All</Link>
+                                    </div>
+                                </div>
 
+                            </div>
+
+                            {/* Card Slider Div */}
+                            <div className="col-md-10">
+                                <div id="carouselExampleControls-house" className="carousel slide" data-bs-ride="carousel">
+                                    <div className="carousel-inner">
+                                        {
+                                            sliderArray?.map((index) => {
+                                                let act = ""
+                                                if (index === 0) {
+                                                    act = "active";
+                                                }
+                                                return (
+                                                    <div className={`carousel-item ${act}`
+                                                    } key={index}>
+                                                        <div className="mx-2">
+                                                            <div className="cards-wrapper">
+                                                                {
+                                                                    house?.map((item, index) => {
+                                                                        return <CommonCard
+                                                                            item={item}
+                                                                            key={item._id}
+                                                                            index={index}
+                                                                            category={item.category}
+                                                                        />
+                                                                    }).slice(0, 8)
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls-house"
+                                            data-bs-slide="prev">
+                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Previous</span>
+                                        </button>
+                                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls-house"
+                                            data-bs-slide="next">
+                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        {/* divider */}
+                        <div className="divider"></div>
+
+                        <div className="row ">
                             {/* <!-- car bike --> */}
                             <div className="first_row_title">
                                 <h2>Cars & Bikes</h2>
                             </div>
-                            {
-                                vehicle?.map((item, index) => {
-                                    return <CommonCard
-                                        item={item}
-                                        key={item._id}
-                                        index={index}
-                                        category={item.category}
-                                    />
-                                }).slice(0, 8)
-                            }
+                            {/* View All Div */}
+                            <div className="col-md-2">
+                                <div className="view_all_bg">
+                                    <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                                    <div className="viewall_btn">
+                                        <h6>Looking More? Click Here</h6>
+                                        <Link to={`/viewall/${vehicle[0]?.category}`} className="btn2">View All</Link>
+                                    </div>
+                                </div>
 
-                            {/* divider */}
-                            <div className="divider"></div>
+                            </div>
+
+                            {/* Card Slider Div */}
+                            <div className="col-md-10">
+                                <div id="carouselExampleControls-vehicle" className="carousel slide" data-bs-ride="carousel">
+                                    <div className="carousel-inner">
+                                        {
+                                            sliderArray?.map((index) => {
+                                                let act = ""
+                                                if (index === 0) {
+                                                    act = "active";
+                                                }
+                                                return (
+                                                    <div className={`carousel-item ${act}`
+                                                    } key={index}>
+                                                        <div className="mx-2">
+                                                            <div className="cards-wrapper">
+                                                                {
+                                                                    vehicle?.map((item, index) => {
+                                                                        return <CommonCard
+                                                                            item={item}
+                                                                            key={item._id}
+                                                                            index={index}
+                                                                            category={item.category}
+                                                                        />
+                                                                    }).slice(0, 8)
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls-vehicle"
+                                            data-bs-slide="prev">
+                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Previous</span>
+                                        </button>
+                                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls-vehicle"
+                                            data-bs-slide="next">
+                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* divider */}
+                        <div className="divider"></div>
+
+                        <div className="row ">
                             {/* <!-- stydy travel --> */}
                             <div className="first_row_title">
                                 <h2>Study & Travel</h2>
                             </div>
-                            {
-                                study_travel?.map((item, index) => {
-                                    return <CommonCard
-                                        item={item}
-                                        key={item._id}
-                                        index={index}
-                                        category={item.category}
-                                    />
-                                }).slice(0, 8)
-                            }
+                            {/* View All Div */}
+                            <div className="col-md-2">
+                                <div className="view_all_bg">
+                                    <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                                    <div className="viewall_btn">
+                                        <h6>Looking More? Click Here</h6>
+                                        <Link to={`/viewall/${study_travel[0]?.category}`} className="btn2">View All</Link>
+                                    </div>
+                                </div>
 
-                            {/* divider */}
-                            <div className="divider"></div>
+                            </div>
 
+                            {/* Card Slider Div */}
+                            <div className="col-md-10">
+                                <div id="carouselExampleControls-study_travel" className="carousel slide" data-bs-ride="carousel">
+                                    <div className="carousel-inner">
+                                        {
+                                            sliderArray?.map((index) => {
+                                                let act = ""
+                                                if (index === 0) {
+                                                    act = "active";
+                                                }
+                                                return (
+                                                    <div className={`carousel-item ${act}`
+                                                    } key={index}>
+                                                        <div className="mx-2">
+                                                            <div className="cards-wrapper">
+                                                                {
+                                                                    study_travel?.map((item, index) => {
+                                                                        return <CommonCard
+                                                                            item={item}
+                                                                            key={item._id}
+                                                                            index={index}
+                                                                            category={item.category}
+                                                                        />
+                                                                    }).slice(0, 8)
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls-study_travel"
+                                            data-bs-slide="prev">
+                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Previous</span>
+                                        </button>
+                                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls-study_travel"
+                                            data-bs-slide="next">
+                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* divider */}
+                        <div className="divider"></div>
+
+                        <div className="row ">
                             {/* <!-- computers & phones --> */}
                             <div className="first_row_title">
                                 <h2>Computer & Phones</h2>
                             </div>
-                            {
-                                comp_phn?.map((item, index) => {
-                                    return <CommonCard
-                                        item={item}
-                                        key={item._id}
-                                        index={index}
-                                        category={item.category}
-                                    />
-                                }).slice(0, 8)
-                            }
+                            {/* View All Div */}
+                            <div className="col-md-2">
+                                <div className="view_all_bg">
+                                    <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                                    <div className="viewall_btn">
+                                        <h6>Looking More? Click Here</h6>
+                                        <Link to={`/viewall/${comp_phn[0]?.category}`} className="btn2">View All</Link>
+                                    </div>
+                                </div>
 
-                            {/* divider */}
-                            <div className="divider"></div>
+                            </div>
 
+                            {/* Card Slider Div */}
+                            <div className="col-md-10">
+                                <div id="carouselExampleControls-comp_phn" className="carousel slide" data-bs-ride="carousel">
+                                    <div className="carousel-inner">
+                                        {
+                                            sliderArray?.map((index) => {
+                                                let act = ""
+                                                if (index === 0) {
+                                                    act = "active";
+                                                }
+                                                return (
+                                                    <div className={`carousel-item ${act}`
+                                                    } key={index}>
+                                                        <div className="mx-2">
+                                                            <div className="cards-wrapper">
+                                                                {
+                                                                    comp_phn?.map((item, index) => {
+                                                                        return <CommonCard
+                                                                            item={item}
+                                                                            key={item._id}
+                                                                            index={index}
+                                                                            category={item.category}
+                                                                        />
+                                                                    }).slice(0, 8)
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls-comp_phn"
+                                            data-bs-slide="prev">
+                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Previous</span>
+                                        </button>
+                                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls-comp_phn"
+                                            data-bs-slide="next">
+                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* divider */}
+                        <div className="divider"></div>
+
+                        <div className="row ">
                             {/* <!-- cosmetic --> */}
                             <div className="first_row_title">
                                 <h2>Cosmetics</h2>
                             </div>
-                            {
-                                cosmetics?.map((item, index) => {
-                                    return <CommonCard
-                                        item={item}
-                                        key={item._id}
-                                        index={index}
-                                        category={item.category}
-                                    />
-                                }).slice(0, 8)
-                            }
+                            {/* View All Div */}
+                            <div className="col-md-2">
+                                <div className="view_all_bg">
+                                    <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                                    <div className="viewall_btn">
+                                        <h6>Looking More? Click Here</h6>
+                                        <Link to={`/viewall/${cosmetics[0]?.category}`} className="btn2">View All</Link>
+                                    </div>
+                                </div>
 
-                            {/* <div className="text-center ">
+                            </div>
+
+                            {/* Card Slider Div */}
+                            <div className="col-md-10">
+                                <div id="carouselExampleControls-cosmetics" className="carousel slide" data-bs-ride="carousel">
+                                    <div className="carousel-inner">
+                                        {
+                                            sliderArray?.map((index) => {
+                                                let act = ""
+                                                if (index === 0) {
+                                                    act = "active";
+                                                }
+                                                return (
+                                                    <div className={`carousel-item ${act}`
+                                                    } key={index}>
+                                                        <div className="mx-2">
+                                                            <div className="cards-wrapper">
+                                                                {
+                                                                    cosmetics?.map((item, index) => {
+                                                                        return <CommonCard
+                                                                            item={item}
+                                                                            key={item._id}
+                                                                            index={index}
+                                                                            category={item.category}
+                                                                        />
+                                                                    }).slice(0, 8)
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls-cosmetics"
+                                            data-bs-slide="prev">
+                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Previous</span>
+                                        </button>
+                                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls-cosmetics"
+                                            data-bs-slide="next">
+                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* <div className="text-center ">
                                 <button className="btn3">Load More</button>
                             </div> */}
 
-                            {/* trused payment */}
-                            <TrustedPayment />
+                        {/* trused payment */}
+                        <TrustedPayment />
 
-                        </div>
-                                               
                     </div>
-                </div>
 
+                </div>
             </div>
             {/* </main> */}
         </>

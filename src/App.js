@@ -4,10 +4,10 @@ import NavBar from './USER/components/common/navigationBar/NavBar';
 import FooterMain from './USER/components/common/footer/FooterMain';
 import LotteryInfo from './USER/pages/LotteryInfo';
 import PrivateRoute from './USER/privateroute/PrivateRoute';
-import Profile from './USER/pages/Profile';
 import Cart from './USER/pages/Cart';
 import PlaceOrder from './USER/pages/PlaceOrder';
 import Contact from './USER/pages/Contact';
+// import Profile from './USER/pages/Profile';
 // import ViewAllHome from './USER/components/core/viewAllLottery/ViewAllHome';
 // import ViewAllCars from './USER/components/core/viewAllLottery/ViewAllCars';
 // import ViewAllStudyTravel from './USER/components/core/viewAllLottery/ViewAllStudyTravel';
@@ -45,8 +45,8 @@ function App() {
 
         {/* Private Route Part */}
         <Route element={<PrivateRoute />}>
-          <Route path='/profile' element={<MyProfile />} />
           {/* <Route path='/profile' element={<Profile />} /> */}
+          <Route path='/profile' element={<MyProfile />} />
           <Route path='/wallet' element={<Wallet />} />
           <Route path='/wallet/:dueAmount' element={<Wallet />} />
           <Route path='/orderhistory' element={<OrderHistory />} />
