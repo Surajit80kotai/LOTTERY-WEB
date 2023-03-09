@@ -6,7 +6,7 @@ import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSl
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
 import PreLoader from '../preloader/PreLoader'
 
-const CommonCard = ({ item, index, category }) => {
+const CommonCard = ({ item }) => {
     const { time_left, ticket_name, ticket_price, ticket_quantity, discount_percentage, main_image, is_image, _id } = item
     // discount calculation
     const discountedPrice = Number((ticket_price - ((ticket_price * discount_percentage) / 100)))
@@ -60,19 +60,18 @@ const CommonCard = ({ item, index, category }) => {
         dispatch(buyNowItem(orderData))
     }
 
+    
+    useEffect(() => { }, [cartLength, add_cart_status])
 
     useEffect(() => {
-        // window.scrollTo(0, 0)
-        // console.log("common card");
+        window.scrollTo(0, 0)
+        startTimer(Number(time_left))
         return () => {
             dispatch(getCart())
             dispatch(clearAddStatus())
         }
-    }, [dispatch, cartLength, add_cart_status])
+    }, [dispatch])
 
-    useEffect(() => {
-        startTimer(Number(time_left))
-    })
 
 
     return (
@@ -120,7 +119,7 @@ const CommonCard = ({ item, index, category }) => {
                             {
                                 (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                                     ticket_quantity > 0 ?
-                                        <h3 className="total_ticket">Ticket Quantity : {ticket_quantity}</h3>
+                                        <h3 className="total_ticket">Remaining Tickets: {ticket_quantity}</h3>
                                         : <h3 className="total_ticket">All tickets sold</h3>
                                     : null
                             }

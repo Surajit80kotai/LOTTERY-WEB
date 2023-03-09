@@ -109,12 +109,10 @@ const Home = () => {
                                                                     <div className="mx-2">
                                                                         <div className="cards-wrapper">
                                                                             {
-                                                                                sliderItem?.map((item, index) => {
+                                                                                sliderItem?.map((item) => {
                                                                                     return <CommonCard
                                                                                         item={item}
                                                                                         key={item._id}
-                                                                                        index={index}
-                                                                                        category={item.category}
                                                                                     />
                                                                                 })
                                                                             }
