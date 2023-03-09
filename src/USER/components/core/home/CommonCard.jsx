@@ -66,8 +66,8 @@ const CommonCard = ({ item }) => {
     useEffect(() => {
         window.scrollTo(0, 0)
         startTimer(Number(time_left))
+        dispatch(getCart())
         return () => {
-            dispatch(getCart())
             dispatch(clearAddStatus())
         }
     }, [dispatch])

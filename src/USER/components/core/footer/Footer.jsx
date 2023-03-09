@@ -28,7 +28,7 @@ const Footer = () => {
                         <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>How to Register</Link></li>
                         {
                             token ?
-                                <li><Link to="/profile"><span><i className="fas fa-caret-right"></i></span>Balance Check</Link></li>
+                                <li><Link to="/wallet"><span><i className="fas fa-caret-right"></i></span>Balance Check</Link></li>
                                 : <li><Link to="/login"><span><i className="fas fa-caret-right"></i></span>Balance Check</Link></li>
                         }
                         <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Help Center</Link></li>
