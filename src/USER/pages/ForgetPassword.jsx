@@ -53,7 +53,6 @@ const ForgetPassword = () => {
 
     //  onSubmit Function for recover password
     const onSubmit = () => {
-        console.log("click")
         if (password.newpassword !== password.confirmPassword) {
             return setErr("Pasword did not matched")
         } else {
