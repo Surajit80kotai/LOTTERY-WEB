@@ -31,10 +31,17 @@ const Home = () => {
     const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
 
     // slider array
-    const sliderArray = [0, 1]
-    // const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn]
+    const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn]
 
-    // console.log(ticketArray);
+    // finding a key from an object
+    const getKey = (obj, value) => {
+        for (const key in obj) {
+            if (obj[key] === value) {
+                return key
+            }
+        }
+        return null
+    }
 
     // mount cycle
     useEffect(() => {
@@ -62,30 +69,38 @@ const Home = () => {
             <div className="prodcut_wrapper">
                 <div className="one_row">
 
-                    <div className="container-fluid">
-
-                        {/* {
+                    <div className="container-fluid" style={{ "width": "95%" }}>
+                        {/* Mapping from ticketArray */}
+                        {
                             ticketArray?.map((curItem, index) => {
+                                let carouselID = curItem[0]?.category
+                                let slider = (curItem?.length) > 4 ? [curItem?.slice(0, 4), curItem?.slice(4, 8)] : [curItem]
                                 return (
                                     <div className='row' key={index}>
                                         <div className="first_row_title">
-                                            <h2>House & Apartments</h2>
+                                            <h2>
+                                                {
+                                                    (getKey(categoryObj, curItem[0]?.category))?.toUpperCase()
+                                                }
+                                            </h2>
                                         </div>
                                         <div className="col-md-2">
                                             <div className="view_all_bg">
                                                 <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
                                                 <div className="viewall_btn">
                                                     <h6>Looking More? Click Here</h6>
-                                                    <Link to={`/viewall/${house[0]?.category}`} className="btn2">View All</Link>
+                                                    <Link to={`/viewall/${curItem[0]?.category}`} className="btn2">View All</Link>
                                                 </div>
                                             </div>
 
                                         </div>
                                         <div className="col-md-10">
-                                            <div id="carouselExampleControls-house" className="carousel slide" data-bs-ride="carousel">
+                                            <div id={`carouselExampleControls-${carouselID}`} className="carousel slide" data-bs-ride="carousel">
                                                 <div className="carousel-inner">
+                                                    {/* Maping For Slider */}
                                                     {
-                                                        sliderArray?.map((index) => {
+                                                        slider?.map((sliderItem, index) => {
+                                                            console.log(sliderItem)
                                                             let act = ""
                                                             if (index === 0) {
                                                                 act = "active";
@@ -95,15 +110,16 @@ const Home = () => {
                                                                 } key={index}>
                                                                     <div className="mx-2">
                                                                         <div className="cards-wrapper">
+                                                                            {/* Mapping For Tickets Preset In each slider */}
                                                                             {
-                                                                                curItem?.map((item, index) => {
+                                                                                sliderItem?.map((item, index) => {
                                                                                     return <CommonCard
                                                                                         item={item}
                                                                                         key={item._id}
                                                                                         index={index}
                                                                                         category={item.category}
                                                                                     />
-                                                                                }).slice(0, 8)
+                                                                                })
                                                                             }
                                                                         </div>
                                                                     </div>
@@ -111,12 +127,12 @@ const Home = () => {
                                                             )
                                                         })
                                                     }
-                                                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls-house"
+                                                    <button className="carousel-control-prev" type="button" data-bs-target={`#carouselExampleControls-${carouselID}`}
                                                         data-bs-slide="prev">
                                                         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                                         <span className="visually-hidden">Previous</span>
                                                     </button>
-                                                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls-house"
+                                                    <button className="carousel-control-next" type="button" data-bs-target={`#carouselExampleControls-${carouselID}`}
                                                         data-bs-slide="next">
                                                         <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                                         <span className="visually-hidden">Next</span>
@@ -128,14 +144,12 @@ const Home = () => {
                                     </div>
                                 )
                             })
-                        } */}
+                        }
 
-                        <div className='row'>
-                            {/* Home Lottery */}
+                        {/* <div className='row'>
                             <div className="first_row_title">
                                 <h2>House & Apartments</h2>
                             </div>
-                            {/* View All Div */}
                             <div className="col-md-2">
                                 <div className="view_all_bg">
                                     <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
@@ -146,8 +160,6 @@ const Home = () => {
                                 </div>
 
                             </div>
-
-                            {/* Card Slider Div */}
                             <div className="col-md-10">
                                 <div id="carouselExampleControls-house" className="carousel slide" data-bs-ride="carousel">
                                     <div className="carousel-inner">
@@ -192,17 +204,15 @@ const Home = () => {
                                 </div>
                             </div>
 
-                        </div>
+                        </div> */}
 
                         {/* divider */}
-                        <div className="divider"></div>
+                        {/* <div className="divider"></div> */}
 
-                        <div className="row ">
-                            {/* <!-- car bike --> */}
+                        {/* <div className="row ">
                             <div className="first_row_title">
                                 <h2>Cars & Bikes</h2>
                             </div>
-                            {/* View All Div */}
                             <div className="col-md-2">
                                 <div className="view_all_bg">
                                     <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
@@ -213,8 +223,6 @@ const Home = () => {
                                 </div>
 
                             </div>
-
-                            {/* Card Slider Div */}
                             <div className="col-md-10">
                                 <div id="carouselExampleControls-vehicle" className="carousel slide" data-bs-ride="carousel">
                                     <div className="carousel-inner">
@@ -258,17 +266,15 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* divider */}
-                        <div className="divider"></div>
+                        {/* <div className="divider"></div> */}
 
-                        <div className="row ">
-                            {/* <!-- stydy travel --> */}
+                        {/* <div className="row ">
                             <div className="first_row_title">
                                 <h2>Study & Travel</h2>
                             </div>
-                            {/* View All Div */}
                             <div className="col-md-2">
                                 <div className="view_all_bg">
                                     <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
@@ -279,8 +285,6 @@ const Home = () => {
                                 </div>
 
                             </div>
-
-                            {/* Card Slider Div */}
                             <div className="col-md-10">
                                 <div id="carouselExampleControls-study_travel" className="carousel slide" data-bs-ride="carousel">
                                     <div className="carousel-inner">
@@ -324,17 +328,15 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* divider */}
-                        <div className="divider"></div>
+                        {/* <div className="divider"></div> */}
 
-                        <div className="row ">
-                            {/* <!-- computers & phones --> */}
+                        {/* <div className="row ">
                             <div className="first_row_title">
                                 <h2>Computer & Phones</h2>
                             </div>
-                            {/* View All Div */}
                             <div className="col-md-2">
                                 <div className="view_all_bg">
                                     <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
@@ -345,8 +347,6 @@ const Home = () => {
                                 </div>
 
                             </div>
-
-                            {/* Card Slider Div */}
                             <div className="col-md-10">
                                 <div id="carouselExampleControls-comp_phn" className="carousel slide" data-bs-ride="carousel">
                                     <div className="carousel-inner">
@@ -390,17 +390,15 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* divider */}
-                        <div className="divider"></div>
+                        {/* <div className="divider"></div> */}
 
-                        <div className="row ">
-                            {/* <!-- cosmetic --> */}
+                        {/* <div className="row ">
                             <div className="first_row_title">
                                 <h2>Cosmetics</h2>
                             </div>
-                            {/* View All Div */}
                             <div className="col-md-2">
                                 <div className="view_all_bg">
                                     <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
@@ -411,8 +409,6 @@ const Home = () => {
                                 </div>
 
                             </div>
-
-                            {/* Card Slider Div */}
                             <div className="col-md-10">
                                 <div id="carouselExampleControls-cosmetics" className="carousel slide" data-bs-ride="carousel">
                                     <div className="carousel-inner">
@@ -456,7 +452,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* <div className="text-center ">
                                 <button className="btn3">Load More</button>
