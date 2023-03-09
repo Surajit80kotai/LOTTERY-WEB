@@ -60,17 +60,19 @@ const CommonCard = ({ item }) => {
         dispatch(buyNowItem(orderData))
     }
 
-    
-    useEffect(() => { }, [cartLength, add_cart_status])
 
     useEffect(() => {
         window.scrollTo(0, 0)
         startTimer(Number(time_left))
-        dispatch(getCart())
+    }, [])
+
+
+    useEffect(() => {
         return () => {
+            dispatch(getCart())
             dispatch(clearAddStatus())
         }
-    }, [dispatch])
+    }, [cartLength, add_cart_status])
 
 
 
