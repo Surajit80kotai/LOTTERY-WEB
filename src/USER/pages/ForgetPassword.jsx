@@ -71,12 +71,10 @@ const ForgetPassword = () => {
 
     useEffect(() => {
         if (reg_otp?.status === true) {
-            console.log("if", reg_otp);
             setFlag(true)
             toast.success(reg_otp?.message)
             dispatch(clearVerifyOtp(reg_otp?.message))
         } else if (reg_otp?.status === false) {
-            console.log("else", reg_otp);
             setFlag(false)
             toast.error(reg_otp?.message)
             dispatch(clearVerifyOtp(reg_otp?.message))
