@@ -158,20 +158,9 @@ const CommonCard = ({ item, index, category }) => {
                                     <div className="time_left">
                                         <div id="coundown" className="countdown text-center">
                                             <div className="timeleftarea">
-                                                <div id="days" className=" days"></div>
-                                                <br /><span className='text-danger fs-5'>Ticket is unavailabe right now</span>
-                                            </div>
-                                            <div className="timeleftarea">
                                                 <div id="hours" className=" hours"></div>
-                                                <br /><span></span>
-                                            </div>
-                                            <div className="timeleftarea">
-                                                <div id="minutes" className=" minutes"></div>
-                                                <br /><span></span>
-                                            </div>
-                                            <div className="timeleftarea">
-                                                <div id="seconds" className=" seconds"></div>
-                                                <br /><span></span>
+                                                <br />
+                                                <span className='text-danger fs-5'>Ticket is unavailabe right now</span>
                                             </div>
                                         </div>
                                     </div>

@@ -111,14 +111,12 @@ const BannerData = ({ item, id }) => {
                             </div>
                         </div>
                         :
-                        <div className="time_counter">
-                            <div id="coundown" className="countdown">
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <div className="one_time">
-                                    <span className='text-white fs-1 fw-semibold'>Ticket is unavailabe right now</span>
+                        <div className="time_left">
+                            <div id="coundown" className="countdown text-center">
+                                <div className="timeleftarea">
+                                    <div id="hours" className=" hours"></div>
+                                    <br />
+                                    <span className='text-white fs-1 fw-normal'>Ticket is unavailabe right now</span>
                                 </div>
                             </div>
                         </div>

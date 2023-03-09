@@ -17,7 +17,7 @@ const Login = () => {
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [formValues, setFormValues] = useState({ phone_code: "", phone: "", password: "" })
+    const [formValues, setFormValues] = useState({ phone_code: "", contact: "", password: "" })
 
 
     // handle change function
@@ -32,9 +32,15 @@ const Login = () => {
     // handleSubmit Function for form submit
     const handleSubmit = (e) => {
         e.preventDefault()
-        const data = { phone_code: formValues.phone_code, phone: formValues.phone_code + formValues.phone, password: formValues.password }
-        console.log(data);
-        dispatch(fetchLogin({ data, navigate, toast }))
+        if (isNaN(formValues?.contact)) {
+            const data = { user_id: formValues.contact, password: formValues.password, user_id_type: "email" }
+            console.log("if", data);
+            dispatch(fetchLogin({ data, navigate, toast }))
+        } else {
+            const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, password: formValues.password, user_id_type: "phone" }
+            console.log("else", data);
+            dispatch(fetchLogin({ data, navigate, toast }))
+        }
     }
 
     // socailLogin function
@@ -88,42 +94,65 @@ const Login = () => {
                                     {/* Phone & Email Input */}
                                     <div className="mb-5">
                                         <label htmlFor="contact" className="form-label label_style">Enter Phone Or Email ID</label>
-                                        <div className='row'>
-                                            <div className='col-2'>
-                                                <select
-                                                    className="form-select form_input form_select"
-                                                    aria-label="Default select example"
-                                                    id="selects"
-                                                    name='phone_code'
-                                                    value={formValues.phone_code}
-                                                    onChange={handleChange}
-                                                >
-                                                    {
-                                                        phoneCodeData?.map((country) => {
-                                                            return (
-                                                                <option value={country.dial_code} key={country._id}>{country.dial_code} {country.name}</option>
-                                                            )
-                                                        })
-                                                    }
-                                                </select>
-                                            </div>
+                                        {
+                                            isNaN(formValues?.contact) ?
+                                                <div className='row'>
+                                                    <div className='col-12'>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control form_input"
+                                                            id="contact"
+                                                            name="contact"
+                                                            aria-describedby="emailHelp"
+                                                            placeholder="Enter Phone Or Email ID"
+                                                            pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                            title="Enter a valid email or phone number"
+                                                            value={formValues.contact}
+                                                            onChange={handleChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+                                                :
+                                                <div className='row'>
+                                                    {/* <h6 style={{ "color": "#f9772b" }}>Select Country Code*</h6> */}
+                                                    <div className='col-2' style={{ "width": "18%" }}>
+                                                        <select
+                                                            className="form-select form_input form_select"
+                                                            aria-label="Default select example"
+                                                            id="selects"
+                                                            name='phone_code'
+                                                            value={formValues.phone_code}
+                                                            onChange={handleChange}
+                                                        >
+                                                            {/* <option value="1" aria-readonly>Sel.</option> */}
+                                                            {
+                                                                phoneCodeData?.map((country) => {
+                                                                    return (
+                                                                        <option value={country.dial_code} key={country._id}>{country.dial_code}&nbsp;&nbsp;&nbsp;&nbsp;{country.name}</option>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </select>
+                                                    </div>
 
-                                            <div className='col-10'>
-                                                <input
-                                                    type="text"
-                                                    className="form-control form_input"
-                                                    id="phone"
-                                                    name="phone"
-                                                    aria-describedby="emailHelp"
-                                                    placeholder="Enter Phone Or Email ID"
-                                                    pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
-                                                    title="Enter a valid email or phone number"
-                                                    value={formValues.phone}
-                                                    onChange={handleChange}
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
+                                                    <div className='col-10' style={{ "width": "82%" }}>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control form_input"
+                                                            id="contact"
+                                                            name="contact"
+                                                            aria-describedby="emailHelp"
+                                                            placeholder="Enter Phone Or Email ID"
+                                                            pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                            title="Enter a valid email or phone number"
+                                                            value={formValues.contact}
+                                                            onChange={handleChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+                                        }
 
                                         {/* <label htmlFor="email" className="form-label label_style">Phone Number</label>
                                         <PhoneInput

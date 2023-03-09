@@ -386,7 +386,7 @@ main {
 .form_input {
 	border-radius: 0.6rem;
 	background: transparent;
-	padding: 1rem;
+	padding: 1rem 0.7rem;
 }
 
 
@@ -3874,7 +3874,8 @@ margin: 0.5rem;
 
 .carousel-control-prev,
 .carousel-control-next {
-	background-color: #8f8d8d;
+	background-color: var(--primary-color);
+	/* background-color: #8f8d8d; */
 	width: 6vh;
 	height: 6vh;
 	border-radius: 50%;

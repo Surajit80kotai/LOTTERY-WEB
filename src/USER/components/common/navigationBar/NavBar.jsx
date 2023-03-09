@@ -73,7 +73,7 @@ const NavBar = () => {
                 </li>
                 {/* Product Dropdown */}
                 <li className="nav-item dropdown">
-                  <Link className="nav-link nav-link-active dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products <i className="bi bi-chevron-down" style={{ "fontSize": "12px" }}></i></Link>
+                  <Link className="nav-link nav-link-active dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products<i className="fa-solid fa-caret-down mx-2"></i></Link>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                     {
                       category_data?.map((category) => {
@@ -188,6 +188,7 @@ const NavBar = () => {
                     <Link className=" dropdown-toggle userbtn mx-2" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       {token ? user?.full_name : social_user?.displayName}
                       <i className="fas fa-user mx-2"></i>
+                      <i className="fa-solid fa-caret-down"></i>
                     </Link>
                     : null
                 }

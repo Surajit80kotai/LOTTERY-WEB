@@ -27,7 +27,7 @@ const VerifyPhone = () => {
 
     const handleChange = (e) => {
         setPhone({ ...phone, [e.target.name]: e.target.value })
-        console.log(phone);
+        // console.log(phone);
     }
 
     // sendOtp func.
@@ -101,7 +101,7 @@ const VerifyPhone = () => {
                                     <div className="row d-flex mb-5" style={{ "display": !flag ? "block" : "none" }}>
                                         <label htmlFor="phone" className="form-label label_style">Enter Phone Number</label>
 
-                                        <div className='col-2'>
+                                        <div className='col-2' style={{ "width": "18%" }}>
                                             <select
                                                 className="form-select form_input form_select"
                                                 aria-label="Default select example"
@@ -113,21 +113,21 @@ const VerifyPhone = () => {
                                                 {
                                                     phoneCodeData?.map((country) => {
                                                         return (
-                                                            <option value={country.dial_code} key={country._id}>{country.dial_code} {country.name}</option>
+                                                            <option value={country.dial_code} key={country._id}>{country.dial_code}&nbsp;&nbsp;&nbsp;&nbsp;{country.name}</option>
                                                         )
                                                     })
                                                 }
                                             </select>
                                         </div>
 
-                                        <div className='col-10'>
+                                        <div className='col-10' style={{ "width": "82%" }}>
                                             <input
                                                 type="tel"
                                                 className="form-control form_input"
                                                 id="phone"
                                                 name="phone"
                                                 aria-describedby="emailHelp"
-                                                placeholder="Enter Phone Or Email ID"
+                                                placeholder="Enter A Valid Phone Number"
                                                 pattern="[0-9]{10}"
                                                 title="Enter a valid phone number"
                                                 maxLength={10}
@@ -178,8 +178,8 @@ const VerifyPhone = () => {
                                         <button
                                             onClick={onVerify}
                                             type="submit"
-                                            className={(otp.otp.length) === 6 ? active : deactive}
-                                            disabled={(otp.otp.length) === 6 ? false : true}
+                                            className={(otp?.otp?.length) === 6 ? active : deactive}
+                                            disabled={(otp?.otp?.length) === 6 ? false : true}
                                         >Verify</button>
                                     </div>
                                 </div>
@@ -195,7 +195,6 @@ const VerifyPhone = () => {
                         </div>
                     </div>
                 </div>
-                {/* <ToastContainer style={{ "fontSize": "16px" }} transition={Flip} position="top-center" autoClose={3000} /> */}
             </main>
         </>
     )

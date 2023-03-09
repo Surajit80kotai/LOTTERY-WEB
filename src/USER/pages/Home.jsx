@@ -100,7 +100,6 @@ const Home = () => {
                                                     {/* Maping For Slider */}
                                                     {
                                                         slider?.map((sliderItem, index) => {
-                                                            console.log(sliderItem)
                                                             let act = ""
                                                             if (index === 0) {
                                                                 act = "active";
