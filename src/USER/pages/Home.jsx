@@ -74,7 +74,7 @@ const Home = () => {
                         {
                             ticketArray?.map((curItem, index) => {
                                 let carouselID = curItem[0]?.category
-                                let slider = (curItem?.length) > 4 ? [curItem?.slice(0, 4), curItem?.slice(4, 8)] : [curItem]
+                                let slider = (curItem?.length > 4) ? [curItem?.slice(0, 4), curItem?.slice(4, 8)] : [curItem]
                                 return (
                                     <div className='row' key={index}>
                                         <div className="first_row_title">
@@ -97,7 +97,6 @@ const Home = () => {
                                         <div className="col-md-10">
                                             <div id={`carouselExampleControls-${carouselID}`} className="carousel slide" data-bs-ride="carousel">
                                                 <div className="carousel-inner">
-                                                    {/* Maping For Slider */}
                                                     {
                                                         slider?.map((sliderItem, index) => {
                                                             let act = ""
@@ -109,7 +108,6 @@ const Home = () => {
                                                                 } key={index}>
                                                                     <div className="mx-2">
                                                                         <div className="cards-wrapper">
-                                                                            {/* Mapping For Tickets Preset In each slider */}
                                                                             {
                                                                                 sliderItem?.map((item, index) => {
                                                                                     return <CommonCard

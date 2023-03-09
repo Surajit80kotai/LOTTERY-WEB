@@ -14,6 +14,9 @@ export const FORGETPASSWORD = (formValue) => API.post('/auth/forget', formValue)
 // forgetpassword api function
 export const FORGETPASSWORDOTP = (phone) => API.post('/system/forget/password/otp', phone)
 
+// set new password
+export const SETNEWPASSWORD = (data) => API.post('/system/set/password', data)
+
 // country & state api function
 export const COUNTRY = () => API.get('/countries')
 export const STATE = (id) => API.get('/state/' + id)

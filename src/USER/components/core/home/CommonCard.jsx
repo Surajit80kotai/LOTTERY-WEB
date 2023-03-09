@@ -31,8 +31,6 @@ const CommonCard = ({ item, index, category }) => {
     const baseUrl = process.env.REACT_APP_NODE_HOST
 
 
-
-
     // add to cart
     const addToCart = () => {
         const cartData = { product_id: _id, user_id: userID, qty: 1 }
@@ -64,17 +62,17 @@ const CommonCard = ({ item, index, category }) => {
 
 
     useEffect(() => {
-        startTimer(Number(time_left))
-    })
-
-    useEffect(() => {
         // window.scrollTo(0, 0)
+        // console.log("common card");
         return () => {
             dispatch(getCart())
             dispatch(clearAddStatus())
         }
     }, [dispatch, cartLength, add_cart_status])
 
+    useEffect(() => {
+        startTimer(Number(time_left))
+    })
 
 
     return (

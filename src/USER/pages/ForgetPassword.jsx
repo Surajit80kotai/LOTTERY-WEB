@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearVerifyOtp, fetchForgetPassOTP, storePhoneNumber, verifyOTP } from '../services/slice/AuthSlice'
+import { clearVerifyOtp, fetchForgetPassOTP, setNewPassword, storePhoneNumber, verifyOTP } from '../services/slice/AuthSlice'
 import { toast } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { Link, useNavigate } from 'react-router-dom'
-// import PhoneInput from 'react-phone-input-2'
-// import 'react-phone-input-2/lib/style.css'
 
 const ForgetPassword = () => {
-    // const [formValues, setFormValues] = useState({ email: "" })
-    // const [phone, setPhone] = useState({ phone_code: "", phone: "" })
+    const [formValues, setFormValues] = useState({ phone_code: "", contact: "" })
+    const [password, setPassword] = useState({ newpassword: "", confirmPassword: "" })
+    const [otp, setOtp] = useState({ otp: "" })
+    const [err, setErr] = useState("")
     const [flag, setFlag] = useState(false)
     const [hidden, setHidden] = useState(false)
-    const [formValues, setFormValues] = useState({ phone_code: "", contact: "" })
-    const [otp, setOtp] = useState({ otp: "" })
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { loading } = useSelector((state) => state.authslice)
     const { reg_otp, verify_otp } = useSelector((state) => state.authslice)
     const { phoneCodeData } = useSelector((state) => state.countrystateslice)
+    const { error } = useSelector((state) => state.authslice)
 
 
     // button style
@@ -29,30 +28,22 @@ const ForgetPassword = () => {
     const sendOtp = () => {
         if (isNaN(formValues?.contact)) {
             const data = { user_id: formValues.contact, user_id_type: "email" }
-            console.log("if", data);
             dispatch(fetchForgetPassOTP(data))
         } else {
             const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, user_id_type: "phone" }
-            console.log("else", data);
             dispatch(fetchForgetPassOTP(data))
         }
-        // const data = { phone_number: phone.phone_code + phone.phone }
-        // dispatch(fetchForgetPassOTP(data))
     }
 
     // onVerify func.
     const onVerify = () => {
         if (isNaN(formValues?.contact)) {
-            const data = { phone_number: formValues.phone, otp: otp.otp }
-            console.log("if", data);
+            const data = { phone_number: formValues.contact, otp: otp.otp }
             dispatch(verifyOTP(data))
         } else {
             const data = { phone_number: formValues.phone_code + formValues.contact, otp: otp.otp }
-            console.log("else", data);
             dispatch(verifyOTP(data))
         }
-        // const data = { phone_number: formValues.phone_code + formValues.contact, otp: otp.otp }
-        // dispatch(verifyOTP(data))
     }
 
     // handleChange Function for input change
@@ -60,14 +51,24 @@ const ForgetPassword = () => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value })
     }
 
-    //  handleSubmit Function for form submit
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     const formValues = { phone: "+" + phone }
-    //     dispatch(fetchForgetPass({ formValues }))
-    //     toast.info(`Link sent to your Phone ${formValues.phone}`)
-    //     setPhone({ phone: "" })
-    // }
+    //  onSubmit Function for recover password
+    const onSubmit = () => {
+        console.log("click")
+        if (password.newpassword !== password.confirmPassword) {
+            return setErr("Pasword did not matched")
+        } else {
+            if (isNaN(formValues?.contact)) {
+                const data = { user_id: formValues.contact, password: password.newpassword, user_id_type: "email" }
+                dispatch(setNewPassword({ data, navigate, toast }))
+                setFormValues({ ...formValues, contact: "" })
+            } else {
+                const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, password: password.newpassword, user_id_type: "phone" }
+                dispatch(setNewPassword({ data, navigate, toast }))
+                setErr("")
+                setFormValues({ ...formValues, contact: "" })
+            }
+        }
+    }
 
     useEffect(() => {
         if (reg_otp?.status === true) {
@@ -90,7 +91,6 @@ const ForgetPassword = () => {
             dispatch(storePhoneNumber(data.phone_number))
             navigate("/f_password")
             setOtp({ otp: "" })
-            setFormValues({ ...formValues, phone: "" })
             dispatch(clearVerifyOtp())
         } else if (verify_otp?.status === false) {
             toast.error(verify_otp?.message)
@@ -228,7 +228,7 @@ const ForgetPassword = () => {
                             <div className="forget ">
                                 {/* New Password */}
                                 <div className="mb-5" style={{ "display": hidden ? "block" : "none" }}>
-                                    <label htmlFor="otp" className="form-label label_style">New Password</label>
+                                    <label htmlFor="newpassword" className="form-label label_style">New Password</label>
                                     <input
                                         type="password"
                                         className="form-control form_input"
@@ -236,9 +236,8 @@ const ForgetPassword = () => {
                                         name="newpassword"
                                         aria-describedby="emailHelp"
                                         placeholder="Enter New Password Here"
-                                        // value={otp.otp}
-                                        // onChange={(e) => setOtp({ ...otp, [e.target.name]: e.target.value })}
-                                        // maxLength={6}
+                                        value={password?.newpassword}
+                                        onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                                         required
                                     />
                                 </div>
@@ -246,25 +245,24 @@ const ForgetPassword = () => {
 
                             {/* Re Enter Password */}
                             <div className="forget" style={{ "display": hidden ? "block" : "none" }}>
-                                <label htmlFor="otp" className="form-label label_style">Re Enter Password</label>
+                                <label htmlFor="confirmPassword" className="form-label label_style">Re Enter Password</label>
                                 <input
                                     type="password"
                                     className="form-control form_input"
-                                    id="connfpassword"
-                                    name="connfpassword"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
                                     aria-describedby="emailHelp"
                                     placeholder="Re Enter New Password Here"
-                                // value={otp.otp}
-                                // onChange={(e) => setOtp({ ...otp, [e.target.name]: e.target.value })}
-                                // maxLength={6}
+                                    value={password?.confirmPassword}
+                                    onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                                 />
+                                {/* Form Vaidation */}
+                                <p className='text-danger fs-4 mt-3'>{error ? error : err}</p>
                             </div>
-                            {/* Form Vaidation */}
-                            {/* <p className='text-danger fs-4 mt-2'>{error}</p> */}
 
                             {/* Button */}
                             <div className="text-center">
-                                <button type="submit" className="btn_one" style={{ "margin": "30px 0 30px 0" }}>Recover Password</button>
+                                <button type="submit" className="btn_one" style={{ "margin": "30px 0 30px 0" }} onClick={onSubmit}>Recover Password</button>
                             </div>
                         </div>
                     </div>

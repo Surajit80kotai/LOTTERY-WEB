@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SIGNUP, VERIFYOTP } from "../api/Api";
+import { FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
 
 
 //AsyncThunk For SignUp 
@@ -98,6 +98,23 @@ export const fetchForgetPassOTP = createAsyncThunk(
         }
 
     })
+
+
+// set new password
+export const setNewPassword = createAsyncThunk(
+    "/system/set/password", async ({ data, navigate, toast }, { rejectWithValue }) => {
+        try {
+            const res = await SETNEWPASSWORD(data)
+            navigate('/login')
+            toast.success(`${res?.data?.message} Please login to continue`)
+            return res?.data
+        } catch (err) {
+            // console.log(rejectWithValue(err.response.data));
+            return rejectWithValue(err.response.data)
+        }
+
+    })
+
 
 
 // defining initialState
@@ -234,6 +251,7 @@ export const AuthSlice = createSlice({
             // console.log("verify otp error", payload.status);
         })
 
+
         //States for Register OTP
         builder.addCase(fetchForgetPassOTP.pending, (state) => {
             state.msg = "Loading"
@@ -250,6 +268,22 @@ export const AuthSlice = createSlice({
             state.loading = false
             state.reg_otp = payload
             // console.log("reg otp error", payload.status);
+        })
+
+
+        //States for Set New Password
+        builder.addCase(setNewPassword.pending, (state) => {
+            state.msg = "Loading"
+            state.loading = true
+        })
+        builder.addCase(setNewPassword.fulfilled, (state) => {
+            state.msg = "Success"
+            state.loading = false
+        })
+        builder.addCase(setNewPassword.rejected, (state, { payload }) => {
+            state.msg = "Failed"
+            state.loading = false
+            state.error = payload?.message
         })
     }
 })
