@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Banner from '../components/core/home/Banner'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { fetchCategory, fetchLottery } from '../services/slice/LotterySlice'
-import { getCart } from '../services/slice/CartSlice'
+// import { getCart } from '../services/slice/CartSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import CommonCard from '../components/core/home/CommonCard'
 import { Link } from 'react-router-dom'
@@ -48,7 +48,7 @@ const Home = () => {
         window.scrollTo(0, 0)
         dispatch(fetchLottery())
         dispatch(fetchCategory())
-        dispatch(getCart())
+        // dispatch(getCart())
     }, [dispatch])
 
 
