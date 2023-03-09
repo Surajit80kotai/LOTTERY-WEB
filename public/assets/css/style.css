@@ -3894,10 +3894,10 @@ margin: 0.5rem;
 		display: flex;
 	}
 
-	.card {
+	/* .card {
 		margin: 0 0.5em;
 		width: calc(100% / 2);
-	}
+	} */
 
 	.image-wrapper {
 		height: 20vw;
