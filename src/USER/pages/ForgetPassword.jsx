@@ -12,7 +12,7 @@ const ForgetPassword = () => {
     // const [phone, setPhone] = useState({ phone_code: "", phone: "" })
     const [flag, setFlag] = useState(false)
     const [hidden, setHidden] = useState(false)
-    const [formValues, setFormValues] = useState({ phone_code: "", contact: "", password: "" })
+    const [formValues, setFormValues] = useState({ phone_code: "", contact: "" })
     const [otp, setOtp] = useState({ otp: "" })
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -28,11 +28,11 @@ const ForgetPassword = () => {
     // sendOtp func.
     const sendOtp = () => {
         if (isNaN(formValues?.contact)) {
-            const data = { user_id: formValues.contact, password: formValues.password, user_id_type: "email" }
+            const data = { user_id: formValues.contact, user_id_type: "email" }
             console.log("if", data);
             dispatch(fetchForgetPassOTP(data))
         } else {
-            const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, password: formValues.password, user_id_type: "phone" }
+            const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, user_id_type: "phone" }
             console.log("else", data);
             dispatch(fetchForgetPassOTP(data))
         }
@@ -43,15 +43,15 @@ const ForgetPassword = () => {
     // onVerify func.
     const onVerify = () => {
         if (isNaN(formValues?.contact)) {
-            const data = { phone_number: formValues.phone_code + formValues.phone, otp: otp.otp }
+            const data = { phone_number: formValues.phone, otp: otp.otp }
             console.log("if", data);
             dispatch(verifyOTP(data))
         } else {
-            const data = { phone_number: formValues.phone_code + formValues.phone, otp: otp.otp }
+            const data = { phone_number: formValues.phone_code + formValues.contact, otp: otp.otp }
             console.log("else", data);
             dispatch(verifyOTP(data))
         }
-        // const data = { phone_number: phone.phone_code + phone.phone, otp: otp.otp }
+        // const data = { phone_number: formValues.phone_code + formValues.contact, otp: otp.otp }
         // dispatch(verifyOTP(data))
     }
 
@@ -126,50 +126,66 @@ const ForgetPassword = () => {
                             <div className="forget" style={{ "display": !flag ? "block" : "none" }}>
                                 <label htmlFor="contact" className="form-label label_for">Enter Your Registered Phone Number</label>
                                 <div className="row">
-                                    <div className='col-2' style={{ "width": "18%" }}>
-                                        <select
-                                            className="form-select form_input form_select"
-                                            aria-label="Default select example"
-                                            id="selects"
-                                            name='phone_code'
-                                            value={formValues.phone_code}
-                                            onChange={handleChange}
-                                        >
-                                            {
-                                                phoneCodeData?.map((country) => {
-                                                    return (
-                                                        <option value={country.dial_code} key={country._id}>{country.dial_code}&nbsp;&nbsp;&nbsp;&nbsp;{country.name}</option>
-                                                    )
-                                                })
-                                            }
-                                        </select>
-                                    </div>
+                                    {
+                                        isNaN(formValues?.contact) ?
+                                            <div className='row'>
+                                                <div className='col-12'>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control form_input"
+                                                        id="contact"
+                                                        name="contact"
+                                                        aria-describedby="emailHelp"
+                                                        placeholder="Enter Phone Or Email ID"
+                                                        pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                        title="Enter a valid email or phone number"
+                                                        value={formValues.contact}
+                                                        onChange={handleChange}
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                            :
+                                            <div className='row'>
+                                                {/* <h6 style={{ "color": "#f9772b" }}>Select Country Code*</h6> */}
+                                                <div className='col-2' style={{ "width": "18%" }}>
+                                                    <select
+                                                        className="form-select form_input form_select"
+                                                        aria-label="Default select example"
+                                                        id="selects"
+                                                        name='phone_code'
+                                                        value={formValues.phone_code}
+                                                        onChange={handleChange}
+                                                    >
+                                                        {/* <option value="1" aria-readonly>Sel.</option> */}
+                                                        {
+                                                            phoneCodeData?.map((country) => {
+                                                                return (
+                                                                    <option value={country.dial_code} key={country._id}>{country.dial_code}&nbsp;&nbsp;&nbsp;&nbsp;{country.name}</option>
+                                                                )
+                                                            })
+                                                        }
+                                                    </select>
+                                                </div>
 
-                                    <div className='col-10' style={{ "width": "82%" }}>
-                                        <input
-                                            type="tel"
-                                            className="form-control form_input"
-                                            id="contact"
-                                            name="contact"
-                                            aria-describedby="emailHelp"
-                                            placeholder="Enter A Valid Phone Number"
-                                            pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
-                                            title="Enter a valid phone number"
-                                            maxLength={10}
-                                            value={formValues.contact}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                    </div>
+                                                <div className='col-10' style={{ "width": "82%" }}>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control form_input"
+                                                        id="contact"
+                                                        name="contact"
+                                                        aria-describedby="emailHelp"
+                                                        placeholder="Enter Phone Or Email ID"
+                                                        pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                        title="Enter a valid email or phone number"
+                                                        value={formValues.contact}
+                                                        onChange={handleChange}
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                    }
                                 </div>
-                                {/* <PhoneInput
-                                    inputProps={{ required: true }}
-                                    placeholder="Enter Your Phone Number"
-                                    country={"cm"}
-                                    enableSearch={true}
-                                    value={phone.phone}
-                                    onChange={(phone) => setPhone(phone)}
-                                /> */}
                                 <div className="text-center" style={{ "margin": "30px 0 30px 0", "display": !flag ? "block" : "none" }}>
                                     <button
                                         onClick={sendOtp}
@@ -226,9 +242,6 @@ const ForgetPassword = () => {
                                         required
                                     />
                                 </div>
-                                {/* Form Vaidation */}
-                                {/* <p className='text-danger fs-4 mt-2'>{error}</p> */}
-
                             </div>
 
                             {/* Re Enter Password */}
@@ -246,6 +259,8 @@ const ForgetPassword = () => {
                                 // maxLength={6}
                                 />
                             </div>
+                            {/* Form Vaidation */}
+                            {/* <p className='text-danger fs-4 mt-2'>{error}</p> */}
 
                             {/* Button */}
                             <div className="text-center">
