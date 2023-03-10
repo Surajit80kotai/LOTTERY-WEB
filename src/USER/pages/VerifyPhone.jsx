@@ -64,6 +64,7 @@ const VerifyPhone = () => {
             setFlag(false)
             toast.success(verify_otp?.message)
             dispatch(storePhoneNumber(data.phone_number))
+            window.localStorage.setItem("phone_number", JSON.stringify(data?.phone_number))
             navigate("/signup")
             setOtp({ otp: "" })
             setPhone({ ...phone, phone: "" })

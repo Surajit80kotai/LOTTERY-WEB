@@ -11,6 +11,7 @@ import { toast } from 'react-toastify'
 
 
 const SignUp = () => {
+    window.localStorage.removeItem("phone_number")
     const { signupErr, loading } = useSelector((state) => state.authslice)
     const { countryData } = useSelector((state) => state.countrystateslice)
     const dispatch = useDispatch()

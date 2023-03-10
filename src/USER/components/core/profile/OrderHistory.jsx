@@ -79,7 +79,7 @@ const OrderHistory = () => {
                                             return (
                                                 <div className="orderhistroy_item" key={item?._id}>
                                                     <div className="ribbon-wrapper-green">
-                                                        <div className="ribbon-green">won</div>
+                                                        <div className="ribbon-green">Won</div>
                                                     </div>
 
                                                     <div className="pro_im_t">
@@ -96,6 +96,14 @@ const OrderHistory = () => {
                                                     <div className="info_item">
                                                         <h3 className="dateofresult"><span></span>Total Price</h3>
                                                         <p>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{(item?.total_discount_price)}</p>
+                                                    </div>
+                                                    <div className="info_item">
+                                                        <h3 className="dateofresult"><span></span>Date Of Purchase</h3>
+                                                        <p>{new Date(item?.createdAt).toLocaleString('en-US', {
+                                                            month: 'short',
+                                                            day: '2-digit',
+                                                            year: 'numeric'
+                                                        })}</p>
                                                     </div>
                                                     <div className="info_item">
                                                         <h3 className="dateofresult"><span></span>Date Of Result </h3>

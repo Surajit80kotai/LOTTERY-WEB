@@ -2355,12 +2355,12 @@ margin: 0.5rem;
 
 .info_pro_title h4 {
 	font-weight: 600;
-	font-size: 1.3rem;
+	font-size: 1.4rem;
 }
 
 .num_of_tick h4 {
 	color: rgb(145, 145, 145);
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 }
 
 .info_item {
@@ -2369,12 +2369,13 @@ margin: 0.5rem;
 }
 
 .info_item h3 {
-	font-weight: 400;
-	font-size: 1.2rem;
+	font-weight: 600;
+	font-size: 1.3rem;
 }
 
 .info_item p {
-	font-size: 1.1rem;
+	font-weight: 500;
+	font-size: 1.2rem;
 	color: rgb(145, 145, 145);
 }
 
