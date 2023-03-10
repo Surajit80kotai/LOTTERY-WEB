@@ -114,14 +114,13 @@ const NavBar = () => {
               <div className='search_bar'>
                 <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
                   <input
-                    className="form-control me-2 fs-4"
+                    className="form-control search_input me-2 fs-4"
                     type="search"
                     placeholder="Search..."
                     aria-label="Search"
                     // name='search'
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    style={{ "width": "300px" }}
                   />
                   <button
                     className="btn fs-4 "
