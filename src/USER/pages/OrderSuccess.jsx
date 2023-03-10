@@ -38,6 +38,7 @@ const OrderSuccess = () => {
                             <p className='fs-3'>Your order has been placed successfully</p>
                             <br />
                             <Link to="/" onClick={() => dispatch(clearOrderedData())} className="orderplace text-white">&larr; Continue Shopping</Link>
+                            <Link to="/orderhistory" onClick={() => dispatch(clearOrderedData())} className="orderplace text-white">Your Order History &rarr;</Link>
                         </div>
                     </div>
                 </div>

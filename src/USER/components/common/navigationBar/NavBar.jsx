@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { doLogOut } from '../../../services/slice/AuthSlice'
 import { emptyCart, getCart } from '../../../services/slice/CartSlice'
 import { auth } from '../../../config/firebase'
@@ -20,6 +20,9 @@ const NavBar = () => {
   const { cart_data } = useSelector((state) => state.cartslice)
   const cartLength = cart_data?.length
   const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
+  const location = useLocation()
+
+  // console.log(location.pathname);
 
 
   // Log Out Function
@@ -106,32 +109,37 @@ const NavBar = () => {
 
 
           {/* Search Bar */}
-          <div className='search_bar'>
-            <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
-              <input
-                className="form-control me-2 fs-4"
-                type="search"
-                placeholder="Search..."
-                aria-label="Search"
-                // name='search'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{ "width": "300px" }}
-              />
-              <button
-                className="btn fs-4 "
-                type="submit"
-                style={{ "background": "#f9772b" }}
-              ><i className="fa-solid fa-magnifying-glass d-flex"></i></button>
-            </form>
-            {
-              search.length > 0 ?
-                <div style={{ "width": "350px", "height": "auto", "backgroundColor": "white" }}>
-                  <SearchDesk ticketList={fetch_lott_data} search={search} setSearch={setSearch} />
-                </div>
-                : null
-            }
-          </div>
+          {
+            (location.pathname === "/") ?
+              <div className='search_bar'>
+                <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+                  <input
+                    className="form-control me-2 fs-4"
+                    type="search"
+                    placeholder="Search..."
+                    aria-label="Search"
+                    // name='search'
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    style={{ "width": "300px" }}
+                  />
+                  <button
+                    className="btn fs-4 "
+                    type="submit"
+                    style={{ "background": "#f9772b" }}
+                  ><i className="fa-solid fa-magnifying-glass d-flex"></i></button>
+                </form>
+                {
+                  search.length > 0 ?
+                    <div style={{ "width": "350px", "height": "auto", "backgroundColor": "white" }}>
+                      <SearchDesk ticketList={fetch_lott_data} search={search} setSearch={setSearch} />
+                    </div>
+                    : null
+                }
+              </div>
+              : null
+          }
+
 
           <div className="nv_rt">
             {/* Currency Dropdown */}
