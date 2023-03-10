@@ -35,6 +35,7 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(getCart())
+    // console.log("navbar");
   }, [dispatch, cartLength])
 
 

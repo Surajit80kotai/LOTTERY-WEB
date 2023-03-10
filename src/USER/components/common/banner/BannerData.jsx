@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -126,4 +126,4 @@ const BannerData = ({ item, id }) => {
     )
 }
 
-export default BannerData
+export default memo(BannerData)

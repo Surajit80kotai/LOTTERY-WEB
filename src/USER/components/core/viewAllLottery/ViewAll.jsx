@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { fetchCategory, fetchLottery } from '../../../services/slice/LotterySlice'
 import TrustedPayment from '../../common/trustedPayment/TrustedPayment'
 import CommonCard from '../home/CommonCard'
-// import HomeLottery from '../home/HomeLottery'
 import PreLoader from '../preloader/PreLoader'
 
 const ViewAll = () => {
@@ -33,7 +32,6 @@ const ViewAll = () => {
 
     // Filtering category from data
     const LotteryCategory = fetch_lott_data?.filter((item) => item.category === categoryID)
-    // console.log(LotteryCategory);
 
     useEffect(() => {
         dispatch(fetchLottery())

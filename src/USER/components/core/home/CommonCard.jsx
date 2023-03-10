@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
@@ -62,9 +62,8 @@ const CommonCard = ({ item }) => {
 
 
     useEffect(() => {
-        window.scrollTo(0, 0)
         startTimer(Number(time_left))
-    }, [])
+    })
 
 
     useEffect(() => {
@@ -72,7 +71,7 @@ const CommonCard = ({ item }) => {
             dispatch(getCart())
             dispatch(clearAddStatus())
         }
-    }, [cartLength, add_cart_status])
+    }, [dispatch, cartLength, add_cart_status])
 
 
 
@@ -213,4 +212,4 @@ const CommonCard = ({ item }) => {
     )
 }
 
-export default CommonCard
+export default memo(CommonCard)
