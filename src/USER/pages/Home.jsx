@@ -6,11 +6,14 @@ import { fetchCategory, fetchLottery } from '../services/slice/LotterySlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import CommonCard from '../components/core/home/CommonCard'
 import { Link } from 'react-router-dom'
+import { getCart } from '../services/slice/CartSlice'
 
 
 const Home = () => {
     const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
     const dispatch = useDispatch()
+    const { cart_data } = useSelector((state) => state.cartslice)
+    const cartLength = cart_data?.length
 
     // Getting category_name & category_id
     const categoryObj = category_data?.reduce((acc, cur) => {
@@ -47,7 +50,8 @@ const Home = () => {
         window.scrollTo(0, 0)
         dispatch(fetchLottery())
         dispatch(fetchCategory())
-    }, [dispatch])
+        dispatch(getCart())
+    }, [dispatch, cartLength])
 
 
 

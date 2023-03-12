@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
@@ -13,10 +13,11 @@ const CommonCard = ({ item }) => {
     // defining states timer
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     const dispatch = useDispatch()
+    // const [isrender, setIsrender] = useState(false)
 
     // states from cartslice
-    const { cart_data, add_cart_status, loading } = useSelector((state) => state.cartslice)
-    const cartLength = cart_data?.length
+    const { add_cart_status, loading } = useSelector((state) => state.cartslice)
+    // const cartLength = cart_data?.length
 
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
@@ -35,6 +36,10 @@ const CommonCard = ({ item }) => {
     const addToCart = () => {
         const cartData = { product_id: _id, user_id: userID, qty: 1 }
         dispatch(addCart(cartData))
+        setTimeout(() => {
+            dispatch(getCart())
+        }, 300)
+        // setIsrender(!isrender)
     }
 
     // buyNow function
@@ -67,12 +72,17 @@ const CommonCard = ({ item }) => {
 
 
     useEffect(() => {
+        // console.log("mount");
         return () => {
-            dispatch(getCart())
             dispatch(clearAddStatus())
         }
-    }, [dispatch, cartLength, add_cart_status])
+    }, [dispatch, add_cart_status])
 
+
+    // useEffect(() => {
+    //     console.log("get cart called");
+    // dispatch(getCart())
+    // }, [dispatch, isrender])
 
 
     return (
@@ -212,4 +222,4 @@ const CommonCard = ({ item }) => {
     )
 }
 
-export default memo(CommonCard)
+export default CommonCard;

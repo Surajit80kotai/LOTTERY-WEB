@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { doLogOut } from '../../../services/slice/AuthSlice'
-import { emptyCart, getCart } from '../../../services/slice/CartSlice'
+import { emptyCart } from '../../../services/slice/CartSlice'
 import { auth } from '../../../config/firebase'
 import { signOut } from 'firebase/auth'
 import PreLoader from '../../core/preloader/PreLoader'
@@ -35,11 +35,6 @@ const NavBar = () => {
     navigate('/')
   }
 
-
-  useEffect(() => {
-    dispatch(getCart())
-    // console.log("navbar");
-  }, [dispatch, cartLength])
 
 
   return (
