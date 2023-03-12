@@ -59,12 +59,12 @@ const OrderHistory = () => {
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ "width": "180px" }}>
                                         <p className='fw-bold fs-4 px-3'>Price:</p>
-                                        <li><Link className="dropdown-item" to="!#">Low To High</Link></li>
-                                        <li><Link className="dropdown-item" to="!#">High To Low</Link></li>
+                                        <li><Link className="dropdown-item" to="#!">Low To High</Link></li>
+                                        <li><Link className="dropdown-item" to="#!">High To Low</Link></li>
                                         <hr />
                                         <p className='fw-bold fs-4 px-3'>Date:</p>
-                                        <li><Link className="dropdown-item" to="!#">Newest First</Link></li>
-                                        <li><Link className="dropdown-item" to="!#">Oldest First</Link></li>
+                                        <li><Link className="dropdown-item" to="#!">Newest First</Link></li>
+                                        <li><Link className="dropdown-item" to="#!">Oldest First</Link></li>
                                     </ul>
                                 </div>
                                 {/* <button className='d-flex fw-bold'>
