@@ -28,17 +28,17 @@ const BannerData = ({ item, id }) => {
     const buyNow = (ticket) => {
         // dispatch(emptyCart())
         const subtotal = Number(ticket?.rounds[round]?._price)
-        const total = (ticket?.rounds[round]?._dis ?
-            (ticket?.rounds[round]?._price - ((ticket?.rounds[round]?._price * ticket?.rounds[round]?._dis) / 100))
-            : ticket?.rounds[round]?._price)
-        const discount = ((ticket?.rounds[round]?._price * ticket?.rounds[round]?._dis) / 100)
+        const total = (Number(ticket?.rounds[round]?._dis) ?
+            (Number(ticket?.rounds[round]?._price) - ((Number(ticket?.rounds[round]?._price) * Number(ticket?.rounds[round]?._dis)) / 100))
+            : Number(ticket?.rounds[round]?._price))
+        const discount = ((Number(ticket?.rounds[round]?._price) * Number(ticket?.rounds[round]?._dis)) / 100)
         const amount = { subtotal: subtotal, total: total, discount: discount }
 
         const newTicket = {
             product_id: ticket._id,
-            unit_price: (ticket?.rounds[round]?._price).toFixed(2),
+            unit_price: (Number(ticket?.rounds[round]?._price)).toFixed(2),
             quantity: 1,
-            discount: (ticket?.rounds[round]?._dis).toFixed(2),
+            discount: (Number(ticket?.rounds[round]?._dis)).toFixed(2),
             total_price: (subtotal).toFixed(2),
             total_discount_price: (total).toFixed(2)
         }
