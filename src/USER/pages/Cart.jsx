@@ -18,7 +18,7 @@ const Cart = () => {
   // Accesing token
   const token = JSON.parse(window.localStorage.getItem("token"))
 
-
+  // console.log(cart_data);
 
   // CalculateSum Function
   const calculateSum = () => {

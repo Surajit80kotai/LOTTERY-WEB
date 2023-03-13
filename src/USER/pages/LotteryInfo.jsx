@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { useTimer } from '../customHooks/useTimer'
@@ -6,17 +6,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addCart, clearAddStatus, getCart } from '../services/slice/CartSlice'
 import { buyNowItem } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
-import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol, userCurrency_symbol } from '../util/Currency'
+import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 
 const LotteryInfo = () => {
+    const [round, setRound] = useState(0)
     const { lid } = useParams()
+    const lottData = JSON.parse(window.localStorage.getItem("data"))
+    const ticketInfo = lottData?.filter((item) => item._id === lid)
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     // const [qty, setQty] = useState(1)
     const dispatch = useDispatch()
-    const lottData = JSON.parse(window.localStorage.getItem("data"))
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
-    const ticketInfo = lottData?.filter((item) => item._id === lid)
-    const discountedPrice = Number((ticketInfo[0]?.ticket_price - ((ticketInfo[0]?.ticket_price * ticketInfo[0]?.discount_percentage) / 100)))
+    // discount calculation
+    const discountedPrice = Number((ticketInfo[0]?.rounds[round]?._price - ((ticketInfo[0]?.rounds[round]?._price * ticketInfo[0]?.rounds[round]?._dis) / 100)))
     const { cart_data, add_cart_status } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
     const { loading } = useSelector((state) => state.cartslice)
@@ -30,6 +32,14 @@ const LotteryInfo = () => {
     const baseUrl = process.env.REACT_APP_NODE_HOST           //base url link
     const qty = 1                                       // default quantity of a ticket
 
+
+    // ticket rounds calculation function
+    const calculateRounds = (round) => {
+        if (ticketInfo[0].rounds[round]._status === false) {
+            setRound(round + 1)
+            console.log(round);
+        }
+    }
 
     // IncQty function
     // const IncQty = () => {
@@ -80,6 +90,7 @@ const LotteryInfo = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        calculateRounds(round)
         return () => {
             dispatch(getCart())
             dispatch(clearAddStatus())
@@ -89,7 +100,7 @@ const LotteryInfo = () => {
 
 
     useEffect(() => {
-        startTimer(Number(ticketInfo[0]?.time_left))
+        startTimer(ticketInfo[0]?.rounds[round]?._time)
         // console.log("render");
     })
 
@@ -156,13 +167,13 @@ const LotteryInfo = () => {
                                     </div>
                                     <div className="tic_of_price">
                                         {
-                                            ticketInfo[0]?.discount_percentage ?
+                                            ticketInfo[0]?.rounds[round]?._dis ?
                                                 <h3>Ticket Price :&nbsp;&nbsp;
                                                     <span className="discountprice">
                                                         {token ? currency_symbol : generalCurrency_symbol}{discountedPrice}</span>&nbsp;&nbsp;
                                                     <span className="text-decoration-line-through fs-4 fw-light">
                                                         {token ? currency_symbol : generalCurrency_symbol}
-                                                        {ticketInfo[0]?.ticket_price}
+                                                        {ticketInfo[0]?.rounds[round]?._price}
                                                     </span>&nbsp;&nbsp;
                                                     <span className="discount_percent fs-4 ">{ticketInfo[0]?.discount_percentage}% off</span>
                                                 </h3>
@@ -170,7 +181,7 @@ const LotteryInfo = () => {
                                                 <h3>Ticket Price :&nbsp;&nbsp;
                                                     <span className="discountprice">
                                                         {token ? currency_symbol : generalCurrency_symbol}
-                                                        {ticketInfo[0]?.ticket_price}</span>
+                                                        {ticketInfo[0]?.rounds[round]?._price}</span>
                                                 </h3>
                                         }
                                     </div>
@@ -223,7 +234,7 @@ const LotteryInfo = () => {
                                     <div className="btn_area mt-5">
                                         {
                                             (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                (ticketInfo[0].ticket_quantity) > 0 ?
+                                                (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                     token ?
                                                         <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
                                                         : <Link to="/login" className="btn2">Add To Cart</Link>
@@ -235,7 +246,7 @@ const LotteryInfo = () => {
                                         {/* Buy now button */}
                                         {
                                             (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                (ticketInfo[0].ticket_quantity) > 0 ?
+                                                (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                     token ?
                                                         <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
                                                         : <Link to="/login" className="btn2">Buy Ticket</Link>
@@ -280,10 +291,10 @@ const LotteryInfo = () => {
                                         <div className="ticket_sold_title">
                                             {
                                                 (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                    (ticketInfo[0]?.ticket_quantity) > 0 ?
+                                                    (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                         <h3>
                                                             <span><img src="/assets/img/9121436 1.png" alt="" /></span>
-                                                            Ticket Remains : <strong>{ticketInfo[0]?.ticket_quantity}</strong>
+                                                            Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
                                                         </h3> : <h3>All tickets sold</h3>
                                                     : null
 

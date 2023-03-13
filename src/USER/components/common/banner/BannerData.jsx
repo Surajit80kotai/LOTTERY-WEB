@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -7,10 +7,18 @@ import { buyNowItem } from '../../../services/slice/PaymentSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 
 const BannerData = ({ item, id }) => {
+    const [round, setRound] = useState(0)
+    // ticket rounds calculation function
+    const calculateRounds = (round) => {
+        if (item?.rounds[round]._status === false) {
+            setRound(round + 1)
+            console.log(round);
+        }
+    }
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     const dispatch = useDispatch()
     // discount calculation
-    const discountedPrice = Number((item?.ticket_price - ((item?.ticket_price * item?.discount_percentage) / 100)))
+    const discountedPrice = Number((item?.rounds[round]?._price - ((item?.rounds[round]?._price * item?.rounds[round]?._dis) / 100)))
     const baseUrl = process.env.REACT_APP_NODE_HOST
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
@@ -19,18 +27,18 @@ const BannerData = ({ item, id }) => {
     // buyNow function
     const buyNow = (ticket) => {
         // dispatch(emptyCart())
-        const subtotal = Number(ticket?.ticket_price)
-        const total = (ticket?.discount_percentage ?
-            (ticket?.ticket_price - ((ticket?.ticket_price * ticket?.discount_percentage) / 100))
-            : ticket?.ticket_price)
-        const discount = ((ticket?.ticket_price * ticket?.discount_percentage) / 100)
+        const subtotal = Number(ticket?.rounds[round]?._price)
+        const total = (ticket?.rounds[round]?._dis ?
+            (ticket?.rounds[round]?._price - ((ticket?.rounds[round]?._price * ticket?.rounds[round]?._dis) / 100))
+            : ticket?.rounds[round]?._price)
+        const discount = ((ticket?.rounds[round]?._price * ticket?.rounds[round]?._dis) / 100)
         const amount = { subtotal: subtotal, total: total, discount: discount }
 
         const newTicket = {
             product_id: ticket._id,
-            unit_price: (ticket.ticket_price).toFixed(2),
+            unit_price: (ticket?.rounds[round]?._price).toFixed(2),
             quantity: 1,
-            discount: (ticket.discount_percentage).toFixed(2),
+            discount: (ticket?.rounds[round]?._dis).toFixed(2),
             total_price: (subtotal).toFixed(2),
             total_discount_price: (total).toFixed(2)
         }
@@ -42,13 +50,17 @@ const BannerData = ({ item, id }) => {
 
     useEffect(() => {
         // console.log("render");
-        startTimer(Number(item?.time_left))
+        startTimer(item?.rounds[round]?._time)
     })
+
+    useEffect(() => {
+        calculateRounds(round)
+    }, [])
 
     return (
         <>
             <div className="banner_img">
-                <img src={baseUrl + item?.main_image} alt="baaner" className="img-fluid" />
+                <img src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
             </div>
             <div className="banner_content">
 
@@ -91,14 +103,14 @@ const BannerData = ({ item, id }) => {
                             <div className="ticket_price">
                                 <h4>Ticket Price
                                     <span>{token ? currency_symbol : generalCurrency_symbol}
-                                    </span>{discountedPrice ? discountedPrice : item?.ticket_price}
+                                    </span>{discountedPrice ? discountedPrice : item?.rounds[round]?._price}
                                 </h4>
                             </div>
                             <div className="banner_product_btn">
                                 {/* Buy Now Button */}
                                 {
                                     (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                        (item?.ticket_quantity) > 0 ?
+                                        (item?.rounds[round]?._qty) > 0 ?
                                             token ?
                                                 <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
                                                 : <Link to="/login" className="btn2">Buy Ticket</Link>

@@ -31,9 +31,10 @@ const Home = () => {
     const cosmetics = fetch_lott_data?.filter((item) => item.category === categoryObj["Cosmetic"])
     const study_travel = fetch_lott_data?.filter((item) => item.category === categoryObj["Study & abroad"])
     const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
+    const electronics = fetch_lott_data?.filter((item) => item.category === categoryObj["Electronics"])
 
     // slider array
-    const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn]
+    const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn, electronics]
 
     // finding a key from an object
     const getKey = (obj, value) => {

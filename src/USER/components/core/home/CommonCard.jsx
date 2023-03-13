@@ -1,16 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSlice'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
-import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol, userCurrency_symbol } from '../../../util/Currency'
+import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
 
 const CommonCard = ({ item }) => {
-    const { time_left, ticket_name, ticket_price, ticket_quantity, discount_percentage, main_image, is_image, _id } = item
+    const [round, setRound] = useState(0)
+    const { ticket_name, main_image, is_image, _id, rounds } = item
+    // ticket rounds calculation function
+    const calculateRounds = (round) => {
+        if (rounds[round]._status === false) {
+            setRound(round + 1)
+            console.log(round);
+        }
+    }
+
     // discount calculation
-    const discountedPrice = Number((ticket_price - ((ticket_price * discount_percentage) / 100)))
+    const discountedPrice = Number((rounds[round]._price - ((rounds[round]._price * rounds[round]._dis) / 100)))
     // defining states timer
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     const dispatch = useDispatch()
@@ -65,16 +74,17 @@ const CommonCard = ({ item }) => {
 
 
     useEffect(() => {
-        startTimer(Number(time_left))
+        startTimer(rounds[round]._time)
     })
 
 
     useEffect(() => {
+        calculateRounds(round)
         // console.log("mount");
         return () => {
             dispatch(clearAddStatus())
         }
-    }, [dispatch, add_cart_status])
+    }, [dispatch, add_cart_status, round])
 
 
     // useEffect(() => {
@@ -110,16 +120,16 @@ const CommonCard = ({ item }) => {
                         <Link to={`/info/${_id}`}>
                             <div className="product_price">
                                 {
-                                    discount_percentage ?
+                                    rounds[round]._dis ?
                                         <h3>
                                             <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>
                                                 {token ? currency_symbol : generalCurrency_symbol}</span>
-                                            <span className="text-decoration-line-through">&nbsp;{ticket_price}</span>&nbsp;&nbsp;
-                                            <span className="discount_percent">{discount_percentage}% off</span>
+                                            <span className="text-decoration-line-through">&nbsp;{rounds[round]._price}</span>&nbsp;&nbsp;
+                                            <span className="discount_percent">{rounds[round]._dis}% off</span>
                                         </h3>
                                         :
                                         <h3>
-                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{ticket_price}</span>
+                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{rounds[round]._price}</span>
                                         </h3>
                                 }
                             </div>
@@ -128,8 +138,8 @@ const CommonCard = ({ item }) => {
                             </div>
                             {
                                 (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                    ticket_quantity > 0 ?
-                                        <h3 className="total_ticket">Remaining Tickets: {ticket_quantity}</h3>
+                                rounds[round]._qty > 0 ?
+                                        <h3 className="total_ticket">Remaining Tickets: {rounds[round]._qty}</h3>
                                         : <h3 className="total_ticket">All tickets sold</h3>
                                     : null
                             }
@@ -179,7 +189,7 @@ const CommonCard = ({ item }) => {
                                 {/* Add Cart Button */}
                                 {
                                     (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                        ticket_quantity > 0 ?
+                                    (rounds[round]._qty) > 0 ?
                                             token ?
                                                 <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
                                                 : <Link to="/login" className="btn2">Add To Cart</Link>
@@ -190,7 +200,7 @@ const CommonCard = ({ item }) => {
                                 {/* Buy Now Button */}
                                 {
                                     (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                        (ticket_quantity) > 0 ?
+                                        (rounds[round]._qty) > 0 ?
                                             token ?
                                                 <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
                                                 : <Link to="/login" className="btn2">Buy Ticket</Link>
