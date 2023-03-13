@@ -37,7 +37,6 @@ const LotteryInfo = () => {
     const calculateRounds = (round) => {
         if (ticketInfo[0].rounds[round]._status === false) {
             setRound(round + 1)
-            console.log(round);
         }
     }
 
@@ -66,18 +65,18 @@ const LotteryInfo = () => {
     // buyNow function
     const buyNow = (ticket) => {
         // dispatch(emptyCart())
-        const subtotal = Number(ticket?.ticket_price * qty)
-        const total = (ticket?.discount_percentage ?
-            (ticket?.ticket_price - ((ticket?.ticket_price * ticket?.discount_percentage) / 100)) * qty
-            : ticket?.ticket_price * qty)
-        const discount = ((ticket?.ticket_price * ticket?.discount_percentage) / 100) * qty
+        const subtotal = Number(ticket?.rounds[round]?._price)
+        const total = (Number(ticket?.rounds[round]?._dis) ?
+            (Number(ticket?.rounds[round]?._price) - ((Number(ticket?.rounds[round]?._price) * Number(ticket?.rounds[round]?._dis)) / 100))
+            : Number(ticket?.rounds[round]?._price))
+        const discount = ((Number(ticket?.rounds[round]?._price) * Number(ticket?.rounds[round]?._dis)) / 100)
         const amount = { subtotal: subtotal, total: total, discount: discount }
 
         const newTicket = {
             product_id: ticket._id,
-            unit_price: (ticket.ticket_price).toFixed(2),
-            quantity: qty,
-            discount: (ticket.discount_percentage).toFixed(2),
+            unit_price: (Number(ticket?.rounds[round]?._price)).toFixed(2),
+            quantity: 1,
+            discount: (Number(ticket?.rounds[round]?._dis)).toFixed(2),
             total_price: (subtotal).toFixed(2),
             total_discount_price: (total).toFixed(2)
         }

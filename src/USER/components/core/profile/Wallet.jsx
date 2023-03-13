@@ -1,11 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { cinetPay, getTransactions, initPay, updateTransactions } from '../../../services/slice/PaymentSlice';
 import { getBalance } from '../../../services/slice/UserSlice';
-import { currency, currency_symbol, generalCurrency, generalCurrency_symbol, otherCurrency, otherCurrency_symbol, userCurrency, userCurrency_symbol } from '../../../util/Currency';
+import { currency, currency_symbol, generalCurrency, generalCurrency_symbol } from '../../../util/Currency';
 import PreLoader from '../preloader/PreLoader';
 import SideNav from './SideNav';
 

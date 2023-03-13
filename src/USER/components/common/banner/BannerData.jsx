@@ -12,7 +12,6 @@ const BannerData = ({ item, id }) => {
     const calculateRounds = (round) => {
         if (item?.rounds[round]._status === false) {
             setRound(round + 1)
-            console.log(round);
         }
     }
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()

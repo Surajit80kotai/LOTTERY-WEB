@@ -11,6 +11,7 @@ import { currency_symbol, generalCurrency_symbol } from '../util/Currency';
 
 
 const PlaceOrder = () => {
+    const [round, setRound] = useState(0)
     // State for price calculation
     const [amount, setAmount] = useState({ subtotal: 0, discount: 0, total: 0 })
     const navigate = useNavigate()
@@ -20,6 +21,8 @@ const PlaceOrder = () => {
     const { balance } = useSelector((state) => state.userslice)
     const { ordered_data, buy_now_data, loading } = useSelector((state) => state.paymentslice)
     const dispatch = useDispatch()
+
+    // console.log(buy_now_data);
 
     const baseUrl = process.env.REACT_APP_NODE_HOST
     const dueAmount = Number(amount?.total - balance?.balance)

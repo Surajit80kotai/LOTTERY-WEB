@@ -14,7 +14,6 @@ const CommonCard = ({ item }) => {
     const calculateRounds = (round) => {
         if (rounds[round]._status === false) {
             setRound(round + 1)
-            console.log(round);
         }
     }
 
