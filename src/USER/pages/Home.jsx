@@ -107,7 +107,7 @@ const Home = () => {
                                                             }
                                                             return (
                                                                 <div className={`carousel-item ${act}`
-                                                                } key={index}>
+                                                                } key={index} data-bs-interval="2000">
                                                                     <div className="mx-2">
                                                                         <div className="cards-wrapper">
                                                                             {

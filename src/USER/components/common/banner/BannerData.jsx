@@ -4,13 +4,11 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
+import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 
 const BannerData = ({ item, id }) => {
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     const dispatch = useDispatch()
-    // currency variables
-    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
     // discount calculation
     const discountedPrice = Number((item?.ticket_price - ((item?.ticket_price * item?.discount_percentage) / 100)))
     const baseUrl = process.env.REACT_APP_NODE_HOST
@@ -92,7 +90,7 @@ const BannerData = ({ item, id }) => {
                             </div>
                             <div className="ticket_price">
                                 <h4>Ticket Price
-                                    <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}
+                                    <span>{token ? currency_symbol : generalCurrency_symbol}
                                     </span>{discountedPrice ? discountedPrice : item?.ticket_price}
                                 </h4>
                             </div>
