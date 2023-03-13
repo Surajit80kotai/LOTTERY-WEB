@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userOrderHistory } from '../../../services/slice/UserSlice'
+import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol, userCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 
@@ -21,10 +22,8 @@ const OrderHistory = () => {
     const orderHistoryData = data?.reverse().slice(pagesVisited, pagesVisited + userPerPage)
     const pageCount = Math.ceil(order_history_data?.length / userPerPage)
 
-    // currency variables
-    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
-
+    // userID
+    const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
     const changePage = (data) => {
         setPageNumber(data?.selected)
@@ -95,7 +94,8 @@ const OrderHistory = () => {
                                                     </div>
                                                     <div className="info_item">
                                                         <h3 className="dateofresult"><span></span>Total Price</h3>
-                                                        <p>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{(item?.total_discount_price)}</p>
+                                                        <p>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(item?.total_discount_price)}
+                                                        </p>
                                                     </div>
                                                     <div className="info_item">
                                                         <h3 className="dateofresult"><span></span>Date Of Purchase</h3>

@@ -34,11 +34,11 @@ const Login = () => {
         e.preventDefault()
         if (isNaN(formValues?.contact)) {
             const data = { user_id: formValues.contact, password: formValues.password, user_id_type: "email" }
-            console.log("if", data);
+            // console.log("if", data);
             dispatch(fetchLogin({ data, navigate, toast }))
         } else {
             const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, password: formValues.password, user_id_type: "phone" }
-            console.log("else", data);
+            // console.log("else", data);
             dispatch(fetchLogin({ data, navigate, toast }))
         }
     }

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addCart, clearAddStatus, getCart } from '../services/slice/CartSlice'
 import { buyNowItem } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
+import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol, userCurrency_symbol } from '../util/Currency'
 
 const LotteryInfo = () => {
     const { lid } = useParams()
@@ -19,14 +20,9 @@ const LotteryInfo = () => {
     const { cart_data, add_cart_status } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
     const { loading } = useSelector((state) => state.cartslice)
-    
-    // currency variables
-    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
-    
+
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
-    const accessToken = JSON.parse(window.localStorage.getItem("accessToken"))
 
     const mainimage = ticketInfo[0]?.main_image
     const is_image = ticketInfo[0]?.is_image
@@ -162,15 +158,19 @@ const LotteryInfo = () => {
                                         {
                                             ticketInfo[0]?.discount_percentage ?
                                                 <h3>Ticket Price :&nbsp;&nbsp;
-                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{discountedPrice}</span>&nbsp;&nbsp;
+                                                    <span className="discountprice">
+                                                        {token ? currency_symbol : generalCurrency_symbol}{discountedPrice}</span>&nbsp;&nbsp;
                                                     <span className="text-decoration-line-through fs-4 fw-light">
-                                                        {userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{ticketInfo[0]?.ticket_price}
+                                                        {token ? currency_symbol : generalCurrency_symbol}
+                                                        {ticketInfo[0]?.ticket_price}
                                                     </span>&nbsp;&nbsp;
                                                     <span className="discount_percent fs-4 ">{ticketInfo[0]?.discount_percentage}% off</span>
                                                 </h3>
                                                 :
                                                 <h3>Ticket Price :&nbsp;&nbsp;
-                                                    <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{ticketInfo[0]?.ticket_price}</span>
+                                                    <span className="discountprice">
+                                                        {token ? currency_symbol : generalCurrency_symbol}
+                                                        {ticketInfo[0]?.ticket_price}</span>
                                                 </h3>
                                         }
                                     </div>
@@ -224,7 +224,7 @@ const LotteryInfo = () => {
                                         {
                                             (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                                                 (ticketInfo[0].ticket_quantity) > 0 ?
-                                                    token || accessToken ?
+                                                    token ?
                                                         <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
                                                         : <Link to="/login" className="btn2">Add To Cart</Link>
                                                     : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
@@ -236,7 +236,7 @@ const LotteryInfo = () => {
                                         {
                                             (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                                                 (ticketInfo[0].ticket_quantity) > 0 ?
-                                                    token || accessToken ?
+                                                    token ?
                                                         <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
                                                         : <Link to="/login" className="btn2">Buy Ticket</Link>
                                                     : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>

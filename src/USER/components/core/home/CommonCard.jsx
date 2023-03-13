@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSlice'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
+import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol, userCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
 
 const CommonCard = ({ item }) => {
@@ -24,9 +25,6 @@ const CommonCard = ({ item }) => {
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
 
-    // currency variables
-    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
 
     // baseUrl For Images
     const baseUrl = process.env.REACT_APP_NODE_HOST
@@ -114,13 +112,14 @@ const CommonCard = ({ item }) => {
                                 {
                                     discount_percentage ?
                                         <h3>
-                                            <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span>
+                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>
+                                                {token ? currency_symbol : generalCurrency_symbol}</span>
                                             <span className="text-decoration-line-through">&nbsp;{ticket_price}</span>&nbsp;&nbsp;
                                             <span className="discount_percent">{discount_percentage}% off</span>
                                         </h3>
                                         :
                                         <h3>
-                                            <span className="discountprice">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{ticket_price}</span>
+                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{ticket_price}</span>
                                         </h3>
                                 }
                             </div>
