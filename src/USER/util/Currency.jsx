@@ -2,8 +2,8 @@ const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.cu
 const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
 
 
-const otherCurrency = "USD "
-const otherCurrency_symbol = "$ "
+const otherCurrency = "USD"
+const otherCurrency_symbol = "$"
 
 
 export const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL

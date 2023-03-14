@@ -21,7 +21,6 @@ const PlaceOrder = () => {
     const { ordered_data, buy_now_data, loading } = useSelector((state) => state.paymentslice)
     const dispatch = useDispatch()
 
-    // console.log(buy_now_data);
 
     const baseUrl = process.env.REACT_APP_NODE_HOST
     const dueAmount = Number(amount?.total - balance?.balance)
@@ -44,7 +43,8 @@ const PlaceOrder = () => {
                     product_id: resp.product_id,
                     quantity: resp.quantity,
                     ticket_price: info[0].ticket_price,
-                    discount_percentage: info[0].discount_percentage
+                    discount_percentage: info[0].discount_percentage,
+                    round_index: resp.round_index
                 })
                 return acc
             }, [])
@@ -103,12 +103,12 @@ const PlaceOrder = () => {
             })
         } else {
             cart_data?.map(({ resp, info }) => {
-                if (info[0].discount_percentage) {
-                    st += (Number((info[0].ticket_price * resp.quantity)))
-                    dc += (Number(((info[0].ticket_price) * (info[0].discount_percentage) / 100) * resp.quantity))
+                if (Number(resp?.round_info?._dis)) {
+                    st += (Number((resp?.round_info?._price * resp.quantity)))
+                    dc += (Number(((resp?.round_info?._price) * (Number(resp?.round_info?._dis)) / 100) * resp.quantity))
                     return Number(st)
                 } else {
-                    st += Number(info[0].ticket_price * resp.quantity)
+                    st += Number(resp?.round_info?._price * resp.quantity)
                     return st
                 }
             })
@@ -204,13 +204,13 @@ const PlaceOrder = () => {
                                                                         <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
                                                                         <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}
                                                                             {
-                                                                                (Number(item?.info[0]?.ticket_price - ((item?.info[0]?.ticket_price * item?.info[0]?.discount_percentage) / 100)) * item?.resp?.quantity).toFixed(2)
+                                                                                (Number((item?.resp?.round_info?._price) - (((item?.resp?.round_info?._price) * (item?.resp?.round_info?._dis)) / 100)) * (item?.resp?.quantity)).toFixed(2)
                                                                             }
                                                                         </p>
                                                                     </div>
                                                                     <div className="date_result">
                                                                         <h5><span><img src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
-                                                                            {new Date(item?.info[0]?.time_left).toLocaleString('en-US', {
+                                                                            {new Date(item?.resp?.round_info?._time).toLocaleString('en-US', {
                                                                                 month: 'short',
                                                                                 day: '2-digit',
                                                                                 year: 'numeric'

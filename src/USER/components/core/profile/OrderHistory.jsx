@@ -15,8 +15,7 @@ const OrderHistory = () => {
     const { order_history_data, loading } = useSelector(state => state.userslice)
     const dispatch = useDispatch()
 
-    console.log(order_history_data);
-
+    
     // for pagination
     const userPerPage = 8
     const pagesVisited = pageNumber * userPerPage
