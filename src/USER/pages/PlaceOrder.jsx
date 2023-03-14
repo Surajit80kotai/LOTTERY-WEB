@@ -11,7 +11,6 @@ import { currency_symbol, generalCurrency_symbol } from '../util/Currency';
 
 
 const PlaceOrder = () => {
-    const [round, setRound] = useState(0)
     // State for price calculation
     const [amount, setAmount] = useState({ subtotal: 0, discount: 0, total: 0 })
     const navigate = useNavigate()
@@ -57,7 +56,7 @@ const PlaceOrder = () => {
 
     // checkOrderData function
     const checkOrderData = () => {
-        if (ordered_data.error === "true") {
+        if (ordered_data?.error === "true") {
             const cartIds = ordered_data?.meta?.map((item) => item.cart_id)
             cartIds?.map((item) => {
                 var element = document.getElementById(item);
@@ -66,7 +65,7 @@ const PlaceOrder = () => {
             toast.error("Quantity Is Unavilabe !!")
             dispatch(clearOrderedData())
         }
-        else if (ordered_data.message === "Order success") {
+        else if (ordered_data?.message === "Order success") {
             if (ordered_data?.meta?.length === 0) {
                 dispatch(emptyCart())
                 dispatch(emptyBuyNow())
@@ -175,7 +174,7 @@ const PlaceOrder = () => {
                                                     </div>
                                                     <div className="date_result">
                                                         <h5><span><img src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
-                                                            {new Date(buy_now_data?.ticket?.time_left).toLocaleString('en-US', {
+                                                            {new Date(buy_now_data?.product_info?.round_info?._time).toLocaleString('en-US', {
                                                                 month: 'short',
                                                                 day: '2-digit',
                                                                 year: 'numeric'

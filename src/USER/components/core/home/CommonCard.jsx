@@ -40,7 +40,7 @@ const CommonCard = ({ item }) => {
 
     // add to cart
     const addToCart = () => {
-        const cartData = { product_id: _id, user_id: userID, qty: 1 }
+        const cartData = { product_id: _id, user_id: userID, qty: 1, round_info: rounds[round], round_index: round }
         dispatch(addCart(cartData))
         setTimeout(() => {
             dispatch(getCart())
@@ -64,7 +64,9 @@ const CommonCard = ({ item }) => {
             quantity: 1,
             discount: (Number(ticket?.rounds[round]?._dis)).toFixed(2),
             total_price: (subtotal).toFixed(2),
-            total_discount_price: (total).toFixed(2)
+            total_discount_price: (total).toFixed(2),
+            round_info: ticket?.rounds[round],
+            round_index: round
         }
 
         const orderData = { product_info: newTicket, amount: amount, ticket: ticket }
@@ -138,8 +140,15 @@ const CommonCard = ({ item }) => {
                             {
                                 (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                                     rounds[round]._qty > 0 ?
-                                        <h3 className="total_ticket">Remaining Tickets: {rounds[round]._qty}</h3>
-                                        : <h3 className="total_ticket">All tickets sold</h3>
+                                        <h3 className="total_ticket">
+                                            <span className='mr-2'>
+                                                Remaining Tickets: {rounds[round]._qty}
+                                            </span>
+                                            <span className='mx-3'>
+                                                Round: {(round + 1) + "/" + rounds.length}
+                                            </span>
+                                        </h3>
+                                        : <h3 className="total_ticket">All tickets sold for {(rounds.length) + 1}</h3>
                                     : null
                             }
 

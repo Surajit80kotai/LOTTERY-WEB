@@ -39,7 +39,9 @@ const BannerData = ({ item, id }) => {
             quantity: 1,
             discount: (Number(ticket?.rounds[round]?._dis)).toFixed(2),
             total_price: (subtotal).toFixed(2),
-            total_discount_price: (total).toFixed(2)
+            total_discount_price: (total).toFixed(2),
+            round_info: ticket?.rounds[round],
+            round_index: round
         }
 
         const orderData = { product_info: newTicket, amount: amount, ticket: ticket }
@@ -58,6 +60,9 @@ const BannerData = ({ item, id }) => {
 
     return (
         <>
+            <Link to={`/info/${id}`}>
+
+            </Link>
             <div className="banner_img">
                 <img src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
             </div>

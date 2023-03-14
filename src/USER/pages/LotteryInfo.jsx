@@ -78,7 +78,9 @@ const LotteryInfo = () => {
             quantity: 1,
             discount: (Number(ticket?.rounds[round]?._dis)).toFixed(2),
             total_price: (subtotal).toFixed(2),
-            total_discount_price: (total).toFixed(2)
+            total_discount_price: (total).toFixed(2),
+            round_info: ticket?.rounds[round],
+            round_index: round
         }
 
         const orderData = { product_info: newTicket, amount: amount, ticket: ticket }
@@ -174,7 +176,7 @@ const LotteryInfo = () => {
                                                         {token ? currency_symbol : generalCurrency_symbol}
                                                         {ticketInfo[0]?.rounds[round]?._price}
                                                     </span>&nbsp;&nbsp;
-                                                    <span className="discount_percent fs-4 ">{ticketInfo[0]?.discount_percentage}% off</span>
+                                                    <span className="discount_percent fs-4 ">{ticketInfo[0]?.rounds[round]?._dis}% off</span>
                                                 </h3>
                                                 :
                                                 <h3>Ticket Price :&nbsp;&nbsp;
@@ -292,6 +294,8 @@ const LotteryInfo = () => {
                                                 (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                                                     (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                         <h3>
+                                                            <span style={{ "marginRight": "20px" }}>
+                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{(round + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
                                                             <span><img src="/assets/img/9121436 1.png" alt="" /></span>
                                                             Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
                                                         </h3> : <h3>All tickets sold</h3>
@@ -310,6 +314,7 @@ const LotteryInfo = () => {
                                         <div>
                                             <div className="des_title">
                                                 <h3>DESCRIPTION</h3>
+                                                <button className='btn btn-outline-dark fs-5' style={{ "borderRadius": "20px" }}>Download Brochure <i className="fa-solid fa-download"></i></button>
                                             </div>
                                             <div className="description_item">
                                                 <div className="describe_heading">

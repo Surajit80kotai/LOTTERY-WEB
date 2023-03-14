@@ -15,6 +15,8 @@ const OrderHistory = () => {
     const { order_history_data, loading } = useSelector(state => state.userslice)
     const dispatch = useDispatch()
 
+    console.log(order_history_data);
+
     // for pagination
     const userPerPage = 8
     const pagesVisited = pageNumber * userPerPage
@@ -78,7 +80,11 @@ const OrderHistory = () => {
                                             return (
                                                 <div className="orderhistroy_item" key={item?._id}>
                                                     <div className="ribbon-wrapper-green">
-                                                        <div className="ribbon-green">Won</div>
+                                                        {
+                                                            item?.is_win === 'true' ?
+                                                                <div className="ribbon-green">Won</div>
+                                                                : null
+                                                        }
                                                     </div>
 
                                                     <div className="pro_im_t">
@@ -107,7 +113,7 @@ const OrderHistory = () => {
                                                     </div>
                                                     <div className="info_item">
                                                         <h3 className="dateofresult"><span></span>Date Of Result </h3>
-                                                        <p>{new Date(item?.time_left).toLocaleString('en-US', {
+                                                        <p>{new Date(item?.result_on).toLocaleString('en-US', {
                                                             month: 'short',
                                                             day: '2-digit',
                                                             year: 'numeric'
