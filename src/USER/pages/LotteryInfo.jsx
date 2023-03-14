@@ -93,7 +93,7 @@ const LotteryInfo = () => {
         const fileUrl = download_link; // Replace with your file URL
         const fileExtension = download_link.substring(download_link.lastIndexOf(".") + 1)
         const fileName = ((ticket_name).trim().split(/\s+/).join('_').toLowerCase() + "." + fileExtension)
-        
+
         fetch(fileUrl)
             .then(response => response.blob())
             .then(blob => {
@@ -121,7 +121,7 @@ const LotteryInfo = () => {
             dispatch(getCart())
             dispatch(clearAddStatus())
         }
-    }, [dispatch, cartLength, add_cart_status])
+    }, [dispatch, cartLength, add_cart_status, round])
 
 
 

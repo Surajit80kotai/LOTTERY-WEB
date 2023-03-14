@@ -56,7 +56,7 @@ const BannerData = ({ item, id }) => {
 
     useEffect(() => {
         calculateRounds(round)
-    }, [])
+    }, [round])
 
     return (
         <>
