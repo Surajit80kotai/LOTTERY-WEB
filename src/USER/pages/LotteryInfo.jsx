@@ -339,11 +339,15 @@ const LotteryInfo = () => {
                                         <div>
                                             <div className="des_title">
                                                 <h3>DESCRIPTION</h3>
-                                                <button
-                                                    onClick={() => handleDownload(baseUrl + ticketInfo[0]?.brochure, ticketInfo[0]?.ticket_name)}
-                                                    className='btn btn-outline-dark fs-5'
-                                                    style={{ "borderRadius": "20px" }}
-                                                >Download Brochure <i className="fa-solid fa-download"></i></button>
+                                                {
+                                                    ticketInfo[0]?.brochure ?
+                                                        <button
+                                                            onClick={() => handleDownload(baseUrl + ticketInfo[0]?.brochure, ticketInfo[0]?.ticket_name)}
+                                                            className='btn btn-outline-dark fs-5'
+                                                            style={{ "borderRadius": "20px" }}
+                                                        >Download Brochure <i className="fa-solid fa-download"></i></button>
+                                                        : null
+                                                }
                                             </div>
                                             <div className="description_item">
                                                 <div className="describe_heading">

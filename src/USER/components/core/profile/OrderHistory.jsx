@@ -5,23 +5,49 @@ import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userOrderHistory } from '../../../services/slice/UserSlice'
-import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol, userCurrency_symbol } from '../../../util/Currency'
+import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 
 const OrderHistory = () => {
+    const [filteredOH, setFilteredOH] = useState([])
     const baseUrl = process.env.REACT_APP_NODE_HOST
     const [pageNumber, setPageNumber] = useState(0)
     const { order_history_data, loading } = useSelector(state => state.userslice)
     const dispatch = useDispatch()
 
-    
+
     // for pagination
     const userPerPage = 8
     const pagesVisited = pageNumber * userPerPage
     const data = [...order_history_data]
     const orderHistoryData = data?.reverse().slice(pagesVisited, pagesVisited + userPerPage)
     const pageCount = Math.ceil(order_history_data?.length / userPerPage)
+
+
+    // filter order history function
+    const filterOrderHistory = (data) => {
+        const newData = [...order_history_data]
+        switch (data) {
+            case "LtoH":
+                setFilteredOH(newData?.sort((a, b) => a.total_discount_price - b.total_discount_price))
+                break;
+            case "HtoL":
+                setFilteredOH(newData?.sort((a, b) => b.total_discount_price - a.total_discount_price))
+                break;
+            case "NF":
+                setFilteredOH(newData?.sort((a, b) => a.createdAt - b.createdAt))
+                break;
+            case "OF":
+                setFilteredOH(newData?.sort((a, b) => b.createdAt - a.createdAt))
+                break;
+
+            default:
+                setFilteredOH(orderHistoryData)
+                break;
+        }
+    }
+
 
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
@@ -32,9 +58,15 @@ const OrderHistory = () => {
 
 
     useEffect(() => {
+        setFilteredOH(orderHistoryData)
+    }, [order_history_data])
+
+
+    useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(userOrderHistory())
     }, [dispatch])
+
 
 
     return (
@@ -58,13 +90,19 @@ const OrderHistory = () => {
                                         <img src="/assets/img/filter.png" alt="img" style={{ "width": "18px", "height": "18px", "margin": "3px 4px" }} /> <h2 className='fw-bold'>Filter<i className="fa-solid fa-caret-down mx-2"></i></h2>
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ "width": "180px" }}>
+                                        {/* Clear Filter Button */}
+                                        <li className=' text-center m-3'><button className="btn btn-secondary  fs-5" onClick={() => filterOrderHistory("")} >CLEAR FILTER</button></li>
+
+                                        {/* Price Filter Options */}
                                         <p className='fw-bold fs-4 px-3'>Price:</p>
-                                        <li><Link className="dropdown-item" to="#!">Low To High</Link></li>
-                                        <li><Link className="dropdown-item" to="#!">High To Low</Link></li>
+                                        <li><Link className="dropdown-item" to="#!" onClick={() => filterOrderHistory("LtoH")} >Low To High</Link></li>
+                                        <li><Link className="dropdown-item" to="#!" onClick={() => filterOrderHistory("HtoL")} >High To Low</Link></li>
                                         <hr />
+
+                                        {/* Date Filter Options */}
                                         <p className='fw-bold fs-4 px-3'>Date:</p>
-                                        <li><Link className="dropdown-item" to="#!">Newest First</Link></li>
-                                        <li><Link className="dropdown-item" to="#!">Oldest First</Link></li>
+                                        <li><Link className="dropdown-item" to="#!" onClick={() => filterOrderHistory("NF")} >Newest First</Link></li>
+                                        <li><Link className="dropdown-item" to="#!" onClick={() => filterOrderHistory("OF")} >Oldest First</Link></li>
                                     </ul>
                                 </div>
                                 {/* <button className='d-flex fw-bold'>
@@ -75,7 +113,7 @@ const OrderHistory = () => {
                                 {/* order his item  */}
                                 {
                                     orderHistoryData?.length ?
-                                        orderHistoryData?.map((item) => {
+                                        filteredOH?.map((item) => {
                                             return (
                                                 <div className="orderhistroy_item" key={item?._id}>
                                                     <div className="ribbon-wrapper-green">
@@ -98,7 +136,10 @@ const OrderHistory = () => {
                                                         </div>
                                                     </div>
                                                     <div className="info_item">
-                                                        <h3 className="dateofresult"><span></span>Total Price</h3>
+                                                        <h3 className="dateofresult"><span></span>Round: {item?.round}</h3>
+                                                    </div>
+                                                    <div className="info_item">
+                                                        <h3 className="dateofresult"><span></span>Price</h3>
                                                         <p>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(item?.total_discount_price)}
                                                         </p>
                                                     </div>
