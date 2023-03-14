@@ -88,14 +88,19 @@ const Home = () => {
                                             </h2>
                                         </div>
                                         <div className="col-md-2">
-                                            <div className="view_all_bg">
-                                                <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
-                                                <div className="viewall_btn">
-                                                    <h6>Looking More? Click Here</h6>
-                                                    <Link to={`/viewall/${curItem[0]?.category}`} className="btn2">View All</Link>
-                                                </div>
-                                            </div>
+                                            {
+                                                curItem[0]?.category ?
+                                                    <div className="view_all_bg">
+                                                        <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                                                        <div className="viewall_btn">
+                                                            <h6>Looking More? Click Here</h6>
+                                                            <Link to={`/viewall/${curItem[0]?.category}`} className="btn2">View All</Link>
+                                                        </div>
+                                                    </div>
 
+                                                    : null
+                                            }
+                                            
                                         </div>
                                         <div className="col-md-10">
                                             <div id={`carouselExampleControls-${carouselID}`} className="carousel slide" data-bs-ride="carousel">

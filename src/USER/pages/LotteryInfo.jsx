@@ -88,6 +88,31 @@ const LotteryInfo = () => {
     }
 
 
+    // Download Brochure
+    const handleDownload = (download_link, ticket_name) => {
+        const fileUrl = download_link; // Replace with your file URL
+        const fileExtension = download_link.substring(download_link.lastIndexOf(".") + 1)
+        const fileName = ((ticket_name).trim().split(/\s+/).join('_').toLowerCase() + "." + fileExtension)
+        
+        fetch(fileUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                // Create a temporary URL to the blob
+                const blobUrl = window.URL.createObjectURL(new Blob([blob]));
+                // Create a new anchor element
+                const a = document.createElement('a');
+                // Set the download attribute to the file name
+                a.setAttribute('download', fileName);
+                // Set the href attribute to the temporary URL
+                a.setAttribute('href', blobUrl);
+                // Click the anchor element to start the download
+                a.click();
+                // Remove the temporary URL and anchor element
+                window.URL.revokeObjectURL(blobUrl);
+                a.remove();
+            });
+    };
+
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -314,7 +339,11 @@ const LotteryInfo = () => {
                                         <div>
                                             <div className="des_title">
                                                 <h3>DESCRIPTION</h3>
-                                                <button className='btn btn-outline-dark fs-5' style={{ "borderRadius": "20px" }}>Download Brochure <i className="fa-solid fa-download"></i></button>
+                                                <button
+                                                    onClick={() => handleDownload(baseUrl + ticketInfo[0]?.brochure, ticketInfo[0]?.ticket_name)}
+                                                    className='btn btn-outline-dark fs-5'
+                                                    style={{ "borderRadius": "20px" }}
+                                                >Download Brochure <i className="fa-solid fa-download"></i></button>
                                             </div>
                                             <div className="description_item">
                                                 <div className="describe_heading">

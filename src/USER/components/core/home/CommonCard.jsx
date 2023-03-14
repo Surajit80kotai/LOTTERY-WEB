@@ -142,10 +142,10 @@ const CommonCard = ({ item }) => {
                                     rounds[round]._qty > 0 ?
                                         <h3 className="total_ticket">
                                             <span className='mr-2'>
-                                                Remaining Tickets: {rounds[round]._qty}
+                                                Round: {(round + 1) + "/" + rounds.length}
                                             </span>
                                             <span className='mx-3'>
-                                                Round: {(round + 1) + "/" + rounds.length}
+                                                Remaining Tickets: {rounds[round]._qty}
                                             </span>
                                         </h3>
                                         : <h3 className="total_ticket">All tickets sold for {(rounds.length) + 1}</h3>
