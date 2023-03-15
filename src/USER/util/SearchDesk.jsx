@@ -17,19 +17,17 @@ const SearchDesk = ({ ticketList, search, setSearch }) => {
 
     return (
         <>
-            <div className="search_list">
-                <ul>
-                    {
-                        newList?.map((item) => {
-                            return (
-                                <li key={item?._id} className='fs-4'>
-                                    <Link to={`/info/${item?._id}`} className='text-black' onClick={() => setSearch([])}><p>{item?.ticket_name}</p></Link>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-            </div>
+            <ul>
+                {
+                    newList?.map((item) => {
+                        return (
+                            <li key={item?._id} className='ser_list fs-4'>
+                                <Link to={`/info/${item?._id}`} className='text-dark' onClick={() => setSearch([])}><p>{item?.ticket_name}</p></Link>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
         </>
     )
 }

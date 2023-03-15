@@ -37,7 +37,7 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(getCart())
-  },[dispatch, cartLength])
+  }, [dispatch, cartLength])
 
 
 
@@ -47,145 +47,84 @@ const NavBar = () => {
       {loading && <PreLoader />}
 
       {/* <main> */}
-      <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark fixed-top">
-        <div className="container-fluid">
-          <div className="nv_lf">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-dark fixed-top p-3">
 
-            {/* Logo */}
-            <Link className="navbar-brand" to="/">
-              <div className="companyLogo">
-                <img src="/assets/img/logo.png" alt="logo" className="img-fluid" />
-              </div>
-            </Link>
 
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
 
-            {/* Navigation Links */}
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                {/* Home */}
-                <li className="nav-item">
-                  <Link className="nav-link nav-link-active" to="/">Home</Link>
-                </li>
-                {/* About Us */}
-                <li className="nav-item">
-                  <Link className="nav-link nav-link-active" to="/aboutus">About Us</Link>
-                </li>
-                {/* Product Dropdown */}
-                <li className="nav-item dropdown">
-                  <Link className="nav-link nav-link-active dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products<i className="fa-solid fa-caret-down mx-2"></i></Link>
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {
-                      category_data?.map((category) => {
-                        return (
-                          <li key={category._id} className="px-2">
-                            <Link className="dropdown-item text-dark fs-5" to={`/viewall/${category._id}`}>{(category.name).toUpperCase()}</Link>
-                          </li>
-                        )
-                      })
-                    }
-                  </ul>
-                </li>
-                {/* How to play */}
-                <li className="nav-item">
-                  <Link className="nav-link nav-link-active" to="/howtoplay">How To play</Link>
-                </li>
-                {/* Charities */}
-                <li className="nav-item">
-                  <Link className="nav-link nav-link-active" to="/charities">Charities</Link>
-                </li>
-                {/* Contact */}
-                <li className="nav-item">
-                  <Link className="nav-link nav-link-active" to="/contact">Contact</Link>
-                </li>
-              </ul>
-            </div>
-
+        {/* Logo */}
+        <Link className="navbar-brand" to="/">
+          <div className="companyLogo">
+            <img src="/assets/img/logo.png" alt="logo" className="img-fluid" />
           </div>
+        </Link>
 
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-          {/* Search Bar */}
-          {
-            (location.pathname === "/") ?
-              <div className='search_bar'>
-                <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+        {/* Navigation Links */}
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav">
+            {/* Home */}
+            <li className="nav-item">
+              <Link className="nav-link nav-link-active" to="/">Home</Link>
+            </li>
+            {/* About Us */}
+            <li className="nav-item">
+              <Link className="nav-link nav-link-active" to="/aboutus">About Us</Link>
+            </li>
+            {/* Product Dropdown */}
+            <li className="nav-item dropdown">
+              <Link className="nav-link nav-link-active dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products<i className="fa-solid fa-caret-down mx-2"></i></Link>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                {
+                  category_data?.map((category) => {
+                    return (
+                      <li key={category._id} className="px-2">
+                        <Link className="dropdown-item text-dark fs-5" to={`/viewall/${category._id}`}>{(category.name).toUpperCase()}</Link>
+                      </li>
+                    )
+                  })
+                }
+              </ul>
+            </li>
+            {/* How to play */}
+            <li className="nav-item">
+              <Link className="nav-link nav-link-active" to="/howtoplay">How To play</Link>
+            </li>
+            {/* Charities */}
+            <li className="nav-item">
+              <Link className="nav-link nav-link-active" to="/charities">Charities</Link>
+            </li>
+            {/* Contact */}
+            {/* <li className="nav-item">
+                  <Link className="nav-link nav-link-active" to="/contact">Contact</Link>
+                </li> */}
+          </ul>
+
+          <div className="nv_rt">
+            {/* Search Bar */}
+            {
+              (location.pathname === "/") ?
+                <div className="serch_filed">
                   <input
-                    className="form-control search_input me-2 fs-4"
-                    type="search"
-                    placeholder="Search..."
-                    aria-label="Search"
-                    // name='search'
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search.."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   />
-                  <button
-                    className="btn fs-4 "
-                    type="submit"
-                    style={{ "background": "#f9772b" }}
-                  ><i className="fa-solid fa-magnifying-glass d-flex"></i></button>
-                </form>
-                {
-                  search.length > 0 ?
-                    <div style={{ "width": "350px", "height": "auto", "backgroundColor": "white" }}>
-                      <SearchDesk ticketList={fetch_lott_data} search={search} setSearch={setSearch} />
-                    </div>
-                    : null
-                }
-              </div>
-              : null
-          }
-
-
-          <div className="nv_rt">
-            {/* Currency Dropdown */}
-            {/* {
-              token ?
-                <div className="courency">
-                  <div className="dropdown">
-                    <Link className=" dropdown-toggle userbtn mt-2" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <span><img src="/assets/img/currency.png" alt="" className="" /></span> Currency
-                    </Link>
-                    <ul className="dropdown-menu">
-                      <div className="item">
-                        <Link to="#!">
-                          FCFA
-                        </Link>
+                  {
+                    search.length > 0 ?
+                      <div className="search_result">
+                        <SearchDesk ticketList={fetch_lott_data} search={search} setSearch={setSearch} />
                       </div>
-                      <div className="item">
-                        <Link to="#!">
-                          XAF
-                        </Link>
-                      </div>
-                      <div className="item">
-                        <Link to="#!">
-                          XOF
-                        </Link>
-                      </div>
-                      <div className="item">
-                        <Link to="#!">
-                          USD
-                        </Link>
-                      </div>
-                      <div className="item">
-                        <Link to="#!">
-                          Euro
-                        </Link>
-                      </div>
-                      <div className="item">
-                        <Link to="#!">
-                          Naira
-                        </Link>
-                      </div>
-                    </ul>
-                  </div>
+                      : null
+                  }
                 </div>
                 : null
-            } */}
-
-
+            }
 
             {/* User Dropdown */}
             <div className="area_profile">
@@ -249,7 +188,16 @@ const NavBar = () => {
             }
 
           </div>
+
         </div>
+
+
+
+
+
+
+
+
       </nav >
       {/* </main> */}
     </>
