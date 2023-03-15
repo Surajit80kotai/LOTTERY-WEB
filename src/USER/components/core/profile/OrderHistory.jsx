@@ -5,14 +5,17 @@ import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userOrderHistory } from '../../../services/slice/UserSlice'
+import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 
 const OrderHistory = () => {
+    const [filteredOH, setFilteredOH] = useState([])
     const baseUrl = process.env.REACT_APP_NODE_HOST
     const [pageNumber, setPageNumber] = useState(0)
     const { order_history_data, loading } = useSelector(state => state.userslice)
     const dispatch = useDispatch()
+
 
     // for pagination
     const userPerPage = 8
@@ -21,10 +24,40 @@ const OrderHistory = () => {
     const orderHistoryData = data?.reverse().slice(pagesVisited, pagesVisited + userPerPage)
     const pageCount = Math.ceil(order_history_data?.length / userPerPage)
 
-    // currency variables
-    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
 
+    // filter order history function
+    const filterOrderHistory = (data) => {
+        const newData = [...order_history_data]
+        switch (data) {
+            case "LtoH":
+                setFilteredOH(newData?.sort((a, b) => a.total_discount_price - b.total_discount_price))
+                break;
+            case "HtoL":
+                setFilteredOH(newData?.sort((a, b) => b.total_discount_price - a.total_discount_price))
+                break;
+            case "NF":
+                setFilteredOH(newData?.sort((a, b) => {
+                    const dateA = new Date(a.createdAt);
+                    const dateB = new Date(b.createdAt);
+                    return dateB.getTime() - dateA.getTime();
+                }))
+                break;
+            case "OF":
+                setFilteredOH(newData?.sort((a, b) => {
+                    const dateA = new Date(a.createdAt);
+                    const dateB = new Date(b.createdAt);
+                    return dateA.getTime() - dateB.getTime();
+                }))
+                break;
+            default:
+                setFilteredOH(orderHistoryData)
+                break;
+        }
+    }
+
+
+    // userID
+    const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
     const changePage = (data) => {
         setPageNumber(data?.selected)
@@ -32,9 +65,15 @@ const OrderHistory = () => {
 
 
     useEffect(() => {
+        setFilteredOH(orderHistoryData)
+    }, [order_history_data])
+
+
+    useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(userOrderHistory())
     }, [dispatch])
+
 
 
     return (
@@ -54,17 +93,24 @@ const OrderHistory = () => {
                             {/* Filter Dropdown */}
                             <div className='d-flex justify-content-end mt-4'>
                                 <div className="dropdown">
-                                    <button className="btn dropdown-toggle d-flex" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="/assets/img/filter.png" alt="img" style={{ "width": "18px", "height": "18px", "margin": "3px 4px" }} /> <h2 className='fw-bold'>Filter<i className="fa-solid fa-caret-down mx-2"></i></h2>
+                                    <button className="btn btn-outline-dark dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i className="ri-equalizer-line" style={{ "fontSize": "18px" ,"margin":"0 5px"}}></i>
+                                        <h2 className='fw-bold'>Filter<i className="fa-solid fa-caret-down mx-2"></i></h2>
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ "width": "180px" }}>
+                                        {/* Clear Filter Button */}
+                                        <li className=' text-center m-3'><button className="btn btn-outline-primary fs-5" onClick={() => filterOrderHistory("")} style={{"borderRadius":"20px"}}>CLEAR FILTER</button></li>
+
+                                        {/* Price Filter Options */}
                                         <p className='fw-bold fs-4 px-3'>Price:</p>
-                                        <li><Link className="dropdown-item" to="#!">Low To High</Link></li>
-                                        <li><Link className="dropdown-item" to="#!">High To Low</Link></li>
+                                        <li><Link className="dropdown-item" to="#!" onClick={() => filterOrderHistory("LtoH")} >Low To High</Link></li>
+                                        <li><Link className="dropdown-item" to="#!" onClick={() => filterOrderHistory("HtoL")} >High To Low</Link></li>
                                         <hr />
+
+                                        {/* Date Filter Options */}
                                         <p className='fw-bold fs-4 px-3'>Date:</p>
-                                        <li><Link className="dropdown-item" to="#!">Newest First</Link></li>
-                                        <li><Link className="dropdown-item" to="#!">Oldest First</Link></li>
+                                        <li><Link className="dropdown-item" to="#!" onClick={() => filterOrderHistory("NF")} >Newest First</Link></li>
+                                        <li><Link className="dropdown-item" to="#!" onClick={() => filterOrderHistory("OF")} >Oldest First</Link></li>
                                     </ul>
                                 </div>
                                 {/* <button className='d-flex fw-bold'>
@@ -75,11 +121,15 @@ const OrderHistory = () => {
                                 {/* order his item  */}
                                 {
                                     orderHistoryData?.length ?
-                                        orderHistoryData?.map((item) => {
+                                        filteredOH?.map((item) => {
                                             return (
                                                 <div className="orderhistroy_item" key={item?._id}>
                                                     <div className="ribbon-wrapper-green">
-                                                        <div className="ribbon-green">Won</div>
+                                                        {
+                                                            item?.is_win === 'true' ?
+                                                                <div className="ribbon-green">Won</div>
+                                                                : null
+                                                        }
                                                     </div>
 
                                                     <div className="pro_im_t">
@@ -94,8 +144,12 @@ const OrderHistory = () => {
                                                         </div>
                                                     </div>
                                                     <div className="info_item">
-                                                        <h3 className="dateofresult"><span></span>Total Price</h3>
-                                                        <p>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{(item?.total_discount_price)}</p>
+                                                        <h3 className="dateofresult"><span></span>Round: {item?.round}</h3>
+                                                    </div>
+                                                    <div className="info_item">
+                                                        <h3 className="dateofresult"><span></span>Price</h3>
+                                                        <p>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(item?.total_discount_price)}
+                                                        </p>
                                                     </div>
                                                     <div className="info_item">
                                                         <h3 className="dateofresult"><span></span>Date Of Purchase</h3>
@@ -107,7 +161,7 @@ const OrderHistory = () => {
                                                     </div>
                                                     <div className="info_item">
                                                         <h3 className="dateofresult"><span></span>Date Of Result </h3>
-                                                        <p>{new Date(item?.time_left).toLocaleString('en-US', {
+                                                        <p>{new Date(item?.result_on).toLocaleString('en-US', {
                                                             month: 'short',
                                                             day: '2-digit',
                                                             year: 'numeric'

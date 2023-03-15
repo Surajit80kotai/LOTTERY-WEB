@@ -5,6 +5,7 @@ import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart,
 import { useEffect } from 'react'
 import { emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
+import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 
 const baseUrl = process.env.REACT_APP_NODE_HOST
 
@@ -14,24 +15,23 @@ const Cart = () => {
   const cartLength = cart_data?.length
   const [amount, setAmount] = useState({ subtotal: 0, discount: 0, total: 0 })
 
-  // currency variables
-  const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-  const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
+  // Accesing token
+  const token = JSON.parse(window.localStorage.getItem("token"))
 
-
+  // console.log(cart_data);
 
   // CalculateSum Function
   const calculateSum = () => {
     setTimeout(() => {
       let st = 0
       let dc = 0
-      cart_data?.map(({ resp, info }) => {
-        if (info[0].discount_percentage) {
-          st += (Number((info[0].ticket_price * resp.quantity)))
-          dc += (Number(((info[0].ticket_price) * (info[0].discount_percentage) / 100) * resp.quantity))
+      cart_data?.map(({ resp }) => {
+        if (Number(resp?.round_info?._dis)) {
+          st += (Number((resp?.round_info?._price * resp.quantity)))
+          dc += (Number(((resp?.round_info?._price) * (Number(resp?.round_info?._dis)) / 100) * resp.quantity))
           return Number(st)
         } else {
-          st += Number(info[0].ticket_price * resp.quantity)
+          st += Number(resp?.round_info?._price * resp.quantity)
           return st
         }
       })
@@ -138,16 +138,16 @@ const Cart = () => {
                               <div className="other_info">
                                 <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
                                 {/* Calculation of discounted price */}
-                                <p className="tic_price fw-bold text-dark">Price Of Ticket : {userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}
+                                <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}
                                   {
-                                    (Number(item?.info[0]?.ticket_price - ((item?.info[0]?.ticket_price * item?.info[0]?.discount_percentage) / 100)) * item?.resp?.quantity).toFixed(2)
+                                    (Number(item?.resp?.round_info?._price - ((item?.resp?.round_info?._price * item?.resp?.round_info?._dis) / 100)) * item?.resp?.quantity).toFixed(2)
                                   }
                                 </p>
                               </div>
                               <div className="date_result">
                                 {/* Calculating the data */}
                                 <h5><span><img src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
-                                  {new Date(item?.info[0]?.time_left).toLocaleString('en-US', {
+                                  {new Date(item?.resp?.round_info?._time).toLocaleString('en-US', {
                                     month: 'short',
                                     day: '2-digit',
                                     year: 'numeric'
@@ -202,7 +202,7 @@ const Cart = () => {
                     <div className="price_item borderbottom">
                       <h4 className="price_text">Price <span> ({cart_data?.length} Item):</span></h4>
                       <h6 className="price_value">
-                        {cart_data ? <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span> : 0}
+                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
                         {(amount.subtotal).toFixed(2)}
                       </h6>
                     </div>
@@ -211,7 +211,7 @@ const Cart = () => {
                     <div className="price_item borderbottom">
                       <h4 className="price_text">Total Discount :</h4>
                       <h6 className="price_value text-success">
-                        {cart_data ? <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}-</span> : 0}
+                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}-</span> : 0}
                         {(amount.discount).toFixed(2)}
                       </h6>
                     </div>
@@ -220,7 +220,7 @@ const Cart = () => {
                     <div className="price_item mt-5">
                       <h4 className="price_text">Total Payables:</h4>
                       <h6 className="price_value">
-                        {cart_data ? <span>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}</span> : 0}
+                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
                         {(amount.total).toFixed(2)}
                       </h6>
                     </div>

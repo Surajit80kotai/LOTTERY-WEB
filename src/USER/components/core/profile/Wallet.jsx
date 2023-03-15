@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { cinetPay, getTransactions, initPay, updateTransactions } from '../../../services/slice/PaymentSlice';
 import { getBalance } from '../../../services/slice/UserSlice';
+import { currency, currency_symbol, generalCurrency, generalCurrency_symbol } from '../../../util/Currency';
 import PreLoader from '../preloader/PreLoader';
 import SideNav from './SideNav';
 
@@ -15,12 +15,14 @@ const Wallet = () => {
     const dispatch = useDispatch()
     const { balance } = useSelector((state) => state.userslice)
     const { paymentData, transaction_data, loading } = useSelector((state) => state.paymentslice)
+    // userID
+    const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
     // currency variables
-    const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
-    const generalCurrency = process.env.REACT_APP_GENERAL_CURRENCY
-    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
+    // const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
+    // const generalCurrency = process.env.REACT_APP_GENERAL_CURRENCY
+    // const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
+    // const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
 
 
     // handleChange function for onChange
@@ -95,7 +97,7 @@ const Wallet = () => {
                                             <div className="total_balns">
                                                 <span>Total Balance</span>
                                                 {
-                                                    balance?.balance > 0 ? <h5 className="total_amount">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}&nbsp;0</h5>
+                                                    balance?.balance > 0 ? <h5 className="total_amount">{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userID ? currency_symbol : generalCurrency_symbol}&nbsp;0</h5>
                                                 }
 
                                             </div>
@@ -110,7 +112,7 @@ const Wallet = () => {
                                                     <div className="col-md-6">
                                                         <div className="payment_input">
                                                             <div className="currency_icon">
-                                                                <p>{userCurrency ? userCurrency : generalCurrency}</p>
+                                                                <p>{userID ? currency : generalCurrency}</p>
                                                             </div>
                                                             <input
                                                                 type="text"
@@ -165,7 +167,7 @@ const Wallet = () => {
                                                                                     : <td>{item.payment_date}</td>
                                                                             }
                                                                             <td>{item.merchant}</td>
-                                                                            <td>{userCurrency_symbol} {item.amount}</td>
+                                                                            <td>{userID ? currency_symbol : generalCurrency_symbol}{item.amount}</td>
                                                                             {/* <td>{(item.status).replace(/_/g," ")}</td> */}
                                                                             <td>
                                                                                 {
@@ -202,7 +204,7 @@ const Wallet = () => {
                                 <div className="modal-content">
                                     <div className="modal-header">
                                         <h3>Add Money to Wallet</h3>
-                                        <h4>{userCurrency_symbol ? userCurrency_symbol : generalCurrency_symbol}{formValue.amount}</h4>
+                                        <h4>{userID ? currency_symbol : generalCurrency_symbol}{formValue.amount}</h4>
                                     </div>
                                     <div className="modal-body">
                                         <h4 className="option_title">Payment Option</h4>

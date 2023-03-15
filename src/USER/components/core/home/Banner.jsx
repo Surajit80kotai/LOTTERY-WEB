@@ -5,7 +5,7 @@ import BannerData from '../../common/banner/BannerData';
 
 const Banner = () => {
     const { fetch_lott_data } = useSelector((state) => state.lotteryslice)
-    const bannerData = fetch_lott_data?.map(item => {
+    const bannerData = fetch_lott_data?.filter(item => {
         return item?.is_banner === true ? item : null
     })
 
@@ -23,7 +23,7 @@ const Banner = () => {
                                     act = "active";
                                 }
                                 return (
-                                    <div className={`carousel-item ${act}`} key={index}>
+                                    <div className={`carousel-item ${act}`} key={index} data-bs-interval="2000">
                                         <BannerData item={item} id={item?._id} />
                                     </div>
                                 )

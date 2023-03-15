@@ -5,6 +5,7 @@ import { updateProfile } from '../../../services/slice/UserSlice'
 import { toast } from 'react-toastify'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
+import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol } from '../../../util/Currency'
 
 
 const MyProfile = () => {
@@ -21,8 +22,8 @@ const MyProfile = () => {
 
     const dispatch = useDispatch()
 
-    const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    // console.log(social_user?.photoURL)
+    // userID
+    const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
 
     // handleChange for onChange
@@ -290,7 +291,7 @@ const MyProfile = () => {
                                             </div>
                                             <p>Best Play of the month</p>
                                             <div className="total_amount">
-                                                <h4>{userCurrency_symbol}&nbsp;42.8k</h4>
+                                                <h4>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;42.8k</h4>
                                             </div>
                                             <div className="mt-5">
                                                 <Link to="#!" className="btn2">View all</Link>
@@ -330,7 +331,7 @@ const MyProfile = () => {
                                             </div>
                                             <p>Best Play of the month</p>
                                             <div className="total_amount">
-                                                <h4>{userCurrency_symbol}&nbsp;42.8k</h4>
+                                                <h4>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;42.8k</h4>
                                             </div>
                                             <div className="mt-5">
                                                 <Link to="#!" className="btn2">View all</Link>

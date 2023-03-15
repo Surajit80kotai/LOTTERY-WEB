@@ -34,11 +34,11 @@ const Login = () => {
         e.preventDefault()
         if (isNaN(formValues?.contact)) {
             const data = { user_id: formValues.contact, password: formValues.password, user_id_type: "email" }
-            console.log("if", data);
+            // console.log("if", data);
             dispatch(fetchLogin({ data, navigate, toast }))
         } else {
             const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, password: formValues.password, user_id_type: "phone" }
-            console.log("else", data);
+            // console.log("else", data);
             dispatch(fetchLogin({ data, navigate, toast }))
         }
     }
@@ -219,7 +219,7 @@ const Login = () => {
 
                                     {/* Forget password Link */}
                                     <div className="forget_password d-flex justify-content-center mt-5">
-                                        <span className='forget_pass mx-2'>Forget Password?</span><Link to="/f_password" className="forget_pass text-decoration-underline text-primary">Click Here</Link>
+                                        <span className='forget_pass mx-2'>Forgot Password?</span><Link to="/f_password" className="forget_pass text-decoration-underline text-primary">Click Here</Link>
                                     </div>
                                 </form>
                             </div>

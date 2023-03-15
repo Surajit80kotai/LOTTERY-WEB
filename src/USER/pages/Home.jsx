@@ -31,9 +31,10 @@ const Home = () => {
     const cosmetics = fetch_lott_data?.filter((item) => item.category === categoryObj["Cosmetic"])
     const study_travel = fetch_lott_data?.filter((item) => item.category === categoryObj["Study & abroad"])
     const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
+    const electronics = fetch_lott_data?.filter((item) => item.category === categoryObj["Electronics"])
 
     // slider array
-    const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn]
+    const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn, electronics]
 
     // finding a key from an object
     const getKey = (obj, value) => {
@@ -87,14 +88,19 @@ const Home = () => {
                                             </h2>
                                         </div>
                                         <div className="col-md-2">
-                                            <div className="view_all_bg">
-                                                <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
-                                                <div className="viewall_btn">
-                                                    <h6>Looking More? Click Here</h6>
-                                                    <Link to={`/viewall/${curItem[0]?.category}`} className="btn2">View All</Link>
-                                                </div>
-                                            </div>
+                                            {
+                                                curItem[0]?.category ?
+                                                    <div className="view_all_bg">
+                                                        <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                                                        <div className="viewall_btn">
+                                                            <h6>Looking More? Click Here</h6>
+                                                            <Link to={`/viewall/${curItem[0]?.category}`} className="btn2">View All</Link>
+                                                        </div>
+                                                    </div>
 
+                                                    : null
+                                            }
+                                            
                                         </div>
                                         <div className="col-md-10">
                                             <div id={`carouselExampleControls-${carouselID}`} className="carousel slide" data-bs-ride="carousel">
@@ -107,7 +113,7 @@ const Home = () => {
                                                             }
                                                             return (
                                                                 <div className={`carousel-item ${act}`
-                                                                } key={index}>
+                                                                } key={index} data-bs-interval="2000">
                                                                     <div className="mx-2">
                                                                         <div className="cards-wrapper">
                                                                             {
