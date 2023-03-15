@@ -100,7 +100,7 @@ const Home = () => {
 
                                                     : null
                                             }
-                                            
+
                                         </div>
                                         <div className="col-md-10">
                                             <div id={`carouselExampleControls-${carouselID}`} className="carousel slide" data-bs-ride="carousel">
@@ -113,7 +113,7 @@ const Home = () => {
                                                             }
                                                             return (
                                                                 <div className={`carousel-item ${act}`
-                                                                } key={index} data-bs-interval="4000" cycle>
+                                                                } key={index} data-bs-interval="4000" cycle="true">
                                                                     <div className="mx-2">
                                                                         <div className="cards-wrapper">
                                                                             {

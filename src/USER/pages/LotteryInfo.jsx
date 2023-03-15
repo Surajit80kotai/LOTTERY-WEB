@@ -160,7 +160,7 @@ const LotteryInfo = () => {
                                                             act = "active";
                                                         }
                                                         return (
-                                                            <div className={`custom-carousel-item carousel-item ${act}`} key={index} data-bs-interval="4000" cycle>
+                                                            <div className={`custom-carousel-item carousel-item ${act}`} key={index} data-bs-interval="4000" cycle="true">
                                                                 <img src={baseUrl + item} className="d-block w-100" alt="" />
                                                             </div>
                                                         )
