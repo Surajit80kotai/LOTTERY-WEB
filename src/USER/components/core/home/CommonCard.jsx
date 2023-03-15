@@ -6,6 +6,7 @@ import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSl
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
+import { toast } from 'react-toastify'
 
 const CommonCard = ({ item }) => {
     const [round, setRound] = useState(0)
@@ -43,6 +44,7 @@ const CommonCard = ({ item }) => {
         const cartData = { product_id: _id, user_id: userID, qty: 1, round_info: rounds[round], round_index: round }
         dispatch(addCart(cartData))
         setTimeout(() => {
+            toast.success("Item Added To The Cart")
             dispatch(getCart())
         }, 300)
         // setIsrender(!isrender)

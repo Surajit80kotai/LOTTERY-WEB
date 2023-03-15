@@ -50,7 +50,7 @@ export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, to
         const res = await CONTACTUS(formData)
         // console.log(res?.data);
         if (res?.data?.responseCode === 200) {
-            toast.info(res?.data?.message)
+            toast.success(res?.data?.message)
         } else if (res?.data?.responseCode === 452) {
             toast.info(res?.data?.message)
         }

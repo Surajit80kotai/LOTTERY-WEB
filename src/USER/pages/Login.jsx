@@ -81,7 +81,7 @@ const Login = () => {
 
                         <div className="right_part">
                             <div className="right_top">
-                                <h2 className="heading_form">Login</h2>
+                                <h2 className="heading_form">LOGIN</h2>
                                 <div className="social_sign">
                                     <button onClick={() => socialLogin(facebook)} className="social_signup"><i className="fab fa-facebook-f"></i></button>
                                     <button onClick={() => socialLogin(google)} className="social_signup"><i className="fab fa-google"></i></button>
@@ -228,7 +228,7 @@ const Login = () => {
                             <div className="company_logo text-center">
                                 <Link to="/"><img src="/assets/img/logo.png" alt="" className="img-fluid" /></Link>
                             </div>
-                            <h2 className="log_title">Welcome To Login</h2>
+                            <h2 className="log_title">Welcome To ES-PLAY</h2>
                             <h6 className="dont">Don't Have Account?</h6>
                             <Link to="/verifyphone" className="Signup">Sing Up</Link>
                         </div>

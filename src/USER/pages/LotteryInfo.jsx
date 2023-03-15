@@ -7,6 +7,7 @@ import { addCart, clearAddStatus, getCart } from '../services/slice/CartSlice'
 import { buyNowItem } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
+import { toast } from 'react-toastify'
 
 const LotteryInfo = () => {
     const [round, setRound] = useState(0)
@@ -60,6 +61,9 @@ const LotteryInfo = () => {
     const addToCart = () => {
         const cartData = { product_id: ticketInfo[0]._id, user_id: userID, qty: qty, round_info: ticketInfo[0]?.rounds[round], round_index: round }
         dispatch(addCart(cartData))
+        setTimeout(() => {
+            toast.success("Item Added To The Cart")
+        }, 300)
     }
 
     // buyNow function

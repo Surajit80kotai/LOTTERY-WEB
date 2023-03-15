@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
+import { toast } from 'react-toastify'
 
 const baseUrl = process.env.REACT_APP_NODE_HOST
 
@@ -65,6 +66,9 @@ const Cart = () => {
   // removeItem function
   const removeItem = (id) => {
     dispatch(delCartItem(id))
+    setTimeout(() => {
+      toast.success("Item Removed From Cart")
+    }, 300)
   }
 
 

@@ -121,7 +121,7 @@ const ForgetPassword = () => {
                         <div style={{ "display": !hidden ? "block" : "none" }}>
                             {/* Phone */}
                             <div className="forget" style={{ "display": !flag ? "block" : "none" }}>
-                                <label htmlFor="contact" className="form-label label_for">Enter Your Registered Phone Number</label>
+                                <label htmlFor="contact" className="form-label label_for">Enter Your Registered Phone Number Or Email</label>
                                 <div className="row">
                                     {
                                         isNaN(formValues?.contact) ?

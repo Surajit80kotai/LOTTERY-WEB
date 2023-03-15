@@ -70,7 +70,7 @@ const PlaceOrder = () => {
                 dispatch(emptyCart())
                 dispatch(emptyBuyNow())
             }
-            toast.success("Order success")
+            // toast.success("Order success")
             navigate('/ordersuccess')
             dispatch(emptyCart())
         }

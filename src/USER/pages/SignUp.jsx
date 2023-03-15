@@ -88,6 +88,9 @@ const SignUp = () => {
                 <div className="wrapper_area margin-top-5">
                     <div className="log_area">
                         <div className="right_part">
+                            <div className="right_top">
+                                <h2 className="heading_form mt-3">SIGN UP</h2>
+                            </div>
                             <div className="form_areas">
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
 
@@ -254,7 +257,7 @@ const SignUp = () => {
                             <div className="company_logo text-center">
                                 <Link to="/"><img src="/assets/img/logo.png" alt="" className="img-fluid" /></Link>
                             </div>
-                            <h2 className="log_title">Welcome To Registration</h2>
+                            <h2 className="log_title">Welcome To ES-PLAY</h2>
                             <h6 className="dont">Already Have An Account?</h6>
                             <Link to="/login" className="Signup">Sing In</Link>
                         </div>
