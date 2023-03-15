@@ -219,7 +219,7 @@ const Login = () => {
 
                                     {/* Forget password Link */}
                                     <div className="forget_password d-flex justify-content-center mt-5">
-                                        <span className='forget_pass mx-2'>Forget Password?</span><Link to="/f_password" className="forget_pass text-decoration-underline text-primary">Click Here</Link>
+                                        <span className='forget_pass mx-2'>Forgot Password?</span><Link to="/f_password" className="forget_pass text-decoration-underline text-primary">Click Here</Link>
                                     </div>
                                 </form>
                             </div>

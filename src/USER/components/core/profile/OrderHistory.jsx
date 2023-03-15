@@ -36,12 +36,19 @@ const OrderHistory = () => {
                 setFilteredOH(newData?.sort((a, b) => b.total_discount_price - a.total_discount_price))
                 break;
             case "NF":
-                setFilteredOH(newData?.sort((a, b) => a.createdAt - b.createdAt))
+                setFilteredOH(newData?.sort((a, b) => {
+                    const dateA = new Date(a.createdAt);
+                    const dateB = new Date(b.createdAt);
+                    return dateB.getTime() - dateA.getTime();
+                }))
                 break;
             case "OF":
-                setFilteredOH(newData?.sort((a, b) => b.createdAt - a.createdAt))
+                setFilteredOH(newData?.sort((a, b) => {
+                    const dateA = new Date(a.createdAt);
+                    const dateB = new Date(b.createdAt);
+                    return dateA.getTime() - dateB.getTime();
+                }))
                 break;
-
             default:
                 setFilteredOH(orderHistoryData)
                 break;
@@ -86,12 +93,13 @@ const OrderHistory = () => {
                             {/* Filter Dropdown */}
                             <div className='d-flex justify-content-end mt-4'>
                                 <div className="dropdown">
-                                    <button className="btn dropdown-toggle d-flex" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="/assets/img/filter.png" alt="img" style={{ "width": "18px", "height": "18px", "margin": "3px 4px" }} /> <h2 className='fw-bold'>Filter<i className="fa-solid fa-caret-down mx-2"></i></h2>
+                                    <button className="btn btn-outline-dark dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i className="ri-equalizer-line" style={{ "fontSize": "18px" ,"margin":"0 5px"}}></i>
+                                        <h2 className='fw-bold'>Filter<i className="fa-solid fa-caret-down mx-2"></i></h2>
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ "width": "180px" }}>
                                         {/* Clear Filter Button */}
-                                        <li className=' text-center m-3'><button className="btn btn-secondary  fs-5" onClick={() => filterOrderHistory("")} >CLEAR FILTER</button></li>
+                                        <li className=' text-center m-3'><button className="btn btn-outline-primary fs-5" onClick={() => filterOrderHistory("")} style={{"borderRadius":"20px"}}>CLEAR FILTER</button></li>
 
                                         {/* Price Filter Options */}
                                         <p className='fw-bold fs-4 px-3'>Price:</p>
