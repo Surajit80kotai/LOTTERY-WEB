@@ -98,9 +98,9 @@ const NavBar = () => {
               <Link className="nav-link" to="/charities">Charities</Link>
             </li>
             {/* Contact */}
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
-            </li>
+            </li> */}
           </ul>
 
           <div className="nv_rt">
