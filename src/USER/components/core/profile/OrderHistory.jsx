@@ -21,7 +21,8 @@ const OrderHistory = () => {
     const userPerPage = 8
     const pagesVisited = pageNumber * userPerPage
     const data = [...order_history_data]
-    const orderHistoryData = data?.reverse().slice(pagesVisited, pagesVisited + userPerPage)
+    const orderHistoryData = data
+    // const orderHistoryData = data?.reverse().slice(pagesVisited, pagesVisited + userPerPage)
     const pageCount = Math.ceil(order_history_data?.length / userPerPage)
 
 
@@ -30,23 +31,23 @@ const OrderHistory = () => {
         const newData = [...order_history_data]
         switch (data) {
             case "LtoH":
-                setFilteredOH(newData?.sort((a, b) => a.total_discount_price - b.total_discount_price))
+                setFilteredOH(newData?.sort((a, b) => b.total_discount_price - a.total_discount_price))
                 break;
             case "HtoL":
-                setFilteredOH(newData?.sort((a, b) => b.total_discount_price - a.total_discount_price))
+                setFilteredOH(newData?.sort((a, b) => a.total_discount_price - b.total_discount_price))
                 break;
             case "NF":
                 setFilteredOH(newData?.sort((a, b) => {
                     const dateA = new Date(a.createdAt);
                     const dateB = new Date(b.createdAt);
-                    return dateB.getTime() - dateA.getTime();
+                    return dateA.getTime() - dateB.getTime();
                 }))
                 break;
             case "OF":
                 setFilteredOH(newData?.sort((a, b) => {
                     const dateA = new Date(a.createdAt);
                     const dateB = new Date(b.createdAt);
-                    return dateA.getTime() - dateB.getTime();
+                    return dateB.getTime() - dateA.getTime();
                 }))
                 break;
             default:
@@ -176,7 +177,7 @@ const OrderHistory = () => {
                                                             </div>
                                                         </div>
                                                     )
-                                                })
+                                                }).reverse().slice(pagesVisited, pagesVisited + userPerPage)
                                                 : <h1 className='text-center'>No order history present</h1>
                                         }
                                     </div>
