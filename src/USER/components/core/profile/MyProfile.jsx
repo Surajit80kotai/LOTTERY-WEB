@@ -281,7 +281,7 @@ const MyProfile = () => {
                             </div>
                         </div>
 
-                        <div className="container mb-4">
+                        {/* <div className="container mb-4">
                             <div className="row">
                                 <div className="col-md-4">
                                     <div className="one_total_box">
@@ -344,7 +344,7 @@ const MyProfile = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </main>

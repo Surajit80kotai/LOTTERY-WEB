@@ -54,7 +54,7 @@ const NavBar = () => {
         {/* Logo */}
         <Link className="navbar-brand" to="/">
           <div className="companyLogo">
-            <img src="/assets/img/logo.png" alt="logo" className="img-fluid" />
+            <img src="/assets/img/eshacplaylogo.png" alt="logo" className="img-fluid" />
           </div>
         </Link>
 
@@ -98,9 +98,9 @@ const NavBar = () => {
               <Link className="nav-link" to="/charities">Charities</Link>
             </li>
             {/* Contact */}
-            {/* <li className="nav-item">
-                  <Link className="nav-link" to="/contact">Contact</Link>
-                </li> */}
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact">Contact</Link>
+            </li>
           </ul>
 
           <div className="nv_rt">
