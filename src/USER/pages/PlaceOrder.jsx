@@ -30,7 +30,6 @@ const PlaceOrder = () => {
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
 
-    console.log(cart_data);
     // On orderPlace function
     const procced = () => {
         if (buyNowDataObj?.length) {
@@ -49,7 +48,6 @@ const PlaceOrder = () => {
                 })
                 return acc
             }, [])
-            console.log(cartData);  
             const orderData = { price: amount, product_info: cartData }
             dispatch(placeOrder(orderData))
         }
