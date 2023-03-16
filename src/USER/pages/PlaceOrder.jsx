@@ -30,24 +30,26 @@ const PlaceOrder = () => {
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
 
+    console.log(cart_data);
     // On orderPlace function
     const procced = () => {
         if (buyNowDataObj?.length) {
             const buyNowData = buy_now_data?.product_info
             dispatch(itemBuyNow(buyNowData))
         } else if (cart_data?.length) {
-            const cartData = cart_data?.reduce((acc, { resp, info }) => {
+            const cartData = cart_data?.reduce((acc, { resp }) => {
                 acc.push({
                     id: resp._id,
                     user_id: resp.user_id,
                     product_id: resp.product_id,
                     quantity: resp.quantity,
-                    ticket_price: info[0].ticket_price,
-                    discount_percentage: info[0].discount_percentage,
+                    ticket_price: resp?.round_info?._price,
+                    discount_percentage: resp?.round_info?._dis,
                     round_index: resp.round_index
                 })
                 return acc
             }, [])
+            console.log(cartData);  
             const orderData = { price: amount, product_info: cartData }
             dispatch(placeOrder(orderData))
         }

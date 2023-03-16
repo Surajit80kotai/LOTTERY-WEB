@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart, updateQTY } from '../services/slice/CartSlice'
 import { useEffect } from 'react'
-import { emptyBuyNow } from '../services/slice/PaymentSlice'
+import { clearOrderedData, emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 import { toast } from 'react-toastify'
@@ -85,6 +85,7 @@ const Cart = () => {
     return () => {
       dispatch(clearUpdateStatus())
       dispatch(clearDeleteStatus())
+      dispatch(clearOrderedData())
     }
   }, [dispatch, cartLength, update_status, delete_status])
 
