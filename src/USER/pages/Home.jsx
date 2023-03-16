@@ -113,7 +113,7 @@ const Home = () => {
                                                             }
                                                             return (
                                                                 <div className={`carousel-item ${act}`
-                                                                } key={index} data-bs-interval="4000" cycle="true">
+                                                                } key={index} data-bs-interval="5000" cycle="true">
                                                                     <div className="mx-2">
                                                                         <div className="cards-wrapper">
                                                                             {
