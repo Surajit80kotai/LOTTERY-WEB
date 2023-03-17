@@ -16,13 +16,12 @@ const NavBar = () => {
   const navigate = useNavigate()
   const token = JSON.parse(window.localStorage.getItem("token"))
   const user = JSON.parse(window.localStorage.getItem("user"))
-  const social_user = JSON.parse(window.localStorage.getItem("social_user"))
   const { cart_data } = useSelector((state) => state.cartslice)
   const cartLength = cart_data?.length
   const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
   const location = useLocation()
 
-  // console.log(location.pathname);
+  // console.log(social_user.displayName);
 
 
   // Log Out Function
@@ -132,7 +131,12 @@ const NavBar = () => {
                 {
                   token ?
                     <Link className=" dropdown-toggle userbtn mx-2" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      {token ? user?.full_name : social_user?.displayName}
+                      {token ?
+                        user?.full_name ?
+                          user?.full_name
+                          : user?.displayName
+                        : null
+                      }
                       <i className="fas fa-user mx-2"></i>
                       <i className="fa-solid fa-caret-down"></i>
                     </Link>
