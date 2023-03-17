@@ -7,6 +7,7 @@ import PreLoader from '../components/core/preloader/PreLoader'
 import CommonCard from '../components/core/home/CommonCard'
 import { Link } from 'react-router-dom'
 import { getCart } from '../services/slice/CartSlice'
+// import { testApi } from '../services/slice/PaymentSlice'
 
 
 const Home = () => {
@@ -48,6 +49,7 @@ const Home = () => {
 
     // mount cycle
     useEffect(() => {
+        // dispatch(testApi())
         window.scrollTo(0, 0)
         dispatch(fetchLottery())
         dispatch(fetchCategory())

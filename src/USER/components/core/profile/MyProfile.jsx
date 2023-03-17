@@ -207,7 +207,7 @@ const MyProfile = () => {
                                                     <label htmlFor="dob" className="form-label label_style">Date Of Birth</label>
                                                     {
                                                         user ?
-                                                            user?.newDOB ?
+                                                            user?.dob ?
                                                                 < input
                                                                     type="text"
                                                                     className="form-control form_input in_disa"

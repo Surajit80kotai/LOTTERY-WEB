@@ -169,7 +169,7 @@ const PlaceOrder = () => {
                                                         <p className="amount fw-bold text-dark">Item Quantity : {buy_now_data?.product_info?.quantity}</p>
                                                         <p className="tic_price fw-bold text-dark">Price Of Ticket :
                                                             {token ? currency_symbol : generalCurrency_symbol}
-                                                            {buy_now_data?.product_info?.total_discount_price}
+                                                            &nbsp;{buy_now_data?.product_info?.total_discount_price}
                                                         </p>
                                                     </div>
                                                     <div className="date_result">
@@ -202,7 +202,7 @@ const PlaceOrder = () => {
                                                                     </div>
                                                                     <div className="other_info">
                                                                         <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
-                                                                        <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}
+                                                                        <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}&nbsp;
                                                                             {
                                                                                 (Number((item?.resp?.round_info?._price) - (((item?.resp?.round_info?._price) * (item?.resp?.round_info?._dis)) / 100)) * (item?.resp?.quantity)).toFixed(2)
                                                                             }
@@ -245,13 +245,13 @@ const PlaceOrder = () => {
                                                             <h4 className="price_text">Price <span> ({buy_now_data?.product_info?.quantity} Item):</span></h4>
                                                             <h6 className="price_value">
                                                                 {buy_now_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
-                                                                {buy_now_data?.amount ? (buy_now_data?.amount?.subtotal).toFixed(2) : 0}
+                                                                &nbsp;{buy_now_data?.amount ? (buy_now_data?.amount?.subtotal).toFixed(2) : 0}
                                                             </h6>
                                                         </div>
                                                         <div className="price_item mb-5">
                                                             <h4 className="price_text">Total Discount :</h4>
                                                             <h6 className="price_value text-success">
-                                                                {buy_now_data ? <span>-{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
+                                                                {buy_now_data ? <span>&nbsp;-{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
                                                                 {buy_now_data?.amount ? (buy_now_data?.amount?.discount).toFixed(2) : 0}
                                                             </h6>
                                                         </div>
@@ -260,7 +260,7 @@ const PlaceOrder = () => {
                                                             <h6 className="price_value">
                                                                 {buy_now_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
 
-                                                                {buy_now_data?.amount ? (buy_now_data?.amount?.total).toFixed(2) : 0}
+                                                                &nbsp;{buy_now_data?.amount ? (buy_now_data?.amount?.total).toFixed(2) : 0}
                                                             </h6>
                                                         </div>
                                                     </div>
@@ -277,13 +277,13 @@ const PlaceOrder = () => {
                                                             <h4 className="price_text">Price <span> ({cart_data?.length} Item):</span></h4>
                                                             <h6 className="price_value">
                                                                 {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
-                                                                {(amount.subtotal).toFixed(2)}
+                                                                &nbsp;{(amount.subtotal).toFixed(2)}
                                                             </h6>
                                                         </div>
                                                         <div className="price_item mb-5">
                                                             <h4 className="price_text">Total Discount :</h4>
                                                             <h6 className="price_value text-success">
-                                                                {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}-</span> : 0}
+                                                                {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}&nbsp;-</span> : 0}
                                                                 {(amount.discount).toFixed(2)}
                                                             </h6>
                                                         </div>
@@ -292,7 +292,7 @@ const PlaceOrder = () => {
                                                             <h6 className="price_value">
                                                                 {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
 
-                                                                {(amount.total).toFixed(2)}
+                                                                &nbsp;{(amount.total).toFixed(2)}
                                                             </h6>
                                                         </div>
                                                     </div>
@@ -319,7 +319,7 @@ const PlaceOrder = () => {
                                                             <span className='fw-bold fs-3'>Wallet Balance&nbsp;:</span>&nbsp;&nbsp;
                                                             {
                                                                 (balance?.balance) > 0 ?
-                                                                    <span className="upi_icon fw-bolder fs-4">{token ? currency_symbol : generalCurrency_symbol}{(balance?.balance)?.toFixed(2)}</span> :
+                                                                    <span className="upi_icon fw-bolder fs-4">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</span> :
                                                                     <span className="upi_icon fw-bolder">0</span>
                                                             }
                                                         </label>

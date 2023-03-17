@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { BUYNOW, GETALLTRANSACTION, PAYINIT, PLACEORDER, UPDATETRANSACTION } from "../api/Api";
+import { BUYNOW, GETALLTRANSACTION, PAYINIT, PLACEORDER, TESTAPI, UPDATETRANSACTION } from "../api/Api";
 
 const token = JSON.parse(window.localStorage.getItem("token"))
+const userID = (JSON.parse(window.localStorage.getItem("user"))?.user_id)
 // Defining header
 const header = {
     headers: {
@@ -33,8 +34,8 @@ export const cinetPay = createAsyncThunk("/v2/payment", async (formValue) => {
         "customer_zip_code": "06510",
         // "notify_url": window.location.origin + "/wallet",
         // "return_url": window.location.origin + "/wallet",
-        "notify_url": process.env.REACT_APP_NODE_HOST + "api/auth/check/post/update",
-        "return_url": process.env.REACT_APP_NODE_HOST + "api/auth/check/post/update",
+        "notify_url": process.env.REACT_APP_BASE_URL + "/auth/update/payment/process/" + userID,
+        "return_url": process.env.REACT_APP_BASE_URL + "/auth/update/payment/process/" + userID,
         "channels": "ALL",
         "metadata": token,
         "lang": "FR",
@@ -117,6 +118,18 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderDa
         console.log(err)
     }
 })
+
+//buy now
+// export const testApi = createAsyncThunk("/auth/update/payment/process/", async () => {
+//     try {
+//         console.log(userID);
+//         const res = await TESTAPI(userID)
+//         console.log("test api response", res);
+//         return res
+//     } catch (err) {
+//         console.log(err)
+//     }
+// })
 
 
 const initialState = {
@@ -242,6 +255,22 @@ export const PaymentSlice = createSlice({
             state.status = "failed"
             state.loading = false
         })
+
+        // States for testapi
+        // builder.addCase(testApi.pending, (state) => {
+        //     state.status = "pending"
+        //     state.loading = true
+        // })
+        // builder.addCase(testApi.fulfilled, (state, { payload }) => {
+        //     console.log("test api state", payload);
+        //     // state.ordered_data = payload
+        //     state.status = "success"
+        //     state.loading = false
+        // })
+        // builder.addCase(testApi.rejected, (state) => {
+        //     state.status = "failed"
+        //     state.loading = false
+        // })
     }
 })
 

@@ -164,13 +164,43 @@ const Wallet = () => {
                                                                             {
                                                                                 item.status_code === "662" ?
                                                                                     <td>
-                                                                                        {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
-                                                                                    </td> :
+                                                                                        {new Date(item?.createdAt).toLocaleString('en-US', {
+                                                                                            month: 'short',
+                                                                                            day: '2-digit',
+                                                                                            year: 'numeric',
+                                                                                            hour: 'numeric',
+                                                                                            minute: 'numeric',
+                                                                                            second: 'numeric'
+                                                                                        })}
+                                                                                    </td>
+                                                                                    // <td>
+                                                                                    //     {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
+                                                                                    // </td>
+                                                                                    :
                                                                                     item.status_code === "623" ?
                                                                                         <td>
-                                                                                            {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
+                                                                                            {new Date(item?.createdAt).toLocaleString('en-US', {
+                                                                                                month: 'short',
+                                                                                                day: '2-digit',
+                                                                                                year: 'numeric',
+                                                                                                hour: 'numeric',
+                                                                                                minute: 'numeric',
+                                                                                                second: 'numeric'
+                                                                                            })}
                                                                                         </td>
-                                                                                        : <td>{item.payment_date}</td>
+                                                                                        // <td>
+                                                                                        //     {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
+                                                                                        // </td>
+                                                                                        :
+                                                                                        <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                            month: 'short',
+                                                                                            day: '2-digit',
+                                                                                            year: 'numeric',
+                                                                                            hour: 'numeric',
+                                                                                            minute: 'numeric',
+                                                                                            second: 'numeric'
+                                                                                        })}</td>
+                                                                                // <td>{item.payment_date}</td>
                                                                             }
                                                                             {
                                                                                 item.payment_method === "OMCM" ?

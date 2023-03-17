@@ -72,3 +72,7 @@ export const GETOTP = (phone) => API.post("/system/register/otp", phone)
 
 // verify otp api
 export const VERIFYOTP = (formData) => API.post("/system/register/otp/verify", formData)
+
+
+// test API
+// export const TESTAPI = (id) => API.post("/auth/update/payment/process/" + id)
