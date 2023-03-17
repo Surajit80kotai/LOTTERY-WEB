@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userOrderHistory } from '../../../services/slice/UserSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
+import Timer from '../../../util/Timer'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 
@@ -168,13 +169,20 @@ const OrderHistory = () => {
                                                                 })}</p>
                                                             </div>
                                                             <div className="info_item">
-                                                                <h3 className="dateofresult"><span></span>Date Of Result </h3>
+                                                                <h3 className="dateofresult"><span></span>Result In</h3>
                                                                 <p>{new Date(item?.result_on).toLocaleString('en-US', {
                                                                     month: 'short',
                                                                     day: '2-digit',
                                                                     year: 'numeric'
                                                                 })}</p>
                                                             </div>
+                                                            {/* <div className="info_item mb-3">
+                                                                <h3 className="dateofresult"><span></span>Result In</h3>
+                                                                <div className="timer_area">
+                                                                    <Timer item={item} />
+                                                                </div>
+
+                                                            </div> */}
                                                         </div>
                                                     )
                                                 }).reverse().slice(pagesVisited, pagesVisited + userPerPage)
