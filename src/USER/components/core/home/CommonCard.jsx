@@ -113,8 +113,8 @@ const CommonCard = ({ item }) => {
                             <div className="pro_img">
                                 {/* Image Condition */}
                                 {
-                                    (is_image?.length) ? <img src={baseUrl + main_image} alt="" className="img-fluid " />
-                                        : <img src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
+                                    (is_image?.length) ? <img loading="lazy" src={baseUrl + main_image} alt="" className="img-fluid " />
+                                        : <img loading="lazy" src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
                                 }
                             </div>
                         </div>
@@ -227,7 +227,7 @@ const CommonCard = ({ item }) => {
                 // <div className="col-md-3 product_item">
                 //     <div className="product_item_one">
                 //         <div className="view_all_bg">
-                //             <img src="/assets/img/viewmorecard.png" alt="" className="img-fluid" />
+                //             <img loading="lazy" src="/assets/img/viewmorecard.png" alt="" className="img-fluid" />
                 //             <div className="viewall_btn">
                 //                 <h6>Looking More? Click Here</h6>
                 //                 <Link className="btn2" to={`/viewall/${category}`}>View All</Link>

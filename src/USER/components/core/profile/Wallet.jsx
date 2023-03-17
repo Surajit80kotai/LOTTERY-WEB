@@ -52,8 +52,8 @@ const Wallet = () => {
             payment_token: paymentData?.data?.payment_token
         }
         if (paymentData.code === "201") {
-            window.open(paymentData.data.payment_url, "_self")
-            // console.log(payment_data)
+            window.open(paymentData.data.payment_url, "_blank")
+            // console.log({ payment_data: payment_data })
             dispatch(initPay(payment_data))
         }
     }
@@ -148,7 +148,7 @@ const Wallet = () => {
                                                         <thead className="table_head sticky-top ">
                                                             <tr>
                                                                 <th scope="col">Date</th>
-                                                                <th scope="col">Merchant</th>
+                                                                <th scope="col" colSpan={2}>Merchant</th>
                                                                 <th scope="col">Amount</th>
                                                                 <th scope="col">Status</th>
                                                             </tr>
@@ -163,24 +163,66 @@ const Wallet = () => {
                                                                                 item.status_code === "662" ?
                                                                                     <td>
                                                                                         {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
-                                                                                    </td>
-                                                                                    : <td>{item.payment_date}</td>
+                                                                                    </td> :
+                                                                                    item.status_code === "623" ?
+                                                                                        <td>
+                                                                                            {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
+                                                                                        </td>
+                                                                                        : <td>{item.payment_date}</td>
                                                                             }
-                                                                            <td>{item.merchant}</td>
-                                                                            <td>{userID ? currency_symbol : generalCurrency_symbol}{item.amount}</td>
+                                                                            {
+                                                                                item.payment_method === "OMCM" ?
+                                                                                    <td colSpan={2}>
+                                                                                        <span className='payment_logo'>
+                                                                                            <img src="/assets/img/omcm.png" alt="" />
+                                                                                        </span>
+                                                                                        Orange Money
+                                                                                    </td>
+                                                                                    :
+                                                                                    item.payment_method === "MTNCM" ?
+                                                                                        <td colSpan={2}>
+                                                                                            <span className='payment_logo'>
+                                                                                                <img src="/assets/img/mtncm.png" alt="" />
+                                                                                            </span>
+                                                                                            MTN Mobile Money
+                                                                                        </td>
+                                                                                        :
+                                                                                        item.payment_method === "VISAMCM" ?
+                                                                                            <td colSpan={2}>
+                                                                                                <span className='payment_logo'>
+                                                                                                    <img src="/assets/img/visamcm.png" alt="" />
+                                                                                                </span>
+                                                                                                VISA/MasterCard
+                                                                                            </td>
+                                                                                            :
+                                                                                            <td colSpan={2}>
+                                                                                                <span className='payment_logo'>
+                                                                                                    <img src="/assets/img/pending.png" alt="" />
+                                                                                                </span>
+                                                                                                Waiting For Payment
+                                                                                            </td>
+                                                                            }
+
+                                                                            <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
                                                                             {/* <td>{(item.status).replace(/_/g," ")}</td> */}
                                                                             <td>
                                                                                 {
                                                                                     // WAITING_CUSTOMER_PAYMENT
-                                                                                    (item.status) === "WAITING_CUSTOMER_PAYMENT" ?
+                                                                                    (item.status_code === "662") ?
                                                                                         <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>PENDING</span>
-                                                                                        // PAYMENT_FAILED
-                                                                                        : (item.status) === "PAYMENT_FAILED" ?
-                                                                                            <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
-                                                                                            // SUCCES
-                                                                                            : (item.status) === "SUCCES" ?
-                                                                                                <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>SUCCESS</span>
-                                                                                                : null
+                                                                                        :
+                                                                                        // WAITING_CUSTOMER_TO_VALIDATE
+                                                                                        (item.status_code === "623") ?
+                                                                                            <span style={{ "color": "#ff9900" }}><i className="fa-regular fa-clock"></i> TIME EXPIRED</span>
+                                                                                            // PAYMENT_FAILED
+                                                                                            : (item.status_code === "600") ?
+                                                                                                <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
+                                                                                                // SUCCES
+                                                                                                : (item.status_code === "00") ?
+                                                                                                    <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>SUCCESS</span>
+                                                                                                    :
+                                                                                                    // TRANSACTION ENDED
+                                                                                                    <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>TRANSACTION ENDED</span>
                                                                                 }
                                                                             </td>
 

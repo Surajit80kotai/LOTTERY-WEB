@@ -10,7 +10,7 @@ export const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYM
 export const generalCurrency = process.env.REACT_APP_GENERAL_CURRENCY
 
 
-export const currency = (userCurrency === "NGN" || userCurrency === "XAF" || userCurrency === "XAF") ?
+export const currency = (userCurrency === "NGN" || userCurrency === "XAF" || userCurrency === "XOF") ?
     userCurrency
     : otherCurrency
 export const currency_symbol = (userCurrency_symbol === "₦" || userCurrency_symbol === "CFA" || userCurrency_symbol === "FCFA") ?

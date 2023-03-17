@@ -63,7 +63,7 @@ const BannerData = ({ item, id }) => {
 
             <Link to={`/info/${id}`}>
                 <div className="banner_img">
-                    <img src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
+                    <img loading="lazy" src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
                 </div>
             </Link>
             <div className="banner_content">

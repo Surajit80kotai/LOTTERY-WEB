@@ -131,7 +131,7 @@ const Cart = () => {
                             {/* Image */}
                             <Link to={`/info/${item?.info[0]?._id}`}>
                               <div className="cart_item_img">
-                                <img src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
+                                <img loading="lazy" src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                               </div>
                             </Link>
 
@@ -151,7 +151,7 @@ const Cart = () => {
                               </div>
                               <div className="date_result">
                                 {/* Calculating the data */}
-                                <h5><span><img src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
+                                <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
                                   {new Date(item?.resp?.round_info?._time).toLocaleString('en-US', {
                                     month: 'short',
                                     day: '2-digit',
@@ -177,7 +177,7 @@ const Cart = () => {
                       })
                       :
                       <div className='text-center' >
-                        <img src="/assets/img/emptycart.png" alt="" />
+                        <img loading="lazy" src="/assets/img/emptycart.png" alt="" />
                         <h2>Your Cart Is Empty</h2>
                       </div>
 

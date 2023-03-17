@@ -3968,3 +3968,11 @@ margin: 0.5rem;
 .filter_button a:hover {
 	color: var(--primary-color);
 }
+
+.payment_logo img {
+	width: 30px;
+	height: 30px;
+	border-radius: 2rem;
+	margin-right: 1rem;
+	object-fit: cover;
+}

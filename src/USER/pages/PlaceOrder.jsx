@@ -158,7 +158,7 @@ const PlaceOrder = () => {
                                             <div className="cart_list_item">
                                                 <Link to={`/info/${buy_now_data?.ticket?._id}`}>
                                                     <div className="cart_item_img">
-                                                        <img src={baseUrl + buy_now_data?.ticket?.is_image} alt="" className="img-fluid" />
+                                                        <img loading="lazy" src={baseUrl + buy_now_data?.ticket?.is_image} alt="" className="img-fluid" />
                                                     </div>
                                                 </Link>
                                                 <div className="cart_item_content">
@@ -173,7 +173,7 @@ const PlaceOrder = () => {
                                                         </p>
                                                     </div>
                                                     <div className="date_result">
-                                                        <h5><span><img src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
+                                                        <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
                                                             {new Date(buy_now_data?.product_info?.round_info?._time).toLocaleString('en-US', {
                                                                 month: 'short',
                                                                 day: '2-digit',
@@ -193,7 +193,7 @@ const PlaceOrder = () => {
                                                             <div className="cart_list_item" key={item.resp._id} id={item.resp._id}>
                                                                 <Link to={`/info/${item?.info[0]?._id}`}>
                                                                     <div className="cart_item_img">
-                                                                        <img src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
+                                                                        <img loading="lazy" src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                                                                     </div>
                                                                 </Link>
                                                                 <div className="cart_item_content">
@@ -209,7 +209,7 @@ const PlaceOrder = () => {
                                                                         </p>
                                                                     </div>
                                                                     <div className="date_result">
-                                                                        <h5><span><img src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
+                                                                        <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
                                                                             {new Date(item?.resp?.round_info?._time).toLocaleString('en-US', {
                                                                                 month: 'short',
                                                                                 day: '2-digit',
@@ -223,7 +223,7 @@ const PlaceOrder = () => {
                                                     })
                                                     :
                                                     <div className='text-center' >
-                                                        <img src="/assets/img/emptycart.png" alt="" />
+                                                        <img loading="lazy" src="/assets/img/emptycart.png" alt="" />
                                                         <h2>Your Order List Is Empty</h2>
                                                     </div>
 

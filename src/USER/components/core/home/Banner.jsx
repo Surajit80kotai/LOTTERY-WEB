@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import "slick-carousel/slick/slick.css";
 import BannerData from '../../common/banner/BannerData';
 
 const Banner = () => {

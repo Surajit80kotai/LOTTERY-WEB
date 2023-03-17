@@ -161,17 +161,17 @@ const LotteryInfo = () => {
                                                         }
                                                         return (
                                                             <div className={`custom-carousel-item carousel-item ${act}`} key={index} data-bs-interval="5000" cycle="true">
-                                                                <img src={baseUrl + item} className="d-block w-100" alt="" />
+                                                                <img src={baseUrl + item} className="d-block w-100" alt="" loading="lazy" />
                                                             </div>
                                                         )
                                                     })
                                                     :
                                                     (is_image?.length) ?
                                                         <div className="custom-carousel-item carousel-item active">
-                                                            <img src={baseUrl + mainimage} className="d-block w-100" alt="" />
+                                                            <img src={baseUrl + mainimage} className="d-block w-100" alt="" loading="lazy" />
                                                         </div>
                                                         : <div className="custom-carousel-item carousel-item active">
-                                                            <img src="/assets/img/imageunavailable.jpeg" className="d-block w-100" alt="" />
+                                                            <img src="/assets/img/imageunavailable.jpeg" className="d-block w-100" alt="" loading="lazy" />
                                                         </div>
                                                 }
 
