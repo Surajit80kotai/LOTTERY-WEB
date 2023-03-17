@@ -18,12 +18,6 @@ const Wallet = () => {
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
-    // currency variables
-    // const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
-    // const generalCurrency = process.env.REACT_APP_GENERAL_CURRENCY
-    // const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    // const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
-
 
     // handleChange function for onChange
     const handleChange = (e) => {
@@ -44,6 +38,14 @@ const Wallet = () => {
         }
     }
 
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // const reloadParam = urlParams.get('q');
+
+    // if (reloadParam === 'reload') {
+    //     window.location.href = "http://192.168.1.18:3000/wallet" // do something if the reload parameter exists in the URL
+    // }
+
     // Redirect page function
     const redirectPage = () => {
         const payment_data = {
@@ -52,7 +54,7 @@ const Wallet = () => {
             payment_token: paymentData?.data?.payment_token
         }
         if (paymentData.code === "201") {
-            window.open(paymentData.data.payment_url, "_blank")
+            window.open(paymentData.data.payment_url, "_self")
             // console.log({ payment_data: payment_data })
             dispatch(initPay(payment_data))
         }
