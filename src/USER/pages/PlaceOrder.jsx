@@ -78,6 +78,7 @@ const PlaceOrder = () => {
 
 
     useEffect(() => {
+        console.log(buy_now_data);
         checkOrderData()
     }, [ordered_data, balance])
 
@@ -156,7 +157,7 @@ const PlaceOrder = () => {
                                     buyNowDataObj?.length > 0 ?
                                         <div className="order_history_summary col-md-8">
                                             <div className="cart_list_item">
-                                                <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.round_index}`}>
+                                                <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.product_info?.round_index}`}>
                                                     <div className="cart_item_img">
                                                         <img loading="lazy" src={baseUrl + buy_now_data?.ticket?.is_image} alt="" className="img-fluid" />
                                                     </div>
