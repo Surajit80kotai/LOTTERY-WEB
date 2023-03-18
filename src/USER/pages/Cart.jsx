@@ -129,7 +129,7 @@ const Cart = () => {
 
                           <div className="cart_list_item" key={item?.resp?._id}>
                             {/* Image */}
-                            <Link to={`/info/${item?.info[0]?._id}`}>
+                            <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
                               <div className="cart_item_img">
                                 <img loading="lazy" src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                               </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { useTimer } from '../customHooks/useTimer'
@@ -10,8 +10,7 @@ import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 import { toast } from 'react-toastify'
 
 const LotteryInfo = () => {
-    const [round, setRound] = useState(0)
-    const { lid } = useParams()
+    const { lid, round } = useParams()
     const lottData = JSON.parse(window.localStorage.getItem("data"))
     const ticketInfo = lottData?.filter((item) => item._id === lid)
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
@@ -33,13 +32,6 @@ const LotteryInfo = () => {
     const baseUrl = process.env.REACT_APP_NODE_HOST           //base url link
     const qty = 1                                       // default quantity of a ticket
 
-
-    // ticket rounds calculation function
-    const calculateRounds = (round) => {
-        if (ticketInfo[0].rounds[round]._status === false) {
-            setRound(round + 1)
-        }
-    }
 
     // IncQty function
     // const IncQty = () => {
@@ -120,7 +112,6 @@ const LotteryInfo = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        calculateRounds(round)
         return () => {
             dispatch(getCart())
             dispatch(clearAddStatus())
@@ -324,7 +315,7 @@ const LotteryInfo = () => {
                                                     (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                         <h3>
                                                             <span style={{ "marginRight": "20px" }}>
-                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{(round + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
+                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
                                                             <span><img src="/assets/img/9121436 1.png" alt="" /></span>
                                                             Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
                                                         </h3> : <h3>All tickets sold</h3>

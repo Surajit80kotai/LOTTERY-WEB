@@ -156,7 +156,7 @@ const PlaceOrder = () => {
                                     buyNowDataObj?.length > 0 ?
                                         <div className="order_history_summary col-md-8">
                                             <div className="cart_list_item">
-                                                <Link to={`/info/${buy_now_data?.ticket?._id}`}>
+                                                <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.round_index}`}>
                                                     <div className="cart_item_img">
                                                         <img loading="lazy" src={baseUrl + buy_now_data?.ticket?.is_image} alt="" className="img-fluid" />
                                                     </div>
@@ -191,7 +191,7 @@ const PlaceOrder = () => {
                                                     cart_data?.map((item) => {
                                                         return (
                                                             <div className="cart_list_item" key={item.resp._id} id={item.resp._id}>
-                                                                <Link to={`/info/${item?.info[0]?._id}`}>
+                                                                <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
                                                                     <div className="cart_item_img">
                                                                         <img loading="lazy" src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                                                                     </div>
