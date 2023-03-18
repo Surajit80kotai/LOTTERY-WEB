@@ -227,12 +227,20 @@ const Wallet = () => {
                                                                                                 VISA/MasterCard
                                                                                             </td>
                                                                                             :
-                                                                                            <td colSpan={2}>
-                                                                                                <span className='payment_logo'>
-                                                                                                    <img src="/assets/img/pending.png" alt="" />
-                                                                                                </span>
-                                                                                                Waiting For Payment
-                                                                                            </td>
+                                                                                            item.payment_method === null ?
+                                                                                                <td colSpan={2}>
+                                                                                                    <span className='payment_logo'>
+                                                                                                        <img src="/assets/img/cancel.png" alt="" />
+                                                                                                    </span>
+                                                                                                    Transaction Cancelled
+                                                                                                </td>
+                                                                                                :
+                                                                                                <td colSpan={2}>
+                                                                                                    <span className='payment_logo'>
+                                                                                                        <img src="/assets/img/pending.png" alt="" />
+                                                                                                    </span>
+                                                                                                    Waiting For Payment
+                                                                                                </td>
                                                                             }
 
                                                                             <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
@@ -245,7 +253,7 @@ const Wallet = () => {
                                                                                         :
                                                                                         // WAITING_CUSTOMER_TO_VALIDATE
                                                                                         (item.status_code === "623") ?
-                                                                                            <span style={{ "color": "#ff9900" }}><i className="fa-regular fa-clock"></i> TIME EXPIRED</span>
+                                                                                            <span className='text-danger'><i className="fa-regular fa-clock"></i> TIME EXPIRED</span>
                                                                                             // PAYMENT_FAILED
                                                                                             : (item.status_code === "600") ?
                                                                                                 <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
