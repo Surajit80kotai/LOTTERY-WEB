@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { BUYNOW, GETALLTRANSACTION, PAYINIT, PLACEORDER, TESTAPI, UPDATETRANSACTION } from "../api/Api";
+import { BUYNOW, GETALLTRANSACTION, PAYINIT, PLACEORDER, UPDATETRANSACTION } from "../api/Api";
 
 const token = JSON.parse(window.localStorage.getItem("token"))
 const userID = (JSON.parse(window.localStorage.getItem("user"))?.user_id)
@@ -119,17 +119,6 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderDa
     }
 })
 
-//buy now
-// export const testApi = createAsyncThunk("/auth/update/payment/process/", async () => {
-//     try {
-//         console.log(userID);
-//         const res = await TESTAPI(userID)
-//         console.log("test api response", res);
-//         return res
-//     } catch (err) {
-//         console.log(err)
-//     }
-// })
 
 
 const initialState = {
@@ -255,22 +244,6 @@ export const PaymentSlice = createSlice({
             state.status = "failed"
             state.loading = false
         })
-
-        // States for testapi
-        // builder.addCase(testApi.pending, (state) => {
-        //     state.status = "pending"
-        //     state.loading = true
-        // })
-        // builder.addCase(testApi.fulfilled, (state, { payload }) => {
-        //     console.log("test api state", payload);
-        //     // state.ordered_data = payload
-        //     state.status = "success"
-        //     state.loading = false
-        // })
-        // builder.addCase(testApi.rejected, (state) => {
-        //     state.status = "failed"
-        //     state.loading = false
-        // })
     }
 })
 
