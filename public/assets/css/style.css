@@ -3255,7 +3255,7 @@ margin: 0.5rem;
 
 @media(max-width:820px) {
 	.log_area {
-		flex-direction: column;
+		flex-direction: column-reverse;
 	}
 
 	.left_part {
@@ -3312,7 +3312,7 @@ margin: 0.5rem;
 	.left_part {
 		width: 100%;
 		position: relative;
-		height: 100vh;
+		
 	}
 
 	.slick-track {
@@ -3325,12 +3325,7 @@ margin: 0.5rem;
 	}
 
 	.right_part {
-		position: absolute;
-		height: 100vh;
-		top: 0;
-		left: 0;
-		background: rgba(0, 0, 0, 0.8);
-		z-index: 99;
+	
 	}
 
 	.form_input {
@@ -3394,7 +3389,7 @@ margin: 0.5rem;
 	.left_part {
 		width: 100%;
 		position: relative;
-		height: 100vh;
+	
 	}
 
 	.slick-track {
@@ -3407,12 +3402,7 @@ margin: 0.5rem;
 	}
 
 	.right_part {
-		position: absolute;
-		height: 100vh;
-		top: 0;
-		left: 0;
-		background: rgba(0, 0, 0, 0.8);
-		z-index: 99;
+	margin-top: 2rem;
 	}
 
 	.form_input {
@@ -3420,12 +3410,12 @@ margin: 0.5rem;
 	}
 
 	.label_style {
-		color: var(--white);
+		color: var(--black);
 	}
 
 	.heading_form {
 		font-size: 2rem;
-		color: var(--white);
+		color: var(--black);
 		margin-top: 2rem;
 	}
 
@@ -3437,7 +3427,7 @@ margin: 0.5rem;
 	}
 
 	.form_input:focus {
-		border-bottom: 1px solid var(--white);
+		border-bottom: 1px solid var(--primary-color);
 	}
 
 	.login_withfb {
