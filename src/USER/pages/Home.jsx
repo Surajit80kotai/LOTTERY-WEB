@@ -64,10 +64,7 @@ const Home = () => {
             {loading && <PreLoader />}
 
             {/* Banner */}
-            <Banner
-                house={house}
-                vehicle={vehicle}
-            />
+            <Banner />
 
             {/* <main> */}
             {/* Product Area */}

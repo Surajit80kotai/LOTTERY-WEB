@@ -11,6 +11,11 @@ import { toast } from 'react-toastify'
 const CommonCard = ({ item }) => {
     const [round, setRound] = useState(0)
     const { ticket_name, main_image, is_image, _id, rounds } = item
+    
+    //timestamp
+    const dateStr = rounds[round]?._time;
+    const dateObj = new Date(dateStr);
+    const timestamp = dateObj.getTime();
 
     // ticket rounds calculation function
     const calculateRounds = () => {
@@ -84,7 +89,7 @@ const CommonCard = ({ item }) => {
 
 
     useEffect(() => {
-        startTimer(rounds[round]?._time)
+        startTimer(Number(timestamp))
     })
 
 

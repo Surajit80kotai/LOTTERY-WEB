@@ -119,9 +119,13 @@ const LotteryInfo = () => {
     }, [dispatch, cartLength, add_cart_status, round])
 
 
+    //timestamp
+    const dateStr = ticketInfo[0]?.rounds[round]?._time
+    const dateObj = new Date(dateStr);
+    const timestamp = dateObj.getTime();
 
     useEffect(() => {
-        startTimer(ticketInfo[0]?.rounds[round]?._time)
+        startTimer(Number(ticketInfo[0]?.rounds[round]?._time))
         // console.log("render");
     })
 

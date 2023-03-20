@@ -56,10 +56,14 @@ const BannerData = ({ item, id }) => {
         dispatch(buyNowItem(orderData))
     }
 
+    //timestamp
+    const dateStr = item?.rounds[round]?._time
+    const dateObj = new Date(dateStr);
+    const timestamp = dateObj.getTime();
 
     useEffect(() => {
         // console.log("render");
-        startTimer(item?.rounds[round]?._time)
+        startTimer(Number(timestamp))
     })
 
     useEffect(() => {
