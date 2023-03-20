@@ -125,7 +125,7 @@ const LotteryInfo = () => {
     const timestamp = dateObj.getTime();
 
     useEffect(() => {
-        startTimer(Number(ticketInfo[0]?.rounds[round]?._time))
+        startTimer(Number(timestamp))
         // console.log("render");
     })
 
