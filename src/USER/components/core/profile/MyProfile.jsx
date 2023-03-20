@@ -96,7 +96,7 @@ const MyProfile = () => {
                                     </div>
                                     <div className="col-md-9">
                                         <div className="profile_edit_form">
-                                            <form method="post" onSubmit={handleSubmit}>
+                                            <form method="post">
 
                                                 {/* Full Name */}
                                                 <div className="mb-3">
@@ -275,7 +275,7 @@ const MyProfile = () => {
                                                         id="remEdit"
                                                         onClick={enabledEdit}
                                                     ><i className="fas fa-edit"></i> Edit</button>
-                                                    <button type="button" className="btn2 hidden" id="saveChanges">Save Changes</button>
+                                                    <button onClick={handleSubmit} type="button" className="btn2 hidden" id="saveChanges">Save Changes</button>
 
                                                 </div>
                                             </form>

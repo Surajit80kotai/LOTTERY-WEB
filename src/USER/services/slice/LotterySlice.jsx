@@ -2,24 +2,26 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { CATEGORY, TICKET } from "../api/Api"
 
 // fetching all category data
-export const fetchCategory = createAsyncThunk("/admin/get-category", async () => {
+export const fetchCategory = createAsyncThunk("/admin/get-category", async (rejectWithValue) => {
     try {
         const response = await CATEGORY()
         // console.log(response?.data)
         return response?.data
     } catch (err) {
-        console.log(err);
+        // console.log(err.response.data);
+        return rejectWithValue(err.response.data)
     }
 })
 
 // fetching all lottery data
-export const fetchLottery = createAsyncThunk("ticket/get-tickets", async () => {
+export const fetchLottery = createAsyncThunk("ticket/get-tickets", async (rejectWithValue) => {
     try {
         const response = await TICKET()
         // console.log(response?.data)
         return response?.data
     } catch (err) {
-        console.log(err);
+        // console.log(err.response.data);
+        return rejectWithValue(err.response.data)
     }
 })
 
@@ -31,7 +33,8 @@ const initialState = {
     category_data: [],
     category_status: "",
     loading: false,
-    status: false
+    status: false,
+    net_error: ""
 }
 
 // Creating Slice
@@ -53,10 +56,11 @@ export const LotterySlice = createSlice({
             state.fetch_lott_data = payload
             window.localStorage.setItem("data", JSON.stringify(payload))
         })
-        builder.addCase(fetchLottery.rejected, (state) => {
+        builder.addCase(fetchLottery.rejected, (state, { payload }) => {
             state.fetch_lott_status = "Failed"
             state.loading = false
             state.status = false
+            state.net_error = payload.data
         })
 
 
