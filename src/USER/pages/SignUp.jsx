@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSignUp } from '../services/slice/AuthSlice'
-import "slick-carousel/slick/slick.css";
 import { Link, useNavigate } from 'react-router-dom'
 import { fetchCountry, fetchStates } from '../services/slice/CountryStateSlice';
 import PreLoader from '../components/core/preloader/PreLoader';
@@ -88,6 +87,9 @@ const SignUp = () => {
                 <div className="wrapper_area margin-top-5">
                     <div className="log_area">
                         <div className="right_part">
+                            <div className="right_top">
+                                <h2 className="heading_form mt-3">SIGN UP</h2>
+                            </div>
                             <div className="form_areas">
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
 
@@ -252,9 +254,9 @@ const SignUp = () => {
                         </div>
                         <div className="left_part">
                             <div className="company_logo text-center">
-                                <Link to="/"><img src="/assets/img/logo.png" alt="" className="img-fluid" /></Link>
+                                <Link to="/"><img src="/assets/img/eshacplaylogo.png    " alt="" className="img-fluid" /></Link>
                             </div>
-                            <h2 className="log_title">Welcome To Registration</h2>
+                            <h2 className="log_title">Welcome To ESHAC-PLAY</h2>
                             <h6 className="dont">Already Have An Account?</h6>
                             <Link to="/login" className="Signup">Sing In</Link>
                         </div>

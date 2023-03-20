@@ -3,6 +3,7 @@ import axios from "axios";
 import { BUYNOW, GETALLTRANSACTION, PAYINIT, PLACEORDER, UPDATETRANSACTION } from "../api/Api";
 
 const token = JSON.parse(window.localStorage.getItem("token"))
+const userID = (JSON.parse(window.localStorage.getItem("user"))?.user_id)
 // Defining header
 const header = {
     headers: {
@@ -31,8 +32,10 @@ export const cinetPay = createAsyncThunk("/v2/payment", async (formValue) => {
         "customer_country": "CM",
         "customer_state": "CM",
         "customer_zip_code": "06510",
-        "notify_url": "http://192.168.1.19:3303/api/auth/update/transaction",
-        "return_url": "http://192.168.1.19:3303/api/auth/update/transaction",
+        // "notify_url": window.location.origin + "/wallet",
+        // "return_url": window.location.origin + "/wallet",
+        "notify_url": process.env.REACT_APP_BASE_URL + "/auth/update/payment/process/" + userID + "/web",
+        "return_url": process.env.REACT_APP_BASE_URL + "/auth/update/payment/process/" + userID + "/web",
         "channels": "ALL",
         "metadata": token,
         "lang": "FR",
@@ -117,6 +120,7 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderDa
 })
 
 
+
 const initialState = {
     paymentData: [],
     transaction_data: [],
@@ -154,6 +158,7 @@ export const PaymentSlice = createSlice({
         })
         builder.addCase(cinetPay.fulfilled, (state, { payload }) => {
             state.paymentData = payload
+            // console.log({ paymentSlice: payload });
             state.status = "success"
             state.loading = false
         })

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { updateProfile } from '../../../services/slice/UserSlice'
 import { toast } from 'react-toastify'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
-import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol } from '../../../util/Currency'
+// import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol } from '../../../util/Currency'
 
 
 const MyProfile = () => {
     const { loading } = useSelector((state) => state.countrystateslice)
     const user = JSON.parse(window.localStorage.getItem("user"))
-    const social_user = JSON.parse(window.localStorage.getItem("social_user"))
     const date_of_birth = new Date(user?.dob)
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const newDOB = `${date_of_birth.getUTCDate()}-${month[date_of_birth.getUTCMonth()]}-${date_of_birth.getUTCFullYear()}`
@@ -23,7 +22,7 @@ const MyProfile = () => {
     const dispatch = useDispatch()
 
     // userID
-    const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
+    // const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
 
     // handleChange for onChange
@@ -76,8 +75,8 @@ const MyProfile = () => {
                                                 :
                                                 <div className="profile_img ">
                                                     {
-                                                        social_user?.photoURL ?
-                                                            <img src={social_user?.photoURL} alt="" className="img-fluid" />
+                                                        user?.photoURL ?
+                                                            <img src={user?.photoURL} alt="" className="img-fluid" />
                                                             : <img src="/assets/img/avatar.png" alt="" className="img-fluid" />
                                                     }
                                                 </div>
@@ -90,7 +89,7 @@ const MyProfile = () => {
                                                 </div>
                                                 :
                                                 <div className="user_name">
-                                                    <h2 className=" text-center mt-3">{social_user?.displayName}</h2>
+                                                    <h2 className=" text-center mt-3">{user?.displayName}</h2>
                                                 </div>
                                         }
 
@@ -104,25 +103,27 @@ const MyProfile = () => {
                                                     <label htmlFor="full_name" className="form-label label_style">Your Full Name</label>
                                                     {
                                                         user ?
-                                                            <input
-                                                                type="text"
-                                                                className="form-control form_input in_disa"
-                                                                id="full_name"
-                                                                name="full_name"
-                                                                title="Accept Alphabets & Whitespaces Only"
-                                                                pattern='^[a-zA-Z ]+$'
-                                                                placeholder={user?.full_name}
-                                                                value={formValues.full_name}
-                                                                onChange={handleChange} disabled
-                                                            />
-                                                            : <input
-                                                                type="text"
-                                                                className="form-control form_input in_disa"
-                                                                id="full_name"
-                                                                name="full_name"
-                                                                placeholder={social_user?.displayName}
-                                                                onChange={handleChange} disabled
-                                                            />
+                                                            user?.full_name ?
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control form_input in_disa"
+                                                                    id="full_name"
+                                                                    name="full_name"
+                                                                    title="Accept Alphabets & Whitespaces Only"
+                                                                    pattern='^[a-zA-Z ]+$'
+                                                                    placeholder={user?.full_name}
+                                                                    value={formValues.full_name}
+                                                                    onChange={handleChange} disabled
+                                                                />
+                                                                : <input
+                                                                    type="text"
+                                                                    className="form-control form_input in_disa"
+                                                                    id="full_name"
+                                                                    name="full_name"
+                                                                    placeholder={user?.displayName}
+                                                                    onChange={handleChange} disabled
+                                                                />
+                                                            : null
                                                     }
                                                 </div>
 
@@ -161,7 +162,7 @@ const MyProfile = () => {
                                                                 id="email"
                                                                 name="email"
                                                                 aria-describedby="emailHelp"
-                                                                placeholder={social_user?.email}
+                                                                placeholder={user?.email}
                                                                 onChange={handleChange} disabled
                                                                 readOnly
                                                             />
@@ -173,30 +174,31 @@ const MyProfile = () => {
                                                     <label htmlFor="phone" className="form-label label_style">Phone Number</label>
                                                     {
                                                         user ?
-                                                            <input
-                                                                type="text"
-                                                                className="form-control form_input in_disa"
-                                                                id="phone"
-                                                                name="phone"
-                                                                aria-describedby="emailHelp"
-                                                                placeholder={user?.phone}
-                                                                onChange={handleChange}
-                                                                maxLength={10}
-                                                                disabled
-                                                                readOnly
-                                                            />
-                                                            :
-                                                            <input
-                                                                type="text"
-                                                                className="form-control form_input in_disa"
-                                                                id="phone"
-                                                                name="phone"
-                                                                aria-describedby="emailHelp"
-                                                                placeholder="Phone number did not registered"
-                                                                readOnly
-                                                                disabled
-                                                            />
-
+                                                            user?.phone ?
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control form_input in_disa"
+                                                                    id="phone"
+                                                                    name="phone"
+                                                                    aria-describedby="emailHelp"
+                                                                    placeholder={user?.phone}
+                                                                    onChange={handleChange}
+                                                                    maxLength={10}
+                                                                    disabled
+                                                                    readOnly
+                                                                />
+                                                                :
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control form_input in_disa"
+                                                                    id="phone"
+                                                                    name="phone"
+                                                                    aria-describedby="emailHelp"
+                                                                    placeholder="Phone number did not registered"
+                                                                    readOnly
+                                                                    disabled
+                                                                />
+                                                            : null
                                                     }
                                                 </div>
 
@@ -205,29 +207,31 @@ const MyProfile = () => {
                                                     <label htmlFor="dob" className="form-label label_style">Date Of Birth</label>
                                                     {
                                                         user ?
-                                                            <input
-                                                                type="text"
-                                                                className="form-control form_input in_disa"
-                                                                id="dob"
-                                                                name="dob"
-                                                                aria-describedby="emailHelp"
-                                                                placeholder={newDOB}
-                                                                value={formValues.dob}
-                                                                onChange={handleChange}
-                                                                readOnly
-                                                                disabled
-                                                            />
-                                                            :
-                                                            <input
-                                                                type="text"
-                                                                className="form-control form_input in_disa"
-                                                                id="dob"
-                                                                name="dob"
-                                                                aria-describedby="emailHelp"
-                                                                placeholder="Birth date did not registered"
-                                                                readOnly
-                                                                disabled
-                                                            />
+                                                            user?.dob ?
+                                                                < input
+                                                                    type="text"
+                                                                    className="form-control form_input in_disa"
+                                                                    id="dob"
+                                                                    name="dob"
+                                                                    aria-describedby="emailHelp"
+                                                                    placeholder={newDOB}
+                                                                    value={formValues.dob}
+                                                                    onChange={handleChange}
+                                                                    readOnly
+                                                                    disabled
+                                                                />
+                                                                :
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control form_input in_disa"
+                                                                    id="dob"
+                                                                    name="dob"
+                                                                    aria-describedby="emailHelp"
+                                                                    placeholder="Birth date did not registered"
+                                                                    readOnly
+                                                                    disabled
+                                                                />
+                                                            : null
                                                     }
 
                                                 </div>
@@ -237,29 +241,31 @@ const MyProfile = () => {
                                                     <label htmlFor="country" className="form-label label_style">Address</label>
                                                     {
                                                         user ?
-                                                            <select
-                                                                className="form-select form_input form_select"
-                                                                aria-label="Default select example"
-                                                                id="selects"
-                                                                name='country'
-                                                                value={formValues.country}
-                                                                onChange={handleChange}
-                                                                disabled
-                                                                readOnly
-                                                            >
-                                                                <option readOnly>{user?.country}</option>
-                                                            </select>
-                                                            :
-                                                            <select
-                                                                className="form-select form_input form_select"
-                                                                aria-label="Default select example"
-                                                                id="selects"
-                                                                name='country'
-                                                                disabled
-                                                                readOnly
-                                                            >
-                                                                <option readOnly>Country did not registered</option>
-                                                            </select>
+                                                            user?.country ?
+                                                                <select
+                                                                    className="form-select form_input form_select"
+                                                                    aria-label="Default select example"
+                                                                    id="selects"
+                                                                    name='country'
+                                                                    value={formValues.country}
+                                                                    onChange={handleChange}
+                                                                    disabled
+                                                                    readOnly
+                                                                >
+                                                                    <option readOnly>{user?.country}</option>
+                                                                </select>
+                                                                :
+                                                                <select
+                                                                    className="form-select form_input form_select"
+                                                                    aria-label="Default select example"
+                                                                    id="selects"
+                                                                    name='country'
+                                                                    disabled
+                                                                    readOnly
+                                                                >
+                                                                    <option readOnly>Country did not registered</option>
+                                                                </select>
+                                                            : null
                                                     }
                                                 </div>
 
@@ -281,7 +287,7 @@ const MyProfile = () => {
                             </div>
                         </div>
 
-                        <div className="container mb-4">
+                        {/* <div className="container mb-4">
                             <div className="row">
                                 <div className="col-md-4">
                                     <div className="one_total_box">
@@ -344,7 +350,7 @@ const MyProfile = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </main>

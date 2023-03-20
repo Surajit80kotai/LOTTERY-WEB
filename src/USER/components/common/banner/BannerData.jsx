@@ -8,12 +8,20 @@ import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 
 const BannerData = ({ item, id }) => {
     const [round, setRound] = useState(0)
+
     // ticket rounds calculation function
-    const calculateRounds = (round) => {
-        if (item?.rounds[round]._status === false) {
-            setRound(round + 1)
-        }
+    const calculateRounds = () => {
+        var currentDate = new Date().toISOString().slice(0, 10);
+        let result = item?.rounds?.filter(item => {
+            // console.log(item?.ticket_name, item)
+            if (item._time >= currentDate) {
+                return item;
+            }
+        })
+        setRound(item?.rounds.indexOf(result[0]))
     }
+
+
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     const dispatch = useDispatch()
     // discount calculation
@@ -55,15 +63,15 @@ const BannerData = ({ item, id }) => {
     })
 
     useEffect(() => {
-        calculateRounds(round)
-    }, [round])
+        calculateRounds()
+    }, [item])
 
     return (
         <>
 
-            <Link to={`/info/${id}`}>
+            <Link to={`/info/${id}/${round}`}>
                 <div className="banner_img">
-                    <img src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
+                    <img loading="lazy" src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
                 </div>
             </Link>
             <div className="banner_content">
@@ -72,7 +80,7 @@ const BannerData = ({ item, id }) => {
                     (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                         <div>
                             <div className="time_counter">
-                                <Link to={`/info/${id}`}>
+                                <Link to={`/info/${id}/${round}`}>
                                     <h1 className="banner_title">{item?.ticket_name}</h1>
                                 </Link>
                                 <h3>Timeleft</h3>

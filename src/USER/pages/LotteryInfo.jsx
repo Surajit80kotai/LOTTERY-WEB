@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { useTimer } from '../customHooks/useTimer'
@@ -7,10 +7,10 @@ import { addCart, clearAddStatus, getCart } from '../services/slice/CartSlice'
 import { buyNowItem } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
+import { toast } from 'react-toastify'
 
 const LotteryInfo = () => {
-    const [round, setRound] = useState(0)
-    const { lid } = useParams()
+    const { lid, round } = useParams()
     const lottData = JSON.parse(window.localStorage.getItem("data"))
     const ticketInfo = lottData?.filter((item) => item._id === lid)
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
@@ -33,13 +33,6 @@ const LotteryInfo = () => {
     const qty = 1                                       // default quantity of a ticket
 
 
-    // ticket rounds calculation function
-    const calculateRounds = (round) => {
-        if (ticketInfo[0].rounds[round]._status === false) {
-            setRound(round + 1)
-        }
-    }
-
     // IncQty function
     // const IncQty = () => {
     //     if (qty < 5) {
@@ -60,6 +53,9 @@ const LotteryInfo = () => {
     const addToCart = () => {
         const cartData = { product_id: ticketInfo[0]._id, user_id: userID, qty: qty, round_info: ticketInfo[0]?.rounds[round], round_index: round }
         dispatch(addCart(cartData))
+        setTimeout(() => {
+            toast.success("Item Added To The Cart")
+        }, 300)
     }
 
     // buyNow function
@@ -116,7 +112,6 @@ const LotteryInfo = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        calculateRounds(round)
         return () => {
             dispatch(getCart())
             dispatch(clearAddStatus())
@@ -156,18 +151,18 @@ const LotteryInfo = () => {
                                                             act = "active";
                                                         }
                                                         return (
-                                                            <div className={`custom-carousel-item carousel-item ${act}`} key={index} >
-                                                                <img src={baseUrl + item} className="d-block w-100" alt="" />
+                                                            <div className={`custom-carousel-item carousel-item ${act}`} key={index} data-bs-interval="5000" cycle="true">
+                                                                <img src={baseUrl + item} className="d-block w-100" alt="" loading="lazy" />
                                                             </div>
                                                         )
                                                     })
                                                     :
                                                     (is_image?.length) ?
                                                         <div className="custom-carousel-item carousel-item active">
-                                                            <img src={baseUrl + mainimage} className="d-block w-100" alt="" />
+                                                            <img src={baseUrl + mainimage} className="d-block w-100" alt="" loading="lazy" />
                                                         </div>
                                                         : <div className="custom-carousel-item carousel-item active">
-                                                            <img src="/assets/img/imageunavailable.jpeg" className="d-block w-100" alt="" />
+                                                            <img src="/assets/img/imageunavailable.jpeg" className="d-block w-100" alt="" loading="lazy" />
                                                         </div>
                                                 }
 
@@ -320,7 +315,7 @@ const LotteryInfo = () => {
                                                     (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                         <h3>
                                                             <span style={{ "marginRight": "20px" }}>
-                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{(round + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
+                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
                                                             <span><img src="/assets/img/9121436 1.png" alt="" /></span>
                                                             Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
                                                         </h3> : <h3>All tickets sold</h3>

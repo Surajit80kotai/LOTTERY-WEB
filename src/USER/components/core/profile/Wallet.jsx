@@ -18,12 +18,6 @@ const Wallet = () => {
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
-    // currency variables
-    // const userCurrency = (JSON.parse(window.localStorage.getItem("user"))?.currency)
-    // const generalCurrency = process.env.REACT_APP_GENERAL_CURRENCY
-    // const userCurrency_symbol = (JSON.parse(window.localStorage.getItem("user"))?.currency_symbol)
-    // const generalCurrency_symbol = process.env.REACT_APP_GENERAL_CURRENCY_SYMBOL
-
 
     // handleChange function for onChange
     const handleChange = (e) => {
@@ -44,6 +38,14 @@ const Wallet = () => {
         }
     }
 
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // const reloadParam = urlParams.get('q');
+
+    // if (reloadParam === 'reload') {
+    //     window.location.href = "http://192.168.1.18:3000/wallet" // do something if the reload parameter exists in the URL
+    // }
+
     // Redirect page function
     const redirectPage = () => {
         const payment_data = {
@@ -53,7 +55,7 @@ const Wallet = () => {
         }
         if (paymentData.code === "201") {
             window.open(paymentData.data.payment_url, "_self")
-            // console.log(payment_data)
+            // console.log({ payment_data: payment_data })
             dispatch(initPay(payment_data))
         }
     }
@@ -148,7 +150,7 @@ const Wallet = () => {
                                                         <thead className="table_head sticky-top ">
                                                             <tr>
                                                                 <th scope="col">Date</th>
-                                                                <th scope="col">Merchant</th>
+                                                                <th scope="col" colSpan={2}>Merchant</th>
                                                                 <th scope="col">Amount</th>
                                                                 <th scope="col">Status</th>
                                                             </tr>
@@ -162,25 +164,105 @@ const Wallet = () => {
                                                                             {
                                                                                 item.status_code === "662" ?
                                                                                     <td>
-                                                                                        {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
+                                                                                        {new Date(item?.createdAt).toLocaleString('en-US', {
+                                                                                            month: 'short',
+                                                                                            day: '2-digit',
+                                                                                            year: 'numeric',
+                                                                                            hour: 'numeric',
+                                                                                            minute: 'numeric',
+                                                                                            second: 'numeric'
+                                                                                        })}
                                                                                     </td>
-                                                                                    : <td>{item.payment_date}</td>
+                                                                                    // <td>
+                                                                                    //     {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
+                                                                                    // </td>
+                                                                                    :
+                                                                                    item.status_code === "623" ?
+                                                                                        <td>
+                                                                                            {new Date(item?.createdAt).toLocaleString('en-US', {
+                                                                                                month: 'short',
+                                                                                                day: '2-digit',
+                                                                                                year: 'numeric',
+                                                                                                hour: 'numeric',
+                                                                                                minute: 'numeric',
+                                                                                                second: 'numeric'
+                                                                                            })}
+                                                                                        </td>
+                                                                                        // <td>
+                                                                                        //     {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
+                                                                                        // </td>
+                                                                                        :
+                                                                                        <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                            month: 'short',
+                                                                                            day: '2-digit',
+                                                                                            year: 'numeric',
+                                                                                            hour: 'numeric',
+                                                                                            minute: 'numeric',
+                                                                                            second: 'numeric'
+                                                                                        })}</td>
+                                                                                // <td>{item.payment_date}</td>
                                                                             }
-                                                                            <td>{item.merchant}</td>
-                                                                            <td>{userID ? currency_symbol : generalCurrency_symbol}{item.amount}</td>
+                                                                            {
+                                                                                item.payment_method === "OMCM" ?
+                                                                                    <td colSpan={2}>
+                                                                                        <span className='payment_logo'>
+                                                                                            <img src="/assets/img/omcm.png" alt="" />
+                                                                                        </span>
+                                                                                        Orange Money
+                                                                                    </td>
+                                                                                    :
+                                                                                    item.payment_method === "MTNCM" ?
+                                                                                        <td colSpan={2}>
+                                                                                            <span className='payment_logo'>
+                                                                                                <img src="/assets/img/mtncm.png" alt="" />
+                                                                                            </span>
+                                                                                            MTN Mobile Money
+                                                                                        </td>
+                                                                                        :
+                                                                                        item.payment_method === "VISAMCM" ?
+                                                                                            <td colSpan={2}>
+                                                                                                <span className='payment_logo'>
+                                                                                                    <img src="/assets/img/visamcm.png" alt="" />
+                                                                                                </span>
+                                                                                                VISA/MasterCard
+                                                                                            </td>
+                                                                                            :
+                                                                                            item.payment_method === null ?
+                                                                                                <td colSpan={2}>
+                                                                                                    <span className='payment_logo'>
+                                                                                                        <img src="/assets/img/cancel.png" alt="" />
+                                                                                                    </span>
+                                                                                                    Transaction Cancelled
+                                                                                                </td>
+                                                                                                :
+                                                                                                <td colSpan={2}>
+                                                                                                    <span className='payment_logo'>
+                                                                                                        <img src="/assets/img/pending.png" alt="" />
+                                                                                                    </span>
+                                                                                                    Waiting For Payment
+                                                                                                </td>
+                                                                            }
+
+                                                                            <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
                                                                             {/* <td>{(item.status).replace(/_/g," ")}</td> */}
                                                                             <td>
                                                                                 {
                                                                                     // WAITING_CUSTOMER_PAYMENT
-                                                                                    (item.status) === "WAITING_CUSTOMER_PAYMENT" ?
+                                                                                    (item.status_code === "662") ?
                                                                                         <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>PENDING</span>
-                                                                                        // PAYMENT_FAILED
-                                                                                        : (item.status) === "PAYMENT_FAILED" ?
-                                                                                            <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
-                                                                                            // SUCCES
-                                                                                            : (item.status) === "SUCCES" ?
-                                                                                                <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>SUCCESS</span>
-                                                                                                : null
+                                                                                        :
+                                                                                        // WAITING_CUSTOMER_TO_VALIDATE
+                                                                                        (item.status_code === "623") ?
+                                                                                            <span className='text-danger'><i className="fa-regular fa-clock"></i> TIME EXPIRED</span>
+                                                                                            // PAYMENT_FAILED
+                                                                                            : (item.status_code === "600") ?
+                                                                                                <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
+                                                                                                // SUCCES
+                                                                                                : (item.status_code === "00") ?
+                                                                                                    <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>SUCCESS</span>
+                                                                                                    :
+                                                                                                    // TRANSACTION ENDED
+                                                                                                    <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>TRANSACTION ENDED</span>
                                                                                 }
                                                                             </td>
 

@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart, updateQTY } from '../services/slice/CartSlice'
 import { useEffect } from 'react'
-import { emptyBuyNow } from '../services/slice/PaymentSlice'
+import { clearOrderedData, emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
+import { toast } from 'react-toastify'
 
 const baseUrl = process.env.REACT_APP_NODE_HOST
 
@@ -65,6 +66,9 @@ const Cart = () => {
   // removeItem function
   const removeItem = (id) => {
     dispatch(delCartItem(id))
+    setTimeout(() => {
+      toast.success("Item Removed From Cart")
+    }, 300)
   }
 
 
@@ -81,6 +85,7 @@ const Cart = () => {
     return () => {
       dispatch(clearUpdateStatus())
       dispatch(clearDeleteStatus())
+      dispatch(clearOrderedData())
     }
   }, [dispatch, cartLength, update_status, delete_status])
 
@@ -124,9 +129,9 @@ const Cart = () => {
 
                           <div className="cart_list_item" key={item?.resp?._id}>
                             {/* Image */}
-                            <Link to={`/info/${item?.info[0]?._id}`}>
+                            <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
                               <div className="cart_item_img">
-                                <img src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
+                                <img loading="lazy" src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                               </div>
                             </Link>
 
@@ -138,7 +143,7 @@ const Cart = () => {
                               <div className="other_info">
                                 <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
                                 {/* Calculation of discounted price */}
-                                <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}
+                                <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}&nbsp;
                                   {
                                     (Number(item?.resp?.round_info?._price - ((item?.resp?.round_info?._price * item?.resp?.round_info?._dis) / 100)) * item?.resp?.quantity).toFixed(2)
                                   }
@@ -146,7 +151,7 @@ const Cart = () => {
                               </div>
                               <div className="date_result">
                                 {/* Calculating the data */}
-                                <h5><span><img src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
+                                <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
                                   {new Date(item?.resp?.round_info?._time).toLocaleString('en-US', {
                                     month: 'short',
                                     day: '2-digit',
@@ -172,7 +177,7 @@ const Cart = () => {
                       })
                       :
                       <div className='text-center' >
-                        <img src="/assets/img/emptycart.png" alt="" />
+                        <img loading="lazy" src="/assets/img/emptycart.png" alt="" />
                         <h2>Your Cart Is Empty</h2>
                       </div>
 
@@ -202,7 +207,7 @@ const Cart = () => {
                     <div className="price_item borderbottom">
                       <h4 className="price_text">Price <span> ({cart_data?.length} Item):</span></h4>
                       <h6 className="price_value">
-                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
+                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}&nbsp;
                         {(amount.subtotal).toFixed(2)}
                       </h6>
                     </div>
@@ -211,7 +216,7 @@ const Cart = () => {
                     <div className="price_item borderbottom">
                       <h4 className="price_text">Total Discount :</h4>
                       <h6 className="price_value text-success">
-                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}-</span> : 0}
+                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}&nbsp;-</span> : 0}
                         {(amount.discount).toFixed(2)}
                       </h6>
                     </div>
@@ -220,7 +225,7 @@ const Cart = () => {
                     <div className="price_item mt-5">
                       <h4 className="price_text">Total Payables:</h4>
                       <h6 className="price_value">
-                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
+                        {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}&nbsp;
                         {(amount.total).toFixed(2)}
                       </h6>
                     </div>

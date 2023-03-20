@@ -7,6 +7,7 @@ import PreLoader from '../components/core/preloader/PreLoader'
 import CommonCard from '../components/core/home/CommonCard'
 import { Link } from 'react-router-dom'
 import { getCart } from '../services/slice/CartSlice'
+// import { testApi } from '../services/slice/PaymentSlice'
 
 
 const Home = () => {
@@ -48,6 +49,7 @@ const Home = () => {
 
     // mount cycle
     useEffect(() => {
+        // dispatch(testApi())
         window.scrollTo(0, 0)
         dispatch(fetchLottery())
         dispatch(fetchCategory())
@@ -100,7 +102,7 @@ const Home = () => {
 
                                                     : null
                                             }
-                                            
+
                                         </div>
                                         <div className="col-md-10">
                                             <div id={`carouselExampleControls-${carouselID}`} className="carousel slide" data-bs-ride="carousel">
@@ -113,7 +115,7 @@ const Home = () => {
                                                             }
                                                             return (
                                                                 <div className={`carousel-item ${act}`
-                                                                } key={index} data-bs-interval="2000">
+                                                                } key={index} data-bs-interval="5000" cycle="true">
                                                                     <div className="mx-2">
                                                                         <div className="cards-wrapper">
                                                                             {

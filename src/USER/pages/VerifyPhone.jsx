@@ -93,14 +93,14 @@ const VerifyPhone = () => {
 
                         <div className="right_part">
                             <div className="right_top">
-                                <h2 className="heading_form mt-3">Verify Your Phone  Number</h2>
+                                <h2 className="heading_form mt-3">SIGN UP</h2>
                             </div>
                             <div className="form_area mt-5">
                                 <div>
 
                                     {/* Phone Number */}
                                     <div className="row d-flex mb-5" style={{ "display": !flag ? "block" : "none" }}>
-                                        <label htmlFor="phone" className="form-label label_style">Enter Phone Number</label>
+                                        <label htmlFor="phone" className="form-label label_style">Verify Your Phone Number Here</label>
 
                                         <div className='col-2' style={{ "width": "18%" }}>
                                             <select
@@ -188,9 +188,9 @@ const VerifyPhone = () => {
                         </div>
                         <div className="left_part mb-5">
                             <div className="company_logo text-center">
-                                <Link to="/"><img src="/assets/img/logo.png" alt="" className="img-fluid" /></Link>
+                                <Link to="/"><img src="/assets/img/eshacplaylogo.png" alt="" className="img-fluid" /></Link>
                             </div>
-                            <h2 className="log_title">Welcome Phone Number Verification</h2>
+                            <h2 className="log_title">Welcome To ESHAC-PLAY</h2>
                             <h6 className="dont">Already Have An Account?</h6>
                             <Link to="/login" className="Signup">Sing In</Link>
                         </div>

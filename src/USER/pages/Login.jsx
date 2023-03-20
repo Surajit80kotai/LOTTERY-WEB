@@ -81,7 +81,7 @@ const Login = () => {
 
                         <div className="right_part">
                             <div className="right_top">
-                                <h2 className="heading_form">Login</h2>
+                                <h2 className="heading_form">LOGIN</h2>
                                 <div className="social_sign">
                                     <button onClick={() => socialLogin(facebook)} className="social_signup"><i className="fab fa-facebook-f"></i></button>
                                     <button onClick={() => socialLogin(google)} className="social_signup"><i className="fab fa-google"></i></button>
@@ -105,7 +105,7 @@ const Login = () => {
                                                             name="contact"
                                                             aria-describedby="emailHelp"
                                                             placeholder="Enter Phone Or Email ID"
-                                                            pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                            pattern="^((\+)?(\d{2}[-]))?(\d{8}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
                                                             title="Enter a valid email or phone number"
                                                             value={formValues.contact}
                                                             onChange={handleChange}
@@ -144,7 +144,7 @@ const Login = () => {
                                                             name="contact"
                                                             aria-describedby="emailHelp"
                                                             placeholder="Enter Phone Or Email ID"
-                                                            pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                            pattern="^((\+)?(\d{1,3}[-]))?(\d{6,14}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
                                                             title="Enter a valid email or phone number"
                                                             value={formValues.contact}
                                                             onChange={handleChange}
@@ -226,9 +226,9 @@ const Login = () => {
                         </div>
                         <div className="left_part">
                             <div className="company_logo text-center">
-                                <Link to="/"><img src="/assets/img/logo.png" alt="" className="img-fluid" /></Link>
+                                <Link to="/"><img src="/assets/img/eshacplaylogo.png" alt="" className="img-fluid" /></Link>
                             </div>
-                            <h2 className="log_title">Welcome To Login</h2>
+                            <h2 className="log_title">Welcome To ESHAC-PLAY</h2>
                             <h6 className="dont">Don't Have Account?</h6>
                             <Link to="/verifyphone" className="Signup">Sing Up</Link>
                         </div>

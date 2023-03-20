@@ -121,7 +121,7 @@ const ForgetPassword = () => {
                         <div style={{ "display": !hidden ? "block" : "none" }}>
                             {/* Phone */}
                             <div className="forget" style={{ "display": !flag ? "block" : "none" }}>
-                                <label htmlFor="contact" className="form-label label_for">Enter Your Registered Phone Number</label>
+                                <label htmlFor="contact" className="form-label label_for">Enter Your Registered Phone Number Or Email</label>
                                 <div className="row">
                                     {
                                         isNaN(formValues?.contact) ?
@@ -173,7 +173,7 @@ const ForgetPassword = () => {
                                                         name="contact"
                                                         aria-describedby="emailHelp"
                                                         placeholder="Enter Phone Or Email ID"
-                                                        pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                        pattern="^((\+)?(\d{1,3}[-]))?(\d{6,14}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
                                                         title="Enter a valid email or phone number"
                                                         value={formValues.contact}
                                                         onChange={handleChange}
@@ -187,8 +187,8 @@ const ForgetPassword = () => {
                                     <button
                                         onClick={sendOtp}
                                         type="submit"
-                                        className={(formValues?.contact?.length > 9) ? active : deactive}
-                                        disabled={(formValues?.contact?.length > 9) ? false : true}
+                                        className={(formValues?.contact?.length) ? active : deactive}
+                                        disabled={(formValues?.contact?.length) ? false : true}
                                     >Send OTP</button>
                                 </div>
                             </div>
