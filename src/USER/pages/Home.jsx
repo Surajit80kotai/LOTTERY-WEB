@@ -27,15 +27,22 @@ const Home = () => {
 
 
     // Filtering category from data
-    const house = fetch_lott_data?.filter((item) => item.category === categoryObj["House"])
-    const vehicle = fetch_lott_data?.filter((item) => item.category === categoryObj["Cars & Bike"])
-    const cosmetics = fetch_lott_data?.filter((item) => item.category === categoryObj["Cosmetic"])
-    const study_travel = fetch_lott_data?.filter((item) => item.category === categoryObj["Study & abroad"])
-    const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
-    const electronics = fetch_lott_data?.filter((item) => item.category === categoryObj["Electronics"])
+    // const house = fetch_lott_data?.filter((item) => item.category === categoryObj["House"])
+    // const vehicle = fetch_lott_data?.filter((item) => item.category === categoryObj["Cars & Bike"])
+    // const cosmetics = fetch_lott_data?.filter((item) => item.category === categoryObj["Cosmetic"])
+    // const study_travel = fetch_lott_data?.filter((item) => item.category === categoryObj["Study & abroad"])
+    // const comp_phn = fetch_lott_data?.filter((item) => item.category === categoryObj["computers & phones"])
+    // const electronics = fetch_lott_data?.filter((item) => item.category === categoryObj["Electronics"])
 
     // slider array
-    const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn, electronics]
+    // const ticketArray = [house, vehicle, cosmetics, study_travel, comp_phn, electronics]
+
+    // slider array
+    const catNames = Object.keys(categoryObj)
+    const ticketArray = catNames.reduce((acc, cur) => {
+        acc?.push(fetch_lott_data?.filter(item => item.category === categoryObj[cur]))
+        return acc
+    }, [])
 
     // finding a key from an object
     const getKey = (obj, value) => {
@@ -106,6 +113,7 @@ const Home = () => {
                                                 <div className="carousel-inner">
                                                     {
                                                         slider?.map((sliderItem, index) => {
+                                                            // console.log(sliderItem[0]);
                                                             let act = ""
                                                             if (index === 0) {
                                                                 act = "active";
