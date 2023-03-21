@@ -7,7 +7,7 @@ export const useTimer = () => {
     const [timerSeconds, setTimerSeconds] = useState()
 
     const startTimer = (time_left) => {
-        const countDownDate = new Date(time_left).getTime()
+        const countDownDate = new Date(time_left + 86400000).getTime()
         var interval = setTimeout(() => {
             const now = new Date().getTime()
             const distance = countDownDate - now
