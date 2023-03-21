@@ -18,7 +18,7 @@ export const useTimer = () => {
 
             if (distance < 0) {
                 // stop timer
-                clearTimeout(interval.current)
+                clearTimeout(interval)
             } else {
                 // update timer
                 setTimerDays(days)
