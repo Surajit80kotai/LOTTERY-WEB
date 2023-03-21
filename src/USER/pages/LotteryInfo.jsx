@@ -203,11 +203,7 @@ const LotteryInfo = () => {
                                                     <span className="discount_percent fs-4 ">{ticketInfo[0]?.rounds[round]?._dis}% off</span>
                                                 </h3>
                                                 :
-                                                <h3>Ticket Price :&nbsp;&nbsp;
-                                                    <span className="discountprice">
-                                                        {token ? currency_symbol : generalCurrency_symbol}
-                                                        {ticketInfo[0]?.rounds[round]?._price}</span>
-                                                </h3>
+                                                null
                                         }
                                     </div>
                                     {/* Promo area */}
@@ -308,7 +304,7 @@ const LotteryInfo = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            : <h3 className='text-danger my-5'>Ticket is unavailabe right now</h3>
+                                            : <h3 className='text-danger my-5'>Ticket is Unavailabe Right Now</h3>
                                     }
 
                                     {/* Ticket quantity Slider */}
@@ -322,7 +318,8 @@ const LotteryInfo = () => {
                                                                 <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
                                                             <span><img src="/assets/img/9121436 1.png" alt="" /></span>
                                                             Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
-                                                        </h3> : <h3>All tickets sold</h3>
+                                                        </h3>
+                                                        : <h3>All tickets sold</h3>
                                                     : null
 
                                             }

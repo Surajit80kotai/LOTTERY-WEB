@@ -7,7 +7,6 @@ import PreLoader from '../components/core/preloader/PreLoader'
 import CommonCard from '../components/core/home/CommonCard'
 import { Link } from 'react-router-dom'
 import { getCart } from '../services/slice/CartSlice'
-// import { testApi } from '../services/slice/PaymentSlice'
 
 
 const Home = () => {
@@ -113,7 +112,7 @@ const Home = () => {
                                                 <div className="carousel-inner">
                                                     {
                                                         slider?.map((sliderItem, index) => {
-                                                            // console.log(sliderItem[0]);
+                                                            // console.log(sliderItem);
                                                             let act = ""
                                                             if (index === 0) {
                                                                 act = "active";

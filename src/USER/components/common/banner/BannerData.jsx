@@ -12,12 +12,7 @@ const BannerData = ({ item, id }) => {
     // ticket rounds calculation function
     const calculateRounds = () => {
         var currentDate = new Date().toISOString().slice(0, 10);
-        let result = item?.rounds?.filter(item => {
-            // console.log(item?.ticket_name, item)
-            if (item._time >= currentDate) {
-                return item;
-            }
-        })
+        let result = item?.rounds?.filter(item => item._time >= currentDate ? item : null)
         setRound(item?.rounds.indexOf(result[0]))
     }
 
@@ -72,82 +67,92 @@ const BannerData = ({ item, id }) => {
 
     return (
         <>
+            {/* {
+                round >= 0 ? */}
+            <div>
+                <Link to={`/info/${id}/${round}`}>
+                    <div className="banner_img">
+                        <img loading="lazy" src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
+                    </div>
+                </Link>
+                <div className="banner_content">
 
-            <Link to={`/info/${id}/${round}`}>
-                <div className="banner_img">
-                    <img loading="lazy" src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
-                </div>
-            </Link>
-            <div className="banner_content">
+                    {
+                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                            <div>
+                                <div className="time_counter">
+                                    <Link to={`/info/${id}/${round}`}>
+                                        <h1 className="banner_title">{item?.ticket_name}</h1>
+                                    </Link>
+                                    <h3>Timeleft</h3>
+                                    <div id="coundown" className="countdown">
+                                        <div className="one_time">
+                                            <div id="days" className="time days">
+                                                {timerDays}
+                                            </div>
+                                            <br /><span>Days</span>
+                                        </div>
+                                        <div className="one_time">
+                                            <div id="hours" className="time hours">
+                                                {timerHours}
+                                            </div>
+                                            <br /><span>Hours</span>
+                                        </div>
+                                        <div className="one_time">
+                                            <div id="minutes" className="time minutes">
+                                                {timerMinutes}
+                                            </div>
+                                            <br /><span>Mins</span>
+                                        </div>
+                                        <div className="one_time">
+                                            <div id="seconds" className="time seconds">
+                                                {timerSeconds}
+                                            </div>
+                                            <br /><span>Sec</span>
+                                        </div>
+                                    </div>
 
-                {
-                    (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                        <div>
-                            <div className="time_counter">
-                                <Link to={`/info/${id}/${round}`}>
-                                    <h1 className="banner_title">{item?.ticket_name}</h1>
-                                </Link>
-                                <h3>Timeleft</h3>
+                                </div>
+                                <div className="ticket_price">
+                                    <h4>Ticket Price
+                                        <span>{token ? currency_symbol : generalCurrency_symbol}
+                                        </span>{discountedPrice ? discountedPrice : item?.rounds[round]?._price}
+                                    </h4>
+                                </div>
+                                <div className="banner_product_btn">
+                                    {/* Buy Now Button */}
+                                    {
+                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                            (item?.rounds[round]?._qty) > 0 ?
+                                                token ?
+                                                    <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
+                                                    : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                                : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+                                            : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+
+                                    }
+                                </div>
+                            </div>
+                            :
+                            <div>
+                                <div className="time_counter">
+                                    <Link to={`/info/${id}/${round}`}>
+                                        <h1 className="banner_title">{item?.ticket_name}</h1>
+                                    </Link>
+                                </div>
                                 <div id="coundown" className="countdown">
                                     <div className="one_time">
-                                        <div id="days" className="time days">
-                                            {timerDays}
-                                        </div>
-                                        <br /><span>Days</span>
-                                    </div>
-                                    <div className="one_time">
-                                        <div id="hours" className="time hours">
-                                            {timerHours}
-                                        </div>
-                                        <br /><span>Hours</span>
-                                    </div>
-                                    <div className="one_time">
-                                        <div id="minutes" className="time minutes">
-                                            {timerMinutes}
-                                        </div>
-                                        <br /><span>Mins</span>
-                                    </div>
-                                    <div className="one_time">
-                                        <div id="seconds" className="time seconds">
-                                            {timerSeconds}
-                                        </div>
-                                        <br /><span>Sec</span>
+                                        <br />
+                                        <br />
+                                        <h1 className='text-white'>Ticket Is Unavailable Right Now</h1>
                                     </div>
                                 </div>
-
                             </div>
-                            <div className="ticket_price">
-                                <h4>Ticket Price
-                                    <span>{token ? currency_symbol : generalCurrency_symbol}
-                                    </span>{discountedPrice ? discountedPrice : item?.rounds[round]?._price}
-                                </h4>
-                            </div>
-                            <div className="banner_product_btn">
-                                {/* Buy Now Button */}
-                                {
-                                    (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                        (item?.rounds[round]?._qty) > 0 ?
-                                            token ?
-                                                <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
-                                                : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                            : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
-                                        : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
-
-                                }
-                            </div>
-                        </div>
-                        :
-                        <div className="time_left">
-                            <div id="coundown" className="countdown text-center">
-                                <div className="timeleftarea">
-                                    <div id="hours" className=" hours"></div>
-                                    <br />
-                                    <span className='text-white fs-1 fw-normal'>Ticket is unavailabe right now</span>
-                                </div>
-                            </div>
-                        </div>
-                }
+                    }
+                </div>
             </div>
+            {/* : null
+            } */}
         </>
     )
 }

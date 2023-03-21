@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 const CommonCard = ({ item }) => {
     const [round, setRound] = useState(0)
     const { ticket_name, main_image, is_image, _id, rounds } = item
-    
+
     //timestamp
     const dateStr = rounds[round]?._time;
     const dateObj = new Date(dateStr);
@@ -20,12 +20,7 @@ const CommonCard = ({ item }) => {
     // ticket rounds calculation function
     const calculateRounds = () => {
         var currentDate = new Date().toISOString().slice(0, 10);
-        let result = item?.rounds?.filter(item => {
-            // console.log(item?.ticket_name, item)
-            if (item._time >= currentDate) {
-                return item;
-            }
-        })
+        let result = item?.rounds?.filter(item => item._time >= currentDate ? item : null)
         setRound(item?.rounds.indexOf(result[0]))
     }
 
@@ -117,137 +112,128 @@ const CommonCard = ({ item }) => {
                 <h2>House & Apartments</h2>
             </div> */}
 
-            {/* // !index || index < 7 ? */}
-            <div className="col-md-3 product_item">
-                <div className="product_item_one m-2">
-                    <Link to={`/info/${_id}/${round}`}>
-                        <div className="product_img">
-                            <div className="pro_img">
-                                {/* Image Condition */}
-                                {
-                                    (is_image?.length) ? <img loading="lazy" src={baseUrl + main_image} alt="" className="img-fluid " />
-                                        : <img loading="lazy" src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
-                                }
-                            </div>
-                        </div>
-                    </Link>
-                    <div className="product_content">
-                        <Link to={`/info/${_id}/${round}`}>
-                            <div className="product_price">
-                                {
-                                    rounds[round]?._dis ?
-                                        <h3>
-                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>
-                                                {token ? currency_symbol : generalCurrency_symbol}</span>
-                                            <span className="text-decoration-line-through">&nbsp;{rounds[round]?._price}</span>&nbsp;&nbsp;
-                                            <span className="discount_percent">{rounds[round]?._dis}% off</span>
-                                        </h3>
-                                        :
-                                        <h3>
-                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{rounds[round]?._price}</span>
-                                        </h3>
-                                }
-                            </div>
-                            <div className="product_title">
-                                <h2 className="card_title">{ticket_name}</h2>
-                            </div>
-                            {
-                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                    rounds[round]?._qty > 0 ?
-                                        <h3 className="total_ticket">
-                                            <span className='mr-2'>
-                                                Round: {(round + 1) + "/" + rounds?.length}
-                                            </span>
-                                            <span className='mx-3'>
-                                                Remaining Tickets: {rounds[round]?._qty}
-                                            </span>
-                                        </h3>
-                                        : <h3 className="total_ticket">All tickets sold for {(rounds.length) + 1}</h3>
-                                    : null
-                            }
-
-                            {/* Condition for timer run-out */}
-                            {
-                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                    <div className="time_left">
-                                        <div id="coundown" className="countdown text-center">
-                                            <div className="timeleftarea">
-                                                <div id="days" className=" days">{timerDays}
-                                                </div>
-                                                <br /><span>Days</span>
-                                            </div>
-                                            <div className="timeleftarea">
-                                                <div id="hours" className=" hours">{timerHours}
-                                                </div>
-                                                <br /><span>Hours</span>
-                                            </div>
-                                            <div className="timeleftarea">
-                                                <div id="minutes" className=" minutes">{timerMinutes}
-                                                </div>
-                                                <br /><span>Mins</span>
-                                            </div>
-                                            <div className="timeleftarea">
-                                                <div id="seconds" className=" seconds">{timerSeconds}
-                                                </div>
-                                                <br /><span>Sec</span>
-                                            </div>
-                                        </div>
+            {
+                round >= 0 ?
+                    <div className="col-md-3 product_item">
+                        <div className="product_item_one m-2">
+                            <Link to={`/info/${_id}/${round}`}>
+                                <div className="product_img">
+                                    <div className="pro_img">
+                                        {/* Image Condition */}
+                                        {
+                                            (is_image?.length) ? <img loading="lazy" src={baseUrl + main_image} alt="" className="img-fluid " />
+                                                : <img loading="lazy" src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
+                                        }
                                     </div>
-                                    :
-                                    <div className="time_left">
-                                        <div id="coundown" className="countdown text-center">
-                                            <div className="timeleftarea">
-                                                <div id="hours" className=" hours"></div>
-                                                <br />
-                                                <span className='text-danger fs-5'>Ticket is unavailabe right now</span>
-                                            </div>
-                                        </div>
+                                </div>
+                            </Link>
+                            <div className="product_content">
+                                <Link to={`/info/${_id}/${round}`}>
+                                    <div className="product_price">
+                                        {
+                                            rounds[round]?._dis ?
+                                                <h3>
+                                                    <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>
+                                                        {token ? currency_symbol : generalCurrency_symbol}</span>
+                                                    <span className="text-decoration-line-through">&nbsp;{rounds[round]?._price}</span>&nbsp;&nbsp;
+                                                    <span className="discount_percent">{rounds[round]?._dis}% off</span>
+                                                </h3>
+                                                :
+                                                <h3>
+                                                    <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{rounds[round]?._price}</span>
+                                                </h3>
+                                        }
                                     </div>
-                            }
-                        </Link>
+                                    <div className="product_title">
+                                        <h2 className="card_title">{ticket_name}</h2>
+                                    </div>
+                                    {
+                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                            rounds[round]?._qty > 0 ?
+                                                <h3 className="total_ticket">
+                                                    <span className='mr-2'>
+                                                        Round: {(round + 1) + "/" + rounds?.length}
+                                                    </span>
+                                                    <span className='mx-3'>
+                                                        Remaining Tickets: {rounds[round]?._qty}
+                                                    </span>
+                                                </h3>
+                                                : <h3 className="total_ticket">All tickets sold for {(rounds.length) + 1}</h3>
+                                            : null
+                                    }
 
-                        <div className="add_buy_button">
-                            <div className="product_btn">
-                                {/* Add Cart Button */}
-                                {
-                                    (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                        (rounds[round]?._qty) > 0 ?
-                                            token ?
-                                                <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                                : <Link to="/login" className="btn2">Add To Cart</Link>
-                                            : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
-                                        : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
+                                    {/* Condition for timer run-out */}
+                                    {
+                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                            <div className="time_left">
+                                                <div id="coundown" className="countdown text-center">
+                                                    <div className="timeleftarea">
+                                                        <div id="days" className=" days">{timerDays}
+                                                        </div>
+                                                        <br /><span>Days</span>
+                                                    </div>
+                                                    <div className="timeleftarea">
+                                                        <div id="hours" className=" hours">{timerHours}
+                                                        </div>
+                                                        <br /><span>Hours</span>
+                                                    </div>
+                                                    <div className="timeleftarea">
+                                                        <div id="minutes" className=" minutes">{timerMinutes}
+                                                        </div>
+                                                        <br /><span>Mins</span>
+                                                    </div>
+                                                    <div className="timeleftarea">
+                                                        <div id="seconds" className=" seconds">{timerSeconds}
+                                                        </div>
+                                                        <br /><span>Sec</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            :
+                                            <div className="time_left">
+                                                <div id="coundown" className="countdown text-center">
+                                                    <div className="timeleftarea">
+                                                        <div id="hours" className=" hours"></div>
+                                                        <br />
+                                                        <span className='text-danger fs-5'>Ticket is unavailabe right now</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    }
+                                </Link>
 
-                                }
-                                {/* Buy Now Button */}
-                                {
-                                    (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                        (rounds[round]?._qty) > 0 ?
-                                            token ?
-                                                <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
-                                                : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                            : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
-                                        : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+                                <div className="add_buy_button">
+                                    <div className="product_btn">
+                                        {/* Add Cart Button */}
+                                        {
+                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                                (rounds[round]?._qty) > 0 ?
+                                                    token ?
+                                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
+                                                        : <Link to="/login" className="btn2">Add To Cart</Link>
+                                                    : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
+                                                : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
 
-                                }
+                                        }
+                                        {/* Buy Now Button */}
+                                        {
+                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
+                                                (rounds[round]?._qty) > 0 ?
+                                                    token ?
+                                                        <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
+                                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                                    : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+                                                : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            {/* // :
-                // <div className="col-md-3 product_item">
-                //     <div className="product_item_one">
-                //         <div className="view_all_bg">
-                //             <img loading="lazy" src="/assets/img/viewmorecard.png" alt="" className="img-fluid" />
-                //             <div className="viewall_btn">
-                //                 <h6>Looking More? Click Here</h6>
-                //                 <Link className="btn2" to={`/viewall/${category}`}>View All</Link>
-                //             </div>
-                //         </div>
-                //     </div>
-                // </div> */}
-
+                    :
+                    null
+            }
 
         </>
     )

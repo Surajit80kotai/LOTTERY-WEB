@@ -78,7 +78,6 @@ const PlaceOrder = () => {
 
 
     useEffect(() => {
-        console.log(buy_now_data);
         checkOrderData()
     }, [ordered_data, balance])
 
