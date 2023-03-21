@@ -2972,14 +2972,49 @@ margin: 0.5rem;
 
 }
 
+
 .about_img {
-	margin-bottom: 3rem;
+	position: relative;
+}
+
+.overlay_description {
+	position: relative;
+	background: var(--primary-color);
+	width: 300px;
+	color: #fff;
+	padding: 2rem;
+
+}
+
+.right {
+	position: relative;
+	left: 35%;
+	right: 0;
+	bottom: 20%;
+}
+
+.left {
+	position: relative;
+	left: 0;
+	right: 0;
+	bottom: 20%;
+}
+
+.overlay_description p {
+	font-size: 1.2rem;
+}
+
+.overlay_description h1 {
+	font-size: 1.5rem;
+	color: #fff;
+	margin-bottom: 1rem;
+	font-weight: bold;
 }
 
 .about_img img {
-	border-radius: 2rem;
-}
 
+	object-fit: cover;
+}
 
 
 /* / how to play / */
