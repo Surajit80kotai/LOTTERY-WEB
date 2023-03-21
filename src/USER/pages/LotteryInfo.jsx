@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
-import { useTimer } from '../customHooks/useTimer'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCart, clearAddStatus, getCart } from '../services/slice/CartSlice'
 import { buyNowItem } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 import { toast } from 'react-toastify'
+import LotteryInfoTimer from '../util/LotteryInfoTimer'
 
 const LotteryInfo = () => {
     const { lid, round } = useParams()
     const lottData = JSON.parse(window.localStorage.getItem("data"))
     const ticketInfo = lottData?.filter((item) => item._id === lid)
-    const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     // const [qty, setQty] = useState(1)
     const dispatch = useDispatch()
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
@@ -118,16 +117,6 @@ const LotteryInfo = () => {
         }
     }, [dispatch, cartLength, add_cart_status, round])
 
-
-    //timestamp
-    const dateStr = ticketInfo[0]?.rounds[round]?._time
-    const dateObj = new Date(dateStr);
-    const timestamp = dateObj.getTime();
-
-    useEffect(() => {
-        startTimer(Number(timestamp))
-        // console.log("render");
-    })
 
 
     return (
@@ -254,74 +243,40 @@ const LotteryInfo = () => {
                                     {/* Add to cart buttton */}
                                     <div className="btn_area mt-5">
                                         {
-                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
-                                                    token ?
-                                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                                        : <Link to="/login" className="btn2">Add To Cart</Link>
-                                                    : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
+                                            (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
+                                                token ?
+                                                    <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
+                                                    : <Link to="/login" className="btn2">Add To Cart</Link>
                                                 : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
-
                                         }
 
                                         {/* Buy now button */}
                                         {
-                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
-                                                    token ?
-                                                        <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
-                                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                                    : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+                                            (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
+                                                token ?
+                                                    <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
+                                                    : <Link to="/login" className="btn2">Buy Ticket</Link>
                                                 : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
-
                                         }
                                     </div>
 
                                     {/* Timer */}
-                                    {
-                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                            <div className="product_time">
-                                                <div id="coundown" className="countdown product_timeleftwrap">
-                                                    <div className="product_timeleft">
-                                                        <div id="days" className="time_left_style days">{timerDays}
-                                                        </div>
-                                                        <br /><span>Days</span>
-                                                    </div>
-                                                    <div className="product_timeleft">
-                                                        <div id="hours" className="time_left_style hours">{timerHours}
-                                                        </div>
-                                                        <br /><span>Hours</span>
-                                                    </div>
-                                                    <div className="product_timeleft">
-                                                        <div id="minutes" className="time_left_style minutes">{timerMinutes}
-                                                        </div>
-                                                        <br /><span>Mins</span>
-                                                    </div>
-                                                    <div className="product_timeleft">
-                                                        <div id="seconds" className="time_left_style seconds">{timerSeconds}
-                                                        </div>
-                                                        <br /><span>Sec</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            : <h3 className='text-danger my-5'>Ticket is Unavailabe Right Now</h3>
-                                    }
+                                    <LotteryInfoTimer
+                                        ticketInfo={ticketInfo}
+                                        round={round}
+                                    />
 
                                     {/* Ticket quantity Slider */}
                                     <div className="ticket_sold">
                                         <div className="ticket_sold_title">
-                                            {
-                                                (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                    (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
-                                                        <h3>
-                                                            <span style={{ "marginRight": "20px" }}>
-                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
-                                                            <span><img src="/assets/img/9121436 1.png" alt="" /></span>
-                                                            Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
-                                                        </h3>
-                                                        : <h3>All tickets sold</h3>
-                                                    : null
-
+                                            {(ticketInfo[0]?.rounds[round]?._qty) > 0 ?
+                                                <h3>
+                                                    <span style={{ "marginRight": "20px" }}>
+                                                        <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
+                                                    <span><img src="/assets/img/9121436 1.png" alt="" /></span>
+                                                    Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
+                                                </h3>
+                                                : <h3>All tickets sold</h3>
                                             }
 
                                         </div>

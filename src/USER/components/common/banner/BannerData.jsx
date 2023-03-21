@@ -67,8 +67,6 @@ const BannerData = ({ item, id }) => {
 
     return (
         <>
-            {/* {
-                round >= 0 ? */}
             <div>
                 <Link to={`/info/${id}/${round}`}>
                     <div className="banner_img">
@@ -76,7 +74,7 @@ const BannerData = ({ item, id }) => {
                     </div>
                 </Link>
                 <div className="banner_content">
-
+                    {/* Timer */}
                     {
                         (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                             <div>
@@ -151,8 +149,6 @@ const BannerData = ({ item, id }) => {
                     }
                 </div>
             </div>
-            {/* : null
-            } */}
         </>
     )
 }

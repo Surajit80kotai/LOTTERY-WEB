@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useTimer } from '../../../customHooks/useTimer'
 import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSlice'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
 import { toast } from 'react-toastify'
+import CommonCardTimer from '../../../util/CommonCardTimer'
 
 const CommonCard = ({ item }) => {
     const [round, setRound] = useState(0)
     const { ticket_name, main_image, is_image, _id, rounds } = item
-
-    //timestamp
-    const dateStr = rounds[round]?._time;
-    const dateObj = new Date(dateStr);
-    const timestamp = dateObj.getTime();
 
     // ticket rounds calculation function
     const calculateRounds = () => {
@@ -27,10 +22,7 @@ const CommonCard = ({ item }) => {
 
     // discount calculation
     const discountedPrice = Number((rounds[round]?._price - ((rounds[round]?._price * rounds[round]?._dis) / 100)))
-    // defining states timer
-    const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     const dispatch = useDispatch()
-    // const [isrender, setIsrender] = useState(false)
 
     // states from cartslice
     const { add_cart_status, loading } = useSelector((state) => state.cartslice)
@@ -83,9 +75,6 @@ const CommonCard = ({ item }) => {
     }
 
 
-    useEffect(() => {
-        startTimer(Number(timestamp))
-    })
 
 
     useEffect(() => {
@@ -148,83 +137,42 @@ const CommonCard = ({ item }) => {
                                         <h2 className="card_title">{ticket_name}</h2>
                                     </div>
                                     {
-                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                            rounds[round]?._qty > 0 ?
-                                                <h3 className="total_ticket">
-                                                    <span className='mr-2'>
-                                                        Round: {(round + 1) + "/" + rounds?.length}
-                                                    </span>
-                                                    <span className='mx-3'>
-                                                        Remaining Tickets: {rounds[round]?._qty}
-                                                    </span>
-                                                </h3>
-                                                : <h3 className="total_ticket">All tickets sold for {(rounds.length) + 1}</h3>
-                                            : null
+                                        rounds[round]?._qty > 0 ?
+                                            <h3 className="total_ticket">
+                                                <span className='mr-2'>
+                                                    Round: {(round + 1) + "/" + rounds?.length}
+                                                </span>
+                                                <span className='mx-3'>
+                                                    Remaining Tickets: {rounds[round]?._qty}
+                                                </span>
+                                            </h3>
+                                            : <h3 className="total_ticket">All tickets sold for {(rounds.length) + 1}</h3>
                                     }
 
                                     {/* Condition for timer run-out */}
-                                    {
-                                        (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                            <div className="time_left">
-                                                <div id="coundown" className="countdown text-center">
-                                                    <div className="timeleftarea">
-                                                        <div id="days" className=" days">{timerDays}
-                                                        </div>
-                                                        <br /><span>Days</span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="hours" className=" hours">{timerHours}
-                                                        </div>
-                                                        <br /><span>Hours</span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="minutes" className=" minutes">{timerMinutes}
-                                                        </div>
-                                                        <br /><span>Mins</span>
-                                                    </div>
-                                                    <div className="timeleftarea">
-                                                        <div id="seconds" className=" seconds">{timerSeconds}
-                                                        </div>
-                                                        <br /><span>Sec</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            :
-                                            <div className="time_left">
-                                                <div id="coundown" className="countdown text-center">
-                                                    <div className="timeleftarea">
-                                                        <div id="hours" className=" hours"></div>
-                                                        <br />
-                                                        <span className='text-danger fs-5'>Ticket is unavailabe right now</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    }
+                                    <CommonCardTimer
+                                        item={item}
+                                        round={round}
+                                    />
                                 </Link>
 
                                 <div className="add_buy_button">
                                     <div className="product_btn">
                                         {/* Add Cart Button */}
                                         {
-                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                (rounds[round]?._qty) > 0 ?
-                                                    token ?
-                                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                                        : <Link to="/login" className="btn2">Add To Cart</Link>
-                                                    : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
+                                            (rounds[round]?._qty) > 0 ?
+                                                token ?
+                                                    <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
+                                                    : <Link to="/login" className="btn2">Add To Cart</Link>
                                                 : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
-
                                         }
                                         {/* Buy Now Button */}
                                         {
-                                            (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
-                                                (rounds[round]?._qty) > 0 ?
-                                                    token ?
-                                                        <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
-                                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                                    : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+                                            (rounds[round]?._qty) > 0 ?
+                                                token ?
+                                                    <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
+                                                    : <Link to="/login" className="btn2">Buy Ticket</Link>
                                                 : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
-
                                         }
                                     </div>
                                 </div>
