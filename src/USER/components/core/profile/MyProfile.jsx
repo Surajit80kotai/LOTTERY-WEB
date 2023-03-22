@@ -144,7 +144,6 @@ const MyProfile = () => {
                                                                     placeholder={user?.email}
                                                                     value={formValues?.email}
                                                                     onChange={handleChange} disabled
-                                                                    readOnly
                                                                 />
                                                                 : <input
                                                                     type="email"
@@ -154,7 +153,6 @@ const MyProfile = () => {
                                                                     aria-describedby="emailHelp"
                                                                     placeholder="Add Email ID"
                                                                     onChange={handleChange} disabled
-                                                                    readOnly
                                                                 />
                                                             : <input
                                                                 type="email"
