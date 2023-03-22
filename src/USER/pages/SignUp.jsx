@@ -95,7 +95,7 @@ const SignUp = () => {
 
                                     {/* Full name */}
                                     <div className="m_gap">
-                                        <label htmlFor="full_name" className="form-label label_style">Full Name</label>
+                                        <label htmlFor="full_name" className="form-label label_style">Full Name*</label>
                                         <input
                                             type="text"
                                             className="form-control form_input"
@@ -158,7 +158,7 @@ const SignUp = () => {
                                         {/* Date Of birth */}
                                         <div className="col-md">
                                             <div className="m_gap dob">
-                                                <label htmlFor="dob" className="form-label label_style">Date Of Birth</label>
+                                                <label htmlFor="dob" className="form-label label_style">Date Of Birth*</label>
                                                 {/* <!-- <input type="date" value="2017-01-01" min="1960-01-01" max="2019-01-01" className="form-control form_input"> --> */}
                                                 <input
                                                     placeholder="Select your date"
@@ -179,7 +179,7 @@ const SignUp = () => {
                                         {/* Country */}
                                         <div className="col-md">
                                             <div className="m_gap">
-                                                <label htmlFor="Country" className="form-label label_style">Country</label>
+                                                <label htmlFor="Country" className="form-label label_style">Country*</label>
                                                 <select
                                                     className="form-select form_input form_select"
                                                     aria-label="Default select example"
@@ -210,7 +210,7 @@ const SignUp = () => {
                                         {/* Create Password*/}
                                         <div className="col-md">
                                             <div className="m_gap mb-3">
-                                                <label htmlFor="password" className="form-label label_style">Create Password</label>
+                                                <label htmlFor="password" className="form-label label_style">Create Password*</label>
                                                 <input
                                                     type="password"
                                                     className="form-control form_input"
@@ -228,7 +228,7 @@ const SignUp = () => {
                                         {/* Confirm Password */}
                                         <div className="col-md">
                                             <div className="m_gap mb-3">
-                                                <label htmlFor="confirmPassword" className="form-label label_style">Confirm Password</label>
+                                                <label htmlFor="confirmPassword" className="form-label label_style">Confirm Password*</label>
                                                 <input
                                                     type="password"
                                                     className="form-control form_input"
