@@ -18,6 +18,7 @@ import Wallet from './USER/components/core/profile/Wallet';
 import OrderHistory from './USER/components/core/profile/OrderHistory';
 import { useSelector } from 'react-redux';
 import ErrorPage from './USER/util/ErrorPage';
+// import TestOne from './USER/pages/test/TestOne';
 
 
 function App() {
@@ -37,16 +38,12 @@ function App() {
               <Route path='/charities' element={<Charities />} />
               <Route path='/contact' element={<Contact />} />
               <Route path='/info/:lid/:round' element={<LotteryInfo />} />
-              {/* <Route path='/viewallhome' element={<ViewAllHome />} />
-            <Route path='/viewallcars' element={<ViewAllCars />} />
-            <Route path='/viewallstud_trv' element={<ViewAllStudyTravel />} />
-            <Route path='/viewallcomp_phn' element={<ViewAllCompPhn />} />
-            <Route path='/viewallcosmetics' element={<ViewAllCosmetics />} /> */}
               <Route path='/viewall/:categoryID' element={<ViewAll />} />
+              {/* Test Route */}
+              {/* <Route path='/test' element={<TestOne />} /> */}
 
               {/* Private Route Part */}
               <Route element={<PrivateRoute />}>
-                {/* <Route path='/profile' element={<Profile />} /> */}
                 <Route path='/profile' element={<MyProfile />} />
                 <Route path='/wallet' element={<Wallet />} />
                 <Route path='/wallet/:dueAmount' element={<Wallet />} />

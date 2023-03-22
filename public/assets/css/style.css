@@ -4034,3 +4034,8 @@ margin: 0.5rem;
 	font-weight: 600;
 	color: #2F2E2E;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+	color: var(--primary-color) !important;
+}
