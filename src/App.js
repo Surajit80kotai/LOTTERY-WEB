@@ -24,11 +24,12 @@ import ErrorPage from './USER/util/ErrorPage';
 function App() {
 
   const { net_error } = useSelector((state) => state.lotteryslice)
+  const { error } = useSelector((state) => state.cartslice)
 
   return (
     <>
       {
-        net_error !== undefined ?
+        net_error !== undefined || error !== undefined ?
           <div>
             <NavBar />
             <Routes>

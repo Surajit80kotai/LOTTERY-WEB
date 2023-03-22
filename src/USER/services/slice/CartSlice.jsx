@@ -43,7 +43,7 @@ export const delCartItem = createAsyncThunk("/auth/cart/delete", async (c_id) =>
 
 
 // GetCart get request handle
-export const getCart = createAsyncThunk("/auth/cart", async () => {
+export const getCart = createAsyncThunk("/auth/cart", async (rejectWithValue) => {
     try {
         if (userID && header) {
             const res = await FETCHCART(userID, header)
@@ -51,7 +51,9 @@ export const getCart = createAsyncThunk("/auth/cart", async () => {
             return res?.data
         }
     } catch (err) {
-        console.log("Cart data is not fetched", err)
+        // console.log("Cart data is not fetched", err)
+        // console.log(err.response.data);
+        return rejectWithValue(err.response.data)
     }
 })
 
@@ -78,7 +80,8 @@ export const CartSlice = createSlice({
         add_cart_status: "",
         update_status: "",
         delete_status: "",
-        loading: false
+        loading: false,
+        error: ""
     },
     reducers: {
         emptyCart(state, { payload }) {
@@ -160,9 +163,10 @@ export const CartSlice = createSlice({
             state.loading = false
             state.cart_data = payload
         })
-        builder.addCase(getCart.rejected, (state) => {
+        builder.addCase(getCart.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
+            state.error = payload?.data
         })
 
 

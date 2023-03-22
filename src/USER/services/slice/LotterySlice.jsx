@@ -60,7 +60,7 @@ export const LotterySlice = createSlice({
             state.fetch_lott_status = "Failed"
             state.loading = false
             state.status = false
-            state.net_error = payload.data
+            state.net_error = payload?.data
         })
 
 
@@ -77,10 +77,11 @@ export const LotterySlice = createSlice({
             state.category_data = payload
             window.localStorage.setItem("categoryData", JSON.stringify(payload))
         })
-        builder.addCase(fetchCategory.rejected, (state) => {
+        builder.addCase(fetchCategory.rejected, (state, { payload }) => {
             state.category_status = "Failed"
             state.loading = false
             state.status = false
+            state.net_error = payload?.data
         })
     }
 })
