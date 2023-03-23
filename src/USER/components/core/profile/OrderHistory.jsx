@@ -132,6 +132,7 @@ const OrderHistory = () => {
                                             orderHistoryData?.length ?
                                                 filteredOH?.map((item) => {
                                                     return (
+                                                        item?._id &&
                                                         <div className="orderhistroy_item" key={item?._id}>
                                                             <div className="ribbon-wrapper-green">
                                                                 {

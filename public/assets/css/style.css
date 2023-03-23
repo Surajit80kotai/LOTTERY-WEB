@@ -4039,3 +4039,155 @@ margin: 0.5rem;
 .swiper-button-prev {
 	color: var(--primary-color) !important;
 }
+
+
+
+
+/* media quries  */
+
+@media only screen and (max-width: 1366px) {
+
+	.product_btn .btn2{
+		padding: 0.6rem 1rem;
+	}
+
+	.product_item_one {
+		height: 400px;
+	}
+
+	.view_all_bg {
+		height: 404px;
+		position: relative;
+		width: 100%;
+	}
+
+	.btn2 {
+		text-align: center;
+		padding: 0.6rem 1px;
+	}
+}
+
+@media only screen and (max-width: 1280px) {
+
+	.product_btn .btn2{
+		padding: 0.6rem 1rem;
+	}
+
+	.product_item_one {
+		height: 400px;
+	}
+
+	.view_all_bg {
+		height: 404px;
+		position: relative;
+		width: 100%;
+	}
+
+	.btn2 {
+		text-align: center;
+		padding: 0.6rem 1px;
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+
+	.product_btn .btn2{
+		padding: 0.6rem 1rem;
+	}
+
+	.product_item_one {
+		height: 400px;
+	}
+	.view_all_bg{
+		height: 404px;
+	}
+}
+
+@media only screen and (max-width: 1164px) {
+
+	.product_btn .btn2{
+		padding: 0.6rem 0.6rem;
+	}
+
+	.product_item_one {
+		height: 400px;
+	}
+
+	.view_all_bg{
+		height: 404px;
+	}
+}
+
+
+@media only screen and (max-width: 991px) {
+
+	.product_btn .btn2{
+		padding: 0.6rem 1rem;
+	}
+
+	.product_item_one {
+		height: 400px;
+	}
+	.view_all_bg{
+		height: 404px;
+	}
+}
+
+
+@media only screen and (max-width: 800px) {
+
+	.product_btn .btn2{
+		padding: 0.6rem 0.5rem;
+	}
+
+	.product_item_one {
+		height: 400px;
+	}
+	.view_all_bg{
+		height: 404px;
+	}
+
+	.view_all_bg .viewall_btn {
+		position: absolute;
+		top: 50%;
+		left: 0%; 
+		 transform: translate(0%, -50%);
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 576px) {
+
+	.product_btn .btn2{
+		padding: 0.6rem 0.5rem;
+	}
+
+	.product_item_one {
+		height: 400px;
+	}
+	.view_all_bg{
+		height: 150px;
+	}
+
+	.view_all_bg .viewall_btn {
+		position: absolute;
+		top: 50%;
+		left: 50%; 
+		 transform: translate(-50%, -50%);
+		text-align: center;
+	}
+
+	.viewall_btn h6 {
+		font-size: 2.5rem;
+	}
+
+	.btn2 {
+		text-align: center;
+		padding: 0.8rem 2rem;
+	}
+
+	.product_content {
+		padding: 1rem;
+		text-align: center;
+	}	
+}
