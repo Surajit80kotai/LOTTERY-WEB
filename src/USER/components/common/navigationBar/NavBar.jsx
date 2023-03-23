@@ -7,6 +7,7 @@ import { auth } from '../../../config/firebase'
 import { signOut } from 'firebase/auth'
 import PreLoader from '../../core/preloader/PreLoader'
 import SearchDesk from '../../../util/SearchDesk'
+// import { useTranslation } from 'react-i18next'
 
 
 
@@ -20,8 +21,14 @@ const NavBar = () => {
   const cartLength = cart_data?.length
   const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
   const location = useLocation()
+  // const { i18n } = useTranslation()
 
   // console.log(social_user.displayName);
+
+  // language change function
+  // const handleClick = (lang) => {
+  //   i18n.changeLanguage(lang)
+  // }
 
 
   // Log Out Function
@@ -99,6 +106,26 @@ const NavBar = () => {
             {/* Contact */}
             {/* <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
+            </li> */}
+
+            {/* Language Dropdown */}
+            {/* <li className="nav-item dropdown">
+              <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Language<i className="fa-solid fa-caret-down mx-2"></i></Link>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('en')}>English </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('fr')}>France </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('cm')}>Cameroon </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('td')}>Chad </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('cg')}>Congo </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('ne')}>Niger </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('ng')}>Nigeria </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('ga')}>Gabon </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('gq')}>Equatorial Guinea </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('bj')}>Benin </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('ml')}>Mali </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('sn')}>Senegal </button></li>
+                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('bf')}>Burkina Faso </button></li>
+              </ul>
             </li> */}
           </ul>
 
