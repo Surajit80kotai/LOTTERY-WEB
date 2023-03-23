@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userOrderHistory } from '../../../services/slice/UserSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
-import Timer from '../../../util/Timer'
+// import Timer from '../../../util/Timer'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 
@@ -32,22 +32,22 @@ const OrderHistory = () => {
         const newData = [...order_history_data]
         switch (data) {
             case "LtoH":
-                setFilteredOH(newData?.sort((a, b) => b.total_discount_price - a.total_discount_price))
+                setFilteredOH(newData?.sort((a, b) => b?.total_discount_price - a?.total_discount_price))
                 break;
             case "HtoL":
-                setFilteredOH(newData?.sort((a, b) => a.total_discount_price - b.total_discount_price))
+                setFilteredOH(newData?.sort((a, b) => a?.total_discount_price - b?.total_discount_price))
                 break;
             case "NF":
                 setFilteredOH(newData?.sort((a, b) => {
-                    const dateA = new Date(a.createdAt);
-                    const dateB = new Date(b.createdAt);
+                    const dateA = new Date(a?.createdAt);
+                    const dateB = new Date(b?.createdAt);
                     return dateA.getTime() - dateB.getTime();
                 }))
                 break;
             case "OF":
                 setFilteredOH(newData?.sort((a, b) => {
-                    const dateA = new Date(a.createdAt);
-                    const dateB = new Date(b.createdAt);
+                    const dateA = new Date(a?.createdAt);
+                    const dateB = new Date(b?.createdAt);
                     return dateB.getTime() - dateA.getTime();
                 }))
                 break;
