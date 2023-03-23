@@ -276,7 +276,9 @@ const LotteryInfo = () => {
                                                     <span><img src="/assets/img/9121436 1.png" alt="" /></span>
                                                     Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
                                                 </h3>
-                                                : <h3>All tickets sold</h3>
+                                                : <h3 style={{ "color": "#cb4154" }}>
+                                                    All Tickets Sold For Round : {(Number(round) + 1)}
+                                                </h3>
                                             }
 
                                         </div>

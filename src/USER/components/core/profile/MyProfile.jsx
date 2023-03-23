@@ -9,14 +9,15 @@ import SideNav from './SideNav'
 
 
 const MyProfile = () => {
-    const { loading } = useSelector((state) => state.countrystateslice)
+    const { loading } = useSelector((state) => state.userslice)
     const user = JSON.parse(window.localStorage.getItem("user"))
     const date_of_birth = new Date(user?.dob)
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const newDOB = `${date_of_birth.getUTCDate()}-${month[date_of_birth.getUTCMonth()]}-${date_of_birth.getUTCFullYear()}`
     const [formValues, setFormValues] = useState({
         full_name: user?.full_name,
-        email: user?.email
+        email: user?.email,
+        phone: user?.phone
     })
 
     const dispatch = useDispatch()
@@ -180,10 +181,10 @@ const MyProfile = () => {
                                                                     name="phone"
                                                                     aria-describedby="emailHelp"
                                                                     placeholder={user?.phone}
+                                                                    value={formValues?.phone}
                                                                     onChange={handleChange}
-                                                                    maxLength={10}
+                                                                    // maxLength={10}
                                                                     disabled
-                                                                    readOnly
                                                                 />
                                                                 :
                                                                 <input
@@ -193,7 +194,6 @@ const MyProfile = () => {
                                                                     name="phone"
                                                                     aria-describedby="emailHelp"
                                                                     placeholder="Phone number did not registered"
-                                                                    readOnly
                                                                     disabled
                                                                 />
                                                             : null

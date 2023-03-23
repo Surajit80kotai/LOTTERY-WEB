@@ -146,7 +146,9 @@ const CommonCard = ({ item }) => {
                                                     Remaining Tickets: {rounds[round]?._qty}
                                                 </span>
                                             </h3>
-                                            : <h3 className="total_ticket">All tickets sold for {(rounds.length) + 1}</h3>
+                                            : <h3 className="total_ticket" style={{ "color": "#cb4154" }}>
+                                                All Tickets Sold For Round : {(round + 1)}
+                                            </h3>
                                     }
 
                                     {/* Condition for timer run-out */}
