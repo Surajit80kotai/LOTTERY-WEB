@@ -150,6 +150,7 @@ const Wallet = () => {
                                                         <thead className="table_head sticky-top ">
                                                             <tr>
                                                                 <th scope="col">Date</th>
+                                                                <th scope="col" colSpan={2}>Transaction ID</th>
                                                                 <th scope="col" colSpan={2}>Merchant</th>
                                                                 <th scope="col">Amount</th>
                                                                 <th scope="col">Status</th>
@@ -202,6 +203,7 @@ const Wallet = () => {
                                                                                         })}</td>
                                                                                 // <td>{item.payment_date}</td>
                                                                             }
+                                                                            <td colSpan={2}>{item.transaction_id}</td>
                                                                             {
                                                                                 item.payment_method === "OMCM" ?
                                                                                     <td colSpan={2}>
@@ -247,22 +249,25 @@ const Wallet = () => {
                                                                             {/* <td>{(item.status).replace(/_/g," ")}</td> */}
                                                                             <td>
                                                                                 {
-                                                                                    // WAITING_CUSTOMER_PAYMENT
-                                                                                    (item.status_code === "662") ?
-                                                                                        <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>PENDING</span>
+                                                                                    (item.payment_method === null) ?
+                                                                                        <span className='text-danger'><i className="fa-solid fa-ban mx-3"></i>CANCELLED</span>
                                                                                         :
-                                                                                        // WAITING_CUSTOMER_TO_VALIDATE
-                                                                                        (item.status_code === "623") ?
-                                                                                            <span className='text-danger'><i className="fa-regular fa-clock"></i> TIME EXPIRED</span>
-                                                                                            // PAYMENT_FAILED
-                                                                                            : (item.status_code === "600") ?
-                                                                                                <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
-                                                                                                // SUCCES
-                                                                                                : (item.status_code === "00") ?
-                                                                                                    <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>SUCCESS</span>
-                                                                                                    :
-                                                                                                    // TRANSACTION ENDED
-                                                                                                    <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>TRANSACTION ENDED</span>
+                                                                                        // WAITING_CUSTOMER_PAYMENT
+                                                                                        (item.status_code === "662") ?
+                                                                                            <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>PENDING</span>
+                                                                                            :
+                                                                                            // WAITING_CUSTOMER_TO_VALIDATE
+                                                                                            (item.status_code === "623") ?
+                                                                                                <span className='text-danger'><i className="fa-regular fa-clock"></i> TIME EXPIRED</span>
+                                                                                                // PAYMENT_FAILED
+                                                                                                : (item.status_code === "600") ?
+                                                                                                    <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
+                                                                                                    // SUCCES
+                                                                                                    : (item.status_code === "00") ?
+                                                                                                        <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>SUCCESS</span>
+                                                                                                        :
+                                                                                                        // TRANSACTION ENDED
+                                                                                                        <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>TRANSACTION ENDED</span>
                                                                                 }
                                                                             </td>
 
