@@ -51,10 +51,7 @@ const LotteryInfo = () => {
     // Add ticket function
     const addToCart = () => {
         const cartData = { product_id: ticketInfo[0]._id, user_id: userID, qty: qty, round_info: ticketInfo[0]?.rounds[round], round_index: round }
-        dispatch(addCart(cartData))
-        setTimeout(() => {
-            toast.success("Item Added To The Cart")
-        }, 300)
+        dispatch(addCart({ cartData, toast }))
     }
 
     // buyNow function

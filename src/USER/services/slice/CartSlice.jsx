@@ -20,10 +20,15 @@ const userID = socialuserID ? socialuserID : (JSON.parse(window.localStorage.get
 
 
 // AddCart post request handle
-export const addCart = createAsyncThunk("/auth/add-cart", async (cartData) => {
-    // console.log(cartData);
+export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toast }) => {
     try {
+        // console.log(cartData);
         const res = await ADDTOCART(cartData, header)
+        if (res?.data?.status) {
+            toast.success(res?.data?.message)
+        } else {
+            toast.error(res?.data?.message)
+        }
         return res?.data
     } catch (err) {
         console.log(err)
@@ -59,9 +64,9 @@ export const getCart = createAsyncThunk("/auth/cart", async (rejectWithValue) =>
 
 
 // updateCart get request handle
-export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ id, qty }) => {
+export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ id, qty, flag }) => {
     try {
-        const res = await UPDATECART(id, qty, header)
+        const res = await UPDATECART(id, qty, flag, header)
         return res?.data
     } catch (err) {
         console.log("Quantity not updated", err)
@@ -97,7 +102,7 @@ export const CartSlice = createSlice({
             state.delete_status = ""
         },
         updateQTY(state, { payload }) {
-            if (payload.qty > 0 && payload.qty < 6) {
+            if (payload.qty) {
                 const newCartData = state.cart_data.map(item => {
                     if (payload.id === item.resp._id) {
                         return {
@@ -179,7 +184,7 @@ export const CartSlice = createSlice({
             state.status = "Success"
             state.loading = false
             state.update_status = payload
-            if (payload?.quantity > 5) {
+            if (!payload?.status) {
                 toast.warning(payload.message)
             }
         })

@@ -129,9 +129,8 @@ const VerifyPhone = () => {
                                                 name="phone"
                                                 aria-describedby="emailHelp"
                                                 placeholder="Enter A Valid Phone Number"
-                                                pattern="[0-9]{10}"
+                                                pattern="[0-9]"
                                                 title="Enter a valid phone number"
-                                                maxLength={10}
                                                 value={phone.phone}
                                                 onChange={handleChange}
                                                 required

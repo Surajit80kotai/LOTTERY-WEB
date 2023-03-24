@@ -14,7 +14,8 @@ import SliderCard from '../components/core/home/SliderCard'
 
 
 const Home = () => {
-    const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
+    const { fetch_lott_data, category_data } = useSelector((state) => state.lotteryslice)
+    const { loading } = useSelector((state) => state.cartslice)
     const dispatch = useDispatch()
     const { cart_data } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length

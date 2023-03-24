@@ -46,21 +46,21 @@ const Cart = () => {
 
   }
 
-
+  // console.log(cart_data);
   // IncQty function
   const IncQty = (qty, c_id) => {
     const u_qty = qty + 1
-    const data = { id: c_id, qty: u_qty }
-    dispatch(updateCart(data))
+    const data = { id: c_id, qty: u_qty, flag: "cart" }
     dispatch(updateQTY(data))
+    dispatch(updateCart(data))
   }
 
   // DecQty function
   const DecQty = (qty, c_id) => {
     const u_qty = qty - 1
-    const data = { id: c_id, qty: u_qty }
-    dispatch(updateCart(data))
+    const data = { id: c_id, qty: u_qty, flag: "cart" }
     dispatch(updateQTY(data))
+    dispatch(updateCart(data))
   }
 
   // removeItem function

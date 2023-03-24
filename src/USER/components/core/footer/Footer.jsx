@@ -55,7 +55,7 @@ const Footer = () => {
 
                 <div className="footitem">
                     <div className="partner_num">
-                        <h3>17 +</h3>
+                        <h3>21 +</h3>
                     </div>
                 </div>
             </div>

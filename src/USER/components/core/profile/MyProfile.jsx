@@ -14,10 +14,16 @@ const MyProfile = () => {
     const date_of_birth = new Date(user?.dob)
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const newDOB = `${date_of_birth.getUTCDate()}-${month[date_of_birth.getUTCMonth()]}-${date_of_birth.getUTCFullYear()}`
+    const [showEditButton, setShowEditButton] = useState(true)
+    // baseUrl
+    const baseUrl = process.env.REACT_APP_NODE_HOST
+    const [file, setFile] = useState()
     const [formValues, setFormValues] = useState({
+        profile: "profile",
         full_name: user?.full_name,
         email: user?.email,
-        phone: user?.phone
+        phone: user?.phone,
+        profile_img: file
     })
 
     const dispatch = useDispatch()
@@ -34,18 +40,32 @@ const MyProfile = () => {
     // handleSubmit for onSubmit
     const handleSubmit = (e) => {
         e.preventDefault()
+        setShowEditButton(true)
+        let inputs = document.getElementsByClassName("in_disa");
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+        // console.log(formValues);
         dispatch(updateProfile({ formValues, toast }))
     }
 
+
+    // handleProfileImg
+    const handleProfileImg = (e) => {
+        const data = e.target.files[0]
+        // console.log(data?.name);
+        setFile(data?.name)
+        console.log(file);
+    }
+
+
     // Edit button function
-    function enabledEdit() {
+    const enabledEdit = () => {
+        setShowEditButton(false)
         let inputs = document.getElementsByClassName("in_disa");
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].disabled = false;
         }
-        // document.getElementById("saveChanges").style.display = "block";
-        document.getElementById("remEdit").classList.add("hidden");
-        document.getElementById("saveChanges").classList.remove("hidden");
     }
 
     useEffect(() => {
@@ -66,39 +86,59 @@ const MyProfile = () => {
                         <div className="container">
                             <div className="user_information_area">
                                 <h3 className="user_title">Personal Information</h3>
-                                <div className="row mt-5">
-                                    <div className="col-md-3">
-                                        {
-                                            user ?
-                                                <div className="profile_img ">
-                                                    <img src="/assets/img/avatar.png" alt="" className="img-fluid" />
-                                                </div>
-                                                :
-                                                <div className="profile_img ">
-                                                    {
-                                                        user?.photoURL ?
-                                                            <img src={user?.photoURL} alt="" className="img-fluid" />
-                                                            : <img src="/assets/img/avatar.png" alt="" className="img-fluid" />
-                                                    }
-                                                </div>
-                                        }
+                                <form method="post" encType='multipart/form-data'>
+                                    <div className="row mt-5">
+                                        <div className="col-md-3">
+                                            {
+                                                user ?
+                                                    <div className="profile-pic">
+                                                        <input
+                                                            className='in_disa'
+                                                            type="hidden"
+                                                            name="profile"
+                                                        />
+                                                        <label className="-label" htmlFor="file">
+                                                            <span className="glyphicon glyphicon-camera"><i className="fa-regular fa-pen-to-square fs-3"></i></span>
+                                                            <span className='fs-5'>Change Image</span>
+                                                        </label>
+                                                        <input
+                                                            className='in_disa'
+                                                            name='profile_img'
+                                                            id="file"
+                                                            type="file"
+                                                            onChange={handleProfileImg}
+                                                        />
+                                                        {
+                                                            !user?.profile_img ?
+                                                                <img src={baseUrl + user?.profile_img} id="output" width="200" />
+                                                                :
+                                                                <img src={`./assets/img/${file}`} id="output" width="200" />
+                                                        }
+                                                    </div>
+                                                    :
+                                                    <div className="profile_img ">
+                                                        {
+                                                            user?.photoURL ?
+                                                                <img src={user?.photoURL} alt="" className="img-fluid" />
+                                                                : <img src="/assets/img/avatar.png" alt="" className="img-fluid" />
+                                                        }
+                                                    </div>
+                                            }
 
-                                        {
-                                            user ?
-                                                <div className="user_name">
-                                                    <h2 className=" text-center mt-3">{user?.full_name}</h2>
-                                                </div>
-                                                :
-                                                <div className="user_name">
-                                                    <h2 className=" text-center mt-3">{user?.displayName}</h2>
-                                                </div>
-                                        }
+                                            {
+                                                user ?
+                                                    <div className="user_name">
+                                                        <h2 className=" text-center mt-3">{user?.full_name}</h2>
+                                                    </div>
+                                                    :
+                                                    <div className="user_name">
+                                                        <h2 className=" text-center mt-3">{user?.displayName}</h2>
+                                                    </div>
+                                            }
 
-                                    </div>
-                                    <div className="col-md-9">
-                                        <div className="profile_edit_form">
-                                            <form method="post">
-
+                                        </div>
+                                        <div className="col-md-9">
+                                            <div className="profile_edit_form">
                                                 {/* Full Name */}
                                                 <div className="mb-3">
                                                     <label htmlFor="full_name" className="form-label label_style">Your Full Name</label>
@@ -114,7 +154,8 @@ const MyProfile = () => {
                                                                     pattern='^[a-zA-Z ]+$'
                                                                     placeholder={user?.full_name}
                                                                     value={formValues.full_name}
-                                                                    onChange={handleChange} disabled
+                                                                    onChange={handleChange}
+                                                                    disabled
                                                                 />
                                                                 : <input
                                                                     type="text"
@@ -122,7 +163,8 @@ const MyProfile = () => {
                                                                     id="full_name"
                                                                     name="full_name"
                                                                     placeholder={user?.displayName}
-                                                                    onChange={handleChange} disabled
+                                                                    onChange={handleChange}
+                                                                    disabled
                                                                 />
                                                             : null
                                                     }
@@ -183,7 +225,8 @@ const MyProfile = () => {
                                                                     placeholder={user?.phone}
                                                                     value={formValues?.phone}
                                                                     onChange={handleChange}
-                                                                    // maxLength={10}
+                                                                    pattern="[0-9]"
+                                                                    title="Enter a valid phone number"
                                                                     disabled
                                                                 />
                                                                 :
@@ -269,19 +312,27 @@ const MyProfile = () => {
 
                                                 {/* Edit Button */}
                                                 <div className="mt-5">
-                                                    <button type="button" className="editbtn edit"
+                                                    <button
+                                                        type="button"
+                                                        className="editbtn edit"
                                                         id="remEdit"
                                                         onClick={enabledEdit}
+                                                        style={{ "display": showEditButton ? "block" : "none" }}
                                                     ><i className="fas fa-edit"></i> Edit</button>
-                                                    <button onClick={handleSubmit} type="button" className="btn2 hidden" id="saveChanges">Save Changes</button>
+                                                    <button
+                                                        onClick={handleSubmit}
+                                                        type="button"
+                                                        className="btn2 hidden"
+                                                        id="saveChanges"
+                                                        style={{ "display": !showEditButton ? "block" : "none" }}
+                                                    >Save Changes</button>
 
                                                 </div>
-                                            </form>
 
-
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
 

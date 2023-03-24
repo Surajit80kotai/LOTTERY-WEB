@@ -38,7 +38,7 @@ export const FETCHCART = (id, header) => API.get("/auth/cart/" + id, header)
 export const DELCART = (id, header) => API.delete("/auth/cart/delete/" + id, header)
 
 // update Cart item quantity
-export const UPDATECART = (id, qty, header) => API.get("/auth/cart/qt_update/" + id + "/" + qty, header)
+export const UPDATECART = (id, qty, flag, header) => API.get("/auth/cart/qt_update/" + id + "/" + qty + "/" + flag, header)
 
 // user balance
 export const WALLETBALANCE = (header) => API.get("/auth/account/wallet/balance", header)

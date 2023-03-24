@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { clearOrderedData, emptyBuyNow, itemBuyNow, placeOrder } from '../services/slice/PaymentSlice';
 import PreLoader from '../components/core/preloader/PreLoader';
-import { emptyCart } from '../services/slice/CartSlice';
+import { emptyCart, updateCart, updateQTY } from '../services/slice/CartSlice';
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency';
 
 
@@ -27,6 +27,7 @@ const PlaceOrder = () => {
 
     const buyNowDataObj = Object.keys(buy_now_data)
 
+    // console.log(buy_now_data?.product_info?.round_index);
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
 
@@ -75,6 +76,22 @@ const PlaceOrder = () => {
             dispatch(emptyCart())
         }
     }
+
+    // IncQty function
+    // const IncQty = (qty, c_id) => {
+    //     const u_qty = qty + 1
+    //     const data = { id: c_id, qty: u_qty, flag: "buynow" }
+    //     dispatch(updateQTY(data))
+    //     dispatch(updateCart(data))
+    // }
+
+    // // DecQty function
+    // const DecQty = (qty, c_id) => {
+    //     const u_qty = qty - 1
+    //     const data = { id: c_id, qty: u_qty, flag: "buynow" }
+    //     dispatch(updateQTY(data))
+    //     dispatch(updateCart(data))
+    // }
 
 
     useEffect(() => {
@@ -180,6 +197,14 @@ const PlaceOrder = () => {
                                                                 year: 'numeric'
                                                             })}
                                                         </span></h5>
+
+                                                        {/* Quantity */}
+                                                        {/* <div className="qty-container">
+                                                            <button onClick={() => DecQty(buy_now_data?.product_info?.quantity, buy_now_data?.ticket?._id)} className="qty-btn-minus btn-light" type="button"><i className="fa fa-minus"></i></button>
+                                                            <h1 className='quantity_title'>{buy_now_data?.product_info?.quantity}</h1>
+                                                            <button onClick={() => IncQty(buy_now_data?.product_info?.quantity, buy_now_data?.ticket?._id)} className="qty-btn-plus btn-light" type="button"><i className="fa fa-plus"></i></button>
+                                                        </div> */}
+
                                                     </div>
                                                 </div>
                                             </div>

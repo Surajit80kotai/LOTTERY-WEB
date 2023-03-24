@@ -41,9 +41,8 @@ const CommonCard = ({ item }) => {
     // add to cart
     const addToCart = () => {
         const cartData = { product_id: _id, user_id: userID, qty: 1, round_info: rounds[round], round_index: round }
-        dispatch(addCart(cartData))
+        dispatch(addCart({ cartData, toast }))
         setTimeout(() => {
-            toast.success("Item Added To The Cart")
             dispatch(getCart())
         }, 300)
         // setIsrender(!isrender)
@@ -125,7 +124,7 @@ const CommonCard = ({ item }) => {
                                                     <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>
                                                         {token ? currency_symbol : generalCurrency_symbol}</span>
                                                     <span className="text-decoration-line-through">&nbsp;{rounds[round]?._price}</span>&nbsp;&nbsp;
-                                                    <span className="discount_percent">{rounds[round]?._dis}% off</span>
+                                                    {/* <span className="discount_percent">{rounds[round]?._dis}% off</span> */}
                                                 </h3>
                                                 :
                                                 <h3>
@@ -139,10 +138,13 @@ const CommonCard = ({ item }) => {
                                     {
                                         rounds[round]?._qty > 0 ?
                                             <h3 className="total_ticket">
-                                                <span className='mr-2'>
+                                                {/* <span className='mr-2'> */}
+                                                <span >
                                                     Round: {(round + 1) + "/" + rounds?.length}
                                                 </span>
-                                                <span className='mx-3'>
+                                                <br />
+                                                {/* <span className='mx-3'> */}
+                                                <span >
                                                     Remaining Tickets: {rounds[round]?._qty}
                                                 </span>
                                             </h3>
