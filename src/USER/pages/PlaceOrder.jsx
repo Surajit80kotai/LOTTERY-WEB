@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { clearOrderedData, emptyBuyNow, itemBuyNow, placeOrder } from '../services/slice/PaymentSlice';
 import PreLoader from '../components/core/preloader/PreLoader';
-import { emptyCart, updateCart, updateQTY } from '../services/slice/CartSlice';
+import { emptyCart } from '../services/slice/CartSlice';
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency';
 
 

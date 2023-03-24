@@ -21,11 +21,12 @@ export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async
 
 
 //update profile
-export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ formValues, toast }) => {
+export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ formData, toast }) => {
     try {
-        const response = await UPDATEPROFILE(formValues, header)
+        const response = await UPDATEPROFILE(formData, header)
+        // console.log(response?.data?.user_details);
         toast.success("Profile Updated Successfully")
-        window.localStorage.setItem("user", JSON.stringify(response?.data))
+        window.localStorage.setItem("user", JSON.stringify(response?.data?.user_details))
         return response?.data
     } catch (err) {
         console.log(err);

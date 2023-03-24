@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 // import { Link } from 'react-router-dom'
 import { updateProfile } from '../../../services/slice/UserSlice'
-import { toast } from 'react-toastify'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 // import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol } from '../../../util/Currency'
@@ -15,15 +15,19 @@ const MyProfile = () => {
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const newDOB = `${date_of_birth.getUTCDate()}-${month[date_of_birth.getUTCMonth()]}-${date_of_birth.getUTCFullYear()}`
     const [showEditButton, setShowEditButton] = useState(true)
+
     // baseUrl
-    const baseUrl = process.env.REACT_APP_NODE_HOST
-    const [file, setFile] = useState()
+    const baseUrl = process.env.REACT_APP_BASE_URL
+    const baseNodeUrl = process.env.REACT_APP_NODE_HOST
+
+
+    const [image, setImage] = useState(null)
     const [formValues, setFormValues] = useState({
         profile: "profile",
         full_name: user?.full_name,
         email: user?.email,
         phone: user?.phone,
-        profile_img: file
+        profile_img: user?.profile_img
     })
 
     const dispatch = useDispatch()
@@ -31,31 +35,39 @@ const MyProfile = () => {
     // userID
     // const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
+    // token
+    const token = (JSON.parse(window.localStorage.getItem("token")))
+
 
     // handleChange for onChange
     const handleChange = (e) => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value })
     }
 
-    // handleSubmit for onSubmit
+
     const handleSubmit = (e) => {
-        e.preventDefault()
         setShowEditButton(true)
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('profile', "profile");
+        formData.append('profile_img', image ? image : user?.profile_img);
+        formData.append('full_name', formValues?.full_name);
+        formData.append('email', formValues?.email);
+        formData.append('phone', formValues?.phone);
+
+        dispatch(updateProfile({ formData, toast }))
+
         let inputs = document.getElementsByClassName("in_disa");
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].disabled = true;
         }
-        // console.log(formValues);
-        dispatch(updateProfile({ formValues, toast }))
-    }
-
+    };
 
     // handleProfileImg
     const handleProfileImg = (e) => {
         const data = e.target.files[0]
-        // console.log(data?.name);
-        setFile(data?.name)
-        console.log(file);
+        setImage(data)
+        // console.log(data);
     }
 
 
@@ -86,7 +98,8 @@ const MyProfile = () => {
                         <div className="container">
                             <div className="user_information_area">
                                 <h3 className="user_title">Personal Information</h3>
-                                <form method="post" encType='multipart/form-data'>
+                                {/* <form method="post" encType='multipart/form-data'> */}
+                                <form>
                                     <div className="row mt-5">
                                         <div className="col-md-3">
                                             {
@@ -103,16 +116,15 @@ const MyProfile = () => {
                                                         </label>
                                                         <input
                                                             className='in_disa'
-                                                            name='profile_img'
                                                             id="file"
                                                             type="file"
                                                             onChange={handleProfileImg}
                                                         />
                                                         {
-                                                            !user?.profile_img ?
-                                                                <img src={baseUrl + user?.profile_img} id="output" width="200" />
+                                                            user?.profile_img ?
+                                                                <img src={baseNodeUrl + user?.profile_img} id="output" width="200" />
                                                                 :
-                                                                <img src={`./assets/img/${file}`} id="output" width="200" />
+                                                                <img src={`./assets/img/avatar.png`} id="output" width="200" />
                                                         }
                                                     </div>
                                                     :
