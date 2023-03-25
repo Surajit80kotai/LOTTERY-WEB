@@ -25,6 +25,7 @@ export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ f
     try {
         const response = await UPDATEPROFILE(formData, header)
         // console.log(response?.data?.user_details);
+        window.localStorage.removeItem("user")
         toast.success("Profile Updated Successfully")
         window.localStorage.setItem("user", JSON.stringify(response?.data?.user_details))
         return response?.data

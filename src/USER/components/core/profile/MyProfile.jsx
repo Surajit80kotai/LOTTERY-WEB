@@ -17,7 +17,7 @@ const MyProfile = () => {
     const [showEditButton, setShowEditButton] = useState(true)
 
     // baseUrl
-    const baseUrl = process.env.REACT_APP_BASE_URL
+    // const baseUrl = process.env.REACT_APP_BASE_URL
     const baseNodeUrl = process.env.REACT_APP_NODE_HOST
 
 
@@ -36,7 +36,7 @@ const MyProfile = () => {
     // const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
 
     // token
-    const token = (JSON.parse(window.localStorage.getItem("token")))
+    // const token = (JSON.parse(window.localStorage.getItem("token")))
 
 
     // handleChange for onChange
@@ -109,6 +109,7 @@ const MyProfile = () => {
                                                             className='in_disa'
                                                             type="hidden"
                                                             name="profile"
+                                                            disabled
                                                         />
                                                         <label className="-label" htmlFor="file">
                                                             <span className="glyphicon glyphicon-camera"><i className="fa-regular fa-pen-to-square fs-3"></i></span>
@@ -116,15 +117,17 @@ const MyProfile = () => {
                                                         </label>
                                                         <input
                                                             className='in_disa'
+                                                            name='profile_img'
                                                             id="file"
                                                             type="file"
                                                             onChange={handleProfileImg}
+                                                            disabled
                                                         />
                                                         {
                                                             user?.profile_img ?
-                                                                <img src={baseNodeUrl + user?.profile_img} id="output" width="200" />
+                                                                <img src={baseNodeUrl + user?.profile_img} id="output" width="200" alt='' />
                                                                 :
-                                                                <img src={`./assets/img/avatar.png`} id="output" width="200" />
+                                                                <img src={`./assets/img/avatar.png`} id="output" width="200" alt='' />
                                                         }
                                                     </div>
                                                     :

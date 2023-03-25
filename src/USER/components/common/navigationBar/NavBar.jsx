@@ -114,17 +114,6 @@ const NavBar = () => {
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('en')}>English </button></li>
                 <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('fr')}>France </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('cm')}>Cameroon </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('td')}>Chad </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('cg')}>Congo </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('ne')}>Niger </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('ng')}>Nigeria </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('ga')}>Gabon </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('gq')}>Equatorial Guinea </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('bj')}>Benin </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('ml')}>Mali </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('sn')}>Senegal </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('bf')}>Burkina Faso </button></li>
               </ul>
             </li> */}
           </ul>
