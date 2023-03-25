@@ -104,17 +104,23 @@ const VerifyPhone = () => {
 
                                         <div className='col-2' style={{ "width": "18%" }}>
                                             <select
-                                                className="form-select form_input form_select"
+                                                className="form-select form_input form_select fw-bold"
                                                 aria-label="Default select example"
                                                 id="selects"
                                                 name='phone_code'
                                                 value={phone.phone_code}
                                                 onChange={handleChange}
                                             >
+                                                <option className='fw-bold' value="1" aria-readonly>MDC</option>
                                                 {
                                                     phoneCodeData?.map((country) => {
                                                         return (
-                                                            <option value={country.dial_code} key={country._id}>{country.dial_code}&nbsp;&nbsp;&nbsp;&nbsp;{country.name}</option>
+                                                            <option
+                                                                value={country.dial_code}
+                                                                key={country._id}>
+                                                                {country.name}&nbsp;
+                                                                ({country.dial_code})
+                                                            </option>
                                                         )
                                                     })
                                                 }

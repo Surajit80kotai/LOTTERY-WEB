@@ -11,7 +11,7 @@ import { getPhoneCode, testPhoneCode } from '../services/slice/CountryStateSlice
 
 const Login = () => {
     const { login, loading } = useSelector((state) => state.authslice)
-    const { phoneCodeData, testPhoneCodeData } = useSelector((state) => state.countrystateslice)
+    const { phoneCodeData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -118,23 +118,23 @@ const Login = () => {
                                                     {/* <h6 style={{ "color": "#f9772b" }}>Select Country Code*</h6> */}
                                                     <div className='col-2' style={{ "width": "18%" }}>
                                                         <select
-                                                            className="form-select form_input form_select"
+                                                            className="form-select form_input form_select fw-bold"
                                                             aria-label="Default select example"
                                                             id="selects"
                                                             name='phone_code'
                                                             value={formValues.phone_code}
                                                             onChange={handleChange}
                                                         >
-                                                            <option value="1" aria-readonly>MDC</option>
+                                                            <option className='fw-bold' value="1" aria-readonly>MDC</option>
                                                             {
-                                                                testPhoneCodeData?.map((country, index) => {
+                                                                phoneCodeData?.map((country, index) => {
                                                                     return (
                                                                         <option
                                                                             value={country.dial_code} key={index}>
                                                                             {/* {country.emoji}&nbsp; */}
                                                                             {/* ({country.code})&nbsp; */}
-                                                                            ({country.dial_code})&nbsp;
-                                                                            {country.name}
+                                                                            {country.name}&nbsp;
+                                                                            ({country.dial_code})
                                                                         </option>
                                                                     )
                                                                 })
