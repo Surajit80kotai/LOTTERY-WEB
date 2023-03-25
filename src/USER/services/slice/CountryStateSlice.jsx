@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { COUNTRY, PHONECODE, STATE } from "../api/Api";
+import { COUNTRY, PHONECODE, STATE, TESTAPI } from "../api/Api";
 
 // fetchCountry data
 export const fetchCountry = createAsyncThunk("/countries", async () => {
@@ -34,6 +34,17 @@ export const fetchStates = createAsyncThunk("/state", async (id) => {
     }
 })
 
+// test
+export const testPhoneCode = createAsyncThunk("/phonecode.json", async () => {
+    try {
+        const result = await TESTAPI()
+        // console.log(result?.data);
+        return result?.data
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 
 const CountryStateSlice = createSlice({
     name: "countrystateslice",
@@ -42,7 +53,8 @@ const CountryStateSlice = createSlice({
         phoneCodeData: [],
         stateData: [],
         msg: "",
-        loading: false
+        loading: false,
+        testPhoneCodeData: []
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -89,6 +101,23 @@ const CountryStateSlice = createSlice({
             state.stateData = payload
         })
         builder.addCase(fetchStates.rejected, (state) => {
+            state.msg = "Failed"
+            state.loading = false
+        })
+
+
+        //  For state fetch
+        builder.addCase(testPhoneCode.pending, (state) => {
+            state.msg = "Loading.."
+            state.loading = true
+        })
+        builder.addCase(testPhoneCode.fulfilled, (state, { payload }) => {
+            state.msg = "Success"
+            state.loading = false
+            state.testPhoneCodeData = payload
+            // console.log(payload);
+        })
+        builder.addCase(testPhoneCode.rejected, (state) => {
             state.msg = "Failed"
             state.loading = false
         })

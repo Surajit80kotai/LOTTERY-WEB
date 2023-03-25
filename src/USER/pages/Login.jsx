@@ -6,14 +6,12 @@ import { toast } from 'react-toastify'
 import { auth, google, facebook } from '../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import PreLoader from '../components/core/preloader/PreLoader';
-// import PhoneInput from 'react-phone-input-2'
-// import 'react-phone-input-2/lib/style.css'
-import { getPhoneCode } from '../services/slice/CountryStateSlice'
+import { getPhoneCode, testPhoneCode } from '../services/slice/CountryStateSlice'
 
 
 const Login = () => {
     const { login, loading } = useSelector((state) => state.authslice)
-    const { phoneCodeData } = useSelector((state) => state.countrystateslice)
+    const { phoneCodeData, testPhoneCodeData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -59,9 +57,11 @@ const Login = () => {
         console.log(result);
     }
 
+    // console.log(testPhoneCodeData);
 
     useEffect(() => {
         dispatch(getPhoneCode())
+        dispatch(testPhoneCode())
     }, [dispatch])
 
 
@@ -125,11 +125,17 @@ const Login = () => {
                                                             value={formValues.phone_code}
                                                             onChange={handleChange}
                                                         >
-                                                            {/* <option value="1" aria-readonly>Sel.</option> */}
+                                                            <option value="1" aria-readonly>MDC</option>
                                                             {
-                                                                phoneCodeData?.map((country) => {
+                                                                testPhoneCodeData?.map((country, index) => {
                                                                     return (
-                                                                        <option value={country.dial_code} key={country._id}>{country.dial_code}&nbsp;&nbsp;&nbsp;&nbsp;{country.name}</option>
+                                                                        <option
+                                                                            value={country.dial_code} key={index}>
+                                                                            {/* {country.emoji}&nbsp; */}
+                                                                            {/* ({country.code})&nbsp; */}
+                                                                            ({country.dial_code})&nbsp;
+                                                                            {country.name}
+                                                                        </option>
                                                                     )
                                                                 })
                                                             }
