@@ -450,7 +450,7 @@ main {
 .forgetwrapper {
 	max-width: 600px;
 	margin: 0 auto;
-	padding-top: 6rem;
+	/* padding-top: 6rem; */
 }
 
 .forget {

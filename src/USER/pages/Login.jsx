@@ -7,16 +7,28 @@ import { auth, google, facebook } from '../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import PreLoader from '../components/core/preloader/PreLoader';
 import { getPhoneCode, testPhoneCode } from '../services/slice/CountryStateSlice'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 
 const Login = () => {
     const { login, loading } = useSelector((state) => state.authslice)
-    const { phoneCodeData, testPhoneCodeData } = useSelector((state) => state.countrystateslice)
+    // const { phoneCodeData, testPhoneCodeData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [formValues, setFormValues] = useState({ phone_code: "", contact: "", password: "" })
+    const [phone, setPhone] = useState('')
+    const [toggleBtn, setToggleBtn] = useState(false)
 
+    // toggle button function
+    const toggleButton = () => {
+        if (toggleBtn) {
+            setToggleBtn(false)
+        } else {
+            setToggleBtn(true)
+        }
+    }
 
     // handle change function
     const handleChange = (e) => {
@@ -34,7 +46,7 @@ const Login = () => {
             const data = { user_id: formValues.contact, password: formValues.password, user_id_type: "email" }
             dispatch(fetchLogin({ data, navigate, toast }))
         } else {
-            const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, password: formValues.password, user_id_type: "phone" }
+            const data = { user_id: "+" + phone, password: formValues.password, user_id_type: "phone" }
             dispatch(fetchLogin({ data, navigate, toast }))
         }
     }
@@ -88,88 +100,98 @@ const Login = () => {
 
                             <div className="form_area">
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
-
-                                    {/* Phone & Email Input */}
+                                    {/* Email ID */}
                                     <div className="mb-5">
-                                        <label htmlFor="contact" className="form-label label_style">Enter Phone Or Email ID</label>
-                                        {
-                                            isNaN(formValues?.contact) ?
-                                                <div className='row'>
-                                                    <div className='col-12'>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control form_input"
-                                                            id="contact"
-                                                            name="contact"
-                                                            aria-describedby="emailHelp"
-                                                            placeholder="Enter Phone Or Email ID"
-                                                            pattern="^((\+)?(\d{2}[-]))?(\d{8}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
-                                                            title="Enter a valid email or phone number"
-                                                            value={formValues.contact}
-                                                            onChange={handleChange}
-                                                            required
-                                                        />
-                                                    </div>
-                                                </div>
-                                                :
-                                                <div className='row'>
-                                                    {/* <h6 style={{ "color": "#f9772b" }}>Select Country Code*</h6> */}
-                                                    <div className='col-2' style={{ "width": "18%" }}>
-                                                        <select
-                                                            className="form-select form_input form_select fw-bold"
-                                                            aria-label="Default select example"
-                                                            id="selects"
-                                                            name='phone_code'
-                                                            value={formValues.phone_code}
-                                                            onChange={handleChange}
-                                                        >
-                                                            <option className='fw-bold' value="1" aria-readonly>MDC</option>
-                                                            {
-                                                                phoneCodeData?.map((country, index) => {
-                                                                    return (
-                                                                        <option
-                                                                            value={country.dial_code}
-                                                                            key={index}
-                                                                            data-image=''
-                                                                        >
-                                                                            {/* {country.emoji}&nbsp; */}
-                                                                            {/* ({country.code})&nbsp; */}
-                                                                            {country.name}&nbsp;
-                                                                            ({country.dial_code})
-                                                                        </option>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </select>
-                                                    </div>
+                                        <div className='row' style={{ "display": toggleBtn ? "block" : "none" }}>
+                                            <label htmlFor="contact" className="form-label label_style">Enter Email ID</label>
+                                            <div className='col-12'>
+                                                <input
+                                                    type="text"
+                                                    className="form-control form_input"
+                                                    id="contact"
+                                                    name="contact"
+                                                    aria-describedby="emailHelp"
+                                                    placeholder="Enter Your Email ID"
+                                                    pattern="^((\+)?(\d{2}[-]))?(\d{8}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                    title="Enter a valid email or phone number"
+                                                    value={formValues.contact}
+                                                    onChange={handleChange}
+                                                // required
+                                                />
+                                            </div>
+                                        </div>
 
-                                                    <div className='col-10' style={{ "width": "82%" }}>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control form_input"
-                                                            id="contact"
-                                                            name="contact"
-                                                            aria-describedby="emailHelp"
-                                                            placeholder="Enter Phone Or Email ID"
-                                                            pattern="^((\+)?(\d{1,3}[-]))?(\d{6,14}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
-                                                            title="Enter a valid email or phone number"
-                                                            value={formValues.contact}
-                                                            onChange={handleChange}
-                                                            required
-                                                        />
-                                                    </div>
-                                                </div>
-                                        }
+                                        {/* <div className='row'>
+                                            <div className='col-2' style={{ "width": "18%" }}>
+                                                <select
+                                                    className="form-select form_input form_select fw-bold"
+                                                    aria-label="Default select example"
+                                                    id="selects"
+                                                    name='phone_code'
+                                                    value={formValues.phone_code}
+                                                    onChange={handleChange}
+                                                >
+                                                    <option className='fw-bold' value="1" aria-readonly>MDC</option>
+                                                    {
+                                                        phoneCodeData?.map((country, index) => {
+                                                            return (
+                                                                <option
+                                                                    value={country.dial_code}
+                                                                    key={index}
+                                                                >
+                                                                    {country.emoji}&nbsp;
+                                                                    ({country.code})&nbsp;
+                                                                    {country.name}&nbsp;
+                                                                    ({country.dial_code})
+                                                                </option>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                            </div>
 
-                                        {/* <label htmlFor="email" className="form-label label_style">Phone Number</label>
-                                        <PhoneInput
-                                            inputProps={{ required: true }}
-                                            placeholder="Enter Your Phone Number"
-                                            country={"cm"}
-                                            enableSearch={true}
-                                            value={phone.phone}
-                                            onChange={(phone) => setPhone(phone)}
-                                        /> */}
+                                            <div className='col-10' style={{ "width": "82%" }}>
+                                                <input
+                                                    type="text"
+                                                    className="form-control form_input"
+                                                    id="contact"
+                                                    name="contact"
+                                                    aria-describedby="emailHelp"
+                                                    placeholder="Enter Phone Or Email ID"
+                                                    pattern="^((\+)?(\d{1,3}[-]))?(\d{6,14}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
+                                                    title="Enter a valid email or phone number"
+                                                    value={formValues.contact}
+                                                    onChange={handleChange}
+                                                    required
+                                                />
+                                            </div>
+                                        </div> */}
+
+                                        {/* Phone Number */}
+                                        <div className='row' style={{ "display": !toggleBtn ? "block" : "none" }}>
+                                            <label htmlFor="contact" className="form-label label_style">Enter Phone Number</label>
+                                            <div className='col-12'>
+                                                <PhoneInput
+                                                    inputProps={{ required: true }}
+                                                    placeholder="Enter Your Phone Number"
+                                                    country={"cm"}
+                                                    enableSearch={true}
+                                                    value={phone.phone}
+                                                    onChange={(phone) => setPhone(phone)}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Toggle button for email or phone */}
+                                        <div className='text-center mt-3'>
+                                            <div className='mb-5' style={{ "display": !toggleBtn ? "block" : "none" }}>
+                                                <button className='btn2 fs-5' onClick={toggleButton}>Login With Email</button>
+                                            </div>
+                                            <div className='mb-5' style={{ "display": toggleBtn ? "block" : "none" }}>
+                                                <button className='btn2 fs-5' onClick={toggleButton}>Login With Phone</button>
+                                            </div>
+                                        </div>
+
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_user.error}</p>
                                     </div>

@@ -7,38 +7,41 @@ import { toast } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { clearVerifyOtp, registerOTP, storePhoneNumber, verifyOTP } from '../services/slice/AuthSlice'
 import { getPhoneCode } from '../services/slice/CountryStateSlice'
-// import PhoneInput from 'react-phone-input-2'
-// import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const VerifyPhone = () => {
-    const [phone, setPhone] = useState({ phone_code: "", phone: "" })
+    const [phone, setPhone] = useState({ phone: "" })
+    // const [phone, setPhone] = useState({ phone_code: "", phone: "" })
     const [otp, setOtp] = useState({ otp: "" })
     const [flag, setFlag] = useState(false)
     const { loading } = useSelector((state) => state.authslice)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { reg_otp, verify_otp } = useSelector((state) => state.authslice)
-    const { phoneCodeData } = useSelector((state) => state.countrystateslice)
+    // const { phoneCodeData } = useSelector((state) => state.countrystateslice)
 
 
     // button style
     const active = "btn_one"
     const deactive = "btn_deactive"
 
-    const handleChange = (e) => {
-        setPhone({ ...phone, [e.target.name]: e.target.value })
-        // console.log(phone);
-    }
+    // const handleChange = (e) => {
+    // setPhone({ ...phone, [e.target.name]: e.target.value })
+    // console.log(phone);
+    // }
 
     // sendOtp func.
     const sendOtp = () => {
-        const data = { phone_number: phone.phone_code + phone.phone }
+        const data = { phone_number: "+" + phone }
+        // const data = { phone_number: phone.phone_code + phone.phone }
         dispatch(registerOTP(data))
     }
 
     // onVerify func.
     const onVerify = () => {
-        const data = { phone_number: phone.phone_code + phone.phone, otp: otp.otp }
+        const data = { phone_number: "+" + phone, otp: otp.otp }
+        // const data = { phone_number: "phone.phone_code" + phone.phone, otp: otp.otp }
         dispatch(verifyOTP(data))
     }
 
@@ -60,14 +63,16 @@ const VerifyPhone = () => {
         }
 
         if (verify_otp?.status === true) {
-            const data = { phone_number: phone.phone_code + phone.phone, otp: otp.otp }
+            const data = { phone_number: "+" + phone, otp: otp.otp }
+            // const data = { phone_number: phone.phone_code + phone.phone, otp: otp.otp }
             setFlag(false)
             toast.success(verify_otp?.message)
             dispatch(storePhoneNumber(data.phone_number))
             window.localStorage.setItem("phone_number", JSON.stringify(data?.phone_number))
             navigate("/signup")
             setOtp({ otp: "" })
-            setPhone({ ...phone, phone: "" })
+            setPhone({ phone: "" })
+            // setPhone({ ...phone, phone: "" })
             dispatch(clearVerifyOtp())
         } else if (verify_otp?.status === false) {
             toast.error(verify_otp?.message)
@@ -102,7 +107,7 @@ const VerifyPhone = () => {
                                     <div className="row d-flex mb-5" style={{ "display": !flag ? "block" : "none" }}>
                                         <label htmlFor="phone" className="form-label label_style">Verify Your Phone Number Here</label>
 
-                                        <div className='col-2' style={{ "width": "18%" }}>
+                                        {/* <div className='col-2' style={{ "width": "18%" }}>
                                             <select
                                                 className="form-select form_input form_select fw-bold"
                                                 aria-label="Default select example"
@@ -141,23 +146,24 @@ const VerifyPhone = () => {
                                                 onChange={handleChange}
                                                 required
                                             />
-                                        </div>
-                                        {/* <PhoneInput
+                                        </div> */}
+
+                                        <PhoneInput
                                             inputProps={{ required: true }}
                                             placeholder="Enter Your Phone Number"
                                             country={"cm"}
                                             enableSearch={true}
                                             value={phone.phone}
                                             onChange={(phone) => setPhone(phone)}
-                                        /> */}
+                                        />
                                     </div>
 
                                     <div className="text-center" style={{ "display": !flag ? "block" : "none" }}>
                                         <button
                                             onClick={sendOtp}
                                             type="submit"
-                                            className={(phone?.phone?.length) ? active : deactive}
-                                            disabled={(phone?.phone?.length) ? false : true}
+                                            className={(phone?.length > 8) ? active : deactive}
+                                            disabled={(phone?.length > 8) ? false : true}
                                         >Send OTP</button>
                                     </div>
 
