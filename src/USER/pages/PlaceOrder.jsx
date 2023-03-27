@@ -21,7 +21,6 @@ const PlaceOrder = () => {
     const { ordered_data, buy_now_data, loading } = useSelector((state) => state.paymentslice)
     const dispatch = useDispatch()
     const [buyNowQty, setBuyNowQty] = useState(buy_now_data?.product_info?.quantity)
-    // console.log(buyNowQty);
 
     const baseUrl = process.env.REACT_APP_NODE_HOST
     const dueAmount = Number(amount?.total - balance?.balance)

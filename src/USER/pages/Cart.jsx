@@ -76,8 +76,8 @@ const Cart = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
     dispatch(getCart())
-
-    if (update_status) {
+    
+    if (update_status?.status) {
       calculateSum()
     }
 
