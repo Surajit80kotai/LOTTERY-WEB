@@ -136,7 +136,7 @@ const ForgetPassword = () => {
                         </p>
 
                         {/* Toggle button for email or phone */}
-                        <div className='text-center'>
+                        <div className='text-center' style={{ "display": !hidden ? "block" : "none" }}>
                             <div className='mb-5' style={{ "display": !toggleBtn ? "block" : "none" }}>
                                 <button className='btn2 fs-5' onClick={toggleButton}>Reset Password With Email</button>
                             </div>
