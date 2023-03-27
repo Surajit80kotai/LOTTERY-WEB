@@ -266,16 +266,17 @@ const LotteryInfo = () => {
                                     {/* Ticket quantity Slider */}
                                     <div className="ticket_sold">
                                         <div className="ticket_sold_title">
-                                            {(ticketInfo[0]?.rounds[round]?._qty) > 0 ?
-                                                <h3>
-                                                    <span style={{ "marginRight": "20px" }}>
-                                                        <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
-                                                    <span><img src="/assets/img/9121436 1.png" alt="" /></span>
-                                                    Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
-                                                </h3>
-                                                : <h3 style={{ "color": "#cb4154" }}>
-                                                    All Tickets Sold For Round : {(Number(round) + 1)}
-                                                </h3>
+                                            {
+                                                (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
+                                                    <h3>
+                                                        <span style={{ "marginRight": "20px" }}>
+                                                            <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
+                                                        <span><img src="/assets/img/9121436 1.png" alt="" /></span>
+                                                        Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
+                                                    </h3>
+                                                    : <h3 style={{ "color": "#cb4154" }}>
+                                                        All Tickets Sold For Round : {(Number(round) + 1)}
+                                                    </h3>
                                             }
 
                                         </div>

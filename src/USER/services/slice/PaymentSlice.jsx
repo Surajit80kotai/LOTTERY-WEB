@@ -139,15 +139,18 @@ export const PaymentSlice = createSlice({
         buyNowItem(state, { payload }) {
             // console.log(payload)
             state.buy_now_data = payload
+            window.localStorage.setItem("buy_now_data", JSON.stringify(payload))
         },
         emptyBuyNow(state) {
             state.buy_now_data = []
+            window.localStorage.removeItem("buy_now_data")
         },
         clearOrderedData(state) {
             state.ordered_data = []
         },
         clearBuyNowData(state) {
             state.buy_now_data = []
+            window.localStorage.removeItem("buy_now_data")
         }
     },
     extraReducers: (builder) => {

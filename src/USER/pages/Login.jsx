@@ -11,7 +11,7 @@ import { getPhoneCode, testPhoneCode } from '../services/slice/CountryStateSlice
 
 const Login = () => {
     const { login, loading } = useSelector((state) => state.authslice)
-    const { phoneCodeData } = useSelector((state) => state.countrystateslice)
+    const { phoneCodeData, testPhoneCodeData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -32,11 +32,9 @@ const Login = () => {
         e.preventDefault()
         if (isNaN(formValues?.contact)) {
             const data = { user_id: formValues.contact, password: formValues.password, user_id_type: "email" }
-            // console.log("if", data);
             dispatch(fetchLogin({ data, navigate, toast }))
         } else {
             const data = { phone_code: formValues.phone_code, user_id: formValues.phone_code + formValues.contact, password: formValues.password, user_id_type: "phone" }
-            // console.log("else", data);
             dispatch(fetchLogin({ data, navigate, toast }))
         }
     }
@@ -130,7 +128,10 @@ const Login = () => {
                                                                 phoneCodeData?.map((country, index) => {
                                                                     return (
                                                                         <option
-                                                                            value={country.dial_code} key={index}>
+                                                                            value={country.dial_code}
+                                                                            key={index}
+                                                                            data-image=''
+                                                                        >
                                                                             {/* {country.emoji}&nbsp; */}
                                                                             {/* ({country.code})&nbsp; */}
                                                                             {country.name}&nbsp;

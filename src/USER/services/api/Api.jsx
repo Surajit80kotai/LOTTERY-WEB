@@ -75,4 +75,4 @@ export const VERIFYOTP = (formData) => API.post("/system/register/otp/verify", f
 
 
 // test API
-export const TESTAPI = () => API.get("http://192.168.123.6:3000/phonecode.json")
+export const TESTAPI = () => API.get("http://localhost:3000/phonecode.json")

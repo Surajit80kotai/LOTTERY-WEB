@@ -20,14 +20,14 @@ const PlaceOrder = () => {
     const { balance } = useSelector((state) => state.userslice)
     const { ordered_data, buy_now_data, loading } = useSelector((state) => state.paymentslice)
     const dispatch = useDispatch()
-
+    const [buyNowQty, setBuyNowQty] = useState(buy_now_data?.product_info?.quantity)
+    // console.log(buyNowQty);
 
     const baseUrl = process.env.REACT_APP_NODE_HOST
     const dueAmount = Number(amount?.total - balance?.balance)
 
     const buyNowDataObj = Object.keys(buy_now_data)
 
-    // console.log(buy_now_data?.product_info?.round_index);
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
 
@@ -35,7 +35,14 @@ const PlaceOrder = () => {
     const procced = () => {
         if (buyNowDataObj?.length) {
             const buyNowData = buy_now_data?.product_info
-            dispatch(itemBuyNow(buyNowData))
+            const newBuyNowData = {
+                ...buyNowData,
+                quantity: buyNowQty,
+                total_discount_price: (buyNowData?.total_discount_price * buyNowQty),
+                total_price: (buyNowData?.total_price * buyNowQty)
+            }
+            // console.log(newBuyNowData);
+            dispatch(itemBuyNow(newBuyNowData))
         } else if (cart_data?.length) {
             const cartData = cart_data?.reduce((acc, { resp }) => {
                 acc.push({
@@ -58,13 +65,20 @@ const PlaceOrder = () => {
     // checkOrderData function
     const checkOrderData = () => {
         if (ordered_data?.error === "true") {
-            const cartIds = ordered_data?.meta?.map((item) => item.cart_id)
-            cartIds?.map((item) => {
-                var element = document.getElementById(item);
+            if (!ordered_data?.meta[0]?.cart_id) {
+                var element = document.getElementById(ordered_data?.meta[0]?.pro_id);
+                toast.error(ordered_data?.meta[0]?.quantity)
+                dispatch(clearOrderedData())
                 return element.style.backgroundColor = "#ff616170";
-            })
-            toast.error("Quantity Is Unavilabe !!")
-            dispatch(clearOrderedData())
+            } else {
+                const cartIds = ordered_data?.meta?.map((item) => item.cart_id)
+                cartIds?.map((item) => {
+                    var element = document.getElementById(item);
+                    return element.style.backgroundColor = "#ff616170";
+                })
+                toast.error(ordered_data?.meta[0]?.quantity)
+                dispatch(clearOrderedData())
+            }
         }
         else if (ordered_data?.message === "Order success") {
             if (ordered_data?.meta?.length === 0) {
@@ -78,20 +92,18 @@ const PlaceOrder = () => {
     }
 
     // IncQty function
-    // const IncQty = (qty, c_id) => {
-    //     const u_qty = qty + 1
-    //     const data = { id: c_id, qty: u_qty, flag: "buynow" }
-    //     dispatch(updateQTY(data))
-    //     dispatch(updateCart(data))
-    // }
+    const IncQty = () => {
+        if (buyNowQty) {
+            setBuyNowQty(buyNowQty + 1)
+        }
+    }
 
     // // DecQty function
-    // const DecQty = (qty, c_id) => {
-    //     const u_qty = qty - 1
-    //     const data = { id: c_id, qty: u_qty, flag: "buynow" }
-    //     dispatch(updateQTY(data))
-    //     dispatch(updateCart(data))
-    // }
+    const DecQty = () => {
+        if (buyNowQty > 1) {
+            setBuyNowQty(buyNowQty - 1)
+        }
+    }
 
 
     useEffect(() => {
@@ -119,7 +131,7 @@ const PlaceOrder = () => {
                 total: buy_now_data?.amount?.total
             })
         } else {
-            cart_data?.map(({ resp, info }) => {
+            cart_data?.map(({ resp }) => {
                 if (Number(resp?.round_info?._dis)) {
                     st += (Number((resp?.round_info?._price * resp.quantity)))
                     dc += (Number(((resp?.round_info?._price) * (Number(resp?.round_info?._dis)) / 100) * resp.quantity))
@@ -172,7 +184,7 @@ const PlaceOrder = () => {
                                 {
                                     buyNowDataObj?.length > 0 ?
                                         <div className="order_history_summary col-md-8">
-                                            <div className="cart_list_item">
+                                            <div className="cart_list_item" id={buy_now_data?.ticket?._id}>
                                                 <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.product_info?.round_index}`}>
                                                     <div className="cart_item_img">
                                                         <img loading="lazy" src={baseUrl + buy_now_data?.ticket?.is_image} alt="" className="img-fluid" />
@@ -183,10 +195,10 @@ const PlaceOrder = () => {
                                                         <h3>{buy_now_data?.ticket?.ticket_name}</h3>
                                                     </div>
                                                     <div className="other_info">
-                                                        <p className="amount fw-bold text-dark">Item Quantity : {buy_now_data?.product_info?.quantity}</p>
+                                                        <p className="amount fw-bold text-dark">Item Quantity : {buyNowQty}</p>
                                                         <p className="tic_price fw-bold text-dark">Price Of Ticket :
                                                             {token ? currency_symbol : generalCurrency_symbol}
-                                                            &nbsp;{buy_now_data?.product_info?.total_discount_price}
+                                                            &nbsp;{buy_now_data?.product_info?.total_discount_price * buyNowQty}
                                                         </p>
                                                     </div>
                                                     <div className="date_result">
@@ -199,11 +211,11 @@ const PlaceOrder = () => {
                                                         </span></h5>
 
                                                         {/* Quantity */}
-                                                        {/* <div className="qty-container">
-                                                            <button onClick={() => DecQty(buy_now_data?.product_info?.quantity, buy_now_data?.ticket?._id)} className="qty-btn-minus btn-light" type="button"><i className="fa fa-minus"></i></button>
-                                                            <h1 className='quantity_title'>{buy_now_data?.product_info?.quantity}</h1>
-                                                            <button onClick={() => IncQty(buy_now_data?.product_info?.quantity, buy_now_data?.ticket?._id)} className="qty-btn-plus btn-light" type="button"><i className="fa fa-plus"></i></button>
-                                                        </div> */}
+                                                        <div className="qty-container">
+                                                            <button onClick={() => DecQty()} className="qty-btn-minus btn-light" type="button"><i className="fa fa-minus"></i></button>
+                                                            <h1 className='quantity_title'>{buyNowQty}</h1>
+                                                            <button onClick={() => IncQty()} className="qty-btn-plus btn-light" type="button"><i className="fa fa-plus"></i></button>
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -270,14 +282,14 @@ const PlaceOrder = () => {
                                                             <h4 className="price_text">Price <span> ({buy_now_data?.product_info?.quantity} Item):</span></h4>
                                                             <h6 className="price_value">
                                                                 {buy_now_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
-                                                                &nbsp;{buy_now_data?.amount ? (buy_now_data?.amount?.subtotal).toFixed(2) : 0}
+                                                                &nbsp;{buy_now_data?.amount ? (buy_now_data?.amount?.subtotal * buyNowQty).toFixed(2) : 0}
                                                             </h6>
                                                         </div>
                                                         <div className="price_item mb-5">
                                                             <h4 className="price_text">Total Discount :</h4>
                                                             <h6 className="price_value text-success">
                                                                 {buy_now_data ? <span>&nbsp;-{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
-                                                                {buy_now_data?.amount ? (buy_now_data?.amount?.discount).toFixed(2) : 0}
+                                                                {buy_now_data?.amount ? (buy_now_data?.amount?.discount * buyNowQty).toFixed(2) : 0}
                                                             </h6>
                                                         </div>
                                                         <div className="price_item mt-5">
@@ -285,7 +297,7 @@ const PlaceOrder = () => {
                                                             <h6 className="price_value">
                                                                 {buy_now_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
 
-                                                                &nbsp;{buy_now_data?.amount ? (buy_now_data?.amount?.total).toFixed(2) : 0}
+                                                                &nbsp;{buy_now_data?.amount ? (buy_now_data?.amount?.total * buyNowQty).toFixed(2) : 0}
                                                             </h6>
                                                         </div>
                                                     </div>
@@ -352,7 +364,7 @@ const PlaceOrder = () => {
                                                 </div>
                                                 {/* Wallet Validation */}
                                                 {
-                                                    ((amount.total).toFixed(2) > balance?.balance) ?
+                                                    ((amount?.total)?.toFixed(2) > balance?.balance) ?
                                                         <div className="alert alert-danger mt-2  fs-4" role="alert">
                                                             <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
                                                         </div>
@@ -363,7 +375,7 @@ const PlaceOrder = () => {
                                     </div>
                                     <div className="text-center mt-5">
                                         {
-                                            ((amount.total).toFixed(2) < balance?.balance) ?
+                                            ((amount?.total)?.toFixed(2) < balance?.balance) ?
                                                 <button onClick={procced} className="btn2">Procced</button>
                                                 : <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
                                         }
