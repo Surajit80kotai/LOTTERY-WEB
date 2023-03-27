@@ -44,13 +44,16 @@ const MyProfile = () => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value })
     }
 
+    // console.log(user?.profile_img.split("/"));
+    // console.log(user?.profile_img.split("/")[4]);
 
     const handleSubmit = (e) => {
         setShowEditButton(true)
         e.preventDefault();
         const formData = new FormData();
         formData.append('profile', "profile");
-        formData.append('profile_img', image ? image : user?.profile_img);
+        // image ? formData.append('profile_img', image) : formData.append('profile_img', user?.profile_img?.split("/")[4])
+        formData.append('profile_img', image ? image : user?.profile_img.split("/")[4]);
         formData.append('full_name', formValues?.full_name);
         formData.append('email', formValues?.email);
         formData.append('phone', formValues?.phone);
