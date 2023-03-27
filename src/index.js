@@ -33,7 +33,7 @@ root.render(
         {/* <Route path='/ordersuccess' element={<OrderSuccess />} /> */}
       </Routes>
     </Router>
-    <ToastContainer style={{ "fontSize": "14px" }} transition={Flip} position="top-center" autoClose={3000} />
+    <ToastContainer style={{ "fontSize": "15px" }} transition={Flip} position="top-center" autoClose={3000} />
     {/* </Suspense> */}
   </Provider>
 );

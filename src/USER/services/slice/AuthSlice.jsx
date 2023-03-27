@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
 
 
@@ -145,6 +146,7 @@ export const AuthSlice = createSlice({
             window.localStorage.removeItem("user")
             state.user = null
             state.token = ""
+            toast.success("You have successfully logged out")
         },
         clearVerifyOtp(state) {
             state.reg_otp = null;
