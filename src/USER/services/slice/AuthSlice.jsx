@@ -37,7 +37,7 @@ export const fetchLogin = createAsyncThunk(
             }, 3500)
 
             // react toast message
-            toast.success('Loged In Successfully')
+            toast.success('Logged In Successfully')
             return result?.data
         } catch (err) {
             // console.log(rejectWithValue(err.response.data));
