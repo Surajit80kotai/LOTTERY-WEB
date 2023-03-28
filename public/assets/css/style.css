@@ -3356,7 +3356,7 @@ margin: 0.5rem;
 /* language_dropdown */
 
 .language_dropdown {
-	margin-left: 1rem;
+	margin-top: 1.6rem;
 }
 
 .goog-te-combo {
@@ -4421,3 +4421,10 @@ margin: 0.5rem;
 /* .sticky+main { 
 	padding-top: 10px; 
 } */
+
+.claimbtn{
+	background: var(--primary-color);
+	color: var(--white);
+	padding: 0.5rem 1rem;
+	border-radius: 2rem;
+}

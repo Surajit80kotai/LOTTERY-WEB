@@ -184,6 +184,101 @@ const OrderHistory = () => {
                                                                 </div>
 
                                                             </div> */}
+
+                                                            {/* claim */}
+                                                            {
+                                                                item?.is_win === 'true' ?
+                                                                    <div className="info_item mb-3">
+                                                                        <button type="button" className="claimbtn fs-4" data-bs-toggle="modal" data-bs-target="#claim">
+                                                                            Claim
+                                                                            <span className='mx-2'>
+                                                                                <i className="fas fa-gift" style={{ "color": "#ffffff" }}></i>
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                    : null
+                                                            }
+
+                                                            <div className="modal fade" id="claim" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div className="modal-dialog modal-lg">
+                                                                    <div className="modal-content p-3">
+                                                                        <div className="modal-header">
+                                                                            <h5 className="modal-title fw-bold fs-3" id="exampleModalLabel">Fill Details For Claim Your Prize</h5>
+                                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div className="modal-body">
+                                                                            <form>
+                                                                                {/* Address */}
+                                                                                <div className="mb-5">
+                                                                                    <label htmlFor="address" className="form-label label_style"> Address</label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control"
+                                                                                        id="address"
+                                                                                        aria-describedby="emailHelp"
+                                                                                    />
+                                                                                </div>
+
+                                                                                {/* Road name/Area/Colony */}
+                                                                                <div className="mb-5">
+                                                                                    <label htmlFor="rode_name" className="form-label label_style">Road name/Area/Colony</label>
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control"
+                                                                                        id="rode_name"
+                                                                                    />
+                                                                                </div>
+
+                                                                                {/* Zipcode/Pincode */}
+                                                                                <div className="row">
+                                                                                    <div className="col-md-4">
+                                                                                        <div className="mb-3">
+                                                                                            <label htmlFor="pincode" className="form-label label_style">Zipcode/Pincode</label>
+                                                                                            <input
+                                                                                                type="text"
+                                                                                                className="form-control" id="pincode"
+                                                                                            />
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    {/* Country */}
+                                                                                    <div className="col-md-4">
+                                                                                        <div className="mb-5">
+                                                                                            <label htmlFor="country" className="form-label label_style">Country</label>
+                                                                                            <select
+                                                                                                className="form-select form_select"
+                                                                                                aria-label="Default select example"
+                                                                                                id='country'
+                                                                                            >
+                                                                                                <option value="1">Select...</option>
+                                                                                                <option>One</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className="col-md-4">
+                                                                                        <div className="mb-3">
+                                                                                            <label htmlFor="state" className="form-label label_style">State</label>
+                                                                                            <select
+                                                                                                className="form-select form_select"
+                                                                                                aria-label="Default select example"
+                                                                                                id='state'
+                                                                                            >
+                                                                                                <option value="1">Select...</option>
+                                                                                                <option>One</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="text-center m-2">
+                                                                                    <button type="submit" className="btn2 btn-primary">Submit</button>
+                                                                                </div>
+
+                                                                            </form>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     )
                                                 }).reverse().slice(pagesVisited, pagesVisited + userPerPage)
