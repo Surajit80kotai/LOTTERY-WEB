@@ -7,7 +7,6 @@ import { auth } from '../../../config/firebase'
 import { signOut } from 'firebase/auth'
 import PreLoader from '../../core/preloader/PreLoader'
 import SearchDesk from '../../../util/SearchDesk'
-// import { useTranslation } from 'react-i18next'
 
 
 
@@ -21,15 +20,6 @@ const NavBar = () => {
   const cartLength = cart_data?.length
   const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
   const location = useLocation()
-  // const { i18n } = useTranslation()
-
-  // console.log(social_user.displayName);
-
-  // language change function
-  // const handleClick = (lang) => {
-  //   i18n.changeLanguage(lang)
-  // }
-
 
   // Log Out Function
   const logOut = async () => {
@@ -41,9 +31,47 @@ const NavBar = () => {
     navigate('/')
   }
 
+  // Language translation function
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        autoDisplay: false
+      },
+      "google_translate_element"
+    );
+  };
+
+
+  useEffect(() => {
+    var addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.body.appendChild(addScript);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
+
+
   useEffect(() => {
     dispatch(getCart())
   }, [dispatch, cartLength])
+
+
+  // navbar stickey function after language select
+  window.onscroll = function () { myFunction() };
+
+  var navbar = document.getElementById("navbar");
+  var sticky = navbar?.offsetTop;
+
+  function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky")
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  }
 
 
 
@@ -53,7 +81,7 @@ const NavBar = () => {
       {loading && <PreLoader />}
 
       {/* <main> */}
-      <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-dark fixed-top p-3">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-dark p-3" id='navbar'>
 
 
 
@@ -107,18 +135,12 @@ const NavBar = () => {
             {/* <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
             </li> */}
-
-            {/* Language Dropdown */}
-            {/* <li className="nav-item dropdown">
-              <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Language<i className="fa-solid fa-caret-down mx-2"></i></Link>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('en')}>English </button></li>
-                <li><button className='dropdown-item text-dark fs-5' to="#!" onClick={() => handleClick('fr')}>France </button></li>
-              </ul>
-            </li> */}
           </ul>
 
           <div className="nv_rt">
+            {/* Language Dropdown */}
+            <div className='language_dropdown' id="google_translate_element"></div>
+
             {/* Search Bar */}
             {
               (location.pathname === "/") ?

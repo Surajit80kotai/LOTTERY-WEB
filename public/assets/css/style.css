@@ -150,13 +150,16 @@ input:-webkit-autofill:active {
 	-webkit-box-shadow: 0 0 0 30px #FFEACA inset !important;
 }
 
-main {
+/* main {
 	padding-top: 10rem;
+} */
+.main {
+	margin-top: 5rem;
 }
 
-.mar_top {
+/* .mar_top {
 	margin-top: 10.6rem;
-}
+} */
 
 
 .btn2 {
@@ -3350,7 +3353,25 @@ margin: 0.5rem;
 	line-height: 2rem;
 }
 
+/* language_dropdown */
 
+.language_dropdown {
+	margin-left: 1rem;
+}
+
+.goog-te-combo {
+	padding-top: 0.6rem !important;
+	background: transparent;
+	border: none !important;
+	color: var(--white);
+	font-size: 20px;
+}
+
+
+.goog-te-combo option {
+	background: #efefef;
+	color: #000;
+}
 
 @media screen and (max-width: 768px) {
 	.tab {
@@ -4387,4 +4408,16 @@ margin: 0.5rem;
 	display: inline-flex;
 	padding: 0.2em;
 	height: 2em;
+}
+
+
+
+.sticky {
+	position: sticky;
+	top: 0;
+	width: 100%;
+}
+
+.sticky+main {
+	padding-top: 10px;
 }
