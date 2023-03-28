@@ -4418,6 +4418,6 @@ margin: 0.5rem;
 	width: 100%;
 }
 
-.sticky+main {
-	padding-top: 10px;
-}
+/* .sticky+main { 
+	padding-top: 10px; 
+} */
