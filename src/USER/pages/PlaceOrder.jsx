@@ -199,7 +199,12 @@ const PlaceOrder = () => {
                                                         <p className="amount fw-bold text-dark">Item Quantity : {buyNowQty}</p>
                                                         <p className="tic_price fw-bold text-dark">Price Of Ticket :
                                                             {token ? currency_symbol : generalCurrency_symbol}
-                                                            &nbsp;{buy_now_data?.product_info?.total_discount_price * buyNowQty}
+                                                            &nbsp;
+                                                            {
+                                                                (buy_now_data?.product_info?.total_discount_price) ?
+                                                                    (buy_now_data?.product_info?.total_discount_price * buyNowQty).toFixed(2)
+                                                                    : (buy_now_data?.product_info?.unit_price * buyNowQty)
+                                                            }
                                                         </p>
                                                     </div>
                                                     <div className="date_result">
