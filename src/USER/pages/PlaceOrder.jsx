@@ -20,10 +20,10 @@ const PlaceOrder = () => {
     const { balance } = useSelector((state) => state.userslice)
     const { ordered_data, buy_now_data, loading } = useSelector((state) => state.paymentslice)
     const dispatch = useDispatch()
-    const [buyNowQty, setBuyNowQty] = useState(buy_now_data?.product_info?.quantity)
+    const [buyNowQty, setBuyNowQty] = useState(1)
 
     const baseUrl = process.env.REACT_APP_NODE_HOST
-    const dueAmount = Number(amount?.total - balance?.balance)
+    const dueAmount = buy_now_data?.amount?.total ? Number((buy_now_data?.amount?.total * buyNowQty) - balance?.balance).toFixed(2) : Number((amount?.total - balance?.balance).toFixed(2))
 
     const buyNowDataObj = Object.keys(buy_now_data)
 
@@ -84,7 +84,9 @@ const PlaceOrder = () => {
                 dispatch(emptyCart())
                 dispatch(emptyBuyNow())
             }
-            // toast.success("Order success")
+            // toast.success("Order success",{
+            // autoClose: 3000
+            // })
             navigate('/ordersuccess')
             dispatch(emptyCart())
         }
@@ -363,7 +365,7 @@ const PlaceOrder = () => {
                                                 </div>
                                                 {/* Wallet Validation */}
                                                 {
-                                                    ((amount?.total)?.toFixed(2) > balance?.balance) ?
+                                                    ((amount?.total)?.toFixed(2) && (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance) ?
                                                         <div className="alert alert-danger mt-2  fs-4" role="alert">
                                                             <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
                                                         </div>
@@ -374,7 +376,7 @@ const PlaceOrder = () => {
                                     </div>
                                     <div className="text-center mt-5">
                                         {
-                                            ((amount?.total)?.toFixed(2) < balance?.balance) ?
+                                            ((amount?.total)?.toFixed(2) && (buy_now_data?.amount?.total * buyNowQty).toFixed(2) < balance?.balance) ?
                                                 <button onClick={procced} className="btn2">Procced</button>
                                                 : <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
                                         }

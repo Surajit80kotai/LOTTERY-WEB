@@ -1,10 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { CATEGORY, TICKET } from "../api/Api"
 
+
+// Defining header
+const header = {
+    headers: {
+        Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("token"))}`
+    }
+}
+
 // fetching all category data
 export const fetchCategory = createAsyncThunk("/admin/get-category", async (rejectWithValue) => {
     try {
-        const response = await CATEGORY()
+        const response = await CATEGORY(header)
         // console.log(response?.data)
         return response?.data
     } catch (err) {
@@ -16,7 +24,7 @@ export const fetchCategory = createAsyncThunk("/admin/get-category", async (reje
 // fetching all lottery data
 export const fetchLottery = createAsyncThunk("ticket/get-tickets", async (rejectWithValue) => {
     try {
-        const response = await TICKET()
+        const response = await TICKET(header)
         // console.log(response?.data)
         return response?.data
     } catch (err) {

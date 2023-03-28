@@ -1,10 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { COUNTRY, PHONECODE, STATE, TESTAPI } from "../api/Api";
 
+// Defining header
+const header = {
+    headers: {
+        Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("token"))}`
+    }
+};
+
 // fetchCountry data
 export const fetchCountry = createAsyncThunk("/countries", async (rejectWithValue) => {
     try {
-        const result = await COUNTRY()
+        const result = await COUNTRY(header)
         // console.log(result?.data);
         return result?.data
     } catch (err) {
@@ -16,7 +23,7 @@ export const fetchCountry = createAsyncThunk("/countries", async (rejectWithValu
 // getPhone code
 export const getPhoneCode = createAsyncThunk("/phone/code", async (rejectWithValue) => {
     try {
-        const result = await PHONECODE()
+        const result = await PHONECODE(header)
         // console.log(result?.data);
         return result?.data
     } catch (err) {
@@ -28,7 +35,7 @@ export const getPhoneCode = createAsyncThunk("/phone/code", async (rejectWithVal
 // fetchStates data
 export const fetchStates = createAsyncThunk("/state", async (id, { rejectWithValue }) => {
     try {
-        const result = await STATE(id)
+        const result = await STATE(id, header)
         // console.log(result?.data);
         return result?.data
     } catch (err) {
@@ -40,7 +47,7 @@ export const fetchStates = createAsyncThunk("/state", async (id, { rejectWithVal
 // test
 export const testPhoneCode = createAsyncThunk("/phonecode.json", async (rejectWithValue) => {
     try {
-        const result = await TESTAPI()
+        const result = await TESTAPI(header)
         // console.log(result?.data);
         return result?.data
     } catch (err) {

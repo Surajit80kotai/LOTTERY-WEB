@@ -14,7 +14,7 @@ const Footer = () => {
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>About us</Link></li> */}
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Find Us</Link></li> */}
                         <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Terms & Condition</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Privacy Policy</Link></li>
+                        <li><Link to="/privacypolicy"><span><i className="fas fa-caret-right"></i></span>Privacy Policy</Link></li>
                         <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Cookies Policy</Link></li>
                     </ul>
                 </div>

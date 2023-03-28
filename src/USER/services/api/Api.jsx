@@ -18,15 +18,15 @@ export const FORGETPASSWORDOTP = (phone) => API.post('/system/forget/password/ot
 export const SETNEWPASSWORD = (data) => API.post('/system/set/password', data)
 
 // country & state api function
-export const COUNTRY = () => API.get('/countries')
-export const STATE = (id) => API.get('/state/' + id)
-export const PHONECODE = () => API.get('/phone/code')
+export const COUNTRY = (header) => API.get('/countries', header)
+export const STATE = (id, header) => API.get('/state/' + id, header)
+export const PHONECODE = (header) => API.get('/phone/code', header)
 
 // get Category api function
-export const CATEGORY = () => API.get('/admin/get-category')
+export const CATEGORY = (header) => API.get('/admin/get-category', header)
 
 // get ticket api Function
-export const TICKET = () => API.get('/ticket/get-tickets')
+export const TICKET = (header) => API.get('/ticket/get-tickets', header)
 
 // post Add to Cart
 export const ADDTOCART = (cartData, header) => API.post('/auth/add-cart', cartData, header)
@@ -65,13 +65,13 @@ export const UPDATEPROFILE = (formData, header) => API.post("/auth/update/profil
 export const ORDERHISTORY = (header) => API.get("/auth/order/history", header)
 
 // contact us
-export const CONTACTUS = (formData) => API.post("/auth/contact", formData)
+export const CONTACTUS = (formData, header) => API.post("/auth/contact", formData, header)
 
 // get otp api
-export const GETOTP = (phone) => API.post("/system/register/otp", phone)
+export const GETOTP = (phone, header) => API.post("/system/register/otp", phone, header)
 
 // verify otp api
-export const VERIFYOTP = (formData) => API.post("/system/register/otp/verify", formData)
+export const VERIFYOTP = (formData, header) => API.post("/system/register/otp/verify", formData, header)
 
 
 // test API

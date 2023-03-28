@@ -181,7 +181,7 @@ const LotteryInfo = () => {
                                             ticketInfo[0]?.rounds[round]?._dis ?
                                                 <h3>Ticket Price :&nbsp;&nbsp;
                                                     <span className="discountprice">
-                                                        {token ? currency_symbol : generalCurrency_symbol}{discountedPrice}</span>&nbsp;&nbsp;
+                                                        {token ? currency_symbol : generalCurrency_symbol}{(discountedPrice).toFixed(2)}</span>&nbsp;&nbsp;
                                                     <span className="text-decoration-line-through fs-4 fw-light">
                                                         {token ? currency_symbol : generalCurrency_symbol}
                                                         {ticketInfo[0]?.rounds[round]?._price}
@@ -189,7 +189,12 @@ const LotteryInfo = () => {
                                                     <span className="discount_percent fs-4 ">{ticketInfo[0]?.rounds[round]?._dis}% off</span>
                                                 </h3>
                                                 :
-                                                null
+                                                <h3>Ticket Price :&nbsp;&nbsp;
+                                                    <span className="discountprice">
+                                                        {token ? currency_symbol : generalCurrency_symbol}
+                                                        {ticketInfo[0]?.rounds[round]?._price}
+                                                    </span>
+                                                </h3>
                                         }
                                     </div>
                                     {/* Promo area */}

@@ -114,7 +114,7 @@ const BannerData = ({ item, id }) => {
                                 <div className="ticket_price">
                                     <h4>Ticket Price
                                         <span>{token ? currency_symbol : generalCurrency_symbol}
-                                        </span>{discountedPrice ? discountedPrice : item?.rounds[round]?._price}
+                                        </span>{discountedPrice ? (discountedPrice).toFixed(2) : (item?.rounds[round]?._price)}
                                     </h4>
                                 </div>
                                 <div className="banner_product_btn">

@@ -121,14 +121,14 @@ const CommonCard = ({ item }) => {
                                         {
                                             rounds[round]?._dis ?
                                                 <h3>
-                                                    <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{discountedPrice}</span>&nbsp;&nbsp;<span>
+                                                    <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{(discountedPrice).toFixed(2)}</span>&nbsp;&nbsp;<span>
                                                         {token ? currency_symbol : generalCurrency_symbol}</span>
                                                     <span className="text-decoration-line-through">&nbsp;{rounds[round]?._price}</span>&nbsp;&nbsp;
                                                     {/* <span className="discount_percent">{rounds[round]?._dis}% off</span> */}
                                                 </h3>
                                                 :
                                                 <h3>
-                                                    <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{rounds[round]?._price}</span>
+                                                    <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{(rounds[round]?._price).toFixed(2)}</span>
                                                 </h3>
                                         }
                                     </div>

@@ -54,7 +54,7 @@ export const userOrderHistory = createAsyncThunk("/auth/order/history", async (r
 // contact us
 export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, toast }, { rejectWithValue }) => {
     try {
-        const res = await CONTACTUS(formData)
+        const res = await CONTACTUS(formData, header)
         // console.log(res?.data);
         if (res?.data?.responseCode === 200) {
             toast.success(res?.data?.message, {
