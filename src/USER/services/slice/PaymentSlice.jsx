@@ -13,7 +13,7 @@ const header = {
 
 
 // cinetPay
-export const cinetPay = createAsyncThunk("/v2/payment", async (formValue) => {
+export const cinetPay = createAsyncThunk("/v2/payment", async (formValue, { rejectWithValue }) => {
     var data = JSON.stringify({
         "apikey": "102219127563b7f7c53a41e9.62135970",
         "site_id": "126127",
@@ -58,64 +58,70 @@ export const cinetPay = createAsyncThunk("/v2/payment", async (formValue) => {
         const res = await axios(config)
         return res?.data
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 //payment initialization
-export const initPay = createAsyncThunk("/auth/pay/init", async (paymentData) => {
+export const initPay = createAsyncThunk("/auth/pay/init", async (paymentData, { rejectWithValue }) => {
     try {
         const res = await PAYINIT(paymentData, header)
         return res?.data
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 // get all transaction
-export const getTransactions = createAsyncThunk("/auth/get/transaction", async () => {
+export const getTransactions = createAsyncThunk("/auth/get/transaction", async (rejectWithValue) => {
     try {
         const res = await GETALLTRANSACTION(header)
         return res?.data
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 //update transaction 
-export const updateTransactions = createAsyncThunk("/auth/update/transaction", async () => {
+export const updateTransactions = createAsyncThunk("/auth/update/transaction", async (rejectWithValue) => {
     try {
         const res = await UPDATETRANSACTION(header)
         return res?.data
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 // place order
-export const placeOrder = createAsyncThunk("/auth/order", async (orderData) => {
+export const placeOrder = createAsyncThunk("/auth/order", async (orderData, { rejectWithValue }) => {
     try {
         const res = await PLACEORDER(orderData, header)
         // console.log(res?.data);
         return res?.data
     } catch (err) {
-        console.log(err?.data)
+        // console.log(err?.data)
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 //buy now
-export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderData) => {
+export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderData, { rejectWithValue }) => {
     try {
         const res = await BUYNOW(orderData, header)
         // console.log("response", res?.data);
         return res?.data
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return rejectWithValue(err.response.data)
     }
 })
 

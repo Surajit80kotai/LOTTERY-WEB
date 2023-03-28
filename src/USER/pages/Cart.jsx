@@ -67,7 +67,9 @@ const Cart = () => {
   const removeItem = (id) => {
     dispatch(delCartItem(id))
     setTimeout(() => {
-      toast.success("Item Removed From Cart")
+      toast.success("Item Removed From Cart", {
+        autoClose: 3000
+      })
     }, 300)
   }
 
@@ -76,7 +78,7 @@ const Cart = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
     dispatch(getCart())
-    
+
     if (update_status?.status) {
       calculateSum()
     }

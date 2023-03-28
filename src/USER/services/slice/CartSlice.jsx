@@ -20,29 +20,35 @@ const userID = socialuserID ? socialuserID : (JSON.parse(window.localStorage.get
 
 
 // AddCart post request handle
-export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toast }) => {
+export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toast }, { rejectWithValue }) => {
     try {
         // console.log(cartData);
         const res = await ADDTOCART(cartData, header)
         if (res?.data?.status) {
-            toast.success(res?.data?.message)
+            toast.success(res?.data?.message, {
+                autoClose: 3500
+            })
         } else {
-            toast.error(res?.data?.message)
+            toast.error(res?.data?.message, {
+                autoClose: 3500
+            })
         }
         return res?.data
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 // DeleteCart post request handle
-export const delCartItem = createAsyncThunk("/auth/cart/delete", async (c_id) => {
+export const delCartItem = createAsyncThunk("/auth/cart/delete", async (c_id, { rejectWithValue }) => {
     try {
         const res = await DELCART(c_id, header)
         return res?.data
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return rejectWithValue(err.response.data)
     }
 })
 
@@ -64,12 +70,13 @@ export const getCart = createAsyncThunk("/auth/cart", async (rejectWithValue) =>
 
 
 // updateCart get request handle
-export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ id, qty, flag }) => {
+export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ id, qty, flag }, { rejectWithValue }) => {
     try {
         const res = await UPDATECART(id, qty, flag, header)
         return res?.data
     } catch (err) {
-        console.log("Quantity not updated", err)
+        // console.log("Quantity not updated", err)
+        return rejectWithValue(err.response.data)
     }
 })
 
@@ -185,7 +192,9 @@ export const CartSlice = createSlice({
             state.loading = false
             state.update_status = payload
             if (!payload?.status) {
-                toast.warning(payload.message)
+                toast.warning(payload.message, {
+                    autoClose: 3500
+                })
             }
         })
         builder.addCase(updateCart.rejected, (state) => {

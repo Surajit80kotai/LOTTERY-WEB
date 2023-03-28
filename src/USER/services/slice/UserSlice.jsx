@@ -9,56 +9,66 @@ const header = {
 };
 
 //get user balance
-export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async () => {
+export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async (rejectWithValue) => {
     try {
         const response = await WALLETBALANCE(header)
         // console.log(response?.data)
         return response?.data
     } catch (err) {
-        console.log(err);
+        // console.log(err);
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 //update profile
-export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ formData, toast }) => {
+export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ formData, toast }, { rejectWithValue }) => {
     try {
         const response = await UPDATEPROFILE(formData, header)
         // console.log(response?.data?.user_details);
         window.localStorage.removeItem("user")
-        toast.success("Profile Updated Successfully.\nPlease Login Again To See The Changes")
+        toast.success("Profile Updated Successfully.\nPlease Login Again To See The Changes", {
+            autoClose: 4500
+        })
         window.localStorage.setItem("user", JSON.stringify(response?.data?.user_details))
         return response?.data
     } catch (err) {
-        console.log(err);
+        // console.log(err);
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 // order history
-export const userOrderHistory = createAsyncThunk("/auth/order/history", async () => {
+export const userOrderHistory = createAsyncThunk("/auth/order/history", async (rejectWithValue) => {
     try {
         const res = await ORDERHISTORY(header)
         return res?.data
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return rejectWithValue(err.response.data)
     }
 })
 
 
 // contact us
-export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, toast }) => {
+export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, toast }, { rejectWithValue }) => {
     try {
         const res = await CONTACTUS(formData)
         // console.log(res?.data);
         if (res?.data?.responseCode === 200) {
-            toast.success(res?.data?.message)
+            toast.success(res?.data?.message, {
+                autoClose: 3500
+            })
         } else if (res?.data?.responseCode === 452) {
-            toast.info(res?.data?.message)
+            toast.info(res?.data?.message, {
+                autoClose: 3500
+            })
         }
         return res?.data
     } catch (err) {
-        console.log(err);
+        // console.log(err);
+        return rejectWithValue(err.response.data)
     }
 })
 

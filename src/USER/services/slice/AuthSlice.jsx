@@ -11,7 +11,9 @@ export const fetchSignUp = createAsyncThunk(
         try {
             const res = await SIGNUP(formValues)
             navigate('/login')
-            toast.success('Registered Successfully. Please login to continue')
+            toast.success('Registered Successfully.\nPlease login to continue', {
+                autoClose: 4500
+            })
             return res?.data
         } catch (err) {
             // console.log("Sign Slice", rejectWithValue(err.response.data.errors));
@@ -37,7 +39,9 @@ export const fetchLogin = createAsyncThunk(
             }, 3500)
 
             // react toast message
-            toast.success('Logged In Successfully')
+            toast.success('Logged In Successfully', {
+                autoClose: 3000
+            })
             return result?.data
         } catch (err) {
             // console.log(rejectWithValue(err.response.data));
@@ -107,7 +111,9 @@ export const setNewPassword = createAsyncThunk(
         try {
             const res = await SETNEWPASSWORD(data)
             navigate('/login')
-            toast.success(`${res?.data?.message} Please login to continue`)
+            toast.success(`${res?.data?.message} Please login to continue`, {
+                autoClose: 4500
+            })
             return res?.data
         } catch (err) {
             // console.log(rejectWithValue(err.response.data));
@@ -146,7 +152,9 @@ export const AuthSlice = createSlice({
             window.localStorage.removeItem("user")
             state.user = null
             state.token = ""
-            toast.success("You have successfully logged out")
+            toast.success("You have successfully logged out", {
+                autoClose: 3500
+            })
         },
         clearVerifyOtp(state) {
             state.reg_otp = null;

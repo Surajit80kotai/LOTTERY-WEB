@@ -54,11 +54,15 @@ const VerifyPhone = () => {
     useEffect(() => {
         if (reg_otp?.status === true) {
             setFlag(true)
-            toast.success(reg_otp?.message)
+            toast.success(reg_otp?.message, {
+                autoClose: 3000
+            })
             dispatch(clearVerifyOtp(reg_otp?.message))
         } else if (reg_otp?.status === false) {
             setFlag(false)
-            toast.error(reg_otp?.message)
+            toast.error(reg_otp?.message, {
+                autoClose: 3000
+            })
             dispatch(clearVerifyOtp())
         }
 
@@ -66,7 +70,9 @@ const VerifyPhone = () => {
             const data = { phone_number: "+" + phone, otp: otp.otp }
             // const data = { phone_number: phone.phone_code + phone.phone, otp: otp.otp }
             setFlag(false)
-            toast.success(verify_otp?.message)
+            toast.success(verify_otp?.message, {
+                autoClose: 3000
+            })
             dispatch(storePhoneNumber(data.phone_number))
             window.localStorage.setItem("phone_number", JSON.stringify(data?.phone_number))
             navigate("/signup")
@@ -75,7 +81,9 @@ const VerifyPhone = () => {
             // setPhone({ ...phone, phone: "" })
             dispatch(clearVerifyOtp())
         } else if (verify_otp?.status === false) {
-            toast.error(verify_otp?.message)
+            toast.error(verify_otp?.message, {
+                autoClose: 3000
+            })
             navigate('/verifyphone')
             dispatch(clearVerifyOtp())
         }
