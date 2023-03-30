@@ -23,11 +23,13 @@ const SignUp = () => {
         phone: validPhoneNumber,
         dob: "",
         country: "",
+        gender: "",
+        promo_code: "",
         password: "",
         confirmPassword: ""
     }
     const [formValues, setFormValues] = useState(initialState)
-    const { full_name, email, dob, country, password, confirmPassword } = formValues
+    const { full_name, email, dob, country, gender, promo_code, password, confirmPassword } = formValues
     const [error, setError] = useState("")
 
     // handleChange Function for input change
@@ -47,6 +49,7 @@ const SignUp = () => {
         if (password !== confirmPassword) {
             return setError("Pasword did not matched")
         } else {
+            // console.log(formValues);
             dispatch(fetchSignUp({ formValues, navigate, toast }))
             setError("")
         }
@@ -70,6 +73,7 @@ const SignUp = () => {
 
 
     useEffect(() => {
+        // console.log(countryData);
         dispatch(fetchCountry())
     }, [dispatch, signupErr])
 
@@ -156,7 +160,7 @@ const SignUp = () => {
                                     <div className="row">
 
                                         {/* Date Of birth */}
-                                        <div className="col-md">
+                                        <div className="col-md-6">
                                             <div className="m_gap dob">
                                                 <label htmlFor="dob" className="form-label label_style">Date Of Birth*</label>
                                                 {/* <!-- <input type="date" value="2017-01-01" min="1960-01-01" max="2019-01-01" className="form-control form_input"> --> */}
@@ -177,7 +181,7 @@ const SignUp = () => {
                                         </div>
 
                                         {/* Country */}
-                                        <div className="col-md">
+                                        <div className="col-md-6">
                                             <div className="m_gap">
                                                 <label htmlFor="Country" className="form-label label_style">Country*</label>
                                                 <select
@@ -189,7 +193,7 @@ const SignUp = () => {
                                                     onChange={handleChange}
                                                     required
                                                 >
-                                                    <option value="1">Select...</option>
+                                                    <option value="" disabled>Select Your Country</option>
                                                     {
                                                         countryData?.map((country) => {
                                                             return (
@@ -207,8 +211,48 @@ const SignUp = () => {
 
                                     <div className="row">
 
+                                        {/* Gender */}
+                                        <div className="col-md-6">
+                                            <div className="m_gap">
+                                                <label htmlFor="gender" className="form-label label_style">Gender*</label>
+                                                <select
+                                                    className="form-select form_input form_select"
+                                                    aria-label="Default select example"
+                                                    id="gender"
+                                                    name='gender'
+                                                    value={gender}
+                                                    onChange={handleChange}
+                                                    required
+                                                >
+                                                    <option value="" disabled>Select Your Gender</option>
+                                                    <option value="MALE">MALE</option>
+                                                    <option value="FEMALE">FEMALE</option>
+                                                </select>
+                                                {/* Gender Vaidation */}
+                                                <p className='text-danger fs-4 mt-2'>{signupErr?.gender?.message}</p>
+                                            </div>
+                                        </div>
+
+
+                                        {/* Register with promo code */}
+                                        <div className="col-md-6">
+                                            <div className="m_gap dob">
+                                                <label htmlFor="promo_code" className="form-label label_style">Promo Code</label>
+                                                {/* <!-- <input type="date" value="2017-01-01" min="1960-01-01" max="2019-01-01" className="form-control form_input"> --> */}
+                                                <input
+                                                    type="text"
+                                                    placeholder="Enter Promo Code"
+                                                    name="promo_code"
+                                                    id="promo_code"
+                                                    className="form-control form_input"
+                                                    value={promo_code}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        </div>
+
                                         {/* Create Password*/}
-                                        <div className="col-md">
+                                        <div className="col-md-6">
                                             <div className="m_gap mb-3">
                                                 <label htmlFor="password" className="form-label label_style">Create Password*</label>
                                                 <input
@@ -226,7 +270,7 @@ const SignUp = () => {
                                         </div>
 
                                         {/* Confirm Password */}
-                                        <div className="col-md">
+                                        <div className="col-md-6">
                                             <div className="m_gap mb-3">
                                                 <label htmlFor="confirmPassword" className="form-label label_style">Confirm Password*</label>
                                                 <input

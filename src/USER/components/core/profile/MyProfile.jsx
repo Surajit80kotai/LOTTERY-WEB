@@ -27,7 +27,8 @@ const MyProfile = () => {
         full_name: user?.full_name,
         email: user?.email,
         phone: user?.phone,
-        profile_img: user?.profile_img
+        profile_img: user?.profile_img,
+        gender: user?.gender
     })
 
     const dispatch = useDispatch()
@@ -188,144 +189,182 @@ const MyProfile = () => {
                                                     }
                                                 </div>
 
-                                                {/* Email */}
-                                                <div className="mb-3">
-                                                    <label htmlFor="email" className="form-label label_style">Email</label>
-                                                    {
-                                                        user ?
-                                                            user.email ?
-                                                                <input
-                                                                    type="email"
-                                                                    className="form-control form_input in_disa"
-                                                                    id="email"
-                                                                    name="email"
-                                                                    aria-describedby="emailHelp"
-                                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                                                    title="Accept Email Format Only"
-                                                                    placeholder={user?.email}
-                                                                    value={formValues?.email}
-                                                                    onChange={handleChange} disabled
-                                                                />
+                                                <div className="row">
+                                                    {/* Email */}
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="email" className="form-label label_style">Email</label>
+                                                        {
+                                                            user ?
+                                                                user.email ?
+                                                                    <input
+                                                                        type="email"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="email"
+                                                                        name="email"
+                                                                        aria-describedby="emailHelp"
+                                                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                                        title="Accept Email Format Only"
+                                                                        placeholder={user?.email}
+                                                                        value={formValues?.email}
+                                                                        onChange={handleChange} disabled
+                                                                    />
+                                                                    : <input
+                                                                        type="email"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="email"
+                                                                        name="email"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder="Add Email ID"
+                                                                        onChange={handleChange} disabled
+                                                                    />
                                                                 : <input
                                                                     type="email"
                                                                     className="form-control form_input in_disa"
                                                                     id="email"
                                                                     name="email"
                                                                     aria-describedby="emailHelp"
-                                                                    placeholder="Add Email ID"
+                                                                    placeholder={user?.email}
                                                                     onChange={handleChange} disabled
+                                                                    readOnly
                                                                 />
-                                                            : <input
-                                                                type="email"
-                                                                className="form-control form_input in_disa"
-                                                                id="email"
-                                                                name="email"
-                                                                aria-describedby="emailHelp"
-                                                                placeholder={user?.email}
-                                                                onChange={handleChange} disabled
-                                                                readOnly
-                                                            />
-                                                    }
+                                                        }
+                                                    </div>
+
+                                                    {/* Phone */}
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="phone" className="form-label label_style">Phone Number</label>
+                                                        {
+                                                            user ?
+                                                                user?.phone ?
+                                                                    <input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="phone"
+                                                                        name="phone"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder={user?.phone}
+                                                                        value={formValues?.phone}
+                                                                        onChange={handleChange}
+                                                                        pattern="[0-9]"
+                                                                        title="Enter a valid phone number"
+                                                                        disabled
+                                                                    />
+                                                                    :
+                                                                    <input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="phone"
+                                                                        name="phone"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder="Phone number did not registered"
+                                                                        disabled
+                                                                    />
+                                                                : null
+                                                        }
+                                                    </div>
                                                 </div>
 
-                                                {/* Phone */}
-                                                <div className="mb-3">
-                                                    <label htmlFor="phone" className="form-label label_style">Phone Number</label>
-                                                    {
-                                                        user ?
-                                                            user?.phone ?
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control form_input in_disa"
-                                                                    id="phone"
-                                                                    name="phone"
-                                                                    aria-describedby="emailHelp"
-                                                                    placeholder={user?.phone}
-                                                                    value={formValues?.phone}
-                                                                    onChange={handleChange}
-                                                                    pattern="[0-9]"
-                                                                    title="Enter a valid phone number"
-                                                                    disabled
-                                                                />
-                                                                :
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control form_input in_disa"
-                                                                    id="phone"
-                                                                    name="phone"
-                                                                    aria-describedby="emailHelp"
-                                                                    placeholder="Phone number did not registered"
-                                                                    disabled
-                                                                />
-                                                            : null
-                                                    }
-                                                </div>
+                                                <div className="row">
+                                                    {/* DOB */}
+                                                    <div className="col-md-4 mb-3">
+                                                        <label htmlFor="dob" className="form-label label_style">Date Of Birth</label>
+                                                        {
+                                                            user ?
+                                                                user?.dob ?
+                                                                    < input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="dob"
+                                                                        name="dob"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder={newDOB}
+                                                                        value={formValues.dob}
+                                                                        onChange={handleChange}
+                                                                        readOnly
+                                                                        disabled
+                                                                    />
+                                                                    :
+                                                                    <input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="dob"
+                                                                        name="dob"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder="Birth date did not registered"
+                                                                        readOnly
+                                                                        disabled
+                                                                    />
+                                                                : null
+                                                        }
 
-                                                {/* DOB */}
-                                                <div className="mb-3">
-                                                    <label htmlFor="dob" className="form-label label_style">Date Of Birth</label>
-                                                    {
-                                                        user ?
-                                                            user?.dob ?
-                                                                < input
-                                                                    type="text"
-                                                                    className="form-control form_input in_disa"
-                                                                    id="dob"
-                                                                    name="dob"
-                                                                    aria-describedby="emailHelp"
-                                                                    placeholder={newDOB}
-                                                                    value={formValues.dob}
-                                                                    onChange={handleChange}
-                                                                    readOnly
-                                                                    disabled
-                                                                />
-                                                                :
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control form_input in_disa"
-                                                                    id="dob"
-                                                                    name="dob"
-                                                                    aria-describedby="emailHelp"
-                                                                    placeholder="Birth date did not registered"
-                                                                    readOnly
-                                                                    disabled
-                                                                />
-                                                            : null
-                                                    }
+                                                    </div>
 
-                                                </div>
+                                                    {/* Gender */}
+                                                    <div className="col-md-4 mb-3">
+                                                        <label htmlFor="gender" className="form-label label_style">Gender</label>
+                                                        {
+                                                            user ?
+                                                                user?.gender ?
+                                                                    < input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="gender"
+                                                                        name="gender"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder={user?.gender}
+                                                                        value={formValues.gender}
+                                                                        onChange={handleChange}
+                                                                        readOnly
+                                                                        disabled
+                                                                    />
+                                                                    :
+                                                                    <input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="dob"
+                                                                        name="dob"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder="Birth date did not registered"
+                                                                        readOnly
+                                                                        disabled
+                                                                    />
+                                                                : null
+                                                        }
 
-                                                {/* Country */}
-                                                <div className="mb-3">
-                                                    <label htmlFor="country" className="form-label label_style">Address</label>
-                                                    {
-                                                        user ?
-                                                            user?.country ?
-                                                                <select
-                                                                    className="form-select form_input form_select"
-                                                                    aria-label="Default select example"
-                                                                    id="selects"
-                                                                    name='country'
-                                                                    value={formValues.country}
-                                                                    onChange={handleChange}
-                                                                    disabled
-                                                                    readOnly
-                                                                >
-                                                                    <option readOnly>{user?.country}</option>
-                                                                </select>
-                                                                :
-                                                                <select
-                                                                    className="form-select form_input form_select"
-                                                                    aria-label="Default select example"
-                                                                    id="selects"
-                                                                    name='country'
-                                                                    disabled
-                                                                    readOnly
-                                                                >
-                                                                    <option readOnly>Country did not registered</option>
-                                                                </select>
-                                                            : null
-                                                    }
+                                                    </div>
+
+                                                    {/* Country */}
+                                                    <div className="col-md-4 mb-3">
+                                                        <label htmlFor="country" className="form-label label_style">Country</label>
+                                                        {
+                                                            user ?
+                                                                user?.country ?
+                                                                    <select
+                                                                        className="form-select form_input form_select"
+                                                                        aria-label="Default select example"
+                                                                        id="selects"
+                                                                        name='country'
+                                                                        value={formValues.country}
+                                                                        onChange={handleChange}
+                                                                        disabled
+                                                                        readOnly
+                                                                    >
+                                                                        <option readOnly>{user?.country}</option>
+                                                                    </select>
+                                                                    :
+                                                                    <select
+                                                                        className="form-select form_input form_select"
+                                                                        aria-label="Default select example"
+                                                                        id="selects"
+                                                                        name='country'
+                                                                        disabled
+                                                                        readOnly
+                                                                    >
+                                                                        <option readOnly>Country did not registered</option>
+                                                                    </select>
+                                                                : null
+                                                        }
+                                                    </div>
                                                 </div>
 
                                                 {/* Edit Button */}
