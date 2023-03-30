@@ -158,35 +158,73 @@ const MyProfile = () => {
                                         </div>
                                         <div className="col-md-9">
                                             <div className="profile_edit_form">
-                                                {/* Full Name */}
-                                                <div className="mb-3">
-                                                    <label htmlFor="full_name" className="form-label label_style">Your Full Name</label>
-                                                    {
-                                                        user ?
-                                                            user?.full_name ?
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control form_input in_disa"
-                                                                    id="full_name"
-                                                                    name="full_name"
-                                                                    title="Accept Alphabets & Whitespaces Only"
-                                                                    pattern='^[a-zA-Z ]+$'
-                                                                    placeholder={user?.full_name}
-                                                                    value={formValues.full_name}
-                                                                    onChange={handleChange}
-                                                                    disabled
-                                                                />
-                                                                : <input
-                                                                    type="text"
-                                                                    className="form-control form_input in_disa"
-                                                                    id="full_name"
-                                                                    name="full_name"
-                                                                    placeholder={user?.displayName}
-                                                                    onChange={handleChange}
-                                                                    disabled
-                                                                />
-                                                            : null
-                                                    }
+                                                <div className="row">
+
+                                                    {/* Full Name */}
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="full_name" className="form-label label_style">Your Full Name</label>
+                                                        {
+                                                            user ?
+                                                                user?.full_name ?
+                                                                    <input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="full_name"
+                                                                        name="full_name"
+                                                                        title="Accept Alphabets & Whitespaces Only"
+                                                                        pattern='^[a-zA-Z ]+$'
+                                                                        placeholder={user?.full_name}
+                                                                        value={formValues.full_name}
+                                                                        onChange={handleChange}
+                                                                        disabled
+                                                                    />
+                                                                    : <input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="full_name"
+                                                                        name="full_name"
+                                                                        placeholder={user?.displayName}
+                                                                        onChange={handleChange}
+                                                                        disabled
+                                                                    />
+                                                                : null
+                                                        }
+                                                    </div>
+
+
+                                                    {/* Gender */}
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="gender" className="form-label label_style">Gender</label>
+                                                        {
+                                                            user ?
+                                                                user?.gender ?
+                                                                    < input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="gender"
+                                                                        name="gender"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder={user?.gender}
+                                                                        value={formValues.gender}
+                                                                        onChange={handleChange}
+                                                                        readOnly
+                                                                        disabled
+                                                                    />
+                                                                    :
+                                                                    <input
+                                                                        type="text"
+                                                                        className="form-control form_input in_disa"
+                                                                        id="dob"
+                                                                        name="dob"
+                                                                        aria-describedby="emailHelp"
+                                                                        placeholder="Birth date did not registered"
+                                                                        readOnly
+                                                                        disabled
+                                                                    />
+                                                                : null
+                                                        }
+
+                                                    </div>
                                                 </div>
 
                                                 <div className="row">
@@ -266,7 +304,7 @@ const MyProfile = () => {
 
                                                 <div className="row">
                                                     {/* DOB */}
-                                                    <div className="col-md-4 mb-3">
+                                                    <div className="col-md-6 mb-3">
                                                         <label htmlFor="dob" className="form-label label_style">Date Of Birth</label>
                                                         {
                                                             user ?
@@ -299,42 +337,8 @@ const MyProfile = () => {
 
                                                     </div>
 
-                                                    {/* Gender */}
-                                                    <div className="col-md-4 mb-3">
-                                                        <label htmlFor="gender" className="form-label label_style">Gender</label>
-                                                        {
-                                                            user ?
-                                                                user?.gender ?
-                                                                    < input
-                                                                        type="text"
-                                                                        className="form-control form_input in_disa"
-                                                                        id="gender"
-                                                                        name="gender"
-                                                                        aria-describedby="emailHelp"
-                                                                        placeholder={user?.gender}
-                                                                        value={formValues.gender}
-                                                                        onChange={handleChange}
-                                                                        readOnly
-                                                                        disabled
-                                                                    />
-                                                                    :
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control form_input in_disa"
-                                                                        id="dob"
-                                                                        name="dob"
-                                                                        aria-describedby="emailHelp"
-                                                                        placeholder="Birth date did not registered"
-                                                                        readOnly
-                                                                        disabled
-                                                                    />
-                                                                : null
-                                                        }
-
-                                                    </div>
-
                                                     {/* Country */}
-                                                    <div className="col-md-4 mb-3">
+                                                    <div className="col-md-6 mb-3">
                                                         <label htmlFor="country" className="form-label label_style">Country</label>
                                                         {
                                                             user ?
