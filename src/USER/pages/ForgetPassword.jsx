@@ -131,7 +131,7 @@ const ForgetPassword = () => {
                             <img src="assets/img/forgeticon.png" alt="" className="img-fluid" />
                         </div>
                         <h2 className="title text-center">Forget Your Password ?</h2>
-                        <p className="text-center">Enter Your Phone Number Or Email Address Below To receive
+                        <p className="text-center">Enter Your Phone Number Or Email Address Below To receive OTP For
                             <br />Your Password Reset instruction
                         </p>
 

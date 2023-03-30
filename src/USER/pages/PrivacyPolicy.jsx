@@ -25,8 +25,8 @@ const PrivacyPolicy = () => {
 
     return (
         <>
-            <main style={{ "marginTop": "17px" }}>
-                <div className="bradcramp_area">
+            <main>
+                <div className="bradcramp_area" style={{ "marginBottom": "0" }}>
                     <div className="container">
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">

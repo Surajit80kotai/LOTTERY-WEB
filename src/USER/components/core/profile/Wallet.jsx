@@ -249,7 +249,7 @@ const Wallet = () => {
                                                                             {/* <td>{(item.status).replace(/_/g," ")}</td> */}
                                                                             <td>
                                                                                 {
-                                                                                    (item.payment_method === null) ?
+                                                                                    (item.status_code === "627") ?
                                                                                         <span className='text-danger'><i className="fa-solid fa-ban mx-3"></i>CANCELLED</span>
                                                                                         :
                                                                                         // WAITING_CUSTOMER_PAYMENT
@@ -258,7 +258,7 @@ const Wallet = () => {
                                                                                             :
                                                                                             // WAITING_CUSTOMER_TO_VALIDATE
                                                                                             (item.status_code === "623") ?
-                                                                                                <span className='text-danger'><i className="fa-regular fa-clock"></i> TIME EXPIRED</span>
+                                                                                                <span className='text-danger'><i className="fa-regular fa-clock mx-3"></i> TIME EXPIRED</span>
                                                                                                 // PAYMENT_FAILED
                                                                                                 : (item.status_code === "600") ?
                                                                                                     <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
