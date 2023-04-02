@@ -10,7 +10,7 @@ const header = {
 }
 
 // fetching all category data
-export const fetchCategory = createAsyncThunk("/admin/get-category", async (rejectWithValue) => {
+export const fetchCategory = createAsyncThunk("/admin/get-category", async (payload, { rejectWithValue }) => {
     try {
         const response = await CATEGORY(header)
         // console.log(response?.data)
@@ -22,12 +22,13 @@ export const fetchCategory = createAsyncThunk("/admin/get-category", async (reje
 })
 
 // fetching all lottery data
-export const fetchLottery = createAsyncThunk("ticket/get-tickets", async (rejectWithValue) => {
+export const fetchLottery = createAsyncThunk("ticket/get-tickets", async (payload, { rejectWithValue }) => {
     try {
         const response = await TICKET(header)
         // console.log(response?.data)
         return response?.data
     } catch (err) {
+        // console.log("catch=>", err);
         // console.log(err.response.data);
         return rejectWithValue(err.response.data)
     }

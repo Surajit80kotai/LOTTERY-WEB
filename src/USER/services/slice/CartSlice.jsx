@@ -36,6 +36,10 @@ export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toa
         return res?.data
     } catch (err) {
         // console.log(err)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -48,13 +52,17 @@ export const delCartItem = createAsyncThunk("/auth/cart/delete", async (c_id, { 
         return res?.data
     } catch (err) {
         // console.log(err)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+        }
         return rejectWithValue(err.response.data)
     }
 })
 
 
 // GetCart get request handle
-export const getCart = createAsyncThunk("/auth/cart", async (rejectWithValue) => {
+export const getCart = createAsyncThunk("/auth/cart", async (payload, { rejectWithValue }) => {
     try {
         if (userID && header) {
             const res = await FETCHCART(userID, header)
@@ -62,8 +70,10 @@ export const getCart = createAsyncThunk("/auth/cart", async (rejectWithValue) =>
             return res?.data
         }
     } catch (err) {
-        // console.log("Cart data is not fetched", err)
-        // console.log(err.response.data);
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -76,6 +86,10 @@ export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ id, 
         return res?.data
     } catch (err) {
         // console.log("Quantity not updated", err)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -93,7 +107,7 @@ export const CartSlice = createSlice({
         update_status: "",
         delete_status: "",
         loading: false,
-        error: ""
+        error: {}
     },
     reducers: {
         emptyCart(state, { payload }) {
@@ -178,7 +192,7 @@ export const CartSlice = createSlice({
         builder.addCase(getCart.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
-            state.error = payload?.data
+            state.error = payload
         })
 
 
