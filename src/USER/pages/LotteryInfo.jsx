@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useNavigation, useParams } from 'react-router-dom'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCart, clearAddStatus, getCart } from '../services/slice/CartSlice'
@@ -21,7 +21,7 @@ const LotteryInfo = () => {
     const { cart_data, add_cart_status } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
     const { loading } = useSelector((state) => state.cartslice)
-
+    const navigate = useNavigate()
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
 
@@ -51,7 +51,7 @@ const LotteryInfo = () => {
     // Add ticket function
     const addToCart = () => {
         const cartData = { product_id: ticketInfo[0]._id, user_id: userID, qty: qty, round_info: ticketInfo[0]?.rounds[round], round_index: round }
-        dispatch(addCart({ cartData, toast }))
+        dispatch(addCart({ cartData, toast, navigate }))
     }
 
     // buyNow function

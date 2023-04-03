@@ -20,7 +20,7 @@ const userID = socialuserID ? socialuserID : (JSON.parse(window.localStorage.get
 
 
 // AddCart post request handle
-export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toast }, { rejectWithValue }) => {
+export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toast, navigate }, { rejectWithValue }) => {
     try {
         // console.log(cartData);
         const res = await ADDTOCART(cartData, header)
@@ -39,6 +39,7 @@ export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toa
         if (err.response.data.error === true) {
             window.localStorage.removeItem("token")
             window.localStorage.removeItem("user")
+            navigate('/')
         }
         return rejectWithValue(err.response.data)
     }
@@ -46,15 +47,16 @@ export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toa
 
 
 // DeleteCart post request handle
-export const delCartItem = createAsyncThunk("/auth/cart/delete", async (c_id, { rejectWithValue }) => {
+export const delCartItem = createAsyncThunk("/auth/cart/delete", async ({ id, navigate }, { rejectWithValue }) => {
     try {
-        const res = await DELCART(c_id, header)
+        const res = await DELCART(id, header)
         return res?.data
     } catch (err) {
         // console.log(err)
         if (err.response.data.error === true) {
             window.localStorage.removeItem("token")
             window.localStorage.removeItem("user")
+            navigate("/")
         }
         return rejectWithValue(err.response.data)
     }
@@ -62,7 +64,7 @@ export const delCartItem = createAsyncThunk("/auth/cart/delete", async (c_id, { 
 
 
 // GetCart get request handle
-export const getCart = createAsyncThunk("/auth/cart", async (payload, { rejectWithValue }) => {
+export const getCart = createAsyncThunk("/auth/cart", async (navigate, { rejectWithValue }) => {
     try {
         if (userID && header) {
             const res = await FETCHCART(userID, header)
@@ -73,6 +75,7 @@ export const getCart = createAsyncThunk("/auth/cart", async (payload, { rejectWi
         if (err.response.data.error === true) {
             window.localStorage.removeItem("token")
             window.localStorage.removeItem("user")
+            navigate('/')
         }
         return rejectWithValue(err.response.data)
     }
@@ -80,8 +83,9 @@ export const getCart = createAsyncThunk("/auth/cart", async (payload, { rejectWi
 
 
 // updateCart get request handle
-export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ id, qty, flag }, { rejectWithValue }) => {
+export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ data, navigate }, { rejectWithValue }) => {
     try {
+        const { id, qty, flag } = data
         const res = await UPDATECART(id, qty, flag, header)
         return res?.data
     } catch (err) {
@@ -89,6 +93,7 @@ export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ id, 
         if (err.response.data.error === true) {
             window.localStorage.removeItem("token")
             window.localStorage.removeItem("user")
+            navigate('/')
         }
         return rejectWithValue(err.response.data)
     }
@@ -156,9 +161,10 @@ export const CartSlice = createSlice({
             state.loading = false
             state.add_cart_status = payload
         })
-        builder.addCase(addCart.rejected, (state) => {
+        builder.addCase(addCart.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
+            state.error = payload
         })
 
 
@@ -173,9 +179,10 @@ export const CartSlice = createSlice({
             state.delete_status = payload
             // console.log(payload)
         })
-        builder.addCase(delCartItem.rejected, (state) => {
+        builder.addCase(delCartItem.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
+            state.error = payload
         })
 
 
@@ -211,9 +218,10 @@ export const CartSlice = createSlice({
                 })
             }
         })
-        builder.addCase(updateCart.rejected, (state) => {
+        builder.addCase(updateCart.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
+            state.error = payload
         })
     }
 })

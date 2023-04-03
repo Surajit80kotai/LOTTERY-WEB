@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { addCart, clearAddStatus, getCart } from '../../../services/slice/CartSlice'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
@@ -27,7 +27,7 @@ const CommonCard = ({ item }) => {
     // states from cartslice
     const { add_cart_status, loading } = useSelector((state) => state.cartslice)
     // const cartLength = cart_data?.length
-
+    const navigate = useNavigate()
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
     // Accesing token
@@ -41,7 +41,7 @@ const CommonCard = ({ item }) => {
     // add to cart
     const addToCart = () => {
         const cartData = { product_id: _id, user_id: userID, qty: 1, round_info: rounds[round], round_index: round }
-        dispatch(addCart({ cartData, toast }))
+        dispatch(addCart({ cartData, toast, navigate }))
         setTimeout(() => {
             dispatch(getCart())
         }, 300)

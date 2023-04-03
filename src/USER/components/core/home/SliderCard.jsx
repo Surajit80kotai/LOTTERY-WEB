@@ -6,7 +6,7 @@ import CommonCardTimer from '../../../util/CommonCardTimer'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 // import PreLoader from '../preloader/PreLoader'
 import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const SliderCard = ({ item }) => {
     const [round, setRound] = useState(0)
@@ -27,7 +27,7 @@ const SliderCard = ({ item }) => {
     // states from cartslice
     const { add_cart_status } = useSelector((state) => state.cartslice)
     // const cartLength = cart_data?.length
-
+    const navigate = useNavigate()
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
     // Accesing token
@@ -41,7 +41,7 @@ const SliderCard = ({ item }) => {
     // add to cart
     const addToCart = () => {
         const cartData = { product_id: _id, user_id: userID, qty: 1, round_info: rounds[round], round_index: round }
-        dispatch(addCart({ cartData, toast }))
+        dispatch(addCart({ cartData, toast, navigate }))
         setTimeout(() => {
             dispatch(getCart())
         }, 300)
@@ -74,8 +74,6 @@ const SliderCard = ({ item }) => {
     }
 
 
-
-
     useEffect(() => {
         calculateRounds()
         // console.log("mount");
@@ -83,6 +81,9 @@ const SliderCard = ({ item }) => {
             dispatch(clearAddStatus())
         }
     }, [dispatch, add_cart_status, item])
+
+
+
     return (
         <>
             {/* PreLoader */}

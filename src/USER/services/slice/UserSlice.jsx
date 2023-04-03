@@ -9,7 +9,7 @@ const header = {
 };
 
 //get user balance
-export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async (rejectWithValue) => {
+export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async (payload, { rejectWithValue }) => {
     try {
         const response = await WALLETBALANCE(header)
         // console.log(response?.data)
@@ -40,7 +40,7 @@ export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ f
 
 
 // order history
-export const userOrderHistory = createAsyncThunk("/auth/order/history", async (rejectWithValue) => {
+export const userOrderHistory = createAsyncThunk("/auth/order/history", async (payload, { rejectWithValue }) => {
     try {
         const res = await ORDERHISTORY(header)
         return res?.data

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart, updateQTY } from '../services/slice/CartSlice'
 import { useEffect } from 'react'
@@ -15,6 +15,7 @@ const Cart = () => {
   const dispatch = useDispatch()
   const cartLength = cart_data?.length
   const [amount, setAmount] = useState({ subtotal: 0, discount: 0, total: 0 })
+  const navigate = useNavigate()
 
   // Accesing token
   const token = JSON.parse(window.localStorage.getItem("token"))
@@ -52,7 +53,7 @@ const Cart = () => {
     const u_qty = qty + 1
     const data = { id: c_id, qty: u_qty, flag: "cart" }
     dispatch(updateQTY(data))
-    dispatch(updateCart(data))
+    dispatch(updateCart({ data, navigate }))
   }
 
   // DecQty function
@@ -60,12 +61,12 @@ const Cart = () => {
     const u_qty = qty - 1
     const data = { id: c_id, qty: u_qty, flag: "cart" }
     dispatch(updateQTY(data))
-    dispatch(updateCart(data))
+    dispatch(updateCart({ data, navigate }))
   }
 
   // removeItem function
   const removeItem = (id) => {
-    dispatch(delCartItem(id))
+    dispatch(delCartItem({ id, navigate }))
     setTimeout(() => {
       toast.success("Item Removed From Cart", {
         autoClose: 3000
@@ -77,7 +78,7 @@ const Cart = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    dispatch(getCart())
+    dispatch(getCart(navigate))
 
     if (update_status?.status) {
       calculateSum()
@@ -89,7 +90,7 @@ const Cart = () => {
       dispatch(clearDeleteStatus())
       dispatch(clearOrderedData())
     }
-  }, [dispatch, cartLength, update_status, delete_status])
+  }, [dispatch, cartLength, update_status, delete_status, token])
 
 
 

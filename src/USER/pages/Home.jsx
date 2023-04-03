@@ -4,7 +4,7 @@ import Banner from '../components/core/home/Banner'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { fetchCategory, fetchLottery } from '../services/slice/LotterySlice'
 import PreLoader from '../components/core/preloader/PreLoader'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getCart } from '../services/slice/CartSlice'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -19,6 +19,8 @@ const Home = () => {
     const dispatch = useDispatch()
     const { cart_data } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
+    const navigate = useNavigate()
+    const token = JSON.parse(window.localStorage.getItem("token"))
 
     // Getting category_name & category_id
     const categoryObj = category_data?.reduce((acc, cur) => {
@@ -52,8 +54,8 @@ const Home = () => {
         window.scrollTo(0, 0)
         dispatch(fetchLottery())
         dispatch(fetchCategory())
-        dispatch(getCart())
-    }, [dispatch, cartLength])
+        dispatch(getCart(navigate))
+    }, [dispatch, cartLength, token])
 
 
 

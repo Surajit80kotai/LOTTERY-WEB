@@ -55,8 +55,8 @@ const NavBar = () => {
 
 
   useEffect(() => {
-    dispatch(getCart())
-  }, [dispatch, cartLength])
+    dispatch(getCart(navigate))
+  }, [dispatch, cartLength, token])
 
 
   // navbar stickey function after language select

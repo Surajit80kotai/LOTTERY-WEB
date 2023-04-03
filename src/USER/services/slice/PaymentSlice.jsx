@@ -77,7 +77,7 @@ export const initPay = createAsyncThunk("/auth/pay/init", async (paymentData, { 
 
 
 // get all transaction
-export const getTransactions = createAsyncThunk("/auth/get/transaction", async (rejectWithValue) => {
+export const getTransactions = createAsyncThunk("/auth/get/transaction", async (payload, { rejectWithValue }) => {
     try {
         const res = await GETALLTRANSACTION(header)
         return res?.data
@@ -89,7 +89,7 @@ export const getTransactions = createAsyncThunk("/auth/get/transaction", async (
 
 
 //update transaction 
-export const updateTransactions = createAsyncThunk("/auth/update/transaction", async (rejectWithValue) => {
+export const updateTransactions = createAsyncThunk("/auth/update/transaction", async (payload, { rejectWithValue }) => {
     try {
         const res = await UPDATETRANSACTION(header)
         return res?.data

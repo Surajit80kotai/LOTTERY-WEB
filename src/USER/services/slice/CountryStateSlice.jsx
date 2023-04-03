@@ -9,19 +9,19 @@ const header = {
 };
 
 // fetchCountry data
-export const fetchCountry = createAsyncThunk("/countries", async (rejectWithValue) => {
+export const fetchCountry = createAsyncThunk("/countries", async (payload, { rejectWithValue }) => {
     try {
         const result = await COUNTRY(header)
         // console.log(result?.data);
         return result?.data
     } catch (err) {
-        // console.log(err);
+        // console.log(rejectWithValue(err.response.data));
         return rejectWithValue(err.response.data)
     }
 })
 
 // getPhone code
-export const getPhoneCode = createAsyncThunk("/phone/code", async (rejectWithValue) => {
+export const getPhoneCode = createAsyncThunk("/phone/code", async (payload, { rejectWithValue }) => {
     try {
         const result = await PHONECODE(header)
         // console.log(result?.data);
@@ -45,7 +45,7 @@ export const fetchStates = createAsyncThunk("/state", async (id, { rejectWithVal
 })
 
 // test
-export const testPhoneCode = createAsyncThunk("/phonecode.json", async (rejectWithValue) => {
+export const testPhoneCode = createAsyncThunk("/phonecode.json", async (payload, { rejectWithValue }) => {
     try {
         const result = await TESTAPI(header)
         // console.log(result?.data);

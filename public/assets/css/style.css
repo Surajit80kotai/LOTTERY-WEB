@@ -4428,3 +4428,23 @@ margin: 0.5rem;
 	padding: 0.5rem 1rem;
 	border-radius: 2rem;
 }
+
+
+/* toogle */
+
+.toogle_bg{
+	padding: 0.2rem;
+	background: rgb(214, 214, 214);
+	display: inline-block;
+margin-bottom: 1rem;
+}
+
+.toogle_bg button{
+	color: var(--black);
+	border-left: 1px solid rgb(128, 127, 127);
+	font-weight: 600;
+}
+
+.toogle_bg button:first-child{
+	border-left: 0;
+}

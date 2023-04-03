@@ -99,11 +99,19 @@ const Login = () => {
                             </div>
 
                             <div className="form_area">
+                                {/* Toggle button for email or phone */}
+                                <div className="toogle_bg">
+                                    <button className='btn fs-5' onClick={toggleButton}>Phone</button>
+                                    <button className='btn fs-5' onClick={toggleButton}>Email</button>
+                                </div>
+
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
                                     {/* Email ID */}
                                     <div className="mb-5">
                                         <div className='row' style={{ "display": toggleBtn ? "block" : "none" }}>
-                                            <label htmlFor="contact" className="form-label label_style">Enter Email ID</label>
+                                            <label htmlFor="contact" className="form-label label_style">Enter Email ID
+
+                                            </label>
                                             <div className='col-12'>
                                                 <input
                                                     type="text"
@@ -116,7 +124,7 @@ const Login = () => {
                                                     title="Enter a valid email or phone number"
                                                     value={formValues.contact}
                                                     onChange={handleChange}
-                                                // required
+                                                    required
                                                 />
                                             </div>
                                         </div>
@@ -169,7 +177,9 @@ const Login = () => {
 
                                         {/* Phone Number */}
                                         <div className='row' style={{ "display": !toggleBtn ? "block" : "none" }}>
-                                            <label htmlFor="contact" className="form-label label_style">Enter Phone Number</label>
+                                            <label htmlFor="contact" className="form-label label_style">Enter Phone Number
+
+                                            </label>
                                             <div className='col-12'>
                                                 <PhoneInput
                                                     inputProps={{ required: true }}
@@ -183,14 +193,14 @@ const Login = () => {
                                         </div>
 
                                         {/* Toggle button for email or phone */}
-                                        <div className='text-center mt-3'>
+                                        {/* <div className='mt-3'>
                                             <div className='mb-5' style={{ "display": !toggleBtn ? "block" : "none" }}>
                                                 <button className='btn2 fs-5' onClick={toggleButton}>Login With Email</button>
                                             </div>
                                             <div className='mb-5' style={{ "display": toggleBtn ? "block" : "none" }}>
                                                 <button className='btn2 fs-5' onClick={toggleButton}>Login With Phone</button>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         {/* Form Vaidation */}
                                         <p className='text-danger fs-4 mt-2'>{error_user.error}</p>
