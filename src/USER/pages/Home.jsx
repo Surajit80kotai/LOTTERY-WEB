@@ -11,13 +11,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import SliderCard from '../components/core/home/SliderCard'
+import { toast } from 'react-toastify'
 
 
 const Home = () => {
     const { fetch_lott_data, category_data } = useSelector((state) => state.lotteryslice)
-    const { loading } = useSelector((state) => state.cartslice)
+    const { cart_data, loading } = useSelector((state) => state.cartslice)
     const dispatch = useDispatch()
-    const { cart_data } = useSelector((state) => state.cartslice)
     const cartLength = cart_data?.length
     const navigate = useNavigate()
     const token = JSON.parse(window.localStorage.getItem("token"))
@@ -48,6 +48,21 @@ const Home = () => {
         return null
     }
 
+    // sessionExpired
+    const sessionExpired = () => {
+        if (!token) {
+            toast.info("Your Session Is Expeired.\nPlease Login To Continue", {
+                autoClose: 4500
+            })
+        }
+    }
+
+
+    useEffect(() => {
+        sessionExpired()
+    }, [token])
+
+
     // mount cycle
     useEffect(() => {
         // dispatch(testApi())
@@ -56,7 +71,6 @@ const Home = () => {
         dispatch(fetchCategory())
         dispatch(getCart(navigate))
     }, [dispatch, cartLength, token])
-
 
 
     return (
