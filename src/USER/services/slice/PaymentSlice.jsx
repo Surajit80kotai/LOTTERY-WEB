@@ -86,7 +86,10 @@ export const getTransactions = createAsyncThunk("/auth/get/transaction", async (
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -102,7 +105,10 @@ export const updateTransactions = createAsyncThunk("/auth/update/transaction", a
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -119,7 +125,10 @@ export const placeOrder = createAsyncThunk("/auth/order", async ({ orderData, na
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -136,7 +145,10 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async ({ order
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -151,7 +163,7 @@ const initialState = {
     buy_now_data: [],
     status: "",
     loading: false,
-    error: null
+    paymentSliceError: null
 }
 
 
@@ -174,6 +186,9 @@ export const PaymentSlice = createSlice({
         clearBuyNowData(state) {
             state.buy_now_data = []
             window.localStorage.removeItem("buy_now_data")
+        },
+        clearPaymentSliceError(state) {
+            state.paymentSliceError = null
         }
     },
     extraReducers: (builder) => {
@@ -191,7 +206,7 @@ export const PaymentSlice = createSlice({
         builder.addCase(cinetPay.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
-            state.error = payload
+            state.paymentSliceError = payload
         })
 
 
@@ -208,7 +223,7 @@ export const PaymentSlice = createSlice({
         builder.addCase(initPay.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
-            state.error = payload
+            state.paymentSliceError = payload
         })
 
 
@@ -225,7 +240,7 @@ export const PaymentSlice = createSlice({
         builder.addCase(getTransactions.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
-            state.error = payload
+            state.paymentSliceError = payload
         })
 
 
@@ -242,7 +257,7 @@ export const PaymentSlice = createSlice({
         builder.addCase(updateTransactions.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
-            state.error = payload
+            state.paymentSliceError = payload
         })
 
         // States for place order
@@ -258,7 +273,7 @@ export const PaymentSlice = createSlice({
         builder.addCase(placeOrder.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
-            state.error = payload
+            state.paymentSliceError = payload
         })
 
         // States for buy now
@@ -274,11 +289,11 @@ export const PaymentSlice = createSlice({
         builder.addCase(itemBuyNow.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
-            state.error = payload
+            state.paymentSliceError = payload
         })
     }
 })
 
 
-export const { buyNowItem, emptyBuyNow, clearOrderedData, clearBuyNowData } = PaymentSlice.actions
+export const { buyNowItem, emptyBuyNow, clearOrderedData, clearBuyNowData, clearPaymentSliceError } = PaymentSlice.actions
 export default PaymentSlice.reducer

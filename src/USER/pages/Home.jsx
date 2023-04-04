@@ -5,22 +5,28 @@ import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { fetchCategory, fetchLottery } from '../services/slice/LotterySlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { Link, useNavigate } from 'react-router-dom'
-import { getCart } from '../services/slice/CartSlice'
+import { clearCartSliceError, getCart } from '../services/slice/CartSlice'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import SliderCard from '../components/core/home/SliderCard'
+import { clearUserSliceError } from '../services/slice/UserSlice'
+import { clearPaymentSliceError } from '../services/slice/PaymentSlice'
 import { toast } from 'react-toastify'
 
 
 const Home = () => {
     const { fetch_lott_data, category_data } = useSelector((state) => state.lotteryslice)
-    const { cart_data, loading } = useSelector((state) => state.cartslice)
+    const { cart_data, loading, cartSliceError } = useSelector((state) => state.cartslice)
+    const { paymentSliceError } = useSelector((state) => state.paymentslice)
+    const { userSliceError } = useSelector((state) => state.userslice)
     const dispatch = useDispatch()
     const cartLength = cart_data?.length
     const navigate = useNavigate()
     const token = JSON.parse(window.localStorage.getItem("token"))
+    const error = (cartSliceError?.error === true || paymentSliceError?.error === true || userSliceError?.error === true) ? true : false
+
 
     // Getting category_name & category_id
     const categoryObj = category_data?.reduce((acc, cur) => {
@@ -48,29 +54,28 @@ const Home = () => {
         return null
     }
 
-    // sessionExpired
-    const sessionExpired = () => {
-        if (!token) {
-            toast.info("Your Session Is Expeired.\nPlease Login To Continue", {
-                autoClose: 4500
-            })
-        }
-    }
-
-
-    useEffect(() => {
-        sessionExpired()
-    }, [token])
-
-
     // mount cycle
     useEffect(() => {
-        // dispatch(testApi())
         window.scrollTo(0, 0)
         dispatch(fetchLottery())
         dispatch(fetchCategory())
         dispatch(getCart(navigate))
     }, [dispatch, cartLength, token])
+
+
+    useEffect(() => {
+        if (error) {
+            console.log(error);
+            toast.info("Your Session Is Expeired.\nPlease Login To Continue", {
+                autoClose: 3500
+            })
+        }
+        return () => {
+            dispatch(clearCartSliceError())
+            dispatch(clearUserSliceError())
+            dispatch(clearPaymentSliceError())
+        }
+    }, [error])
 
 
     return (

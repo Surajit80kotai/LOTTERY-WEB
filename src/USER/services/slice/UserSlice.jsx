@@ -19,7 +19,10 @@ export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -41,7 +44,10 @@ export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ f
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -79,7 +85,10 @@ export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, to
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -92,14 +101,18 @@ const initialState = {
     balance_status: "",
     loading: false,
     status: "",
-    error: null
+    userSliceError: null
 }
 
 // Creating Slice
 export const UserSlice = createSlice({
     name: "userslice",
     initialState,
-    reducers: {},
+    reducers: {
+        clearUserSliceError(state) {
+            state.userSliceError = null
+        }
+    },
     extraReducers: (builder) => {
         // states for fetchLottery
         builder.addCase(getBalance.pending, (state) => {
@@ -114,7 +127,7 @@ export const UserSlice = createSlice({
         builder.addCase(getBalance.rejected, (state, { payload }) => {
             state.balance_status = "Failed"
             state.loading = false
-            state.error = payload
+            state.userSliceError = payload
         })
 
         // states for updateProfile
@@ -131,7 +144,7 @@ export const UserSlice = createSlice({
         builder.addCase(updateProfile.rejected, (state, { payload }) => {
             state.balance_status = "Failed"
             state.loading = false
-            state.error = payload
+            state.userSliceError = payload
         })
 
         // states for orderHistory
@@ -147,7 +160,7 @@ export const UserSlice = createSlice({
         builder.addCase(userOrderHistory.rejected, (state, { payload }) => {
             state.balance_status = "Failed"
             state.loading = false
-            state.error = payload
+            state.userSliceError = payload
         })
 
         // states for contactUs
@@ -162,9 +175,10 @@ export const UserSlice = createSlice({
         builder.addCase(contactUs.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
-            state.error = payload
+            state.userSliceError = payload
         })
     }
 })
 
+export const { clearUserSliceError } = UserSlice.actions
 export default UserSlice.reducer

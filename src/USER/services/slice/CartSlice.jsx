@@ -39,7 +39,10 @@ export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toa
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -55,7 +58,10 @@ export const delCartItem = createAsyncThunk("/auth/cart/delete", async ({ id, na
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate("/")
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -73,7 +79,10 @@ export const getCart = createAsyncThunk("/auth/cart", async (navigate, { rejectW
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -90,7 +99,10 @@ export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ data
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("user")
         navigate('/')
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+            navigate('/login')
+        }, 3700)
         return rejectWithValue(err.response.data)
     }
 })
@@ -108,7 +120,7 @@ export const CartSlice = createSlice({
         update_status: "",
         delete_status: "",
         loading: false,
-        error: {}
+        cartSliceError: null
     },
     reducers: {
         emptyCart(state, { payload }) {
@@ -144,6 +156,9 @@ export const CartSlice = createSlice({
                     cart_data: newCartData,
                 };
             }
+        },
+        clearCartSliceError(state) {
+            state.cartSliceError = null
         }
     },
     extraReducers: (builder) => {
@@ -160,7 +175,7 @@ export const CartSlice = createSlice({
         builder.addCase(addCart.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
-            state.error = payload
+            state.cartSliceError = payload
         })
 
 
@@ -178,7 +193,7 @@ export const CartSlice = createSlice({
         builder.addCase(delCartItem.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
-            state.error = payload
+            state.cartSliceError = payload
         })
 
 
@@ -195,7 +210,7 @@ export const CartSlice = createSlice({
         builder.addCase(getCart.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
-            state.error = payload
+            state.cartSliceError = payload
         })
 
 
@@ -217,10 +232,10 @@ export const CartSlice = createSlice({
         builder.addCase(updateCart.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
-            state.error = payload
+            state.cartSliceError = payload
         })
     }
 })
 
-export const { emptyCart, clearUpdateStatus, clearDeleteStatus, clearAddStatus, updateQTY } = CartSlice.actions
+export const { emptyCart, clearUpdateStatus, clearDeleteStatus, clearAddStatus, updateQTY, clearCartSliceError } = CartSlice.actions
 export default CartSlice.reducer
