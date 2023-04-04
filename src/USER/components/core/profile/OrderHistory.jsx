@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { userOrderHistory } from '../../../services/slice/UserSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 // import Timer from '../../../util/Timer'
@@ -16,6 +16,7 @@ const OrderHistory = () => {
     const [pageNumber, setPageNumber] = useState(0)
     const { order_history_data, loading } = useSelector(state => state.userslice)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     // for pagination
@@ -73,7 +74,7 @@ const OrderHistory = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        dispatch(userOrderHistory())
+        dispatch(userOrderHistory(navigate))
     }, [dispatch])
 
 

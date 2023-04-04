@@ -16,7 +16,7 @@ export const fetchCategory = createAsyncThunk("/admin/get-category", async (payl
         // console.log(response?.data)
         return response?.data
     } catch (err) {
-        // console.log(err.response.data);
+        // console.log(rejectWithValue(err.response.data));
         return rejectWithValue(err.response.data)
     }
 })
@@ -28,8 +28,7 @@ export const fetchLottery = createAsyncThunk("ticket/get-tickets", async (payloa
         // console.log(response?.data)
         return response?.data
     } catch (err) {
-        // console.log("catch=>", err);
-        // console.log(err.response.data);
+        // console.log(rejectWithValue(err.response.data));
         return rejectWithValue(err.response.data)
     }
 })

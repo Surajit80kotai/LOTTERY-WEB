@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { contactUs } from '../services/slice/UserSlice'
 import { toast } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader'
+import { useNavigate } from 'react-router-dom'
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const Contact = () => {
     })
     const dispatch = useDispatch()
     const { loading } = useSelector((state) => state.userslice)
+    const navigate = useNavigate()
 
     // handleChange for onChange
     const handleChange = (e) => {
@@ -22,7 +24,7 @@ const Contact = () => {
     // handleSubmit for onSubmit
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(contactUs({ formData, toast }))
+        dispatch(contactUs({ formData, toast, navigate }))
     }
 
     useEffect(() => {

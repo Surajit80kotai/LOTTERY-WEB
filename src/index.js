@@ -12,13 +12,10 @@ import { Store } from './USER/services/store/Store';
 import VerifyPhone from './USER/pages/VerifyPhone';
 import { Flip, ToastContainer } from 'react-toastify';
 import ProtectedRoute from './USER/privateroute/ProtectedRoute';
-// import './i18n';
-// import OrderSuccess from './USER/pages/OrderSuccess';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={Store}>
-    {/* <Suspense fallback={<div>Loading~~~</div>}> */}
     <Router>
       <Routes>
         <Route path='*' element={
@@ -34,7 +31,6 @@ root.render(
       </Routes>
     </Router>
     <ToastContainer style={{ "fontSize": "15px" }} transition={Flip} position="top-center" />
-    {/* </Suspense> */}
   </Provider>
 );
 

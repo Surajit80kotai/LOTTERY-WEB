@@ -9,20 +9,24 @@ const header = {
 };
 
 //get user balance
-export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async (payload, { rejectWithValue }) => {
+export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async (navigate, { rejectWithValue }) => {
     try {
         const response = await WALLETBALANCE(header)
         // console.log(response?.data)
         return response?.data
     } catch (err) {
-        // console.log(err);
+        // console.log(rejectWithValue(err.response.data));
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
+        navigate('/')
+        window.location.reload()
         return rejectWithValue(err.response.data)
     }
 })
 
 
 //update profile
-export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ formData, toast }, { rejectWithValue }) => {
+export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ formData, toast, navigate }, { rejectWithValue }) => {
     try {
         const response = await UPDATEPROFILE(formData, header)
         // console.log(response?.data?.user_details);
@@ -33,26 +37,30 @@ export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ f
         window.localStorage.setItem("user", JSON.stringify(response?.data?.user_details))
         return response?.data
     } catch (err) {
-        // console.log(err);
+        // console.log(rejectWithValue(err.response.data));
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
+        navigate('/')
+        window.location.reload()
         return rejectWithValue(err.response.data)
     }
 })
 
 
 // order history
-export const userOrderHistory = createAsyncThunk("/auth/order/history", async (payload, { rejectWithValue }) => {
+export const userOrderHistory = createAsyncThunk("/auth/order/history", async (navigate, { rejectWithValue }) => {
     try {
         const res = await ORDERHISTORY(header)
         return res?.data
     } catch (err) {
-        // console.log(err)
+        // console.log(rejectWithValue(err.response.data))
         return rejectWithValue(err.response.data)
     }
 })
 
 
 // contact us
-export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, toast }, { rejectWithValue }) => {
+export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, toast, navigate }, { rejectWithValue }) => {
     try {
         const res = await CONTACTUS(formData, header)
         // console.log(res?.data);
@@ -67,7 +75,11 @@ export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, to
         }
         return res?.data
     } catch (err) {
-        // console.log(err);
+        // console.log(rejectWithValue(err.response.data));
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
+        navigate('/')
+        window.location.reload()
         return rejectWithValue(err.response.data)
     }
 })
@@ -79,7 +91,8 @@ const initialState = {
     order_history_data: [],
     balance_status: "",
     loading: false,
-    status: ""
+    status: "",
+    error: null
 }
 
 // Creating Slice
@@ -98,9 +111,10 @@ export const UserSlice = createSlice({
             state.loading = false
             state.balance = payload
         })
-        builder.addCase(getBalance.rejected, (state) => {
+        builder.addCase(getBalance.rejected, (state, { payload }) => {
             state.balance_status = "Failed"
             state.loading = false
+            state.error = payload
         })
 
         // states for updateProfile
@@ -114,9 +128,10 @@ export const UserSlice = createSlice({
             state.profile_data = payload
             // console.log(payload);
         })
-        builder.addCase(updateProfile.rejected, (state) => {
+        builder.addCase(updateProfile.rejected, (state, { payload }) => {
             state.balance_status = "Failed"
             state.loading = false
+            state.error = payload
         })
 
         // states for orderHistory
@@ -129,9 +144,10 @@ export const UserSlice = createSlice({
             state.loading = false
             state.order_history_data = payload
         })
-        builder.addCase(userOrderHistory.rejected, (state) => {
+        builder.addCase(userOrderHistory.rejected, (state, { payload }) => {
             state.balance_status = "Failed"
             state.loading = false
+            state.error = payload
         })
 
         // states for contactUs
@@ -143,9 +159,10 @@ export const UserSlice = createSlice({
             state.status = "Success"
             state.loading = false
         })
-        builder.addCase(contactUs.rejected, (state) => {
+        builder.addCase(contactUs.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
+            state.error = payload
         })
     }
 })

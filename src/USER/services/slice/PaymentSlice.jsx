@@ -77,50 +77,66 @@ export const initPay = createAsyncThunk("/auth/pay/init", async (paymentData, { 
 
 
 // get all transaction
-export const getTransactions = createAsyncThunk("/auth/get/transaction", async (payload, { rejectWithValue }) => {
+export const getTransactions = createAsyncThunk("/auth/get/transaction", async (navigate, { rejectWithValue }) => {
     try {
         const res = await GETALLTRANSACTION(header)
         return res?.data
     } catch (err) {
         // console.log(err)
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
+        navigate('/')
+        window.location.reload()
         return rejectWithValue(err.response.data)
     }
 })
 
 
 //update transaction 
-export const updateTransactions = createAsyncThunk("/auth/update/transaction", async (payload, { rejectWithValue }) => {
+export const updateTransactions = createAsyncThunk("/auth/update/transaction", async (navigate, { rejectWithValue }) => {
     try {
         const res = await UPDATETRANSACTION(header)
         return res?.data
     } catch (err) {
         // console.log(err)
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
+        navigate('/')
+        window.location.reload()
         return rejectWithValue(err.response.data)
     }
 })
 
 
 // place order
-export const placeOrder = createAsyncThunk("/auth/order", async (orderData, { rejectWithValue }) => {
+export const placeOrder = createAsyncThunk("/auth/order", async ({ orderData, navigate }, { rejectWithValue }) => {
     try {
         const res = await PLACEORDER(orderData, header)
         // console.log(res?.data);
         return res?.data
     } catch (err) {
         // console.log(err?.data)
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
+        navigate('/')
+        window.location.reload()
         return rejectWithValue(err.response.data)
     }
 })
 
 
 //buy now
-export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderData, { rejectWithValue }) => {
+export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async ({ orderData, navigate }, { rejectWithValue }) => {
     try {
         const res = await BUYNOW(orderData, header)
         // console.log("response", res?.data);
         return res?.data
     } catch (err) {
         // console.log(err)
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("user")
+        navigate('/')
+        window.location.reload()
         return rejectWithValue(err.response.data)
     }
 })
@@ -134,7 +150,8 @@ const initialState = {
     ordered_data: [],
     buy_now_data: [],
     status: "",
-    loading: false
+    loading: false,
+    error: null
 }
 
 
@@ -171,9 +188,10 @@ export const PaymentSlice = createSlice({
             state.status = "success"
             state.loading = false
         })
-        builder.addCase(cinetPay.rejected, (state) => {
+        builder.addCase(cinetPay.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
+            state.error = payload
         })
 
 
@@ -187,9 +205,10 @@ export const PaymentSlice = createSlice({
             state.status = "success"
             state.loading = false
         })
-        builder.addCase(initPay.rejected, (state) => {
+        builder.addCase(initPay.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
+            state.error = payload
         })
 
 
@@ -203,9 +222,10 @@ export const PaymentSlice = createSlice({
             state.status = "success"
             state.loading = false
         })
-        builder.addCase(getTransactions.rejected, (state) => {
+        builder.addCase(getTransactions.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
+            state.error = payload
         })
 
 
@@ -219,9 +239,10 @@ export const PaymentSlice = createSlice({
             state.status = "success"
             state.loading = false
         })
-        builder.addCase(updateTransactions.rejected, (state) => {
+        builder.addCase(updateTransactions.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
+            state.error = payload
         })
 
         // States for place order
@@ -234,9 +255,10 @@ export const PaymentSlice = createSlice({
             state.status = "success"
             state.loading = false
         })
-        builder.addCase(placeOrder.rejected, (state) => {
+        builder.addCase(placeOrder.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
+            state.error = payload
         })
 
         // States for buy now
@@ -249,9 +271,10 @@ export const PaymentSlice = createSlice({
             state.status = "success"
             state.loading = false
         })
-        builder.addCase(itemBuyNow.rejected, (state) => {
+        builder.addCase(itemBuyNow.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
+            state.error = payload
         })
     }
 })

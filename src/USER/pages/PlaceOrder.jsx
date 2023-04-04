@@ -41,7 +41,7 @@ const PlaceOrder = () => {
                 total_price: (buyNowData?.total_price * buyNowQty)
             }
             // console.log(newBuyNowData);
-            dispatch(itemBuyNow(newBuyNowData))
+            dispatch(itemBuyNow({ newBuyNowData, navigate }))
         } else if (cart_data?.length) {
             const cartData = cart_data?.reduce((acc, { resp }) => {
                 acc.push({
@@ -56,7 +56,7 @@ const PlaceOrder = () => {
                 return acc
             }, [])
             const orderData = { price: amount, product_info: cartData }
-            dispatch(placeOrder(orderData))
+            dispatch(placeOrder({ orderData, navigate }))
         }
     }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { cinetPay, getTransactions, initPay, updateTransactions } from '../../../services/slice/PaymentSlice';
 import { getBalance } from '../../../services/slice/UserSlice';
 import { currency, currency_symbol, generalCurrency, generalCurrency_symbol } from '../../../util/Currency';
@@ -17,6 +17,7 @@ const Wallet = () => {
     const { paymentData, transaction_data, loading } = useSelector((state) => state.paymentslice)
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
+    const navigate = useNavigate()
 
 
     // handleChange function for onChange
@@ -63,10 +64,10 @@ const Wallet = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        dispatch(getBalance())
+        dispatch(getBalance(navigate))
         redirectPage()
-        dispatch(getTransactions())
-        dispatch(updateTransactions())
+        dispatch(getTransactions(navigate))
+        dispatch(updateTransactions(navigate))
     }, [dispatch, paymentData])
 
     return (

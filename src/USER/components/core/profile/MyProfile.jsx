@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { updateProfile } from '../../../services/slice/UserSlice'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
+import { useNavigate } from 'react-router-dom'
 // import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol } from '../../../util/Currency'
 
 
@@ -15,7 +16,7 @@ const MyProfile = () => {
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const newDOB = `${date_of_birth.getUTCDate()}-${month[date_of_birth.getUTCMonth()]}-${date_of_birth.getUTCFullYear()}`
     const [showEditButton, setShowEditButton] = useState(true)
-
+    const navigate = useNavigate()
     // baseUrl
     // const baseUrl = process.env.REACT_APP_BASE_URL
     const baseNodeUrl = process.env.REACT_APP_NODE_HOST
@@ -59,7 +60,7 @@ const MyProfile = () => {
         formData.append('email', formValues?.email);
         formData.append('phone', formValues?.phone);
 
-        dispatch(updateProfile({ formData, toast }))
+        dispatch(updateProfile({ formData, toast, navigate }))
 
         let inputs = document.getElementsByClassName("in_disa");
         for (let i = 0; i < inputs.length; i++) {
