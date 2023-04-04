@@ -4422,7 +4422,7 @@ margin: 0.5rem;
 	padding-top: 10px; 
 } */
 
-.claimbtn{
+.claimbtn {
 	background: var(--primary-color);
 	color: var(--white);
 	padding: 0.5rem 1rem;
@@ -4432,19 +4432,21 @@ margin: 0.5rem;
 
 /* toogle */
 
-.toogle_bg{
-	padding: 0.2rem;
-	background: rgb(214, 214, 214);
+.toogle_bg {
+	padding: 0.2rem 0.5rem;
+	background: var(--primary-color);
 	display: inline-block;
-margin-bottom: 1rem;
+	margin-bottom: 1rem;
+	width: 130px;
+	border-radius: 3px;
 }
 
-.toogle_bg button{
-	color: var(--black);
+.toogle_bg button {
+	color: var(--white);
 	border-left: 1px solid rgb(128, 127, 127);
 	font-weight: 600;
 }
 
-.toogle_bg button:first-child{
+.toogle_bg button:first-child {
 	border-left: 0;
 }

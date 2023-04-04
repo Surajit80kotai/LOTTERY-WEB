@@ -54,18 +54,8 @@ const Home = () => {
         return null
     }
 
-    // mount cycle
-    useEffect(() => {
-        window.scrollTo(0, 0)
-        dispatch(fetchLottery())
-        dispatch(fetchCategory())
-        dispatch(getCart(navigate))
-    }, [dispatch, cartLength, token])
-
-
     useEffect(() => {
         if (error) {
-            console.log(error);
             toast.info("Your Session Is Expeired.\nPlease Login To Continue", {
                 autoClose: 3500
             })
@@ -76,6 +66,14 @@ const Home = () => {
             dispatch(clearPaymentSliceError())
         }
     }, [error])
+
+    // mount cycle
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        dispatch(fetchLottery())
+        dispatch(fetchCategory())
+        dispatch(getCart(navigate))
+    }, [dispatch, cartLength, token])
 
 
     return (

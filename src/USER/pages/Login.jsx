@@ -100,9 +100,11 @@ const Login = () => {
 
                             <div className="form_area">
                                 {/* Toggle button for email or phone */}
-                                <div className="toogle_bg">
-                                    <button className='btn fs-5' onClick={toggleButton}>Phone</button>
-                                    <button className='btn fs-5' onClick={toggleButton}>Email</button>
+                                <div className="toogle_bg" style={{ "display": toggleBtn ? "block" : "none" }}>
+                                    <button className='btn fs-5' onClick={toggleButton}>Login With Phone</button>
+                                </div>
+                                <div className="toogle_bg" style={{ "display": !toggleBtn ? "block" : "none" }}>
+                                    <button className='btn fs-5' onClick={toggleButton}>Login With Email</button>
                                 </div>
 
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
@@ -124,7 +126,6 @@ const Login = () => {
                                                     title="Enter a valid email or phone number"
                                                     value={formValues.contact}
                                                     onChange={handleChange}
-                                                    required
                                                 />
                                             </div>
                                         </div>
