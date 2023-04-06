@@ -65,7 +65,7 @@ const Home = () => {
             dispatch(clearUserSliceError())
             dispatch(clearPaymentSliceError())
         }
-    }, [error])
+    }, [dispatch, error])
 
     // mount cycle
     useEffect(() => {
@@ -73,7 +73,7 @@ const Home = () => {
         dispatch(fetchLottery())
         dispatch(fetchCategory())
         dispatch(getCart(navigate))
-    }, [dispatch, cartLength, token])
+    }, [dispatch, navigate, cartLength, token])
 
 
     return (

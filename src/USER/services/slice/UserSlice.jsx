@@ -16,13 +16,15 @@ export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async
         return response?.data
     } catch (err) {
         // console.log(rejectWithValue(err.response.data));
-        window.localStorage.removeItem("token")
-        window.localStorage.removeItem("user")
-        navigate('/')
-        setTimeout(() => {
-            window.location.reload()
-            navigate('/login')
-        }, 3700)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                navigate('/login')
+            }, 3700)
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -41,13 +43,15 @@ export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ f
         return response?.data
     } catch (err) {
         // console.log(rejectWithValue(err.response.data));
-        window.localStorage.removeItem("token")
-        window.localStorage.removeItem("user")
-        navigate('/')
-        setTimeout(() => {
-            window.location.reload()
-            navigate('/login')
-        }, 3700)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                navigate('/login')
+            }, 3700)
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -82,13 +86,15 @@ export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, to
         return res?.data
     } catch (err) {
         // console.log(rejectWithValue(err.response.data));
-        window.localStorage.removeItem("token")
-        window.localStorage.removeItem("user")
-        navigate('/')
-        setTimeout(() => {
-            window.location.reload()
-            navigate('/login')
-        }, 3700)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                navigate('/login')
+            }, 3700)
+        }
         return rejectWithValue(err.response.data)
     }
 })

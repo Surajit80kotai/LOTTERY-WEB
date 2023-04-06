@@ -7,6 +7,7 @@ import { getBalance } from '../../../services/slice/UserSlice';
 import { currency, currency_symbol, generalCurrency, generalCurrency_symbol } from '../../../util/Currency';
 import PreLoader from '../preloader/PreLoader';
 import SideNav from './SideNav';
+import MyPaypalButton from '../../../util/MyPaypalButton';
 
 const Wallet = () => {
     const { dueAmount } = useParams()
@@ -50,7 +51,7 @@ const Wallet = () => {
     // Redirect page function
     const redirectPage = () => {
         const payment_data = {
-            amount: formValue.amount,
+            amount: formValue?.amount,
             payment_url: paymentData?.data?.payment_url,
             payment_token: paymentData?.data?.payment_token
         }
@@ -68,7 +69,7 @@ const Wallet = () => {
         redirectPage()
         dispatch(getTransactions(navigate))
         dispatch(updateTransactions(navigate))
-    }, [dispatch, paymentData])
+    }, [dispatch, paymentData, navigate])
 
     return (
         <>
@@ -122,7 +123,7 @@ const Wallet = () => {
                                                                 className="payinput"
                                                                 id="amount"
                                                                 name="amount"
-                                                                value={formValue.amount}
+                                                                value={formValue?.amount}
                                                                 onChange={handleChange}
                                                                 aria-describedby="emailHelp"
                                                                 placeholder="Enter amount"
@@ -292,7 +293,7 @@ const Wallet = () => {
                                 <div className="modal-content">
                                     <div className="modal-header">
                                         <h3>Add Money to Wallet</h3>
-                                        <h4>{userID ? currency_symbol : generalCurrency_symbol}{formValue.amount}</h4>
+                                        <h4>{userID ? currency_symbol : generalCurrency_symbol}{formValue?.amount}</h4>
                                     </div>
                                     <div className="modal-body">
                                         <h4 className="option_title">Payment Option</h4>
@@ -335,7 +336,7 @@ const Wallet = () => {
                                             </div>
 
                                             {/* Pay with Master Card */}
-                                            <div className="payment_item">
+                                            {/* <div className="payment_item">
                                                 <input
                                                     type="radio"
                                                     id="control_03"
@@ -349,22 +350,24 @@ const Wallet = () => {
                                                     </div>
                                                     <p className='my-4'>Pay with Master Card</p>
                                                 </label>
-                                            </div>
+                                            </div> */}
 
                                             {/* Pay with Paypal */}
                                             <div className="payment_item">
-                                                <input
+                                                {/* <input
                                                     type="radio"
                                                     id="control_04"
                                                     name="select"
                                                     value="Paypal"
                                                     onChange={(e) => selectPayOption(e.target.value)}
-                                                />
+                                                /> */}
                                                 <label htmlFor="control_04">
                                                     <div className="pay_icon">
-                                                        <img src="/assets/img/paypal.png" alt="" className="img-fluid" />
+                                                        <div className='m-5'>
+                                                            <MyPaypalButton amount={formValue?.amount} />
+                                                            <p className='my-4'>Pay with Paypal</p>
+                                                        </div>
                                                     </div>
-                                                    <p className='my-4'>Pay with Paypal</p>
                                                 </label>
                                             </div>
                                         </div>

@@ -90,7 +90,7 @@ const Cart = () => {
       dispatch(clearDeleteStatus())
       dispatch(clearOrderedData())
     }
-  }, [dispatch, cartLength, update_status, delete_status, token])
+  }, [dispatch, cartLength, update_status, delete_status, navigate, token])
 
 
 

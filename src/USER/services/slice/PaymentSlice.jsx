@@ -83,13 +83,15 @@ export const getTransactions = createAsyncThunk("/auth/get/transaction", async (
         return res?.data
     } catch (err) {
         // console.log(err)
-        window.localStorage.removeItem("token")
-        window.localStorage.removeItem("user")
-        navigate('/')
-        setTimeout(() => {
-            window.location.reload()
-            navigate('/login')
-        }, 3700)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                navigate('/login')
+            }, 3700)
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -102,13 +104,15 @@ export const updateTransactions = createAsyncThunk("/auth/update/transaction", a
         return res?.data
     } catch (err) {
         // console.log(err)
-        window.localStorage.removeItem("token")
-        window.localStorage.removeItem("user")
-        navigate('/')
-        setTimeout(() => {
-            window.location.reload()
-            navigate('/login')
-        }, 3700)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                navigate('/login')
+            }, 3700)
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -122,13 +126,15 @@ export const placeOrder = createAsyncThunk("/auth/order", async ({ orderData, na
         return res?.data
     } catch (err) {
         // console.log(err?.data)
-        window.localStorage.removeItem("token")
-        window.localStorage.removeItem("user")
-        navigate('/')
-        setTimeout(() => {
-            window.location.reload()
-            navigate('/login')
-        }, 3700)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                navigate('/login')
+            }, 3700)
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -142,13 +148,15 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async ({ order
         return res?.data
     } catch (err) {
         // console.log(err)
-        window.localStorage.removeItem("token")
-        window.localStorage.removeItem("user")
-        navigate('/')
-        setTimeout(() => {
-            window.location.reload()
-            navigate('/login')
-        }, 3700)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                navigate('/login')
+            }, 3700)
+        }
         return rejectWithValue(err.response.data)
     }
 })
