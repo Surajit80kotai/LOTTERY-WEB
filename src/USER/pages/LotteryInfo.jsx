@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useNavigate, useNavigation, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCart, clearAddStatus, getCart } from '../services/slice/CartSlice'
@@ -109,10 +109,10 @@ const LotteryInfo = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         return () => {
-            dispatch(getCart())
+            dispatch(getCart(navigate))
             dispatch(clearAddStatus())
         }
-    }, [dispatch, cartLength, add_cart_status, round])
+    }, [dispatch, cartLength, add_cart_status, round, navigate])
 
 
 

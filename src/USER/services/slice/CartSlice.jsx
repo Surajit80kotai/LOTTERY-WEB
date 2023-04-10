@@ -42,7 +42,7 @@ export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toa
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)
@@ -62,7 +62,7 @@ export const delCartItem = createAsyncThunk("/auth/cart/delete", async ({ id, na
         navigate("/")
         setTimeout(() => {
             window.location.reload()
-            navigate('/login')
+            // navigate('/login')
         }, 3700)
         return rejectWithValue(err.response.data)
     }
@@ -84,7 +84,7 @@ export const getCart = createAsyncThunk("/auth/cart", async (navigate, { rejectW
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)
@@ -106,7 +106,7 @@ export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ data
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)

@@ -57,6 +57,7 @@ const MyProfile = () => {
         // image ? formData.append('profile_img', image) : formData.append('profile_img', user?.profile_img?.split("/")[4])
         formData.append('profile_img', image ? image : user?.profile_img.split("/")[4]);
         formData.append('full_name', formValues?.full_name);
+        formData.append('gender', formValues?.gender);
         formData.append('email', formValues?.email);
         formData.append('phone', formValues?.phone);
 
@@ -218,7 +219,7 @@ const MyProfile = () => {
                                                                         id="dob"
                                                                         name="dob"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Birth date did not registered"
+                                                                        placeholder="Gender Is Not Mentioned"
                                                                         readOnly
                                                                         disabled
                                                                     />

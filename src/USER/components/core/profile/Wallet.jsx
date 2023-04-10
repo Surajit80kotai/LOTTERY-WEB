@@ -8,6 +8,7 @@ import { currency, currency_symbol, generalCurrency, generalCurrency_symbol } fr
 import PreLoader from '../preloader/PreLoader';
 import SideNav from './SideNav';
 import MyPaypalButton from '../../../util/MyPaypalButton';
+import WithdrawModal from '../../../modal/WithdrawModal';
 
 const Wallet = () => {
     const { dueAmount } = useParams()
@@ -99,11 +100,23 @@ const Wallet = () => {
                                                 <span>Payment Wallet</span>
                                             </div>
                                             <div className="total_balns">
-                                                <span>Total Balance</span>
-                                                {
-                                                    balance?.balance > 0 ? <h5 className="total_amount">{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userID ? currency_symbol : generalCurrency_symbol}&nbsp;0</h5>
-                                                }
+                                                {/* withdraw Balance */}
+                                                <div className='d-flex'>
+                                                    {/*  Button trigger modal */}
+                                                    <button type="button" className="btn2 mx-5 my-3" data-bs-toggle="modal" data-bs-target="#withdrawModal">
+                                                        Withdraw Money
+                                                    </button>
+                                                    {/* Modal */}
+                                                    <WithdrawModal />
 
+                                                    <div>
+                                                        {/* Total Balance */}
+                                                        <span>Total Balance</span>
+                                                        {
+                                                            balance?.balance > 0 ? <h5 className="total_amount">{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userID ? currency_symbol : generalCurrency_symbol}&nbsp;0</h5>
+                                                        }
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 

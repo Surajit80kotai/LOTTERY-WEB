@@ -4475,7 +4475,6 @@ margin: 0.5rem;
 	font-size: 40px;
 	display: block;
 	padding-right: 12px;
-	animation: type .5s alternate infinite;
 }
 
 @keyframes type {

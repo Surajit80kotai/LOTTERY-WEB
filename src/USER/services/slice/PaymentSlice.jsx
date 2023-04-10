@@ -89,7 +89,7 @@ export const getTransactions = createAsyncThunk("/auth/get/transaction", async (
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)
@@ -110,7 +110,7 @@ export const updateTransactions = createAsyncThunk("/auth/update/transaction", a
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)
@@ -132,7 +132,7 @@ export const placeOrder = createAsyncThunk("/auth/order", async ({ orderData, na
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)
@@ -154,7 +154,7 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async ({ order
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)

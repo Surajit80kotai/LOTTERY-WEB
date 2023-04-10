@@ -19,11 +19,11 @@ const TrustedPayment = () => {
                                 <img src="/assets/img/mtn.png" alt="" />
                             </div>
                         </div>
-                        <div className="col-lg-2 col-md-2">
+                        {/* <div className="col-lg-2 col-md-2">
                             <div className="payment_item">
                                 <img src="/assets/img/master.png" alt="" />
                             </div>
-                        </div>
+                        </div> */}
                         <div className="col-lg-2 col-md-2">
                             <div className="payment_item">
                                 <img src="/assets/img/paypal.png" alt="" />

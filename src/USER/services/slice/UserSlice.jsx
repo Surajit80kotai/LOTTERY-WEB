@@ -22,7 +22,7 @@ export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)
@@ -49,7 +49,7 @@ export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ f
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)
@@ -64,6 +64,15 @@ export const userOrderHistory = createAsyncThunk("/auth/order/history", async (n
         return res?.data
     } catch (err) {
         // console.log(rejectWithValue(err.response.data))
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                // navigate('/login')
+            }, 3700)
+        }
         return rejectWithValue(err.response.data)
     }
 })
@@ -92,7 +101,7 @@ export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, to
             navigate('/')
             setTimeout(() => {
                 window.location.reload()
-                navigate('/login')
+                // navigate('/login')
             }, 3700)
         }
         return rejectWithValue(err.response.data)
