@@ -249,7 +249,7 @@ const Wallet = () => {
                                                                                                     <span className='payment_logo'>
                                                                                                         <img src="/assets/img/cancel.png" alt="" />
                                                                                                     </span>
-                                                                                                    Transaction Cancelled
+                                                                                                    Transaction Pending or Cancelled
                                                                                                 </td>
                                                                                                 :
                                                                                                 <td colSpan={2}>
