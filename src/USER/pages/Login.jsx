@@ -46,7 +46,7 @@ const Login = () => {
             const data = { user_id: formValues.contact, password: formValues.password, user_id_type: "email" }
             dispatch(fetchLogin({ data, navigate, toast }))
         } else {
-            const data = { user_id: "+" + phone, password: formValues.password, user_id_type: "phone" }
+            const data = phone?.length > 0 ? { user_id: "+" + phone, password: formValues.password, user_id_type: "phone" } : { user_id: phone, password: formValues.password, user_id_type: "phone" }
             dispatch(fetchLogin({ data, navigate, toast }))
         }
     }
@@ -188,7 +188,12 @@ const Login = () => {
                                                     country={"cm"}
                                                     enableSearch={true}
                                                     value={phone.phone}
-                                                    onChange={(phone) => setPhone(phone)}
+                                                    onChange={
+                                                        (value, data) => {
+                                                            setPhone(value);
+                                                            formValues.phone_code = data.dialCode
+                                                        }
+                                                    }
                                                 />
                                             </div>
                                         </div>

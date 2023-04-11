@@ -24,8 +24,6 @@ const NavBar = () => {
   // Log Out Function
   const logOut = async () => {
     await signOut(auth)
-    window.localStorage.removeItem("user")
-    window.localStorage.removeItem("token")
     dispatch(doLogOut())
     dispatch(emptyCart())
     navigate('/')
@@ -191,9 +189,7 @@ const NavBar = () => {
                       </li>
                       <li className="user-menu__item">
                         <Link className="user-menu-link dropdown-item" to="/">
-                          <div>
-                            <button className='text-danger' onClick={logOut}><i className="fa-solid fa-power-off mx-1"></i><span className='fw-bolder'>Logout</span></button>
-                          </div>
+                          <button className='text-danger' onClick={logOut}><i className="fa-solid fa-power-off mx-1"></i><span className='fw-bolder'>Logout</span></button>
                         </Link>
                       </li>
                     </ul>
