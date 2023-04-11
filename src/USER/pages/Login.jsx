@@ -100,12 +100,8 @@ const Login = () => {
 
                             <div className="form_area">
                                 {/* Toggle button for email or phone */}
-                                <div className="toogle_bg" style={{ "display": toggleBtn ? "block" : "none" }}>
-                                    <button className='btn fs-5' onClick={toggleButton}>Login With Phone</button>
-                                </div>
-                                <div className="toogle_bg" style={{ "display": !toggleBtn ? "block" : "none" }}>
-                                    <button className='btn fs-5' onClick={toggleButton}>Login With Email</button>
-                                </div>
+                                <button className='btn fs-5 toogle_bg' style={{ "display": toggleBtn ? "block" : "none" }} onClick={toggleButton}>Login With Phone</button>
+                                <button className='btn fs-5 toogle_bg' style={{ "display": !toggleBtn ? "block" : "none" }} onClick={toggleButton}>Login With Email</button>
 
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
                                     {/* Email ID */}

@@ -155,6 +155,10 @@ export const AuthSlice = createSlice({
             toast.success("You have successfully logged out", {
                 autoClose: 3500
             })
+            // To reload the page autometically after logout
+            setTimeout(() => {
+                window.location.reload()
+            }, 3600)
         },
         clearVerifyOtp(state) {
             state.reg_otp = null;
