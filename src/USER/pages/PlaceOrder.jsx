@@ -79,7 +79,7 @@ const PlaceOrder = () => {
                 dispatch(clearOrderedData())
             }
         }
-        else if (ordered_data?.message === "Order success") {
+        else if (ordered_data?.error === "false") {
             if (ordered_data?.meta?.length === 0) {
                 dispatch(emptyCart())
                 dispatch(emptyBuyNow())
@@ -114,9 +114,9 @@ const PlaceOrder = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        dispatch(getBalance())
+        dispatch(getBalance(navigate))
         calculateSum()
-    }, [cart_data, dispatch])
+    }, [cart_data, dispatch, navigate])
 
 
 
@@ -381,9 +381,9 @@ const PlaceOrder = () => {
                                     </div>
                                     <div className="text-center mt-5">
                                         {
-                                            ((amount?.total)?.toFixed(2) && (buy_now_data?.amount?.total * buyNowQty).toFixed(2) < balance?.balance) ?
-                                                <button onClick={procced} className="btn2">Procced</button>
-                                                : <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
+                                            ((amount?.total)?.toFixed(2) && (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance) ?
+                                                <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
+                                                : <button onClick={procced} className="btn2">Procced</button>
                                         }
                                     </div>
                                 </div>

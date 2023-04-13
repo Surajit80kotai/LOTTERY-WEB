@@ -102,10 +102,7 @@ const Wallet = () => {
                                             <div className="total_balns">
                                                 {/* withdraw Balance */}
                                                 <div className='d-flex'>
-                                                    {/*  Button trigger modal */}
-                                                    <button type="button" className="btn2 mx-5 my-3" data-bs-toggle="modal" data-bs-target="#withdrawModal">
-                                                        Withdraw Money
-                                                    </button>
+                                                    
                                                     {/* Modal */}
                                                     <WithdrawModal />
 

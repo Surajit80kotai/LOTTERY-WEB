@@ -141,9 +141,10 @@ export const placeOrder = createAsyncThunk("/auth/order", async ({ orderData, na
 
 
 //buy now
-export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async ({ orderData, navigate }, { rejectWithValue }) => {
+export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderData, { rejectWithValue }) => {
+    const { newBuyNowData, navigate } = orderData
     try {
-        const res = await BUYNOW(orderData, header)
+        const res = await BUYNOW(newBuyNowData, header)
         // console.log("response", res?.data);
         return res?.data
     } catch (err) {
