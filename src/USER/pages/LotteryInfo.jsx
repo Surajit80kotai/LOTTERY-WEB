@@ -178,23 +178,25 @@ const LotteryInfo = () => {
                                     </div>
                                     <div className="tic_of_price">
                                         {
-                                            ticketInfo[0]?.rounds[round]?._dis ?
-                                                <h3>Ticket Price :&nbsp;&nbsp;
-                                                    <span className="discountprice">
-                                                        {token ? currency_symbol : generalCurrency_symbol}{(discountedPrice).toFixed(2)}</span>&nbsp;&nbsp;
-                                                    <span className="text-decoration-line-through fs-4 fw-light">
-                                                        {token ? currency_symbol : generalCurrency_symbol}
-                                                        {ticketInfo[0]?.rounds[round]?._price}
-                                                    </span>&nbsp;&nbsp;
-                                                    <span className="discount_percent fs-4 ">{ticketInfo[0]?.rounds[round]?._dis}% off</span>
-                                                </h3>
-                                                :
-                                                <h3>Ticket Price :&nbsp;&nbsp;
-                                                    <span className="discountprice">
-                                                        {token ? currency_symbol : generalCurrency_symbol}
-                                                        {ticketInfo[0]?.rounds[round]?._price}
-                                                    </span>
-                                                </h3>
+                                            ticketInfo[0]?.rounds[round] ?
+                                                ticketInfo[0]?.rounds[round]?._dis ?
+                                                    <h3>Ticket Price :&nbsp;&nbsp;
+                                                        <span className="discountprice">
+                                                            {token ? currency_symbol : generalCurrency_symbol}{(discountedPrice).toFixed(2)}</span>&nbsp;&nbsp;
+                                                        <span className="text-decoration-line-through fs-4 fw-light">
+                                                            {token ? currency_symbol : generalCurrency_symbol}
+                                                            {ticketInfo[0]?.rounds[round]?._price}
+                                                        </span>&nbsp;&nbsp;
+                                                        <span className="discount_percent fs-4 ">{ticketInfo[0]?.rounds[round]?._dis}% off</span>
+                                                    </h3>
+                                                    :
+                                                    <h3>Ticket Price :&nbsp;&nbsp;
+                                                        <span className="discountprice">
+                                                            {token ? currency_symbol : generalCurrency_symbol}
+                                                            {ticketInfo[0]?.rounds[round]?._price}
+                                                        </span>
+                                                    </h3>
+                                                : null
                                         }
                                     </div>
                                     {/* Promo area */}
@@ -245,20 +247,24 @@ const LotteryInfo = () => {
                                     {/* Add to cart buttton */}
                                     <div className="btn_area mt-5">
                                         {
-                                            (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
-                                                token ?
-                                                    <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                                    : <Link to="/login" className="btn2">Add To Cart</Link>
-                                                : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
+                                            ticketInfo[0]?.rounds[round] ?
+                                                (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
+                                                    token ?
+                                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
+                                                        : <Link to="/login" className="btn2">Add To Cart</Link>
+                                                    : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
+                                                : null
                                         }
 
                                         {/* Buy now button */}
                                         {
-                                            (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
-                                                token ?
-                                                    <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
-                                                    : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                                : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+                                            ticketInfo[0]?.rounds[round] ?
+                                                (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
+                                                    token ?
+                                                        <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
+                                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                                    : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+                                                : null
                                         }
                                     </div>
 
@@ -272,16 +278,18 @@ const LotteryInfo = () => {
                                     <div className="ticket_sold">
                                         <div className="ticket_sold_title">
                                             {
-                                                (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
-                                                    <h3>
-                                                        <span style={{ "marginRight": "20px" }}>
-                                                            <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
-                                                        <span><img src="/assets/img/9121436 1.png" alt="" /></span>
-                                                        Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
-                                                    </h3>
-                                                    : <h3 style={{ "color": "#cb4154" }}>
-                                                        All Tickets Sold For Round : {(Number(round) + 1)}
-                                                    </h3>
+                                                ticketInfo[0]?.rounds[round] ?
+                                                    (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
+                                                        <h3>
+                                                            <span style={{ "marginRight": "20px" }}>
+                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
+                                                            <span><img src="/assets/img/9121436 1.png" alt="" /></span>
+                                                            Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
+                                                        </h3>
+                                                        : <h3 style={{ "color": "#cb4154" }}>
+                                                            All Tickets Sold For Round : {(Number(round) + 1)}
+                                                        </h3>
+                                                    : null
                                             }
 
                                         </div>

@@ -44,13 +44,16 @@ const CommonCardTimer = ({ item, round }) => {
                     </div>
                     :
                     <div className="time_left">
-                        <div id="coundown" className="countdown text-center">
+                        {/* <div id="coundown" className="countdown text-center">
                             <div className="timeleftarea">
                                 <div id="hours" className=" hours"></div>
                                 <br />
-                                <span className='text-danger fs-5'>Ticket is unavailabe right now</span>
                             </div>
-                        </div>
+                        </div> */}
+                        <br />
+                        <br />
+                        <br />
+                        <h2 className='text-center text-uppercase'><span className='text-danger'>Ticket is unavailabe right now</span></h2>
                     </div>
             }
         </>

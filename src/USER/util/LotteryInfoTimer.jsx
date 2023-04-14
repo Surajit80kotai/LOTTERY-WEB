@@ -42,7 +42,7 @@ const LotteryInfoTimer = ({ ticketInfo, round }) => {
                             </div>
                         </div>
                     </div>
-                    : <h3 className='text-danger my-5'>Ticket is Unavailabe Right Now</h3>
+                    : <h2 className='text-danger my-5 text-uppercase'>Ticket is Unavailabe Right Now</h2>
             }
         </>
     )
