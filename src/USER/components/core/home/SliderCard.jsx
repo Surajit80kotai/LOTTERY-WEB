@@ -9,8 +9,10 @@ import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 
 const SliderCard = ({ item }) => {
-    const [round, setRound] = useState(0)
     const { ticket_name, main_image, is_image, _id, rounds } = item
+    const [round, setRound] = useState(0)
+
+    console.log(rounds?.length);
 
     // ticket rounds calculation function
     const calculateRounds = () => {
@@ -89,88 +91,85 @@ const SliderCard = ({ item }) => {
             {/* PreLoader */}
             {/* {loading && <PreLoader />} */}
 
-            {
-                round >= 0 &&
-                <div className="product_item_one m-2">
-                    <Link to={`/info/${_id}/${round}`}>
-                        <div className="product_img">
-                            <div className="pro_img">
-                                {/* Image Condition */}
-                                {
-                                    (is_image?.length) ? <img loading="lazy" src={baseUrl + main_image} alt="" className="img-fluid " />
-                                        : <img loading="lazy" src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
-                                }
-                            </div>
-                        </div>
-                    </Link>
-                    <div className="product_content">
-                        <Link to={`/info/${_id}/${round}`}>
-                            <div className="product_price">
-                                {
-                                    rounds[round]?._dis ?
-                                        <h3>
-                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{(discountedPrice).toFixed(2)}</span>&nbsp;&nbsp;<span>
-                                                {token ? currency_symbol : generalCurrency_symbol}</span>
-                                            <span className="text-decoration-line-through">&nbsp;{rounds[round]?._price}</span>&nbsp;&nbsp;
-                                            {/* <span className="discount_percent">{rounds[round]?._dis}% off</span> */}
-                                        </h3>
-                                        :
-                                        <h3>
-                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{(rounds[round]?._price).toFixed(2)}</span>
-                                        </h3>
-                                }
-                            </div>
-                            <div className="product_title">
-                                <h2 className="card_title">{ticket_name}</h2>
-                            </div>
+            <div className="product_item_one m-2">
+                <Link to={`/info/${_id}/${round}`}>
+                    <div className="product_img">
+                        <div className="pro_img">
+                            {/* Image Condition */}
                             {
-                                rounds[round]?._qty > 0 ?
-                                    <h3 className="total_ticket">
-                                        {/* <span className='mr-2'> */}
-                                        <span>
-                                            Round: {(round + 1) + "/" + rounds?.length}
-                                        </span>
-                                        <br />
-                                        {/* <span className='mx-3'> */}
-                                        <span>
-                                            Remaining Tickets: {rounds[round]?._qty}
-                                        </span>
+                                (is_image?.length) ? <img loading="lazy" src={baseUrl + main_image} alt="" className="img-fluid " />
+                                    : <img loading="lazy" src="/assets/img/imageunavailable.jpeg" alt="" className="img-fluid " />
+                            }
+                        </div>
+                    </div>
+                </Link>
+                <div className="product_content">
+                    <Link to={`/info/${_id}/${round}`}>
+                        <div className="product_price">
+                            {
+                                rounds[round]?._dis ?
+                                    <h3>
+                                        <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{(discountedPrice).toFixed(2)}</span>&nbsp;&nbsp;<span>
+                                            {token ? currency_symbol : generalCurrency_symbol}</span>
+                                        <span className="text-decoration-line-through">&nbsp;{rounds[round]?._price}</span>&nbsp;&nbsp;
+                                        {/* <span className="discount_percent">{rounds[round]?._dis}% off</span> */}
                                     </h3>
-                                    : <h3 className="total_ticket" style={{ "color": "#cb4154" }}>
-                                        All Tickets Sold For Round : {(round + 1)}
+                                    :
+                                    <h3>
+                                        <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{(rounds[round]?._price)?.toFixed(2)}</span>
                                     </h3>
                             }
+                        </div>
+                        <div className="product_title">
+                            <h2 className="card_title">{ticket_name}</h2>
+                        </div>
+                        {
+                            rounds[round]?._qty > 0 ?
+                                <h3 className="total_ticket">
+                                    {/* <span className='mr-2'> */}
+                                    <span>
+                                        Round: {(round + 1) + "/" + rounds?.length}
+                                    </span>
+                                    <br />
+                                    {/* <span className='mx-3'> */}
+                                    <span>
+                                        Remaining Tickets: {rounds[round]?._qty}
+                                    </span>
+                                </h3>
+                                : <h3 className="total_ticket" style={{ "color": "#cb4154" }}>
+                                    All Tickets Sold For Round : {(round + 1)}
+                                </h3>
+                        }
 
-                            {/* Condition for timer run-out */}
-                            <CommonCardTimer
-                                item={item}
-                                round={round}
-                            />
-                        </Link>
+                        {/* Condition for timer run-out */}
+                        <CommonCardTimer
+                            item={item}
+                            round={round}
+                        />
+                    </Link>
 
-                        <div className="add_buy_button">
-                            <div className="product_btn">
-                                {/* Add Cart Button */}
-                                {
-                                    (rounds[round]?._qty) > 0 ?
-                                        token ?
-                                            <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                            : <Link to="/login" className="btn2">Add To Cart</Link>
-                                        : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
-                                }
-                                {/* Buy Now Button */}
-                                {
-                                    (rounds[round]?._qty) > 0 ?
-                                        token ?
-                                            <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
-                                            : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                        : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
-                                }
-                            </div>
+                    <div className="add_buy_button">
+                        <div className="product_btn">
+                            {/* Add Cart Button */}
+                            {
+                                (rounds[round]?._qty) > 0 ?
+                                    token ?
+                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
+                                        : <Link to="/login" className="btn2">Add To Cart</Link>
+                                    : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
+                            }
+                            {/* Buy Now Button */}
+                            {
+                                (rounds[round]?._qty) > 0 ?
+                                    token ?
+                                        <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
+                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
+                                    : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+                            }
                         </div>
                     </div>
                 </div>
-            }
+            </div>
         </>
     )
 }
