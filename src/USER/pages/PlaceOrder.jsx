@@ -99,7 +99,7 @@ const PlaceOrder = () => {
         }
     }
 
-    // // DecQty function
+    // DecQty function
     const DecQty = () => {
         if (buyNowQty > 1) {
             setBuyNowQty(buyNowQty - 1)
@@ -109,6 +109,7 @@ const PlaceOrder = () => {
 
     useEffect(() => {
         checkOrderData()
+        console.log(amount?.total > balance?.balance);
     }, [ordered_data, balance])
 
 
@@ -192,9 +193,11 @@ const PlaceOrder = () => {
                                                     </div>
                                                 </Link>
                                                 <div className="cart_item_content">
-                                                    <div className="cart_title">
-                                                        <h3>{buy_now_data?.ticket?.ticket_name}</h3>
-                                                    </div>
+                                                    <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.product_info?.round_index}`}>
+                                                        <div className="cart_title">
+                                                            <h3>{buy_now_data?.ticket?.ticket_name}</h3>
+                                                        </div>
+                                                    </Link>
                                                     <div className="other_info">
                                                         <p className="amount fw-bold text-dark">Item Quantity : {buyNowQty}</p>
                                                         <p className="tic_price fw-bold text-dark">Price Of Ticket :
@@ -240,9 +243,11 @@ const PlaceOrder = () => {
                                                                     </div>
                                                                 </Link>
                                                                 <div className="cart_item_content">
-                                                                    <div className="cart_title">
-                                                                        <h3>{item?.info[0]?.ticket_name}</h3>
-                                                                    </div>
+                                                                    <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
+                                                                        <div className="cart_title">
+                                                                            <h3>{item?.info[0]?.ticket_name}</h3>
+                                                                        </div>
+                                                                    </Link>
                                                                     <div className="other_info">
                                                                         <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
                                                                         <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}&nbsp;
@@ -361,7 +366,7 @@ const PlaceOrder = () => {
                                                         <label className="form-check-label" htmlFor="inlineRadio1">
                                                             <span className='fw-bold fs-3'>Wallet Balance&nbsp;:</span>&nbsp;&nbsp;
                                                             {
-                                                                (balance?.balance) > 0 ?
+                                                                (balance?.balance)?.toFixed(2) > 0 ?
                                                                     <span className="upi_icon fw-bolder fs-4">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</span> :
                                                                     <span className="upi_icon fw-bolder">0</span>
                                                             }
@@ -370,21 +375,45 @@ const PlaceOrder = () => {
                                                 </div>
                                                 {/* Wallet Validation */}
                                                 {
+                                                    (buy_now_data?.amount?.total) ?
+                                                        (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance?.toFixed(2) ?
+                                                            <div className="alert alert-danger mt-2  fs-4" role="alert">
+                                                                <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
+                                                            </div>
+                                                            : null
+                                                        :
+                                                        (amount?.total)?.toFixed(2) > balance?.balance?.toFixed(2) ?
+                                                            <div className="alert alert-danger mt-2  fs-4" role="alert">
+                                                                <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
+                                                            </div>
+                                                            : null
+                                                }
+                                                {/* {
                                                     ((amount?.total)?.toFixed(2) && (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance) ?
                                                         <div className="alert alert-danger mt-2  fs-4" role="alert">
                                                             <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
                                                         </div>
                                                         : null
-                                                }
+                                                } */}
                                             </div>
                                         </div>
                                     </div>
                                     <div className="text-center mt-5">
                                         {
+                                            (buy_now_data?.amount?.total) ?
+                                                (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance?.toFixed(2) ?
+                                                    <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
+                                                    : <button onClick={procced} className="btn2">Procced</button>
+                                                :
+                                                (amount?.total)?.toFixed(2) > balance?.balance?.toFixed(2) ?
+                                                    <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
+                                                    : <button onClick={procced} className="btn2">Procced</button>
+                                        }
+                                        {/* {
                                             ((amount?.total)?.toFixed(2) && (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance) ?
                                                 <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
                                                 : <button onClick={procced} className="btn2">Procced</button>
-                                        }
+                                        } */}
                                     </div>
                                 </div>
                             </div>

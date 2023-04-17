@@ -159,7 +159,7 @@ const OrderHistory = () => {
                                                             </div>
                                                             <div className="info_item">
                                                                 <h3 className="dateofresult"><span></span>Price</h3>
-                                                                <p>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(item?.total_discount_price)}
+                                                                <p>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{Number(item?.total_discount_price)?.toFixed(2)}
                                                                 </p>
                                                             </div>
                                                             <div className="info_item">

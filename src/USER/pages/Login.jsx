@@ -209,7 +209,7 @@ const Login = () => {
                                     </div>
 
                                     {/* Password input */}
-                                    <div className="">
+                                    <div className="col-12">
                                         <label htmlFor="password" className="form-label label_style">Password</label>
                                         <input
                                             type="password"

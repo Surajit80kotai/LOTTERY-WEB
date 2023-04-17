@@ -139,10 +139,13 @@ const Cart = () => {
                             </Link>
 
                             {/* Item Info */}
+
                             <div className="cart_item_content">
-                              <div className="cart_title">
-                                <h3>{item?.info[0]?.ticket_name}</h3>
-                              </div>
+                              <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
+                                <div className="cart_title">
+                                  <h3>{item?.info[0]?.ticket_name}</h3>
+                                </div>
+                              </Link>
                               <div className="other_info">
                                 <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
                                 {/* Calculation of discounted price */}

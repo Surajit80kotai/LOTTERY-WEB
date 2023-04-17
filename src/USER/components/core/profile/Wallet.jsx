@@ -34,8 +34,6 @@ const Wallet = () => {
             dispatch(cinetPay(formValue))
         } else if (value === "MTN") {
             dispatch(cinetPay(formValue))
-        } else if (value === "Master") {
-            console.log(value)
         } else if (value === "Paypal") {
             console.log(value)
         }
@@ -102,7 +100,7 @@ const Wallet = () => {
                                             <div className="total_balns">
                                                 {/* withdraw Balance */}
                                                 <div className='d-flex'>
-                                                    
+
                                                     {/* Modal */}
                                                     <WithdrawModal />
 

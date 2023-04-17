@@ -5,6 +5,12 @@ import PhoneInput from 'react-phone-input-2'
 const WithdrawModal = () => {
     const [phone, setPhone] = useState('')
     const [phonecode, setPhonecode] = useState('')
+    const [formValues, setFormValues] = useState({ amount: '' })
+
+    // handleChange function
+    const handleChange = (e) => {
+        setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    }
 
     // handleSubmit function
     const handleSubmit = (e) => {
@@ -30,6 +36,7 @@ const WithdrawModal = () => {
                         </div>
                         <div className="modal-body">
                             <form onSubmit={handleSubmit}>
+                                <p className='text-center text-danger fs-5'>Minimum Withdraw Amount Should Be 500*</p>
                                 <div className='row'>
                                     <div style={{ padding: "0 50px" }}>
                                         <div className="mb-3">
@@ -53,18 +60,26 @@ const WithdrawModal = () => {
                                             <input
                                                 type="text"
                                                 className="form-control form_input"
+                                                name='amount'
                                                 id="amount"
                                                 aria-describedby="emailHelp"
                                                 placeholder='Enter Amount'
                                                 pattern="[0-9]+"
                                                 title="Enter positive numbers only"
+                                                value={formValues?.amount}
+                                                onChange={handleChange}
                                                 required
                                             />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="text-center">
-                                    <button className="btn2 mt-3" style={{ alignItems: "center" }}>Withdraw</button>
+                                    {
+                                        formValues?.amount >= 500 ?
+                                            <button className="btn2 mt-3" style={{ alignItems: "center" }}>Withdraw</button>
+                                            :
+                                            <button className="btn2 mt-3" style={{ alignItems: "center", backgroundColor: "#00000078" }}>Withdraw</button>
+                                    }
                                 </div>
                             </form>
                         </div>
