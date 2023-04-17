@@ -109,7 +109,6 @@ const PlaceOrder = () => {
 
     useEffect(() => {
         checkOrderData()
-        console.log(amount?.total > balance?.balance);
     }, [ordered_data, balance])
 
 

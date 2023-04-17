@@ -1,36 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useState } from 'react'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSignUp } from '../services/slice/AuthSlice'
 import { Link, useNavigate } from 'react-router-dom'
-import { fetchCountry, fetchStates } from '../services/slice/CountryStateSlice';
-import PreLoader from '../components/core/preloader/PreLoader';
+import { fetchCountry, fetchStates } from '../../services/slice/CountryStateSlice'
+import { useEffect } from 'react'
 import { toast } from 'react-toastify'
+import PreLoader from '../../components/core/preloader/PreLoader'
+import { fetchAgentSignUp } from '../../services/slice/AuthSlice'
 
-
-
-
-const SignUp = () => {
-    window.localStorage.removeItem("phone_number")
-    const { signupErr, loading } = useSelector((state) => state.authslice)
-    const { countryData } = useSelector((state) => state.countrystateslice)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
-    const { validPhoneNumber } = useSelector((state) => state.authslice)
+const AgentsAndInfluencersSignup = () => {
+    const [phone, setPhone] = useState('')
     const initialState = {
         full_name: "",
         email: "",
-        phone: validPhoneNumber,
         dob: "",
         country: "",
         gender: "",
-        promo_code: "",
+        address: "",
         password: "",
         confirmPassword: ""
     }
     const [formValues, setFormValues] = useState(initialState)
-    const { full_name, email, dob, country, gender, promo_code, password, confirmPassword } = formValues
+    const { full_name, email, dob, country, gender, address, password, confirmPassword } = formValues
     const [error, setError] = useState("")
+    const { countryData } = useSelector((state) => state.countrystateslice)
+    const { signupErr, loading } = useSelector((state) => state.authslice)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     // handleChange Function for input change
     const handleChange = (e) => {
@@ -42,15 +40,15 @@ const SignUp = () => {
         }
     }
 
-
     // handleSubmit Function for form submit
     const handleSubmit = (e) => {
         e.preventDefault()
         if (password !== confirmPassword) {
             return setError("Pasword did not matched")
         } else {
-            // console.log(formValues);
-            dispatch(fetchSignUp({ formValues, navigate, toast }))
+            const signUpData = { ...formValues, phone: "+" + phone }
+            console.log(signUpData);
+            dispatch(fetchAgentSignUp({ signUpData, navigate, toast }))
             setError("")
         }
     }
@@ -71,11 +69,10 @@ const SignUp = () => {
     }
 
 
-
     useEffect(() => {
         // console.log(countryData);
         dispatch(fetchCountry())
-    }, [dispatch, signupErr])
+    }, [dispatch])
 
     return (
         <>
@@ -119,7 +116,7 @@ const SignUp = () => {
 
                                     {/* Email */}
                                     <div className="m_gap">
-                                        <label htmlFor="emailid" className="form-label label_style">Email</label>
+                                        <label htmlFor="emailid" className="form-label label_style">Email <span className="text-danger">*</span></label>
                                         <input
                                             type="email"
                                             className="form-control form_input"
@@ -137,9 +134,9 @@ const SignUp = () => {
                                     </div>
 
                                     {/* Phone */}
-                                    {/* <div className="m_gap">
-                                        <label htmlFor="mobile_code" className="form-label label_style">Phone</label>
-                                        <input
+                                    <div className="m_gap">
+                                        <label htmlFor="mobile_code" className="form-label label_style">Phone <span className="text-danger">*</span></label>
+                                        {/* <input
                                             type="tel"
                                             className="form-control form_input"
                                             id="mobile_code"
@@ -152,10 +149,25 @@ const SignUp = () => {
                                             onChange={handleChange}
                                             maxLength={10}
                                             required
+                                        />*/}
+
+                                        <PhoneInput
+                                            inputProps={{ required: true }}
+                                            placeholder="Enter Your Phone Number"
+                                            country={"cm"}
+                                            enableSearch={true}
+                                            value={phone.phone}
+                                            onChange={
+                                                (value, data) => {
+                                                    setPhone(value);
+                                                    formValues.phone_code = data.dialCode
+                                                }
+                                            }
                                         />
-                                        Phone Vaidation
+
+                                        {/*Phone Vaidation*/}
                                         <p className='text-danger fs-4 mt-2'>{signupErr?.phone?.message}</p>
-                                    </div> */}
+                                    </div>
 
                                     <div className="row">
 
@@ -181,37 +193,6 @@ const SignUp = () => {
                                             </div>
                                         </div>
 
-                                        {/* Country */}
-                                        <div className="col-md-6">
-                                            <div className="m_gap">
-                                                <label htmlFor="Country" className="form-label label_style">Country <span className="text-danger">*</span></label>
-                                                <select
-                                                    className="form-select form_input form_select"
-                                                    aria-label="Default select example"
-                                                    id="selects"
-                                                    name='country'
-                                                    value={country}
-                                                    onChange={handleChange}
-                                                    required
-                                                >
-                                                    <option value="" disabled>Select Your Country</option>
-                                                    {
-                                                        countryData?.map((country) => {
-                                                            return (
-                                                                <option key={country.countries_id
-                                                                } value={country.name + "||" + country.countries_id}>{country.name}</option>
-                                                            )
-                                                        })
-                                                    }
-                                                </select>
-                                                {/* Country Vaidation */}
-                                                <p className='text-danger fs-4 mt-2'>{signupErr?.country?.message}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="row">
-
                                         {/* Gender */}
                                         <div className="col-md-6">
                                             <div className="m_gap">
@@ -226,32 +207,58 @@ const SignUp = () => {
                                                     required
                                                 >
                                                     <option value="" disabled>Select Your Gender</option>
-                                                    <option value="MALE">MALE</option>
-                                                    <option value="FEMALE">FEMALE</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
                                                 {/* Gender Vaidation */}
                                                 <p className='text-danger fs-4 mt-2'>{signupErr?.gender?.message}</p>
                                             </div>
                                         </div>
+                                    </div>
 
+                                    {/* Country */}
+                                    <div className="m_gap">
+                                        <label htmlFor="Country" className="form-label label_style">Country <span className="text-danger">*</span></label>
+                                        <select
+                                            className="form-select form_input form_select"
+                                            aria-label="Default select example"
+                                            id="selects"
+                                            name='country'
+                                            value={country}
+                                            onChange={handleChange}
+                                            required
+                                        >
+                                            <option value="" disabled>Select Your Country</option>
+                                            {
+                                                countryData?.map((country) => {
+                                                    return (
+                                                        <option key={country.countries_id
+                                                        } value={country.name + "||" + country.countries_id}>{country.name}</option>
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                        {/* Country Vaidation */}
+                                        <p className='text-danger fs-4 mt-2'>{signupErr?.country?.message}</p>
+                                    </div>
 
-                                        {/* Register with promo code */}
-                                        <div className="col-md-6">
-                                            <div className="m_gap dob">
-                                                <label htmlFor="promo_code" className="form-label label_style">Promo Code</label>
-                                                {/* <!-- <input type="date" value="2017-01-01" min="1960-01-01" max="2019-01-01" className="form-control form_input"> --> */}
-                                                <input
-                                                    type="text"
-                                                    placeholder="Enter Promo Code"
-                                                    name="promo_code"
-                                                    id="promo_code"
-                                                    className="form-control form_input"
-                                                    value={promo_code}
-                                                    onChange={handleChange}
-                                                />
-                                            </div>
-                                        </div>
+                                    {/* Register with promo code */}
+                                    <div className="m_gap dob">
+                                        <label htmlFor="address" className="form-label label_style">Address <span className="text-danger">*</span></label>
+                                        {/* <!-- <input type="date" value="2017-01-01" min="1960-01-01" max="2019-01-01" className="form-control form_input"> --> */}
+                                        <input
+                                            type="text"
+                                            placeholder="Enter Your Address"
+                                            name="address"
+                                            id="address"
+                                            className="form-control form_input"
+                                            value={address}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
 
+                                    <div className="row">
                                         {/* Create Password*/}
                                         <div className="col-md-6">
                                             <div className="m_gap mb-3">
@@ -308,8 +315,8 @@ const SignUp = () => {
                     </div>
                 </div>
             </main>
-        </ >
+        </>
     )
 }
 
-export default SignUp
+export default AgentsAndInfluencersSignup

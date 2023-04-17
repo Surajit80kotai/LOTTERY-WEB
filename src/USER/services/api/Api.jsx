@@ -8,6 +8,9 @@ export const LOGIN = (loginData) => API.post('/auth/login', loginData)
 // signup api function
 export const SIGNUP = (signupData) => API.post('/auth/signup', signupData)
 
+// agentsignup api function
+export const AGENTSIGNUP = (signupData) => API.post('/auth/agent/signup', signupData)
+
 // forgetpassword api function
 export const FORGETPASSWORD = (formValue) => API.post('/auth/forget', formValue)
 

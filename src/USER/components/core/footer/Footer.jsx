@@ -37,8 +37,8 @@ const Footer = () => {
                 <div className="footitem">
                     <h4 className="foot_title">Partner</h4>
                     <ul className="footlinks">
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Agents</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Influencer</Link></li>
+                        <li><Link to="/agentSignup"><span><i className="fas fa-caret-right"></i></span>Agents</Link></li>
+                        <li><Link to="/agentSignup"><span><i className="fas fa-caret-right"></i></span>Influencer</Link></li>
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Affiliate Partner</Link></li> */}
 
                     </ul>

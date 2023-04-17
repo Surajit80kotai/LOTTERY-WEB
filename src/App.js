@@ -19,6 +19,7 @@ import OrderHistory from './USER/components/core/profile/OrderHistory';
 import { useSelector } from 'react-redux';
 import ErrorPage from './USER/util/ErrorPage';
 import PrivacyPolicy from './USER/pages/PrivacyPolicy';
+import SignUpSuccessPage from './USER/pages/agents/SignUpSuccessPage';
 // import TestOne from './USER/pages/test/TestOne';
 
 
@@ -42,6 +43,7 @@ function App() {
               <Route path='/info/:lid/:round' element={<LotteryInfo />} />
               <Route path='/viewall/:categoryID' element={<ViewAll />} />
               <Route path='/privacypolicy' element={<PrivacyPolicy />} />
+              <Route path='/agentsignupsuccess' element={<SignUpSuccessPage />} />
               {/* Test Route */}
               {/* <Route path='/test' element={<TestOne />} /> */}
 

@@ -12,6 +12,7 @@ import { Store } from './USER/services/store/Store';
 import VerifyPhone from './USER/pages/VerifyPhone';
 import { Flip, ToastContainer } from 'react-toastify';
 import ProtectedRoute from './USER/privateroute/ProtectedRoute';
+import AgentsAndInfluencersSignup from './USER/pages/agents/AgentsAndInfluencersSignup';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
         <Route element={<ProtectedRoute />}>
           <Route path='/signup' element={<SignUp />} />
         </Route>
+        <Route path='/agentSignup' element={<AgentsAndInfluencersSignup />} />
         <Route path='/login' element={<Login text="/" />} />
         <Route path='/f_password' element={<ForgetPassword />} />
         {/* <Route path='/ordersuccess' element={<OrderSuccess />} /> */}

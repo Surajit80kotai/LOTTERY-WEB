@@ -1,6 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
+import { AGENTSIGNUP, FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
+
+
+//AsyncThunk For SignUp 
+export const fetchAgentSignUp = createAsyncThunk(
+    "agent/signup",
+    async ({ signUpData, navigate, toast }, { rejectWithValue }) => {
+
+        try {
+            const res = await AGENTSIGNUP(signUpData)
+            navigate('/agentsignupsuccess')
+            // toast.success('Registered Successfully.\nPlease login to continue', {
+            //     autoClose: 4500
+            // })
+            return res?.data
+        } catch (err) {
+            // console.log("Sign Slice", rejectWithValue(err.response.data.errors));
+            return rejectWithValue(err.response.data.errors)
+        }
+
+    })
+
+
 
 
 //AsyncThunk For SignUp 
@@ -170,6 +192,23 @@ export const AuthSlice = createSlice({
 
     },
     extraReducers: (builder) => {
+        //States for Signup
+        builder.addCase(fetchAgentSignUp.pending, (state) => {
+            state.msg = "Pending"
+            state.loading = true
+        })
+        builder.addCase(fetchAgentSignUp.fulfilled, (state, { payload }) => {
+            state.msg = "Success"
+            state.loading = false
+            state.user = payload
+        })
+        builder.addCase(fetchAgentSignUp.rejected, (state, { payload }) => {
+            state.msg = "Failed"
+            state.loading = false
+            state.signupErr = payload
+        })
+
+
         //States for Signup
         builder.addCase(fetchSignUp.pending, (state) => {
             state.msg = "Pending"
