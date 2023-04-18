@@ -24,8 +24,8 @@ const SignUpSuccessPage = () => {
                             </svg>
                         </div>
                         <div className="text-center">
-                            <h1 style={{ "fontSize": "3.5rem" }}>Thank You For Registration!!</h1>
-                            <p className='fs-3'>Please Wait For Admin Approval</p>
+                            <h1 style={{ "fontSize": "3.5rem" }}>Thank You For Registering!!</h1>
+                            <p className='fs-3'> Our team is excited to review your application and get you started. We'll make sure to notify you via email or phone as soon as your registration is approved. Please keep an eye on your inbox</p>
                             <br />
                             <Link to="/" className="orderplace text-white">&larr; Back To Home Page</Link>
                         </div>
