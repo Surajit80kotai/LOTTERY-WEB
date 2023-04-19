@@ -20,6 +20,7 @@ import { useSelector } from 'react-redux';
 import ErrorPage from './USER/util/ErrorPage';
 import PrivacyPolicy from './USER/pages/PrivacyPolicy';
 import SignUpSuccessPage from './USER/pages/agents/SignUpSuccessPage';
+import LiveChat from './USER/util/LiveChat';
 // import TestOne from './USER/pages/test/TestOne';
 
 
@@ -58,6 +59,7 @@ function App() {
                 <Route path='/ordersuccess' element={<OrderSuccess />} />
               </Route>
             </Routes>
+            <LiveChat />
             <FooterMain />
           </div>
           : <ErrorPage />
