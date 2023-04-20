@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { BUYNOW, GETALLTRANSACTION, PAYINIT, PLACEORDER, UPDATETRANSACTION } from "../api/Api";
+import { BUYNOW, GETALLTRANSACTION, PAYINIT, PAYPAL, PLACEORDER, UPDATETRANSACTION } from "../api/Api";
 
 const token = JSON.parse(window.localStorage.getItem("token"))
 const userID = (JSON.parse(window.localStorage.getItem("user"))?.user_id)
@@ -163,6 +163,19 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderDa
 })
 
 
+// paypal
+export const paypal = createAsyncThunk("/create-paypal-order/", async ({ amount }, { rejectWithValue }) => {
+    try {
+        const res = await PAYPAL(amount)
+        console.log("response", res);
+        return res?.data
+    } catch (err) {
+        // console.log(err)
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
 
 const initialState = {
     paymentData: [],
@@ -296,6 +309,22 @@ export const PaymentSlice = createSlice({
             state.loading = false
         })
         builder.addCase(itemBuyNow.rejected, (state, { payload }) => {
+            state.status = "failed"
+            state.loading = false
+            state.paymentSliceError = payload
+        })
+
+        // States for paypal
+        builder.addCase(paypal.pending, (state) => {
+            state.status = "pending"
+            state.loading = true
+        })
+        builder.addCase(paypal.fulfilled, (state, { payload }) => {
+            state.paymentData = payload
+            state.status = "success"
+            state.loading = false
+        })
+        builder.addCase(paypal.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
             state.paymentSliceError = payload

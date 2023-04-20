@@ -2,12 +2,12 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
-import { cinetPay, getTransactions, initPay, updateTransactions } from '../../../services/slice/PaymentSlice';
+import { cinetPay, getTransactions, initPay, paypal, updateTransactions } from '../../../services/slice/PaymentSlice';
 import { getBalance } from '../../../services/slice/UserSlice';
 import { currency, currency_symbol, generalCurrency, generalCurrency_symbol } from '../../../util/Currency';
 import PreLoader from '../preloader/PreLoader';
 import SideNav from './SideNav';
-import MyPaypalButton from '../../../util/MyPaypalButton';
+// import MyPaypalButton from '../../../util/MyPaypalButton';
 import WithdrawModal from '../../../modal/WithdrawModal';
 
 const Wallet = () => {
@@ -35,7 +35,8 @@ const Wallet = () => {
         } else if (value === "MTN") {
             dispatch(cinetPay(formValue))
         } else if (value === "Paypal") {
-            console.log(value)
+            console.log(formValue);
+            dispatch(paypal(formValue))
         }
     }
 
@@ -362,19 +363,22 @@ const Wallet = () => {
 
                                             {/* Pay with Paypal */}
                                             <div className="payment_item">
-                                                {/* <input
+                                                <input
                                                     type="radio"
                                                     id="control_04"
                                                     name="select"
                                                     value="Paypal"
                                                     onChange={(e) => selectPayOption(e.target.value)}
-                                                /> */}
+                                                />
                                                 <label htmlFor="control_04">
                                                     <div className="pay_icon">
-                                                        <div className='m-5'>
-                                                            <MyPaypalButton amount={formValue?.amount} />
-                                                            <p className='my-4'>Pay with Paypal</p>
+                                                        {/* <div className='m-5'> */}
+                                                        <div className="pay_icon">
+                                                            <img src="/assets/img/paypal.png" alt="" className="img-fluid" />
                                                         </div>
+                                                        {/* <MyPaypalButton amount={formValue?.amount} /> */}
+                                                        <p className='my-4'>Pay with Paypal</p>
+                                                        {/* </div> */}
                                                     </div>
                                                 </label>
                                             </div>

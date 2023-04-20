@@ -76,6 +76,9 @@ export const GETOTP = (phone, header) => API.post("/system/register/otp", phone,
 // verify otp api
 export const VERIFYOTP = (formData, header) => API.post("/system/register/otp/verify", formData, header)
 
+// Paypal api
+export const PAYPAL = (amount) => API.post("/my-server/create-paypal-order/" + amount)
+
 
 // test API
 export const TESTAPI = () => API.get("http://localhost:3000/phonecode.json")
