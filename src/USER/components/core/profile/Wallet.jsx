@@ -2,13 +2,13 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
-import { cinetPay, getTransactions, initPay, paypal, updateTransactions } from '../../../services/slice/PaymentSlice';
+import { cinetPay, getTransactions, initPay, payPalonApprove, paypal, updateTransactions } from '../../../services/slice/PaymentSlice';
 import { getBalance } from '../../../services/slice/UserSlice';
 import { currency, currency_symbol, generalCurrency, generalCurrency_symbol } from '../../../util/Currency';
 import PreLoader from '../preloader/PreLoader';
 import SideNav from './SideNav';
-// import MyPaypalButton from '../../../util/MyPaypalButton';
 import WithdrawModal from '../../../modal/WithdrawModal';
+import MyPaypalButton from '../../../util/MyPaypalButton';
 
 const Wallet = () => {
     const { dueAmount } = useParams()
@@ -20,6 +20,11 @@ const Wallet = () => {
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
     const navigate = useNavigate()
+    const orderID = paymentData?.id;
+
+
+    // console.log(paymentData);
+    // console.log(orderID);
 
 
     // handleChange function for onChange
@@ -35,18 +40,10 @@ const Wallet = () => {
         } else if (value === "MTN") {
             dispatch(cinetPay(formValue))
         } else if (value === "Paypal") {
-            console.log(formValue);
-            dispatch(paypal(formValue))
+            // console.log(formValue);
+            dispatch(paypal(formValue?.amount))
         }
     }
-
-    // const queryString = window.location.search;
-    // const urlParams = new URLSearchParams(queryString);
-    // const reloadParam = urlParams.get('q');
-
-    // if (reloadParam === 'reload') {
-    //     window.location.href = "http://192.168.1.18:3000/wallet" // do something if the reload parameter exists in the URL
-    // }
 
     // Redirect page function
     const redirectPage = () => {
@@ -69,7 +66,14 @@ const Wallet = () => {
         redirectPage()
         dispatch(getTransactions(navigate))
         dispatch(updateTransactions(navigate))
+
+        // for paypal payment
+        if (orderID) {
+            dispatch(payPalonApprove(orderID))
+        }
     }, [dispatch, paymentData, navigate])
+
+
 
     return (
         <>
@@ -370,17 +374,18 @@ const Wallet = () => {
                                                     value="Paypal"
                                                     onChange={(e) => selectPayOption(e.target.value)}
                                                 />
-                                                <label htmlFor="control_04">
+                                                <div className='m-5'>
+                                                    <MyPaypalButton amount={formValue?.amount} />
+                                                    <p className='my-4'>Pay with Paypal</p>
+                                                </div>
+                                                {/* <label htmlFor="control_04">
                                                     <div className="pay_icon">
-                                                        {/* <div className='m-5'> */}
                                                         <div className="pay_icon">
                                                             <img src="/assets/img/paypal.png" alt="" className="img-fluid" />
                                                         </div>
-                                                        {/* <MyPaypalButton amount={formValue?.amount} /> */}
                                                         <p className='my-4'>Pay with Paypal</p>
-                                                        {/* </div> */}
                                                     </div>
-                                                </label>
+                                                </label> */}
                                             </div>
                                         </div>
                                     </div>

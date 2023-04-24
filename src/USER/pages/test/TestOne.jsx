@@ -1,161 +1,98 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import TrustedPayment from '../../components/common/trustedPayment/TrustedPayment'
-import Banner from '../../components/core/home/Banner'
-import PreLoader from '../../components/core/preloader/PreLoader'
-import { getCart } from '../../services/slice/CartSlice'
-import { fetchCategory, fetchLottery } from '../../services/slice/LotterySlice'
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Navigation } from "swiper";
-import SliderCard from '../../components/core/home/SliderCard'
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useState } from "react";
 
-const TestOne = () => {
-    const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
-    const dispatch = useDispatch()
-    const { cart_data } = useSelector((state) => state.cartslice)
-    const cartLength = cart_data?.length
+const debug = true;
 
-    // Getting category_name & category_id
-    const categoryObj = category_data?.reduce((acc, cur) => {
-        return {
-            ...acc,
-            [cur.name]: cur._id
-        }
-    }, {});
+const App = () => {
+  const [state, setState] = useState({
+    amount: "2.00",
+    orderID: "",
+    onApproveMessage: "",
+    onErrorMessage: ""
+  });
 
+  const onChange = (event) => {
+    setState({
+      ...state,
+      amount: event.target.value,
+      orderID: "",
+      onApproveMessage: "",
+      onErrorMessage: ""
+    });
+  }
 
-    // slider array
-    const catNames = Object.keys(categoryObj)
-    const ticketArray = catNames.reduce((acc, cur) => {
-        acc?.push(fetch_lott_data?.filter(item => item.category === categoryObj[cur]))
-        return acc
-    }, [])
-
-    // finding a key from an object
-    const getKey = (obj, value) => {
-        for (const key in obj) {
-            if (obj[key] === value) {
-                return key
+  const createOrder = (data, actions) => {
+    if (debug) console.log("Creating order for amount", state.amount);
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: {
+              value: state.amount
             }
-        }
-        return null
-    }
+          }
+        ]
+      })
+      .then((orderID) => {
+        setState(prevState => ({ ...prevState, orderID }));
+        return orderID;
+      });
+  }
 
-    // mount cycle
-    useEffect(() => {
-        // dispatch(testApi())
-        window.scrollTo(0, 0)
-        dispatch(fetchLottery())
-        dispatch(fetchCategory())
-        dispatch(getCart())
-    }, [dispatch, cartLength])
+  const onApprove = (data, actions) => {
+    return actions.order.capture().then(function (details) {
+      setState(prevState => ({ ...prevState, onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!` }));
+    });
+  }
 
-    return (
-        <>
-            {/* PreLoader */}
-            {loading && <PreLoader />}
+  const onError = (err) => {
+    setState(prevState => ({ ...prevState, onErrorMessage: err.toString() }));
+  }
 
-            {/* Banner */}
-            <Banner />
+  const onClick = () => {
+    if (debug) console.log("When clicked, amount was", state.amount);
+  }
 
-            {/* <main> */}
-            {/* Product Area */}
-            <div className="prodcut_wrapper">
-                <div className="one_row">
-
-                    <div className="container-fluid" style={{ "width": "95%" }}>
-                        {/* Mapping from ticketArray */}
-                        {
-                            ticketArray?.map((curItem, index) => {
-                                let carouselID = curItem[0]?.category
-                                // let slider = (curItem?.length > 4) ? [curItem?.slice(0, 4), curItem?.slice(4, 8)] : [curItem]
-                                return (
-                                    <div className='row' key={index}>
-                                        <div className="first_row_title">
-                                            <h2>
-                                                {
-                                                    (getKey(categoryObj, curItem[0]?.category))?.toUpperCase()
-                                                }
-                                            </h2>
-                                        </div>
-                                        <div className="col-md-2">
-                                            {
-                                                curItem[0]?.category ?
-                                                    <div className="view_all_bg">
-                                                        <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
-                                                        <div className="viewall_btn">
-                                                            <h6>Looking More? Click Here</h6>
-                                                            <Link to={`/viewall/${curItem[0]?.category}`} className="btn2">View All</Link>
-                                                        </div>
-                                                    </div>
-
-                                                    : null
-                                            }
-
-                                        </div>
-                                        <div className="col-md-10">
-                                            <Swiper
-                                                slidesPerView={4}
-                                                spaceBetween={10}
-                                                navigation={true}
-                                                modules={[Navigation]}
-                                                className="mySwiper"
-                                                // loop={true}
-                                                // autoplay={true}
-                                                // autoplaySpeed={5000}
-                                                // speed={4000}
-                                                breakpoints={{
-                                                    1920: {
-                                                        slidesPerView: 4,
-                                                        spaceBetween: 10
-                                                    },
-                                                    1028: {
-                                                        slidesPerView: 4,
-                                                        spaceBetween: 10
-                                                    },
-                                                    375: {
-                                                        slidesPerView: 1,
-                                                        spaceBetween: 10
-                                                    },
-                                                    280: {
-                                                        slidesPerView: 1,
-                                                        spaceBetween: 10
-                                                    }
-                                                }}
-                                            >
-                                                {
-                                                    curItem?.map((item) => {
-                                                        return (
-                                                            <SwiperSlide key={item._id}>
-                                                                <div className="swiper-slide">
-                                                                    <SliderCard
-                                                                        item={item}
-                                                                    />
-                                                                </div>
-                                                            </SwiperSlide>
-                                                        )
-                                                    })
-                                                }
-                                            </Swiper>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-
-                        {/* trused payment */}
-                        <TrustedPayment />
-
-                    </div>
-
-                </div>
-            </div>
-            {/* </main> */}
-        </>
-    )
+  return (
+    <div style={{ minHeight: "300px" }}>
+      <table className="table" style={{ maxWidth: "400px" }}>
+        <tbody>
+          <tr>
+            <th>
+              <label htmlFor="amount">Order Amount: </label>
+            </th>
+            <td>
+              <select onChange={onChange} name="amount" id="amount">
+                <option value="2.00">$2.00</option>
+                <option value="4.00">$4.00</option>
+                <option value="6.00">$6.00</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>Order ID:</th>
+            <td>{state.orderID ? state.orderID : "unknown"}</td>
+          </tr>
+          <tr>
+            <th>On Approve Message: </th>
+            <td data-testid="message">{state.onApproveMessage}</td>
+          </tr>
+          <tr>
+            <th>On Error Message: </th>
+            <td data-testid="error">{state.onErrorMessage}</td>
+          </tr>
+        </tbody>
+      </table>
+      <PayPalScriptProvider options={{ "client-id": "test" }}>
+        <PayPalButtons
+          createOrder={createOrder}
+          onApprove={onApprove}
+          onError={onError}
+          onClick={onClick}
+        />
+      </PayPalScriptProvider>
+    </div>
+  );
 }
 
-export default TestOne
+export default App;

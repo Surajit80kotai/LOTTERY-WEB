@@ -58,9 +58,11 @@ const MyPaypalButton = ({ amount }) => {
                         });
                     }}
                     onApprove={async (data, actions) => {
-                        const order = await actions.order.capture
-                        console.log(order);
-                        handleApprove(data.orderID)
+                        return await actions.order.capture().then((details) => {
+                            // const name = details.payer.name.given_name;
+                            console.log(details);
+                            handleApprove(data.orderID)
+                        });
                     }}
                     onCancel={() => {
                         toast.error("Payment Cancelled", {

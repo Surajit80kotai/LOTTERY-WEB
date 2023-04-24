@@ -72,7 +72,9 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* 
+                                // <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -82,7 +84,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -92,7 +95,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -102,7 +106,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                         </div>
@@ -116,7 +121,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -126,7 +132,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -136,7 +143,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -146,7 +154,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                         </div>
@@ -160,7 +169,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -170,7 +180,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                         </div>
@@ -184,7 +195,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -192,7 +204,8 @@ const PrivacyPolicy = () => {
                                 Donec vitae ullamcorper lacus, ut vehicula metus.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                         </div>
@@ -207,7 +220,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -217,7 +231,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                         </div>
@@ -233,7 +248,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -243,7 +259,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                         </div>
@@ -257,7 +274,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
@@ -267,7 +285,8 @@ const PrivacyPolicy = () => {
                                 tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
                                 <br /> <br />
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. <div className="mb-2"></div>
+                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                {/* <div className="mb-2"></div> */}
 
                             </p>
                             <p> <span><i className="fas fa-circle" style={{ "color": "#f29f2c" }}></i></span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum,  </p>
