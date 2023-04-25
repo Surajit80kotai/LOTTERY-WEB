@@ -13,6 +13,8 @@ import i18next from 'i18next'
 
 
 const NavBar = () => {
+  const { t } = useTranslation()
+  const [toggle, setToggle] = useState(true)
   const [search, setSearch] = useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -31,7 +33,6 @@ const NavBar = () => {
     navigate('/')
   }
 
-  const { t } = useTranslation()
 
   // changeLanguage func.
   const changeLanguage = (e) => {
@@ -145,13 +146,31 @@ const NavBar = () => {
           </ul>
 
           <div className="nv_rt">
-            {/* Language Dropdown */}
+            {/* Language Section */}
             {/* <div className='language_dropdown' id="google_translate_element"></div> */}
-            <select onChange={changeLanguage} className='langu_select'>
-              <option>Language</option>
-              <option value={"en"}>English</option>
-              <option value={"fr"}>French</option>
-            </select>
+
+            {/* Language icon to see the dropdown */}
+            <div style={{ display: toggle ? "inline" : "none", marginRight: "10px" }}>
+              <Link to="#" onClick={() => setToggle(false)}>
+                <i className="fa-solid fa-language" style={{ color: "#f9772b", fontSize: "22px" }}></i>
+              </Link>
+            </div>
+
+            {/* Language Dropdown */}
+            <div style={{ "display": !toggle ? "inline-block" : "none" }}>
+              <select onChange={changeLanguage} className='langu_select'>
+                <option>Language</option>
+                <option value={"en"}>English</option>
+                <option value={"fr"}>French</option>
+              </select>
+            </div>
+
+            {/* Cross icon to close the dropdown */}
+            <div style={{ "display": toggle ? "none" : "inline", marginRight: "10px" }}>
+              <Link to="#" onClick={() => setToggle(true)}>
+                <i className="fa-solid fa-xmark" style={{ color: "#ff0000", fontSize: "20px" }}></i>
+              </Link>
+            </div>
 
             {/* Search Bar */}
             {

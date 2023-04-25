@@ -9,7 +9,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 const Languages = ['en', 'fr']
 const option = {
-  order: ['navigator', 'htmlTag', 'path', 'subdomail'],
+  order: ['navigator', 'htmlTag', 'path', 'subdomain'],
   checkWhitelist: true
 }
 
@@ -27,7 +27,8 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     fallbackLng: 'en',
-    debug: true,
+    debug: false,
+    logLevel: 'error',
     whitelist: Languages,
     detection: option,
     interpolation: {

@@ -14,10 +14,11 @@ import SliderCard from '../components/core/home/SliderCard'
 import { clearUserSliceError } from '../services/slice/UserSlice'
 import { clearPaymentSliceError } from '../services/slice/PaymentSlice'
 import { toast } from 'react-toastify'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 
 const Home = () => {
+    const { t } = useTranslation()
     const { fetch_lott_data, category_data } = useSelector((state) => state.lotteryslice)
     const { cart_data, loading, cartSliceError } = useSelector((state) => state.cartslice)
     const { paymentSliceError } = useSelector((state) => state.paymentslice)

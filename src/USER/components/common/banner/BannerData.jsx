@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 const BannerData = ({ item, id }) => {
+    const { t } = useTranslation()
     const [round, setRound] = useState(0)
 
     // ticket rounds calculation function

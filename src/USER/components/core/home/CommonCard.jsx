@@ -7,9 +7,10 @@ import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
 import { toast } from 'react-toastify'
 import CommonCardTimer from '../../../util/CommonCardTimer'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 const CommonCard = ({ item }) => {
+    const { t } = useTranslation()
     const [round, setRound] = useState(0)
     const { ticket_name, main_image, is_image, _id, rounds } = item
 

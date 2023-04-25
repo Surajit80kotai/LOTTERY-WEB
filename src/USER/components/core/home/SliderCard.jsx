@@ -7,9 +7,10 @@ import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 // import PreLoader from '../preloader/PreLoader'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 const SliderCard = ({ item }) => {
+    const { t } = useTranslation()
     const [round, setRound] = useState(0)
     const { ticket_name, main_image, is_image, _id, rounds } = item
 

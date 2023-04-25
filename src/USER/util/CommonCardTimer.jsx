@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useTimer } from '../customHooks/useTimer'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 const CommonCardTimer = ({ item, round }) => {
+    const { t } = useTranslation()
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
     const { rounds } = item
 

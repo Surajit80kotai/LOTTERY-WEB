@@ -8,9 +8,10 @@ import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 import { toast } from 'react-toastify'
 import LotteryInfoTimer from '../util/LotteryInfoTimer'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 const LotteryInfo = () => {
+    const { t } = useTranslation()
     const { lid, round } = useParams()
     const lottData = JSON.parse(window.localStorage.getItem("data"))
     const ticketInfo = lottData?.filter((item) => item._id === lid)

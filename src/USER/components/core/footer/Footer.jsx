@@ -1,9 +1,9 @@
-import { t } from 'i18next'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const Footer = () => {
-
+    const { t } = useTranslation()
     const token = JSON.parse(window.localStorage.getItem("token"))
 
     return (
@@ -45,7 +45,7 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="footitem">
-                    <h4 className="foot_title">Career</h4>
+                    <h4 className="foot_title">{t('Career')}</h4>
                     <ul className="footlinks">
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Job')}</Link></li> */}
                         <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Work With Us')}</Link></li>
