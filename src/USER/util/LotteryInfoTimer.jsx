@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTimer } from '../customHooks/useTimer';
+import { t } from 'i18next';
 
 const LotteryInfoTimer = ({ ticketInfo, round }) => {
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
@@ -23,26 +24,26 @@ const LotteryInfoTimer = ({ ticketInfo, round }) => {
                             <div className="product_timeleft">
                                 <div id="days" className="time_left_style days">{timerDays}
                                 </div>
-                                <br /><span>Days</span>
+                                <br /><span>{t('Days')}</span>
                             </div>
                             <div className="product_timeleft">
                                 <div id="hours" className="time_left_style hours">{timerHours}
                                 </div>
-                                <br /><span>Hours</span>
+                                <br /><span>{t('Hours')}</span>
                             </div>
                             <div className="product_timeleft">
                                 <div id="minutes" className="time_left_style minutes">{timerMinutes}
                                 </div>
-                                <br /><span>Mins</span>
+                                <br /><span>{t('Mins')}</span>
                             </div>
                             <div className="product_timeleft">
                                 <div id="seconds" className="time_left_style seconds">{timerSeconds}
                                 </div>
-                                <br /><span>Sec</span>
+                                <br /><span>{t('Sec')}</span>
                             </div>
                         </div>
                     </div>
-                    : <h2 className='text-danger my-5 text-uppercase'>Ticket is Unavailabe Right Now</h2>
+                    : <h2 className='text-danger my-5 text-uppercase'>{t('Ticket is Unavailabe Right Now')}</h2>
             }
         </>
     )

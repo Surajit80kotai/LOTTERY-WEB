@@ -1,3 +1,4 @@
+import { t } from 'i18next'
 import React from 'react'
 
 const TrustedPayment = () => {
@@ -5,7 +6,7 @@ const TrustedPayment = () => {
         <>
             <div className="trustedpayemt">
                 <div className="sectitle">
-                    <h1>Trusted  Payment Method</h1>
+                    <h1>{t('Trusted  Payment Method')}</h1>
                 </div>
                 <div className="container">
                     <div className="row justify-content-center">

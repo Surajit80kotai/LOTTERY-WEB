@@ -33,6 +33,11 @@ const NavBar = () => {
 
   const { t } = useTranslation()
 
+  // changeLanguage func.
+  const changeLanguage = (e) => {
+    i18next.changeLanguage(e.target.value)
+  }
+
   // Language translation function
   // const googleTranslateElementInit = () => {
   //   new window.google.translate.TranslateElement(
@@ -142,11 +147,8 @@ const NavBar = () => {
           <div className="nv_rt">
             {/* Language Dropdown */}
             {/* <div className='language_dropdown' id="google_translate_element"></div> */}
-            <select onChange={(e) => i18next.changeLanguage(e.target.value)} className='langu_select'>
-              <option>
-                <span><i className="fa-solid fa-language" style={{ color: "#ffffff" }}></i></span>
-                Language
-              </option>
+            <select onChange={changeLanguage} className='langu_select'>
+              <option>Language</option>
               <option value={"en"}>English</option>
               <option value={"fr"}>French</option>
             </select>

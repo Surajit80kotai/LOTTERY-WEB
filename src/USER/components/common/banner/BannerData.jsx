@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
+import { t } from 'i18next'
 
 const BannerData = ({ item, id }) => {
     const [round, setRound] = useState(0)
@@ -82,37 +83,37 @@ const BannerData = ({ item, id }) => {
                                     <Link to={`/info/${id}/${round}`}>
                                         <h1 className="banner_title">{item?.ticket_name}</h1>
                                     </Link>
-                                    <h3>Timeleft</h3>
+                                    <h3>{t('Timeleft')}</h3>
                                     <div id="coundown" className="countdown">
                                         <div className="one_time">
                                             <div id="days" className="time days">
                                                 {timerDays}
                                             </div>
-                                            <br /><span>Days</span>
+                                            <br /><span>{t('Days')}</span>
                                         </div>
                                         <div className="one_time">
                                             <div id="hours" className="time hours">
                                                 {timerHours}
                                             </div>
-                                            <br /><span>Hours</span>
+                                            <br /><span>{t('Hours')}</span>
                                         </div>
                                         <div className="one_time">
                                             <div id="minutes" className="time minutes">
                                                 {timerMinutes}
                                             </div>
-                                            <br /><span>Mins</span>
+                                            <br /><span>{t('Mins')}</span>
                                         </div>
                                         <div className="one_time">
                                             <div id="seconds" className="time seconds">
                                                 {timerSeconds}
                                             </div>
-                                            <br /><span>Sec</span>
+                                            <br /><span>{t('Sec')}</span>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div className="ticket_price">
-                                    <h4>Ticket Price
+                                    <h4>{t('Ticket Price')}
                                         <span>{token ? currency_symbol : generalCurrency_symbol}
                                         </span>{discountedPrice ? (discountedPrice).toFixed(2) : (item?.rounds[round]?._price)}
                                     </h4>
@@ -123,10 +124,10 @@ const BannerData = ({ item, id }) => {
                                         (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                                             (item?.rounds[round]?._qty) > 0 ?
                                                 token ?
-                                                    <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
-                                                    : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                                : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
-                                            : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+                                                    <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">{t('Buy Ticket')}</Link>
+                                                    : <Link to="/login" className="btn2">{t('Buy Ticket')}</Link>
+                                                : <button to="#!" className="btn2_disabled" disabled>{t('Buy Ticket')}</button>
+                                            : <button to="#!" className="btn2_disabled" disabled>{t('Buy Ticket')}</button>
 
                                     }
                                 </div>

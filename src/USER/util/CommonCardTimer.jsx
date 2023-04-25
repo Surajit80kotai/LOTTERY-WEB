@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTimer } from '../customHooks/useTimer'
+import { t } from 'i18next'
 
 const CommonCardTimer = ({ item, round }) => {
     const [timerDays, timerHours, timerMinutes, timerSeconds, startTimer] = useTimer()
@@ -23,22 +24,22 @@ const CommonCardTimer = ({ item, round }) => {
                             <div className="timeleftarea">
                                 <div id="days" className=" days">{timerDays}
                                 </div>
-                                <br /><span>Days</span>
+                                <br /><span>{t('Days')}</span>
                             </div>
                             <div className="timeleftarea">
                                 <div id="hours" className=" hours">{timerHours}
                                 </div>
-                                <br /><span>Hours</span>
+                                <br /><span>{t('Hours')}</span>
                             </div>
                             <div className="timeleftarea">
                                 <div id="minutes" className=" minutes">{timerMinutes}
                                 </div>
-                                <br /><span>Mins</span>
+                                <br /><span>{t('Mins')}</span>
                             </div>
                             <div className="timeleftarea">
                                 <div id="seconds" className=" seconds">{timerSeconds}
                                 </div>
-                                <br /><span>Sec</span>
+                                <br /><span>{t('Sec')}</span>
                             </div>
                         </div>
                     </div>
@@ -53,7 +54,7 @@ const CommonCardTimer = ({ item, round }) => {
                         <br />
                         <br />
                         <br />
-                        <h2 className='text-center text-uppercase'><span className='text-danger'>Ticket is unavailabe right now</span></h2>
+                        <h2 className='text-center text-uppercase'><span className='text-danger'>{t('Ticket is unavailabe right now')}</span></h2>
                     </div>
             }
         </>

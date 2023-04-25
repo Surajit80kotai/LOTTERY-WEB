@@ -1,3 +1,4 @@
+import { t } from 'i18next'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -9,46 +10,46 @@ const Footer = () => {
         <>
             <div className="footer_top">
                 <div className="footitem">
-                    <h4 className="foot_title">Information</h4>
+                    <h4 className="foot_title">{t('Information')}</h4>
                     <ul className="footlinks">
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>About us</Link></li> */}
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Find Us</Link></li> */}
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Terms & Condition</Link></li>
-                        <li><Link to="/privacypolicy"><span><i className="fas fa-caret-right"></i></span>Privacy Policy</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Cookies Policy</Link></li>
+                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Terms & Condition')}</Link></li>
+                        <li><Link to="/privacypolicy"><span><i className="fas fa-caret-right"></i></span>{t('Privacy Policy')}</Link></li>
+                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Cookies Policy')}</Link></li>
                     </ul>
                 </div>
                 <div className="footitem">
-                    <h4 className="foot_title">Help</h4>
+                    <h4 className="foot_title">{t('Help')}</h4>
                     <ul className="footlinks">
-                        <li><Link to="/howtoplay"><span><i className="fas fa-caret-right"></i></span>How to Play</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>How to Deposit</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Betting Rule</Link></li>
-                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>How to Collect</Link></li> */}
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>How to Register</Link></li>
+                        <li><Link to="/howtoplay"><span><i className="fas fa-caret-right"></i></span>{t('How to Play')}</Link></li>
+                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('How to Deposit')}</Link></li>
+                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Betting Rule')}</Link></li>
+                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('How to Collect')}</Link></li> */}
+                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('How to Register')}</Link></li>
                         {
                             token ?
-                                <li><Link to="/wallet"><span><i className="fas fa-caret-right"></i></span>Balance Check</Link></li>
-                                : <li><Link to="/login"><span><i className="fas fa-caret-right"></i></span>Balance Check</Link></li>
+                                <li><Link to="/wallet"><span><i className="fas fa-caret-right"></i></span>{t('Balance Check')}</Link></li>
+                                : <li><Link to="/login"><span><i className="fas fa-caret-right"></i></span>{t('Balance Check')}</Link></li>
                         }
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Help Center</Link></li>
+                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Help Center')}</Link></li>
                     </ul>
                 </div>
                 <div className="footitem">
-                    <h4 className="foot_title">Partner</h4>
+                    <h4 className="foot_title">{t('Partner')}</h4>
                     <ul className="footlinks">
-                        <li><Link to="/agentSignup"><span><i className="fas fa-caret-right"></i></span>Agents</Link></li>
-                        <li><Link to="/agentSignup"><span><i className="fas fa-caret-right"></i></span>Influencer</Link></li>
-                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Affiliate Partner</Link></li> */}
+                        <li><Link to="/agentSignup"><span><i className="fas fa-caret-right"></i></span>{t('Agents')}</Link></li>
+                        <li><Link to="/agentSignup"><span><i className="fas fa-caret-right"></i></span>{t('Influencer')}</Link></li>
+                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Affiliate Partner')}</Link></li> */}
 
                     </ul>
                 </div>
                 <div className="footitem">
                     <h4 className="foot_title">Career</h4>
                     <ul className="footlinks">
-                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Job</Link></li> */}
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Work With Us</Link></li>
-                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Apply</Link></li> */}
+                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Job')}</Link></li> */}
+                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Work With Us')}</Link></li>
+                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Apply')}</Link></li> */}
 
                     </ul>
                 </div>

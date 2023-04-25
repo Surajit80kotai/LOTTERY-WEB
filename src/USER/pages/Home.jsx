@@ -14,6 +14,7 @@ import SliderCard from '../components/core/home/SliderCard'
 import { clearUserSliceError } from '../services/slice/UserSlice'
 import { clearPaymentSliceError } from '../services/slice/PaymentSlice'
 import { toast } from 'react-toastify'
+import { t } from 'i18next'
 
 
 const Home = () => {
@@ -108,8 +109,8 @@ const Home = () => {
                                                     <div className="view_all_bg">
                                                         <img src="assets/img/viewmorecard.png" alt="" className="img-fluid" />
                                                         <div className="viewall_btn">
-                                                            <h6>Looking More? Click Here</h6>
-                                                            <Link to={`/viewall/${curItem[0]?.category}`} className="btn2">View All</Link>
+                                                            <h6>{t('Looking More? Click Here')}</h6>
+                                                            <Link to={`/viewall/${curItem[0]?.category}`} className="btn2">{t('View All')}</Link>
                                                         </div>
                                                     </div>
 

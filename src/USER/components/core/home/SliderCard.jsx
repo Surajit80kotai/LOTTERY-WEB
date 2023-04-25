@@ -7,6 +7,7 @@ import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 // import PreLoader from '../preloader/PreLoader'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
+import { t } from 'i18next'
 
 const SliderCard = ({ item }) => {
     const [round, setRound] = useState(0)
@@ -132,16 +133,16 @@ const SliderCard = ({ item }) => {
                                     <h3 className="total_ticket">
                                         {/* <span className='mr-2'> */}
                                         <span>
-                                            Round: {(round + 1) + "/" + rounds?.length}
+                                            {t('Round')}: {(round + 1) + "/" + rounds?.length}
                                         </span>
                                         <br />
                                         {/* <span className='mx-3'> */}
                                         <span>
-                                            Remaining Tickets: {rounds[round]?._qty}
+                                            {t('Remaining Tickets')}: {rounds[round]?._qty}
                                         </span>
                                     </h3>
                                     : <h3 className="total_ticket" style={{ "color": "#cb4154" }}>
-                                        All Tickets Sold For Round : {(round + 1)}
+                                        {t('All Tickets Sold For Round')} : {(round + 1)}
                                     </h3>
                                 : null
                         }
@@ -160,9 +161,9 @@ const SliderCard = ({ item }) => {
                                 rounds[round] ?
                                     (rounds[round]?._qty) > 0 ?
                                         token ?
-                                            <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                            : <Link to="/login" className="btn2">Add To Cart</Link>
-                                        : <Link to="#!" className="btn2_disabled" disabled>Add To Cart</Link>
+                                            <Link to="#!" onClick={addToCart} className="btn2">{t('Add To Cart')}</Link>
+                                            : <Link to="/login" className="btn2">{t('Add To Cart')}</Link>
+                                        : <Link to="#!" className="btn2_disabled" disabled>{t('Add To Cart')}</Link>
                                     : null
                             }
                             {/* Buy Now Button */}
@@ -170,9 +171,9 @@ const SliderCard = ({ item }) => {
                                 rounds[round] ?
                                     (rounds[round]?._qty) > 0 ?
                                         token ?
-                                            <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">Buy Ticket</Link>
-                                            : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                        : <Link to="#!" className="btn2_disabled" disabled>Buy Ticket</Link>
+                                            <Link to="/placeorder" onClick={() => buyNow(item)} className="btn2">{t('Buy Ticket')}</Link>
+                                            : <Link to="/login" className="btn2">{t('Buy Ticket')}</Link>
+                                        : <Link to="#!" className="btn2_disabled" disabled>{t('Buy Ticket')}</Link>
                                     : null
                             }
                         </div>

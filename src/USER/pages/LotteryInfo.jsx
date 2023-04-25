@@ -8,6 +8,7 @@ import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 import { toast } from 'react-toastify'
 import LotteryInfoTimer from '../util/LotteryInfoTimer'
+import { t } from 'i18next'
 
 const LotteryInfo = () => {
     const { lid, round } = useParams()
@@ -180,17 +181,17 @@ const LotteryInfo = () => {
                                         {
                                             ticketInfo[0]?.rounds[round] ?
                                                 ticketInfo[0]?.rounds[round]?._dis ?
-                                                    <h3>Ticket Price :&nbsp;&nbsp;
+                                                    <h3>{t('Ticket Price')} :&nbsp;&nbsp;
                                                         <span className="discountprice">
                                                             {token ? currency_symbol : generalCurrency_symbol}{(discountedPrice).toFixed(2)}</span>&nbsp;&nbsp;
                                                         <span className="text-decoration-line-through fs-4 fw-light">
                                                             {token ? currency_symbol : generalCurrency_symbol}
                                                             {ticketInfo[0]?.rounds[round]?._price}
                                                         </span>&nbsp;&nbsp;
-                                                        <span className="discount_percent fs-4 ">{ticketInfo[0]?.rounds[round]?._dis}% off</span>
+                                                        <span className="discount_percent fs-4 ">{ticketInfo[0]?.rounds[round]?._dis}% {t('off')}</span>
                                                     </h3>
                                                     :
-                                                    <h3>Ticket Price :&nbsp;&nbsp;
+                                                    <h3>{t('Ticket Price')} :&nbsp;&nbsp;
                                                         <span className="discountprice">
                                                             {token ? currency_symbol : generalCurrency_symbol}
                                                             {ticketInfo[0]?.rounds[round]?._price}
@@ -250,9 +251,9 @@ const LotteryInfo = () => {
                                             ticketInfo[0]?.rounds[round] ?
                                                 (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                     token ?
-                                                        <Link to="#!" onClick={addToCart} className="btn2">Add To Cart</Link>
-                                                        : <Link to="/login" className="btn2">Add To Cart</Link>
-                                                    : <button to="#!" className="btn2_disabled" disabled>Add To Cart</button>
+                                                        <Link to="#!" onClick={addToCart} className="btn2">{t('Add To Cart')}</Link>
+                                                        : <Link to="/login" className="btn2">{t('Add To Cart')}</Link>
+                                                    : <button to="#!" className="btn2_disabled" disabled>{t('Add To Cart')}</button>
                                                 : null
                                         }
 
@@ -261,9 +262,9 @@ const LotteryInfo = () => {
                                             ticketInfo[0]?.rounds[round] ?
                                                 (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                     token ?
-                                                        <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">Buy Ticket</Link>
-                                                        : <Link to="/login" className="btn2">Buy Ticket</Link>
-                                                    : <button to="#!" className="btn2_disabled" disabled>Buy Ticket</button>
+                                                        <Link to="/placeorder" onClick={() => buyNow(ticketInfo[0])} className="btn2">{t('Buy Ticket')}</Link>
+                                                        : <Link to="/login" className="btn2">{t('Buy Ticket')}</Link>
+                                                    : <button to="#!" className="btn2_disabled" disabled>{t('Buy Ticket')}</button>
                                                 : null
                                         }
                                     </div>
@@ -282,12 +283,13 @@ const LotteryInfo = () => {
                                                     (ticketInfo[0]?.rounds[round]?._qty) > 0 ?
                                                         <h3>
                                                             <span style={{ "marginRight": "20px" }}>
-                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />Round : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
+                                                                <img className='mx-2' src="/assets/img/9121436 1.png" alt="" />
+                                                                {t('Round')} : <strong>{((+round) + 1) + "/" + ticketInfo[0]?.rounds.length}</strong></span>
                                                             <span><img src="/assets/img/9121436 1.png" alt="" /></span>
-                                                            Ticket Remains : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
+                                                            {t('Ticket Remains')} : <strong>{ticketInfo[0]?.rounds[round]?._qty}</strong>
                                                         </h3>
                                                         : <h3 style={{ "color": "#cb4154" }}>
-                                                            All Tickets Sold For Round : {(Number(round) + 1)}
+                                                            {t('All Tickets Sold For Round')} : {(Number(round) + 1)}
                                                         </h3>
                                                     : null
                                             }
@@ -302,14 +304,14 @@ const LotteryInfo = () => {
                                         {/* Description Section */}
                                         <div>
                                             <div className="des_title">
-                                                <h3>DESCRIPTION</h3>
+                                                <h3>{t('DESCRIPTION')}</h3>
                                                 {
                                                     ticketInfo[0]?.brochure ?
                                                         <button
                                                             onClick={() => handleDownload(baseUrl + ticketInfo[0]?.brochure, ticketInfo[0]?.ticket_name)}
                                                             className='btn btn-outline-dark fs-5'
                                                             style={{ "borderRadius": "20px" }}
-                                                        >Download Brochure <i className="fa-solid fa-download"></i></button>
+                                                        >{t('Download Brochure')} <i className="fa-solid fa-download"></i></button>
                                                         : null
                                                 }
                                             </div>
@@ -361,7 +363,7 @@ const LotteryInfo = () => {
                                     (ticketInfo[0]?.highlights?.length) ?
                                         <div className="description_item">
                                             <div className="describe_heading">
-                                                <h4>Highlights:</h4>
+                                                <h4>{t('Highlights')}:</h4>
                                             </div>
 
                                             <div className="bullet_points">

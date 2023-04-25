@@ -310,7 +310,7 @@ const AgentsAndInfluencersSignup = () => {
                             </div>
                             <h2 className="log_title">Welcome To ESHAC-PLAY</h2>
                             <h6 className="dont">Already Have An Account?</h6>
-                            <Link to="/login" className="Signup">Sing In</Link>
+                            <Link to="/agentLogin" className="Signup">Sing In</Link>
                         </div>
                     </div>
                 </div>
