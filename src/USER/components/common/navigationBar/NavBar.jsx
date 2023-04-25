@@ -159,7 +159,7 @@ const NavBar = () => {
             {/* Language Dropdown */}
             <div style={{ "display": !toggle ? "inline-block" : "none" }}>
               <select onChange={changeLanguage} className='langu_select'>
-                <option>Language</option>
+                <option disabled>{t('Language')}</option>
                 <option value={"en"}>English</option>
                 <option value={"fr"}>French</option>
               </select>
