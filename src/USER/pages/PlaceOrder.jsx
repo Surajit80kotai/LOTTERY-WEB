@@ -375,13 +375,13 @@ const PlaceOrder = () => {
                                                 {/* Wallet Validation */}
                                                 {
                                                     (buy_now_data?.amount?.total) ?
-                                                        (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance?.toFixed(2) ?
+                                                        (Number((buy_now_data?.amount?.total * buyNowQty).toFixed(2))) > balance?.balance?.toFixed(2) ?
                                                             <div className="alert alert-danger mt-2  fs-4" role="alert">
                                                                 <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
                                                             </div>
                                                             : null
                                                         :
-                                                        (amount?.total)?.toFixed(2) > balance?.balance?.toFixed(2) ?
+                                                        (Number((amount?.total)?.toFixed(2))) > balance?.balance?.toFixed(2) ?
                                                             <div className="alert alert-danger mt-2  fs-4" role="alert">
                                                                 <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
                                                             </div>
@@ -400,11 +400,11 @@ const PlaceOrder = () => {
                                     <div className="text-center mt-5">
                                         {
                                             (buy_now_data?.amount?.total) ?
-                                                (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance?.toFixed(2) ?
+                                                (Number((buy_now_data?.amount?.total * buyNowQty).toFixed(2))) > balance?.balance?.toFixed(2) ?
                                                     <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
                                                     : <button onClick={procced} className="btn2">Procced</button>
                                                 :
-                                                (amount?.total)?.toFixed(2) > balance?.balance?.toFixed(2) ?
+                                                (Number((amount?.total)?.toFixed(2))) > balance?.balance?.toFixed(2) ?
                                                     <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
                                                     : <button onClick={procced} className="btn2">Procced</button>
                                         }

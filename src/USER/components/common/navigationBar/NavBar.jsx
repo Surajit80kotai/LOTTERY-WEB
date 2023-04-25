@@ -7,6 +7,8 @@ import { auth } from '../../../config/firebase'
 import { signOut } from 'firebase/auth'
 import PreLoader from '../../core/preloader/PreLoader'
 import SearchDesk from '../../../util/SearchDesk'
+import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
 
 
 
@@ -29,27 +31,29 @@ const NavBar = () => {
     navigate('/')
   }
 
+  const { t } = useTranslation()
+
   // Language translation function
-  const googleTranslateElementInit = () => {
-    new window.google.translate.TranslateElement(
-      {
-        pageLanguage: "en",
-        autoDisplay: false
-      },
-      "google_translate_element"
-    );
-  };
+  // const googleTranslateElementInit = () => {
+  //   new window.google.translate.TranslateElement(
+  //     {
+  //       pageLanguage: "en",
+  //       autoDisplay: false
+  //     },
+  //     "google_translate_element"
+  //   );
+  // };
 
 
-  useEffect(() => {
-    var addScript = document.createElement("script");
-    addScript.setAttribute(
-      "src",
-      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    );
-    document.body.appendChild(addScript);
-    window.googleTranslateElementInit = googleTranslateElementInit;
-  }, []);
+  // useEffect(() => {
+  //   var addScript = document.createElement("script");
+  //   addScript.setAttribute(
+  //     "src",
+  //     "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+  //   );
+  //   document.body.appendChild(addScript);
+  //   window.googleTranslateElementInit = googleTranslateElementInit;
+  // }, []);
 
 
   useEffect(() => {
@@ -100,15 +104,15 @@ const NavBar = () => {
           <ul className="navbar-nav">
             {/* Home */}
             <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link" to="/">{t('Home')}</Link>
             </li>
             {/* About Us */}
             <li className="nav-item">
-              <Link className="nav-link" to="/aboutus">About Us</Link>
+              <Link className="nav-link" to="/aboutus">{t('About')} {t('Us')}</Link>
             </li>
             {/* Product Dropdown */}
             <li className="nav-item dropdown">
-              <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products<i className="fa-solid fa-caret-down mx-2"></i></Link>
+              <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{t('Products')}<i className="fa-solid fa-caret-down mx-2"></i></Link>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 {
                   category_data?.map((category) => {
@@ -123,21 +127,29 @@ const NavBar = () => {
             </li>
             {/* How to play */}
             <li className="nav-item">
-              <Link className="nav-link" to="/howtoplay">How To play</Link>
+              <Link className="nav-link" to="/howtoplay">{t('How')} {t('To')} {t('play')}</Link>
             </li>
             {/* Charities */}
             <li className="nav-item">
-              <Link className="nav-link" to="/charities">Charities</Link>
+              <Link className="nav-link" to="/charities">{t('Charities')}</Link>
             </li>
             {/* Contact */}
             {/* <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
+              <Link className="nav-link" to="/contact">{t('Contact')}</Link>
             </li> */}
           </ul>
 
           <div className="nv_rt">
             {/* Language Dropdown */}
-            <div className='language_dropdown' id="google_translate_element"></div>
+            {/* <div className='language_dropdown' id="google_translate_element"></div> */}
+            <select onChange={(e) => i18next.changeLanguage(e.target.value)} className='langu_select'>
+              <option>
+                <span><i className="fa-solid fa-language" style={{ color: "#ffffff" }}></i></span>
+                Language
+              </option>
+              <option value={"en"}>English</option>
+              <option value={"fr"}>French</option>
+            </select>
 
             {/* Search Bar */}
             {
@@ -146,7 +158,7 @@ const NavBar = () => {
                   <input
                     type="text"
                     id="searchInput"
-                    placeholder="Search.."
+                    placeholder={t("Search..")}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   />
@@ -184,12 +196,12 @@ const NavBar = () => {
                     <ul className="dropdown-menu">
                       <li className="user-menu__item">
                         <Link className="user-menu-link dropdown-item" to="/profile">
-                          <div><i className="fas fa-user mx-1"></i><span className='fw-bolder'>My Account</span></div>
+                          <div><i className="fas fa-user mx-1"></i><span className='fw-bolder'>{t('My Account')}</span></div>
                         </Link>
                       </li>
                       <li className="user-menu__item">
                         <Link className="user-menu-link dropdown-item" to="/">
-                          <button className='text-danger' onClick={logOut}><i className="fa-solid fa-power-off mx-1"></i><span className='fw-bolder'>Logout</span></button>
+                          <button className='text-danger' onClick={logOut}><i className="fa-solid fa-power-off mx-1"></i><span className='fw-bolder'>{t('Logout')}</span></button>
                         </Link>
                       </li>
                     </ul>
@@ -215,10 +227,10 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse mx-5" id="navbarSupportedContent">
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0 login_signup">
                     <li className="nav-item">
-                      <Link className="nav-link" to="/verifyphone"><i className="bi bi-person-add mx-2"></i>Sign Up</Link>
+                      <Link className="nav-link" to="/verifyphone"><i className="bi bi-person-add mx-2"></i>{t('Sign Up')}</Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/login"><i className="bi bi-box-arrow-in-right mx-2"></i>Log In</Link>
+                      <Link className="nav-link" to="/login"><i className="bi bi-box-arrow-in-right mx-2"></i>{t('Log In')}</Link>
                     </li>
                   </ul>
                 </div>

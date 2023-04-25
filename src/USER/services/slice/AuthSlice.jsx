@@ -91,10 +91,10 @@ export const fetchForgetPass = createAsyncThunk(
 export const registerOTP = createAsyncThunk("/system/register/otp", async (data, { rejectWithValue }) => {
     try {
         const res = await GETOTP(data)
-        console.log("register otp API try", res?.data);
+        // console.log("register otp API try", res?.data);
         return res?.data
     } catch (err) {
-        console.log(rejectWithValue(err?.response?.data));
+        // console.log(rejectWithValue(err?.response?.data));
         return rejectWithValue(err?.response?.data)
     }
 })

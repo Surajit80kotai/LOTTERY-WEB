@@ -13,6 +13,7 @@ import VerifyPhone from './USER/pages/VerifyPhone';
 import { Flip, ToastContainer } from 'react-toastify';
 import ProtectedRoute from './USER/privateroute/ProtectedRoute';
 import AgentsAndInfluencersSignup from './USER/pages/agents/AgentsAndInfluencersSignup';
+import './i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

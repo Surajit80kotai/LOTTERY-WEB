@@ -4490,3 +4490,24 @@ margin: 0.5rem;
 		box-shadow: inset -3px 0px 0px transparent;
 	}
 }
+
+/* language slection */
+
+.langu_select{
+	padding: 5px 10px;
+    background: transparent;
+    color: white;
+	font-size: 15px;
+	border: none;
+	outline: 0;
+}
+
+.langu_select:focus,.langu_select::selection{
+	border: none;
+	outline: 0;	
+}
+
+.langu_select option{
+	color: #000;
+
+}

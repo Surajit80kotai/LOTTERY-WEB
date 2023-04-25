@@ -8,10 +8,11 @@ const MyPaypalButton = ({ amount }) => {
     const [paidFor, setPaidFor] = useState(false)
     const [error, setError] = useState(null)
     // const [newAmount, setNewAmount] = useState(amount)
-    const [newAmount, setNewAmount] = useState(12)
 
     const handleApprove = (orderID) => {
-        setNewAmount(null)
+        // setNewAmount(null)
+        console.log("amount =>", amount);
+        console.log("orderID =>", orderID);
         setPaidFor(true)
     }
 
@@ -26,9 +27,9 @@ const MyPaypalButton = ({ amount }) => {
 
     return (
         <>
-            {/* <PayPalScriptProvider options={{ "client-id": "test" }}> */}
             <PayPalScriptProvider options={{ "client-id": process.env.REACT_APP_CLIENT_ID }}>
                 <PayPalButtons
+                    forceReRender={[amount]}
                     style={{
                         color: 'silver',
                         layout: 'horizontal',
@@ -50,7 +51,7 @@ const MyPaypalButton = ({ amount }) => {
                             purchase_units: [
                                 {
                                     amount: {
-                                        value: newAmount,
+                                        value: amount,
                                         // value: Number(amount)?.toFixed(2),
                                     },
                                 },
@@ -58,20 +59,15 @@ const MyPaypalButton = ({ amount }) => {
                         });
                     }}
                     onApprove={async (data, actions) => {
-                        return await actions.order.capture().then((details) => {
-                            // const name = details.payer.name.given_name;
-                            console.log(details);
-                            handleApprove(data.orderID)
-                        });
+                        // const order = await actions.order.capture
+                        // console.log(order);
+                        handleApprove(data.orderID)
                     }}
                     onCancel={() => {
-                        toast.error("Payment Cancelled", {
-                            autoClose: 3500
-                        })
+                        toast.error("Payment Cancelled")
                     }}
                     onError={(err) => {
                         setError(err)
-                        console.log(err);
                     }}
                 />
             </PayPalScriptProvider>
