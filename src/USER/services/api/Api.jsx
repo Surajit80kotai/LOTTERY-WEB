@@ -8,6 +8,9 @@ export const LOGIN = (loginData) => API.post('/auth/login', loginData)
 // signup api function
 export const SIGNUP = (signupData) => API.post('/auth/signup', signupData)
 
+// agentlogin api function
+export const AGENTLOGIN = (loginData) => API.post('/auth/agent/login', loginData)
+
 // agentsignup api function
 export const AGENTSIGNUP = (signupData) => API.post('/auth/agent/signup', signupData)
 

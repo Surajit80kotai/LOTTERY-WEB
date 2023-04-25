@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { fetchLogin } from '../../services/slice/AuthSlice'
+import { fetchAgentLogIn } from '../../services/slice/AuthSlice'
 import { toast } from 'react-toastify'
 import { auth, google, facebook } from '../../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
@@ -43,10 +43,10 @@ const AgentsAndInfluencersLogin = () => {
         e.preventDefault()
         if (isNaN(formValues?.contact)) {
             const data = { user_id: formValues.contact, password: formValues.password, user_id_type: "email" }
-            dispatch(fetchLogin({ data, navigate, toast }))
+            dispatch(fetchAgentLogIn({ data, navigate, toast }))
         } else {
             const data = phone?.length > 0 ? { user_id: "+" + phone, password: formValues.password, user_id_type: "phone" } : { user_id: phone, password: formValues.password, user_id_type: "phone" }
-            dispatch(fetchLogin({ data, navigate, toast }))
+            dispatch(fetchAgentLogIn({ data, navigate, toast }))
         }
     }
 

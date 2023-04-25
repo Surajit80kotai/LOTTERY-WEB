@@ -4493,21 +4493,49 @@ margin: 0.5rem;
 
 /* language slection */
 
-.langu_select{
+.langu_select {
 	padding: 5px 10px;
-    background: transparent;
-    color: white;
+	background: transparent;
+	color: white;
 	font-size: 15px;
 	border: none;
 	outline: 0;
 }
 
-.langu_select:focus,.langu_select::selection{
+.langu_select:focus,
+.langu_select::selection {
 	border: none;
-	outline: 0;	
+	outline: 0;
 }
 
-.langu_select option{
+.langu_select option {
 	color: #000;
 
+}
+
+
+.ribbon-red {
+	font: bold 15px Sans-Serif;
+	color: #fff;
+	text-align: center;
+	text-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	position: relative;
+	padding: 7px 0;
+	left: -29px;
+	top: 15px;
+	width: 120px;
+	background-color: #f58b12;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f58b12), to(#9a9312));
+	background-image: -webkit-linear-gradient(top, #f58b12, #9a9312);
+	background-image: -moz-linear-gradient(top, #f58b12, #9a9312);
+	background-image: -ms-linear-gradient(top, #f58b12, #9a9312);
+	background-image: -o-linear-gradient(top, #f58b12, #9a9312);
+	color: #fff;
+	-webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 }

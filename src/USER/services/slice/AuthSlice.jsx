@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { AGENTSIGNUP, FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
+import { AGENTLOGIN, AGENTSIGNUP, FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
 
 
 //AsyncThunk For SignUp 
@@ -23,6 +23,32 @@ export const fetchAgentSignUp = createAsyncThunk(
     })
 
 
+//AsyncThunk For Login 
+export const fetchAgentLogIn = createAsyncThunk(
+    "agent/login", async ({ data, navigate, toast }, { rejectWithValue }) => {
+        // console.log(data)
+        try {
+            const result = await AGENTLOGIN(data)
+            window.localStorage.setItem("token", JSON.stringify(result?.data?.token))
+            window.localStorage.setItem("user", JSON.stringify(result?.data?.user_details))
+            navigate('/')
+
+            // To reload the page autometically after login
+            setTimeout(() => {
+                window.location.reload()
+            }, 3500)
+
+            // react toast message
+            toast.success('Logged In Successfully', {
+                autoClose: 3000
+            })
+            return result?.data
+        } catch (err) {
+            // console.log(rejectWithValue(err.response.data));
+            return rejectWithValue(err.response.data)
+        }
+
+    })
 
 
 //AsyncThunk For SignUp 
@@ -203,6 +229,23 @@ export const AuthSlice = createSlice({
             state.user = payload
         })
         builder.addCase(fetchAgentSignUp.rejected, (state, { payload }) => {
+            state.msg = "Failed"
+            state.loading = false
+            state.signupErr = payload
+        })
+
+
+        //States for Login
+        builder.addCase(fetchAgentLogIn.pending, (state) => {
+            state.msg = "Pending"
+            state.loading = true
+        })
+        builder.addCase(fetchAgentLogIn.fulfilled, (state, { payload }) => {
+            state.msg = "Success"
+            state.loading = false
+            state.user = payload
+        })
+        builder.addCase(fetchAgentLogIn.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
             state.signupErr = payload

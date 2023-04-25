@@ -141,6 +141,11 @@ const OrderHistory = () => {
                                                                         <div className="ribbon-green">Won</div>
                                                                         : null
                                                                 }
+                                                                {
+                                                                    item?.is_bonus === true ?
+                                                                        <div className="ribbon-red">Bonus!</div>
+                                                                        : null
+                                                                }
                                                             </div>
 
                                                             <div className="pro_im_t">
