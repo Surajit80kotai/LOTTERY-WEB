@@ -188,6 +188,7 @@
     "Pay MTN Money": "Payer de l'argent MTN",
     "Pay with VISA/Master Card": "Payer avec VISA/Master Card",
     "Pay with Paypal": "Payer avec PayPal",
+    "Commission": "Commission",
     "Fillter": "Filtre",
     "Clear": "Clair",
     "Low To High": "De bas en haut",
@@ -211,5 +212,10 @@
     "State": "État",
     "Select": "Sélectionner",
     "Submit": "Soumettre",
-    "No order history present": "Aucun historique de commande présent"
+    "No order history present": "Aucun historique de commande présent",
+    "Contact Us": "Contactez-nous",
+    "Mobile Number": "Numéro de portable",
+    "Enter Your Mobile Number": "Entrez votre numéro de mobile",
+    "Message": "Message",
+    "Enter a message": "Entrez un message"
 }

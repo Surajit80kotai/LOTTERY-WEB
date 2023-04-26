@@ -4,8 +4,10 @@ import { contactUs } from '../services/slice/UserSlice'
 import { toast } from 'react-toastify'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Contact = () => {
+    const { t } = useTranslation()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -39,7 +41,7 @@ const Contact = () => {
             <main>
                 <div className="contact_wrapper">
                     <div className="container ">
-                        <h2 className="text-center contact_title">Contact Us</h2>
+                        <h2 className="text-center contact_title">{t("Contact Us")}</h2>
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="contact_area">
@@ -51,16 +53,16 @@ const Contact = () => {
 
                                                         {/* Full Name */}
                                                         <div className="m_gap mb-3">
-                                                            <label htmlFor="fullname" className="form-label label_style">Full Name <span className="requried">*</span></label>
+                                                            <label htmlFor="fullname" className="form-label label_style">{t("Full Name")} <span className="requried">*</span></label>
                                                             <input
                                                                 type="text"
                                                                 className="form-control form_input" id="fullname"
                                                                 name="name"
-                                                                placeholder="Enter Your Full Name"
+                                                                placeholder={t("Enter Your Full Name")}
                                                                 aria-describedby="emailHelp"
                                                                 value={formData.name}
                                                                 onChange={handleChange}
-                                                                title="Accept Alphabets & Whitespaces Only"
+                                                                title={t("Accept Alphabets & Whitespaces Only")}
                                                                 pattern='^[a-zA-Z ]+$'
                                                                 required
                                                             />
@@ -71,13 +73,13 @@ const Contact = () => {
                                                         <div className="row">
                                                             <div className="col-md">
                                                                 <div className="m_gap mb-3">
-                                                                    <label htmlFor="email" className="form-label label_style">Email</label>
+                                                                    <label htmlFor="email" className="form-label label_style">{t("Email")}</label>
                                                                     <input
                                                                         type="email"
                                                                         className="form-control form_input"
                                                                         id="email"
                                                                         name="email"
-                                                                        placeholder="Enter Your Email Id"
+                                                                        placeholder={t("Enter Your Email Id")}
                                                                         aria-describedby="emailHelp"
                                                                         value={formData.email}
                                                                         onChange={handleChange}
@@ -87,19 +89,19 @@ const Contact = () => {
                                                             </div>
                                                             <div className="col-md">
                                                                 <div className="m_gap mb-3">
-                                                                    <label htmlFor="mobilenumber" className="form-label label_style">Mobile Number <span className="requried">*</span></label>
+                                                                    <label htmlFor="mobilenumber" className="form-label label_style">{t("Mobile Number")} <span className="requried">*</span></label>
                                                                     <input
                                                                         type="tel"
                                                                         className="form-control form_input"
                                                                         id="mobilenumber"
                                                                         name="phone"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Enter Your Mobile Number"
+                                                                        placeholder={t("Enter Your Mobile Number")}
                                                                         maxLength={10}
                                                                         value={formData.phone}
                                                                         onChange={handleChange}
                                                                         required
-                                                                        title="Accept Numbers Only"
+                                                                        title={t("Accept Numbers Only")}
                                                                         pattern="[0-9]{10}"
                                                                     />
 
@@ -109,11 +111,12 @@ const Contact = () => {
 
                                                         {/* Message */}
                                                         <div className="m_gap mb-3">
-                                                            <label htmlFor="msg" className="form-label label_style">Message<span className="requried">*</span></label>
+                                                            <label htmlFor="msg" className="form-label label_style">{t("Message")}<span className="requried">*</span></label>
                                                             <textarea
                                                                 className="form-control form_input"
                                                                 id="floatingTextarea2"
                                                                 style={{ "height": "100px", "fontSize": "1.5rem" }}
+                                                                title={t("Enter a message")}
                                                                 required
                                                                 name='message'
                                                                 value={formData.message}
@@ -123,7 +126,7 @@ const Contact = () => {
 
                                                         {/* Button */}
                                                         <div className="text-center mt-5">
-                                                            <button type="submit" className="btn_one">Submit &rarr;</button>
+                                                            <button type="submit" className="btn_one">{t("Submit")} &rarr;</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -131,13 +134,13 @@ const Contact = () => {
                                         </div>
 
                                         {/* Map */}
-                                        {/* <div className="col-md-4">
+                                        <div className="col-md-4">
                                             <div className="address">
                                                 <div className="map_area">
                                                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117925.21192705746!2d88.27731165151606!3d22.535570756362414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1674557643642!5m2!1sen!2sin" style={{ "width": "335px", "height": "400px", "style": "border:0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title='map'></iframe>
                                                 </div>
                                             </div>
-                                        </div> */}
+                                        </div>
                                     </div>
 
                                 </div>

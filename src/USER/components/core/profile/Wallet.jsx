@@ -210,17 +210,27 @@ const Wallet = () => {
                                                                                         //     {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
                                                                                         // </td>
                                                                                         :
-                                                                                        <td>{new Date(item?.payment_date).toLocaleString('en-US', {
-                                                                                            month: 'short',
-                                                                                            day: '2-digit',
-                                                                                            year: 'numeric',
-                                                                                            hour: 'numeric',
-                                                                                            minute: 'numeric',
-                                                                                            second: 'numeric'
-                                                                                        })}</td>
+                                                                                        item.type === "Commission" ?
+                                                                                            <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                                month: 'short',
+                                                                                                day: '2-digit',
+                                                                                                year: 'numeric',
+                                                                                                hour: 'numeric',
+                                                                                                minute: 'numeric',
+                                                                                                second: 'numeric'
+                                                                                            })}</td>
+                                                                                            :
+                                                                                            <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                                month: 'short',
+                                                                                                day: '2-digit',
+                                                                                                year: 'numeric',
+                                                                                                hour: 'numeric',
+                                                                                                minute: 'numeric',
+                                                                                                second: 'numeric'
+                                                                                            })}</td>
                                                                                 // <td>{item.payment_date}</td>
                                                                             }
-                                                                            <td colSpan={2}>{item.transaction_id}</td>
+                                                                            <td colSpan={2}>{item.transaction_id ? item.transaction_id : "--------"}</td>
                                                                             {
                                                                                 item.payment_method === "OMCM" ?
                                                                                     <td colSpan={2}>
@@ -254,12 +264,20 @@ const Wallet = () => {
                                                                                                     {t("Transaction Pending or Cancelled")}
                                                                                                 </td>
                                                                                                 :
-                                                                                                <td colSpan={2}>
-                                                                                                    <span className='payment_logo'>
-                                                                                                        <img src="/assets/img/pending.png" alt="" />
-                                                                                                    </span>
-                                                                                                    {t("Waiting For Payment")}
-                                                                                                </td>
+                                                                                                item.type === "Commission" ?
+                                                                                                    <td colSpan={2}>
+                                                                                                        <span className='payment_logo'>
+                                                                                                            <img src="/assets/img/commission.png" alt="" />
+                                                                                                        </span>
+                                                                                                        {t("Commission")}
+                                                                                                    </td>
+                                                                                                    :
+                                                                                                    <td colSpan={2}>
+                                                                                                        <span className='payment_logo'>
+                                                                                                            <img src="/assets/img/pending.png" alt="" />
+                                                                                                        </span>
+                                                                                                        {t("Waiting For Payment")}
+                                                                                                    </td>
                                                                             }
 
                                                                             <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
@@ -283,8 +301,12 @@ const Wallet = () => {
                                                                                                     : (item.status_code === "00") ?
                                                                                                         <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
                                                                                                         :
-                                                                                                        // TRANSACTION ENDED
-                                                                                                        <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
+                                                                                                        // COMISSION
+                                                                                                        item.type === "Commission" ?
+                                                                                                            <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
+                                                                                                            :
+                                                                                                            // TRANSACTION ENDED
+                                                                                                            <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
                                                                                 }
                                                                             </td>
 
