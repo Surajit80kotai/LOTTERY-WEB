@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { clearOrderedData } from '../services/slice/PaymentSlice'
+import { useTranslation } from 'react-i18next'
 
 const OrderSuccess = () => {
+    const { t } = useTranslation()
     const { loading } = useSelector((state) => state.cartslice)
     const { ordered_data } = useSelector((state) => state.paymentslice)
     const dispatch = useDispatch()
@@ -34,11 +36,11 @@ const OrderSuccess = () => {
                             </svg>
                         </div>
                         <div className="text-center">
-                            <h1 style={{ "fontSize": "3.5rem" }}>Thank You !!</h1>
-                            <p className='fs-3'>Your order has been placed successfully</p>
+                            <h1 style={{ "fontSize": "3.5rem" }}>{t("Thank You")} !!</h1>
+                            <p className='fs-3'>{t("Your order has been placed successfully")}</p>
                             <br />
-                            <Link to="/" onClick={() => dispatch(clearOrderedData())} className="orderplace text-white">&larr; Continue Shopping</Link>
-                            <Link to="/orderhistory" onClick={() => dispatch(clearOrderedData())} className="orderplace text-white">Your Order History &rarr;</Link>
+                            <Link to="/" onClick={() => dispatch(clearOrderedData())} className="orderplace text-white">&larr; {t("Continue Shopping")}</Link>
+                            <Link to="/orderhistory" onClick={() => dispatch(clearOrderedData())} className="orderplace text-white">{t("Your Order History")} &rarr;</Link>
                         </div>
                     </div>
                 </div>

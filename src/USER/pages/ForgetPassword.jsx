@@ -6,8 +6,10 @@ import PreLoader from '../components/core/preloader/PreLoader'
 import { Link, useNavigate } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { useTranslation } from 'react-i18next'
 
 const ForgetPassword = () => {
+    const { t } = useTranslation()
     const [formValues, setFormValues] = useState({ phone_code: "", contact: "" })
     const [password, setPassword] = useState({ newpassword: "", confirmPassword: "" })
     const [otp, setOtp] = useState({ otp: "" })
@@ -121,7 +123,7 @@ const ForgetPassword = () => {
             <div className="forget-password-main">
                 {/* Back to home button */}
                 <Link className='text-secondary' to='/'>
-                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>{t('Home')}</h3>
                 </Link>
 
                 <div className="container">
@@ -130,18 +132,18 @@ const ForgetPassword = () => {
                         <div className="forget_icon">
                             <img src="assets/img/forgeticon.png" alt="" className="img-fluid" />
                         </div>
-                        <h2 className="title text-center">Forget Your Password ?</h2>
-                        <p className="text-center">Enter Your Phone Number Or Email Address Below To receive OTP For
-                            <br />Your Password Reset instruction
+                        <h2 className="title text-center">{t("Forget Your Password ?")}</h2>
+                        <p className="text-center">{t('Enter Your Phone Number Or Email Address Below To receive OTP For')}
+                            <br />{t('Your Password Reset instruction')}
                         </p>
 
                         {/* Toggle button for email or phone */}
                         <div className='text-center' style={{ "display": !hidden ? "block" : "none" }}>
                             <div className='mb-5' style={{ "display": !toggleBtn ? "block" : "none" }}>
-                                <button className='btn2 fs-5' onClick={toggleButton}>Reset Password With Email</button>
+                                <button className='btn2 fs-5' onClick={toggleButton}>{t("Reset Password With Email")}</button>
                             </div>
                             <div className='mb-5' style={{ "display": toggleBtn ? "block" : "none" }}>
-                                <button className='btn2 fs-5' onClick={toggleButton}>Reset Password With Phone</button>
+                                <button className='btn2 fs-5' onClick={toggleButton}>{t("Reset Password With Phone")}</button>
                             </div>
                         </div>
 
@@ -150,7 +152,7 @@ const ForgetPassword = () => {
                             <div className="forget" style={{ "display": !flag ? "block" : "none" }}>
                                 <div className="row" >
                                     <div className='row' style={{ "display": toggleBtn ? "block" : "none" }}>
-                                        <label htmlFor="contact" className="form-label label_for">Enter Your Registered Email ID</label>
+                                        <label htmlFor="contact" className="form-label label_for">{t("Enter Your Registered Email ID")}</label>
                                         <div className='col-12'>
                                             <input
                                                 type="text"
@@ -158,9 +160,9 @@ const ForgetPassword = () => {
                                                 id="contact"
                                                 name="contact"
                                                 aria-describedby="emailHelp"
-                                                placeholder="Email ID"
+                                                placeholder={t("Email ID")}
                                                 pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
-                                                title="Enter a valid email or phone number"
+                                                title={t("Enter a valid email or phone number")}
                                                 value={formValues.contact}
                                                 onChange={handleChange}
                                             // required
@@ -213,11 +215,11 @@ const ForgetPassword = () => {
 
                                     {/* Phone Number */}
                                     <div className='row' style={{ "display": !toggleBtn ? "block" : "none" }}>
-                                        <label htmlFor="contact" className="form-label label_for">Enter Your Registered Phone Number</label>
+                                        <label htmlFor="contact" className="form-label label_for">{t("Enter Your Registered Phone Number")}</label>
                                         <div className='col-12'>
                                             <PhoneInput
                                                 inputProps={{ required: true }}
-                                                placeholder="Enter Your Phone Number"
+                                                placeholder={t("Enter Your Phone Number")}
                                                 country={"cm"}
                                                 enableSearch={true}
                                                 value={phone.phone}
@@ -233,22 +235,22 @@ const ForgetPassword = () => {
                                         type="submit"
                                         className={(phone?.length || formValues?.contact?.length) ? active : deactive}
                                         disabled={(phone?.length || formValues?.contact?.length) ? false : true}
-                                    >Send OTP</button>
+                                    >{t("Send")} {t("OTP")}</button>
                                 </div>
                             </div>
 
                             {/* OTP */}
                             <div className="forget" style={{ "display": flag ? "block" : "none" }}>
-                                <label htmlFor="otp" className="form-label label_style">OTP</label>
+                                <label htmlFor="otp" className="form-label label_style">{t("OTP")}</label>
                                 <input
                                     type="tel"
                                     className="form-control form_input"
                                     id="otp"
                                     name="otp"
                                     aria-describedby="emailHelp"
-                                    placeholder="Enter OTP Here"
+                                    placeholder={t("Enter OTP Here")}
                                     pattern="[0-9]{6}"
-                                    title="Accept Numbers Only"
+                                    title={t("Accept Numbers Only")}
                                     value={otp.otp}
                                     onChange={(e) => setOtp({ ...otp, [e.target.name]: e.target.value })}
                                     maxLength={6}
@@ -260,7 +262,7 @@ const ForgetPassword = () => {
                                         type="submit"
                                         className={(otp?.otp?.length) === 6 ? active : deactive}
                                         disabled={(otp?.otp?.length) === 6 ? false : true}
-                                    >Verify</button>
+                                    >{t("Verify")}</button>
                                 </div>
                             </div>
                         </div>
@@ -269,14 +271,14 @@ const ForgetPassword = () => {
                             <div className="forget ">
                                 {/* New Password */}
                                 <div className="mb-5" style={{ "display": hidden ? "block" : "none" }}>
-                                    <label htmlFor="newpassword" className="form-label label_style">New Password</label>
+                                    <label htmlFor="newpassword" className="form-label label_style">{t("New Password")}</label>
                                     <input
                                         type="password"
                                         className="form-control form_input"
                                         id="newpassword"
                                         name="newpassword"
                                         aria-describedby="emailHelp"
-                                        placeholder="Enter New Password Here"
+                                        placeholder={t("Enter New Password Here")}
                                         value={password?.newpassword}
                                         onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                                         required
@@ -286,14 +288,14 @@ const ForgetPassword = () => {
 
                             {/* Re Enter Password */}
                             <div className="forget" style={{ "display": hidden ? "block" : "none" }}>
-                                <label htmlFor="confirmPassword" className="form-label label_style">Re Enter Password</label>
+                                <label htmlFor="confirmPassword" className="form-label label_style">{t("Re Enter Password")}</label>
                                 <input
                                     type="password"
                                     className="form-control form_input"
                                     id="confirmPassword"
                                     name="confirmPassword"
                                     aria-describedby="emailHelp"
-                                    placeholder="Re Enter New Password Here"
+                                    placeholder={t("Re Enter New Password Here")}
                                     value={password?.confirmPassword}
                                     onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
                                 />
@@ -303,7 +305,7 @@ const ForgetPassword = () => {
 
                             {/* Button */}
                             <div className="text-center">
-                                <button type="submit" className="btn_one" style={{ "margin": "30px 0 30px 0" }} onClick={onSubmit}>Recover Password</button>
+                                <button type="submit" className="btn_one" style={{ "margin": "30px 0 30px 0" }} onClick={onSubmit}>{t("Recover Password")}</button>
                             </div>
                         </div>
                     </div>

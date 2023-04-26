@@ -7,10 +7,12 @@ import { clearOrderedData, emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const baseUrl = process.env.REACT_APP_NODE_HOST
 
 const Cart = () => {
+  const { t } = useTranslation()
   const { cart_data, update_status, delete_status, loading } = useSelector((state) => state.cartslice)
   const dispatch = useDispatch()
   const cartLength = cart_data?.length
@@ -109,12 +111,12 @@ const Cart = () => {
           <div className="container pt-5">
             <div className="bred">
               <div className="product_title_top">
-                <h3>Your Cart Items</h3>
+                <h3>{t("Your Cart Items")}</h3>
               </div>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
-                  <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                  <li className="breadcrumb-item active" aria-current="page">Cart</li>
+                  <li className="breadcrumb-item"><Link to="/">{t("Home")}</Link></li>
+                  <li className="breadcrumb-item active" aria-current="page">{t("Cart")}</li>
                 </ol>
               </nav>
             </div>
@@ -147,9 +149,9 @@ const Cart = () => {
                                 </div>
                               </Link>
                               <div className="other_info">
-                                <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
+                                <p className="amount fw-bold text-dark">{t("Item Quantity")} : {item?.resp?.quantity}</p>
                                 {/* Calculation of discounted price */}
-                                <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}&nbsp;
+                                <p className="tic_price fw-bold text-dark">{t("Price Of Ticket")} : {token ? currency_symbol : generalCurrency_symbol}&nbsp;
                                   {
                                     (Number(item?.resp?.round_info?._price - ((item?.resp?.round_info?._price * item?.resp?.round_info?._dis) / 100)) * item?.resp?.quantity).toFixed(2)
                                   }
@@ -157,7 +159,7 @@ const Cart = () => {
                               </div>
                               <div className="date_result">
                                 {/* Calculating the data */}
-                                <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
+                                <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>{t("Result on")} <span className="fw-bold">
                                   {new Date(item?.resp?.round_info?._time).toLocaleString('en-US', {
                                     month: 'short',
                                     day: '2-digit',
@@ -184,7 +186,7 @@ const Cart = () => {
                       :
                       <div className='text-center' >
                         <img loading="lazy" src="/assets/img/emptycart.png" alt="" />
-                        <h2>Your Cart Is Empty</h2>
+                        <h2>{t("Your Cart Is Empty")}</h2>
                       </div>
 
                   }
@@ -193,11 +195,11 @@ const Cart = () => {
                 {
                   cart_data?.length > 0 ?
                     <div className="placeorder_area sticky">
-                      <Link to="/placeorder" onClick={() => dispatch(emptyBuyNow())} className="orderplace">Place Order</Link>
+                      <Link to="/placeorder" onClick={() => dispatch(emptyBuyNow())} className="orderplace">{t("Place Order")}</Link>
                     </div>
                     :
                     <div className="placeorder_area sticky">
-                      <button disabled>No item left to place order</button>
+                      <button disabled>{t("No item left to place order")}</button>
                     </div>
                 }
 
@@ -206,12 +208,12 @@ const Cart = () => {
               {/* Purchase Summery Section */}
               <div className="col-md-4">
                 <div className="price_area_wrapper">
-                  <h3 className="price_title">Purchase Summary</h3>
+                  <h3 className="price_title">{t("Purchase Summary")}</h3>
                   <div className="price_inner">
 
                     {/* Total Price calculation */}
                     <div className="price_item borderbottom">
-                      <h4 className="price_text">Price <span> ({cart_data?.length} Item):</span></h4>
+                      <h4 className="price_text">{t("Price")} <span> ({cart_data?.length} {t("Item")}):</span></h4>
                       <h6 className="price_value">
                         {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}&nbsp;
                         {(amount.subtotal).toFixed(2)}
@@ -220,7 +222,7 @@ const Cart = () => {
 
                     {/* Discount Calculation */}
                     <div className="price_item borderbottom">
-                      <h4 className="price_text">Total Discount :</h4>
+                      <h4 className="price_text">{t("Total Discount")} :</h4>
                       <h6 className="price_value text-success">
                         {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}&nbsp;-</span> : 0}
                         {(amount.discount).toFixed(2)}
@@ -229,7 +231,7 @@ const Cart = () => {
 
                     {/* Sub Total calculation */}
                     <div className="price_item mt-5">
-                      <h4 className="price_text">Total Payables:</h4>
+                      <h4 className="price_text">{t("Total Payables")}:</h4>
                       <h6 className="price_value">
                         {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}&nbsp;
                         {(amount.total).toFixed(2)}

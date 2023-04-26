@@ -360,10 +360,6 @@ input:-webkit-autofill:active {
 }
 
 
-
-
-
-
 .heading_form {
 	font-size: 2rem;
 	color: var(--text-color);
@@ -377,7 +373,7 @@ input:-webkit-autofill:active {
 }
 
 .form_areas {
-	padding: 1rem 4rem;
+	padding: 1rem;
 }
 
 .label_style {

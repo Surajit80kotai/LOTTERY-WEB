@@ -152,7 +152,7 @@ const NavBar = () => {
             {/* Language icon to see the dropdown */}
             <div style={{ display: toggle ? "inline" : "none", marginRight: "10px" }}>
               <Link to="#" onClick={() => setToggle(false)}>
-                <i className="fa-solid fa-language" style={{ color: "#f9772b", fontSize: "22px" }}></i>
+                <i className="fa-solid fa-language" style={{ color: "#ffffff", fontSize: "22px" }}></i>
               </Link>
             </div>
 

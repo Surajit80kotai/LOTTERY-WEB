@@ -8,9 +8,11 @@ import { clearOrderedData, emptyBuyNow, itemBuyNow, placeOrder } from '../servic
 import PreLoader from '../components/core/preloader/PreLoader';
 import { emptyCart } from '../services/slice/CartSlice';
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency';
+import { useTranslation } from 'react-i18next';
 
 
 const PlaceOrder = () => {
+    const { t } = useTranslation()
     // State for price calculation
     const [amount, setAmount] = useState({ subtotal: 0, discount: 0, total: 0 })
     const navigate = useNavigate()
@@ -162,12 +164,12 @@ const PlaceOrder = () => {
                     <div className="container pt-5">
                         <div className="bred">
                             <div className="product_title_top">
-                                <h3>Payment For Your Order</h3>
+                                <h3>{t("Payment For Your Order")}</h3>
                             </div>
                             <nav aria-label="breadcrumb">
                                 <ol className="breadcrumb">
-                                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                                    <li className="breadcrumb-item active" aria-current="page">Checkout</li>
+                                    <li className="breadcrumb-item"><Link to="/">{t("Home")}</Link></li>
+                                    <li className="breadcrumb-item active" aria-current="page">{t("Checkout")}</li>
                                 </ol>
                             </nav>
 
@@ -198,8 +200,8 @@ const PlaceOrder = () => {
                                                         </div>
                                                     </Link>
                                                     <div className="other_info">
-                                                        <p className="amount fw-bold text-dark">Item Quantity : {buyNowQty}</p>
-                                                        <p className="tic_price fw-bold text-dark">Price Of Ticket :
+                                                        <p className="amount fw-bold text-dark">{t("Item Quantity")} : {buyNowQty}</p>
+                                                        <p className="tic_price fw-bold text-dark">{t("Price Of Ticket")} :
                                                             {token ? currency_symbol : generalCurrency_symbol}
                                                             &nbsp;
                                                             {
@@ -210,7 +212,7 @@ const PlaceOrder = () => {
                                                         </p>
                                                     </div>
                                                     <div className="date_result">
-                                                        <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
+                                                        <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>{t("Result on")} <span className="fw-bold">
                                                             {new Date(buy_now_data?.product_info?.round_info?._time).toLocaleString('en-US', {
                                                                 month: 'short',
                                                                 day: '2-digit',
@@ -248,15 +250,15 @@ const PlaceOrder = () => {
                                                                         </div>
                                                                     </Link>
                                                                     <div className="other_info">
-                                                                        <p className="amount fw-bold text-dark">Item Quantity : {item?.resp?.quantity}</p>
-                                                                        <p className="tic_price fw-bold text-dark">Price Of Ticket : {token ? currency_symbol : generalCurrency_symbol}&nbsp;
+                                                                        <p className="amount fw-bold text-dark">{t("Item Quantity")} : {item?.resp?.quantity}</p>
+                                                                        <p className="tic_price fw-bold text-dark">{t("Price Of Ticket")} : {token ? currency_symbol : generalCurrency_symbol}&nbsp;
                                                                             {
                                                                                 (Number((item?.resp?.round_info?._price) - (((item?.resp?.round_info?._price) * (item?.resp?.round_info?._dis)) / 100)) * (item?.resp?.quantity)).toFixed(2)
                                                                             }
                                                                         </p>
                                                                     </div>
                                                                     <div className="date_result">
-                                                                        <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>Result on <span className="fw-bold">
+                                                                        <h5><span><img loading="lazy" src="/assets/img/3135783 1.png" alt="" /></span>{t("Result on")} <span className="fw-bold">
                                                                             {new Date(item?.resp?.round_info?._time).toLocaleString('en-US', {
                                                                                 month: 'short',
                                                                                 day: '2-digit',
@@ -271,7 +273,7 @@ const PlaceOrder = () => {
                                                     :
                                                     <div className='text-center' >
                                                         <img loading="lazy" src="/assets/img/emptycart.png" alt="" />
-                                                        <h2>Your Order List Is Empty</h2>
+                                                        <h2>{t("Your Order List Is Empty")}</h2>
                                                     </div>
 
                                             }
@@ -286,24 +288,24 @@ const PlaceOrder = () => {
                                         <div className="">
                                             <div className="purches_sum fixed_right">
                                                 <div className="price_area_wrapper ">
-                                                    <h3 className="price_title">Purchase Summary</h3>
+                                                    <h3 className="price_title">{t("Purchase Summary")}</h3>
                                                     <div className="price_inner">
                                                         <div className="price_item borderbottom">
-                                                            <h4 className="price_text">Price <span> ({buy_now_data?.product_info?.quantity} Item):</span></h4>
+                                                            <h4 className="price_text">{t("Price")} <span> ({buy_now_data?.product_info?.quantity} {t("Item")}):</span></h4>
                                                             <h6 className="price_value">
                                                                 {buy_now_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
                                                                 &nbsp;{buy_now_data?.amount ? (buy_now_data?.amount?.subtotal * buyNowQty).toFixed(2) : 0}
                                                             </h6>
                                                         </div>
                                                         <div className="price_item mb-5">
-                                                            <h4 className="price_text">Total Discount :</h4>
+                                                            <h4 className="price_text">{t("Total Discount")} :</h4>
                                                             <h6 className="price_value text-success">
                                                                 {buy_now_data ? <span>&nbsp;-{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
                                                                 {buy_now_data?.amount ? (buy_now_data?.amount?.discount * buyNowQty).toFixed(2) : 0}
                                                             </h6>
                                                         </div>
                                                         <div className="price_item mt-5">
-                                                            <h4 className="price_text">Total Payables:</h4>
+                                                            <h4 className="price_text">{t("Total Payables")}:</h4>
                                                             <h6 className="price_value">
                                                                 {buy_now_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
 
@@ -318,24 +320,24 @@ const PlaceOrder = () => {
                                         <div className="">
                                             <div className="purches_sum fixed_right">
                                                 <div className="price_area_wrapper ">
-                                                    <h3 className="price_title">Purchase Summary</h3>
+                                                    <h3 className="price_title">{t("Purchase Summary")}</h3>
                                                     <div className="price_inner">
                                                         <div className="price_item borderbottom">
-                                                            <h4 className="price_text">Price <span> ({cart_data?.length} Item):</span></h4>
+                                                            <h4 className="price_text">{t("Price")} <span> ({cart_data?.length} {t("Item")}):</span></h4>
                                                             <h6 className="price_value">
                                                                 {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
                                                                 &nbsp;{(amount.subtotal).toFixed(2)}
                                                             </h6>
                                                         </div>
                                                         <div className="price_item mb-5">
-                                                            <h4 className="price_text">Total Discount :</h4>
+                                                            <h4 className="price_text">{t("Total Discount")} :</h4>
                                                             <h6 className="price_value text-success">
                                                                 {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}&nbsp;-</span> : 0}
                                                                 {(amount.discount).toFixed(2)}
                                                             </h6>
                                                         </div>
                                                         <div className="price_item mt-5">
-                                                            <h4 className="price_text">Total Payables:</h4>
+                                                            <h4 className="price_text">{t("Total Payables")}:</h4>
                                                             <h6 className="price_value">
                                                                 {cart_data ? <span>{token ? currency_symbol : generalCurrency_symbol}</span> : 0}
 
@@ -352,7 +354,7 @@ const PlaceOrder = () => {
 
                                     {/* <!-- payment information --> */}
                                     <div className="delivery_address">
-                                        <h2 className="mb-2">Payment</h2>
+                                        <h2 className="mb-2">{t("Payment")}</h2>
                                         <hr />
                                     </div>
                                     <div className="payment_form mt-2">
@@ -363,7 +365,7 @@ const PlaceOrder = () => {
                                                 <div className="upi_one">
                                                     <div className="form-check form-check-inline">
                                                         <label className="form-check-label" htmlFor="inlineRadio1">
-                                                            <span className='fw-bold fs-3'>Wallet Balance&nbsp;:</span>&nbsp;&nbsp;
+                                                            <span className='fw-bold fs-3'>{t("Wallet Balance")}&nbsp;:</span>&nbsp;&nbsp;
                                                             {
                                                                 (balance?.balance)?.toFixed(2) > 0 ?
                                                                     <span className="upi_icon fw-bolder fs-4">{token ? currency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</span> :
@@ -377,13 +379,13 @@ const PlaceOrder = () => {
                                                     (buy_now_data?.amount?.total) ?
                                                         (Number((buy_now_data?.amount?.total * buyNowQty).toFixed(2))) > balance?.balance?.toFixed(2) ?
                                                             <div className="alert alert-danger mt-2  fs-4" role="alert">
-                                                                <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
+                                                                <span><i className="fas fa-balance-scale-right"></i></span> {t("Insufficient Wallet Balance")}
                                                             </div>
                                                             : null
                                                         :
                                                         (Number((amount?.total)?.toFixed(2))) > balance?.balance?.toFixed(2) ?
                                                             <div className="alert alert-danger mt-2  fs-4" role="alert">
-                                                                <span><i className="fas fa-balance-scale-right"></i></span> Insufficient Wallet Balance
+                                                                <span><i className="fas fa-balance-scale-right"></i></span> {t("Insufficient Wallet Balance")}
                                                             </div>
                                                             : null
                                                 }
@@ -401,12 +403,12 @@ const PlaceOrder = () => {
                                         {
                                             (buy_now_data?.amount?.total) ?
                                                 (Number((buy_now_data?.amount?.total * buyNowQty).toFixed(2))) > balance?.balance?.toFixed(2) ?
-                                                    <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
-                                                    : <button onClick={procced} className="btn2">Procced</button>
+                                                    <Link to={`/wallet/${dueAmount}`} className="btn2">{t("Recharge Wallet")}</Link>
+                                                    : <button onClick={procced} className="btn2">{t("Procced")}</button>
                                                 :
                                                 (Number((amount?.total)?.toFixed(2))) > balance?.balance?.toFixed(2) ?
-                                                    <Link to={`/wallet/${dueAmount}`} className="btn2">Recharge Wallet</Link>
-                                                    : <button onClick={procced} className="btn2">Procced</button>
+                                                    <Link to={`/wallet/${dueAmount}`} className="btn2">{t("Recharge Wallet")}</Link>
+                                                    : <button onClick={procced} className="btn2">{t("Procced")}</button>
                                         }
                                         {/* {
                                             ((amount?.total)?.toFixed(2) && (buy_now_data?.amount?.total * buyNowQty).toFixed(2) > balance?.balance) ?

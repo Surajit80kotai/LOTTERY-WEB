@@ -9,8 +9,10 @@ import { clearVerifyOtp, registerOTP, storePhoneNumber, verifyOTP } from '../ser
 import { getPhoneCode } from '../services/slice/CountryStateSlice'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { useTranslation } from 'react-i18next'
 
 const VerifyPhone = () => {
+    const { t } = useTranslation()
     const [phone, setPhone] = useState({ phone: "" })
     // const [phone, setPhone] = useState({ phone_code: "", phone: "" })
     const [otp, setOtp] = useState({ otp: "" })
@@ -98,7 +100,7 @@ const VerifyPhone = () => {
             <main className="main">
                 {/* Back to home button */}
                 <Link className='text-secondary' to='/'>
-                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>{t('Home')}</h3>
                 </Link>
 
                 <div className="wrapper_area margin-top">
@@ -106,14 +108,14 @@ const VerifyPhone = () => {
 
                         <div className="right_part">
                             <div className="right_top">
-                                <h2 className="heading_form mt-3">SIGN UP</h2>
+                                <h2 className="heading_form mt-3">{t('SIGN UP')}</h2>
                             </div>
                             <div className="form_area mt-5">
                                 <div>
 
                                     {/* Phone Number */}
                                     <div className="row d-flex mb-5" style={{ "display": !flag ? "block" : "none" }}>
-                                        <label htmlFor="phone" className="form-label label_style">Verify Your Phone Number Here</label>
+                                        <label htmlFor="phone" className="form-label label_style">{t('Verify Your Phone Number Here')}</label>
 
                                         {/* <div className='col-2' style={{ "width": "18%" }}>
                                             <select
@@ -158,7 +160,7 @@ const VerifyPhone = () => {
 
                                         <PhoneInput
                                             inputProps={{ required: true }}
-                                            placeholder="Enter Your Phone Number"
+                                            placeholder={t("Enter Your Phone Number")}
                                             country={"cm"}
                                             enableSearch={true}
                                             value={phone.phone}
@@ -172,21 +174,21 @@ const VerifyPhone = () => {
                                             type="submit"
                                             className={(phone?.length > 8) ? active : deactive}
                                             disabled={(phone?.length > 8) ? false : true}
-                                        >Send OTP</button>
+                                        >{t('Send')} {t('OTP')}</button>
                                     </div>
 
                                     {/* OTP */}
                                     <div className="mb-5" style={{ "display": flag ? "block" : "none" }}>
-                                        <label htmlFor="otp" className="form-label label_style">OTP</label>
+                                        <label htmlFor="otp" className="form-label label_style">{t('OTP')}</label>
                                         <input
                                             type="tel"
                                             className="form-control form_input"
                                             id="otp"
                                             name="otp"
                                             aria-describedby="emailHelp"
-                                            placeholder="Enter OTP Here"
+                                            placeholder={t("Enter OTP Here")}
                                             pattern="[0-9]{6}"
-                                            title="Accept Numbers Only"
+                                            title={t("Accept Numbers Only")}
                                             value={otp.otp}
                                             onChange={(e) => setOtp({ ...otp, [e.target.name]: e.target.value })}
                                             maxLength={6}
@@ -200,7 +202,7 @@ const VerifyPhone = () => {
                                             type="submit"
                                             className={(otp?.otp?.length) === 6 ? active : deactive}
                                             disabled={(otp?.otp?.length) === 6 ? false : true}
-                                        >Verify</button>
+                                        >{t('Verify')}</button>
                                     </div>
                                 </div>
                             </div>
@@ -209,9 +211,9 @@ const VerifyPhone = () => {
                             <div className="company_logo text-center">
                                 <Link to="/"><img src="/assets/img/eshacplaylogo.png" alt="" className="img-fluid" /></Link>
                             </div>
-                            <h2 className="log_title">Welcome To ESHAC-PLAY</h2>
-                            <h6 className="dont">Already Have An Account?</h6>
-                            <Link to="/login" className="Signup">Sing In</Link>
+                            <h2 className="log_title">{t('Welcome To ESHAC-PLAY')}</h2>
+                            <h6 className="dont">{t('Already Have An Account?')}</h6>
+                            <Link to="/login" className="Signup">{t('Sing In')}</Link>
                         </div>
                     </div>
                 </div>

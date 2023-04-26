@@ -5,11 +5,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { fetchCountry, fetchStates } from '../services/slice/CountryStateSlice';
 import PreLoader from '../components/core/preloader/PreLoader';
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next';
 
 
 
 
 const SignUp = () => {
+    const { t } = useTranslation()
     window.localStorage.removeItem("phone_number")
     const { signupErr, loading } = useSelector((state) => state.authslice)
     const { countryData } = useSelector((state) => state.countrystateslice)
@@ -85,28 +87,28 @@ const SignUp = () => {
             <main className="main">
                 {/* Back to home button */}
                 <Link className='text-secondary' to='/'>
-                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>{t('Home')}</h3>
                 </Link>
 
                 <div className="wrapper_area margin-top-5">
                     <div className="log_area">
                         <div className="right_part">
                             <div className="right_top">
-                                <h2 className="heading_form mt-3">SIGN UP</h2>
+                                <h2 className="heading_form mt-3">{t('SIGN UP')}</h2>
                             </div>
                             <div className="form_areas">
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
 
                                     {/* Full name */}
                                     <div className="m_gap">
-                                        <label htmlFor="full_name" className="form-label label_style">Full Name <span className="text-danger">*</span></label>
+                                        <label htmlFor="full_name" className="form-label label_style">{t('Full Name')} <span className="text-danger">*</span></label>
                                         <input
                                             type="text"
                                             className="form-control form_input"
                                             id="full_name"
                                             name="full_name"
-                                            placeholder="Enter Your Full Name"
-                                            title="Accept Alphabets & Whitespaces Only"
+                                            placeholder={t("Enter Your Full Name")}
+                                            title={t("Accept Alphabets & Whitespaces Only")}
                                             pattern='^[a-zA-Z ]+$'
                                             aria-describedby="emailHelp"
                                             value={full_name}
@@ -119,7 +121,7 @@ const SignUp = () => {
 
                                     {/* Email */}
                                     <div className="m_gap">
-                                        <label htmlFor="emailid" className="form-label label_style">Email</label>
+                                        <label htmlFor="emailid" className="form-label label_style">{t('Email')}</label>
                                         <input
                                             type="email"
                                             className="form-control form_input"
@@ -127,8 +129,8 @@ const SignUp = () => {
                                             name="email"
                                             aria-describedby="emailHelp"
                                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                            title="Accept Email Format Only"
-                                            placeholder="Enter Your Email Id"
+                                            title={t("Accept Email Format Only")}
+                                            placeholder={t("Enter Your Email Id")}
                                             value={email}
                                             onChange={handleChange}
                                         />
@@ -162,10 +164,10 @@ const SignUp = () => {
                                         {/* Date Of birth */}
                                         <div className="col-md-6">
                                             <div className="m_gap dob">
-                                                <label htmlFor="dob" className="form-label label_style">Date Of Birth <span className="text-danger">*</span></label>
+                                                <label htmlFor="dob" className="form-label label_style">{t('Date Of Birth')} <span className="text-danger">*</span></label>
                                                 {/* <!-- <input type="date" value="2017-01-01" min="1960-01-01" max="2019-01-01" className="form-control form_input"> --> */}
                                                 <input
-                                                    placeholder="Select your date"
+                                                    placeholder={t("Select your date")}
                                                     pattern="^(0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19|20)\\d\\d$"
                                                     title="Accept Date Format Only"
                                                     type="date"
@@ -184,7 +186,7 @@ const SignUp = () => {
                                         {/* Country */}
                                         <div className="col-md-6">
                                             <div className="m_gap">
-                                                <label htmlFor="Country" className="form-label label_style">Country <span className="text-danger">*</span></label>
+                                                <label htmlFor="Country" className="form-label label_style">{t('Country')} <span className="text-danger">*</span></label>
                                                 <select
                                                     className="form-select form_input form_select"
                                                     aria-label="Default select example"
@@ -194,7 +196,7 @@ const SignUp = () => {
                                                     onChange={handleChange}
                                                     required
                                                 >
-                                                    <option value="" disabled>Select Your Country</option>
+                                                    <option value="" disabled>{t('Select Your Country')}</option>
                                                     {
                                                         countryData?.map((country) => {
                                                             return (
@@ -215,7 +217,7 @@ const SignUp = () => {
                                         {/* Gender */}
                                         <div className="col-md-6">
                                             <div className="m_gap">
-                                                <label htmlFor="gender" className="form-label label_style">Gender <span className="text-danger">*</span></label>
+                                                <label htmlFor="gender" className="form-label label_style">{t('Gender')} <span className="text-danger">*</span></label>
                                                 <select
                                                     className="form-select form_input form_select"
                                                     aria-label="Default select example"
@@ -225,9 +227,9 @@ const SignUp = () => {
                                                     onChange={handleChange}
                                                     required
                                                 >
-                                                    <option value="" disabled>Select Your Gender</option>
-                                                    <option value="MALE">MALE</option>
-                                                    <option value="FEMALE">FEMALE</option>
+                                                    <option value="" disabled>{t('Select Your Gender')}</option>
+                                                    <option value="MALE">{t('MALE')}</option>
+                                                    <option value="FEMALE">{t('FEMALE')}</option>
                                                 </select>
                                                 {/* Gender Vaidation */}
                                                 <p className='text-danger fs-4 mt-2'>{signupErr?.gender?.message}</p>
@@ -238,11 +240,11 @@ const SignUp = () => {
                                         {/* Register with promo code */}
                                         <div className="col-md-6">
                                             <div className="m_gap dob">
-                                                <label htmlFor="promo_code" className="form-label label_style">Promo Code</label>
+                                                <label htmlFor="promo_code" className="form-label label_style">{t('Promo Code')}</label>
                                                 {/* <!-- <input type="date" value="2017-01-01" min="1960-01-01" max="2019-01-01" className="form-control form_input"> --> */}
                                                 <input
                                                     type="text"
-                                                    placeholder="Enter Promo Code"
+                                                    placeholder={t("Enter Promo Code")}
                                                     name="promo_code"
                                                     id="promo_code"
                                                     className="form-control form_input"
@@ -255,13 +257,13 @@ const SignUp = () => {
                                         {/* Create Password*/}
                                         <div className="col-md-6">
                                             <div className="m_gap mb-3">
-                                                <label htmlFor="password" className="form-label label_style">Create Password <span className="text-danger">*</span></label>
+                                                <label htmlFor="password" className="form-label label_style">{t('Create Password')} <span className="text-danger">*</span> </label>
                                                 <input
                                                     type="password"
                                                     className="form-control form_input"
                                                     id="password"
                                                     name="password"
-                                                    placeholder="Create Your Password"
+                                                    placeholder={t("Create Your Password")}
                                                     aria-describedby="emailHelp"
                                                     value={password}
                                                     onChange={handleChange}
@@ -273,14 +275,14 @@ const SignUp = () => {
                                         {/* Confirm Password */}
                                         <div className="col-md-6">
                                             <div className="m_gap mb-3">
-                                                <label htmlFor="confirmPassword" className="form-label label_style">Confirm Password <span className="text-danger">*</span></label>
+                                                <label htmlFor="confirmPassword" className="form-label label_style">{t('Confirm Password')} <span className="text-danger">*</span></label>
                                                 <input
                                                     type="password"
                                                     className="form-control form_input"
                                                     id="confirmPassword"
                                                     name="confirmPassword"
                                                     aria-describedby="emailHelp"
-                                                    placeholder="Confrim Password"
+                                                    placeholder={t("Confirm Password")}
                                                     value={confirmPassword}
                                                     onChange={handleChange}
                                                     required
@@ -292,7 +294,7 @@ const SignUp = () => {
                                     </div>
 
                                     <div className="text-center">
-                                        <button type="submit" className="btn_one">Register</button>
+                                        <button type="submit" className="btn_one">{t('Register')}</button>
                                     </div>
                                 </form>
                             </div>
@@ -301,9 +303,9 @@ const SignUp = () => {
                             <div className="company_logo text-center">
                                 <Link to="/"><img src="/assets/img/eshacplaylogo.png" alt="" className="img-fluid" /></Link>
                             </div>
-                            <h2 className="log_title">Welcome To ESHAC-PLAY</h2>
-                            <h6 className="dont">Already Have An Account?</h6>
-                            <Link to="/login" className="Signup">Sing In</Link>
+                            <h2 className="log_title">{t('Welcome To ESHAC-PLAY')}</h2>
+                            <h6 className="dont">{t('Already Have An Account?')}</h6>
+                            <Link to="/login" className="Signup">{t('Sing In')}</Link>
                         </div>
                     </div>
                 </div>
