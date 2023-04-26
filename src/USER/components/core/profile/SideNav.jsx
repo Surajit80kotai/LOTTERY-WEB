@@ -1,7 +1,9 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const SideNav = () => {
+    const { t } = useTranslation()
     return (
         <>
             <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme">
@@ -13,7 +15,7 @@ const SideNav = () => {
                     <li className="menu-item active">
                         <Link to="/profile" className="menu-link">
                             <i className="menu-icon fas fa-user"></i>
-                            <div data-i18n="Analytics">My Profile</div>
+                            <div data-i18n="Analytics">{t("My Profile")}</div>
                         </Link>
                     </li>
 
@@ -21,7 +23,7 @@ const SideNav = () => {
                     <li className="menu-item ">
                         <Link to="/wallet" className="menu-link">
                             <i className="menu-icon fas fa-wallet"></i>
-                            <div data-i18n="Analytics">Wallet</div>
+                            <div data-i18n="Analytics">{t("Wallet")}</div>
                         </Link>
                     </li>
 
@@ -29,7 +31,7 @@ const SideNav = () => {
                     <li className="menu-item ">
                         <Link to="/orderhistory" className="menu-link">
                             <i className="menu-icon fas fa-history"></i>
-                            <div data-i18n="Analytics">Order History</div>
+                            <div data-i18n="Analytics">{t("Order History")}</div>
                         </Link>
                     </li>
                 </ul>

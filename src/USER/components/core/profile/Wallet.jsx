@@ -9,8 +9,10 @@ import PreLoader from '../preloader/PreLoader';
 import SideNav from './SideNav';
 import WithdrawModal from '../../../modal/WithdrawModal';
 import MyPaypalButton from '../../../util/MyPaypalButton';
+import { useTranslation } from 'react-i18next';
 
 const Wallet = () => {
+    const { t } = useTranslation()
     const { dueAmount } = useParams()
     const newDueAmount = dueAmount ? dueAmount : ""
     const [formValue, setFormValue] = useState({ amount: newDueAmount })
@@ -88,7 +90,7 @@ const Wallet = () => {
                     {/* Right Side */}
                     <div className="content_wrapper">
                         <div className="paymentwallet_bg">
-                            <h1>Check Your Current Balance</h1>
+                            <h1>{t("Check Your Current Balance")}</h1>
                         </div>
 
                         <div className="container">
@@ -100,7 +102,7 @@ const Wallet = () => {
                                                 <div className="wallet_icon">
                                                     <i className="fas fa-wallet"></i>
                                                 </div>
-                                                <span>Payment Wallet</span>
+                                                <span>{t("Payment Wallet")}</span>
                                             </div>
                                             <div className="total_balns">
                                                 {/* withdraw Balance */}
@@ -111,7 +113,7 @@ const Wallet = () => {
 
                                                     <div>
                                                         {/* Total Balance */}
-                                                        <span>Total Balance</span>
+                                                        <span>{t("Total Balance")}</span>
                                                         {
                                                             balance?.balance > 0 ? <h5 className="total_amount">{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(balance?.balance)?.toFixed(2)}</h5> : <h5 className="total_amount">{userID ? currency_symbol : generalCurrency_symbol}&nbsp;0</h5>
                                                         }
@@ -122,8 +124,8 @@ const Wallet = () => {
 
                                         {/* Add money input */}
                                         <div className="payment_area_body">
-                                            <h4>ADD MONEY TO WALLET</h4>
-                                            <p className='fs-5' style={{ "color": "#f9772b" }}>Minimum Amount Should Be 100 or Higher*</p>
+                                            <h4>{t("ADD MONEY TO WALLET")}</h4>
+                                            <p className='fs-5' style={{ "color": "#f9772b" }}>{t("Minimum Amount Should Be 100 or Higher*")}</p>
                                             <form action="">
                                                 <div className="row">
                                                     <div className="col-md-6">
@@ -139,7 +141,7 @@ const Wallet = () => {
                                                                 value={formValue?.amount}
                                                                 onChange={handleChange}
                                                                 aria-describedby="emailHelp"
-                                                                placeholder="Enter amount"
+                                                                placeholder={t("Enter Amount")}
                                                                 autoComplete='off'
                                                             />
                                                         </div>
@@ -147,8 +149,8 @@ const Wallet = () => {
                                                     <div className="col-md-4">
                                                         {
                                                             formValue?.amount >= 100 ?
-                                                                <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Money</button>
-                                                                : <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled style={{ "backgroundColor": "#00000078" }}>Add Money</button>
+                                                                <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal">{t("Add Money")}</button>
+                                                                : <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled style={{ "backgroundColor": "#00000078" }}>{t("Add Money")}</button>
                                                         }
                                                     </div>
                                                 </div>
@@ -160,15 +162,15 @@ const Wallet = () => {
                                         {
                                             transaction_data?.length ?
                                                 <div className="transaction_area">
-                                                    <h1 className="text-center text-secondary tranhis">Transaction History</h1>
+                                                    <h1 className="text-center text-secondary tranhis">{t("Transaction History")}</h1>
                                                     <table className="table mt-4">
                                                         <thead className="table_head sticky-top ">
                                                             <tr>
-                                                                <th scope="col">Date</th>
-                                                                <th scope="col" colSpan={2}>Transaction ID</th>
-                                                                <th scope="col" colSpan={2}>Merchant</th>
-                                                                <th scope="col">Amount</th>
-                                                                <th scope="col">Status</th>
+                                                                <th scope="col">{t("Date")}</th>
+                                                                <th scope="col" colSpan={2}>{t("Transaction ID")}</th>
+                                                                <th scope="col" colSpan={2}>{t("Merchant")}</th>
+                                                                <th scope="col">{t("Amount")}</th>
+                                                                <th scope="col">{t("Status")}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -225,7 +227,7 @@ const Wallet = () => {
                                                                                         <span className='payment_logo'>
                                                                                             <img src="/assets/img/omcm.png" alt="" />
                                                                                         </span>
-                                                                                        Orange Money
+                                                                                        {t("Orange Money")}
                                                                                     </td>
                                                                                     :
                                                                                     item.payment_method === "MTNCM" ?
@@ -233,7 +235,7 @@ const Wallet = () => {
                                                                                             <span className='payment_logo'>
                                                                                                 <img src="/assets/img/mtncm.png" alt="" />
                                                                                             </span>
-                                                                                            MTN Mobile Money
+                                                                                            {t("MTN Mobile Money")}
                                                                                         </td>
                                                                                         :
                                                                                         item.payment_method === "VISAMCM" ?
@@ -241,7 +243,7 @@ const Wallet = () => {
                                                                                                 <span className='payment_logo'>
                                                                                                     <img src="/assets/img/visamcm.png" alt="" />
                                                                                                 </span>
-                                                                                                VISA/MasterCard
+                                                                                                {t("VISA/MasterCard")}
                                                                                             </td>
                                                                                             :
                                                                                             item.payment_method === null ?
@@ -249,14 +251,14 @@ const Wallet = () => {
                                                                                                     <span className='payment_logo'>
                                                                                                         <img src="/assets/img/cancel.png" alt="" />
                                                                                                     </span>
-                                                                                                    Transaction Pending or Cancelled
+                                                                                                    {t("Transaction Pending or Cancelled")}
                                                                                                 </td>
                                                                                                 :
                                                                                                 <td colSpan={2}>
                                                                                                     <span className='payment_logo'>
                                                                                                         <img src="/assets/img/pending.png" alt="" />
                                                                                                     </span>
-                                                                                                    Waiting For Payment
+                                                                                                    {t("Waiting For Payment")}
                                                                                                 </td>
                                                                             }
 
@@ -265,24 +267,24 @@ const Wallet = () => {
                                                                             <td>
                                                                                 {
                                                                                     (item.status_code === "627") ?
-                                                                                        <span className='text-danger'><i className="fa-solid fa-ban mx-3"></i>CANCELLED</span>
+                                                                                        <span className='text-danger'><i className="fa-solid fa-ban mx-3"></i>{t("CANCELLED")}</span>
                                                                                         :
                                                                                         // WAITING_CUSTOMER_PAYMENT
                                                                                         (item.status_code === "662") ?
-                                                                                            <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>PENDING</span>
+                                                                                            <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>{t("PENDING")}</span>
                                                                                             :
                                                                                             // WAITING_CUSTOMER_TO_VALIDATE
                                                                                             (item.status_code === "623") ?
-                                                                                                <span className='text-danger'><i className="fa-regular fa-clock mx-3"></i> TIME EXPIRED</span>
+                                                                                                <span className='text-danger'><i className="fa-regular fa-clock mx-3"></i> {t("TIME EXPIRED")}</span>
                                                                                                 // PAYMENT_FAILED
                                                                                                 : (item.status_code === "600") ?
-                                                                                                    <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>FAILED</span>
+                                                                                                    <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("FAILED")}</span>
                                                                                                     // SUCCES
                                                                                                     : (item.status_code === "00") ?
-                                                                                                        <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>SUCCESS</span>
+                                                                                                        <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
                                                                                                         :
                                                                                                         // TRANSACTION ENDED
-                                                                                                        <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>TRANSACTION ENDED</span>
+                                                                                                        <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
                                                                                 }
                                                                             </td>
 
@@ -293,7 +295,7 @@ const Wallet = () => {
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                : <h4 className='text-center fst-italic fw-semibold mt-2'>No Transaction History Present</h4>
+                                                : <h4 className='text-center fst-italic fw-semibold mt-2'>{t("No Transaction History Present")}</h4>
                                         }
                                     </div>
 
@@ -305,11 +307,11 @@ const Wallet = () => {
                             <div className="modal-dialog modal-dialog-centered modal-lg">
                                 <div className="modal-content">
                                     <div className="modal-header">
-                                        <h3>Add Money to Wallet</h3>
+                                        <h3>{t("Add Money to Wallet")}</h3>
                                         <h4>{userID ? currency_symbol : generalCurrency_symbol}{formValue?.amount}</h4>
                                     </div>
                                     <div className="modal-body">
-                                        <h4 className="option_title">Payment Option</h4>
+                                        <h4 className="option_title">{t("Payment Option")}</h4>
                                         <div className="payment_section">
 
                                             {/* Pay with Orange Pay */}
@@ -325,7 +327,7 @@ const Wallet = () => {
                                                     <div className="pay_icon">
                                                         <img src="/assets/img/orange.png" alt="" className="img-fluid" />
                                                     </div>
-                                                    <p className='my-4'>Pay with Orange Pay</p>
+                                                    <p className='my-4'>{t("Pay with Orange Pay")}</p>
                                                 </label>
 
                                             </div>
@@ -343,7 +345,7 @@ const Wallet = () => {
                                                     <div className="pay_icon">
                                                         <img src="/assets/img/mtn.png" alt="" className="img-fluid" />
                                                     </div>
-                                                    <p className='my-4'>Pay MTN Money</p>
+                                                    <p className='my-4'>{t("Pay MTN Money")}</p>
                                                 </label>
 
                                             </div>
@@ -361,7 +363,7 @@ const Wallet = () => {
                                                     <div className="pay_icon">
                                                         <img src="/assets/img/master.png" alt="" className="img-fluid" />
                                                     </div>
-                                                    <p className='my-4'>Pay with Master Card</p>
+                                                    <p className='my-4'>{t("Pay with VISA/Master Card")}</p>
                                                 </label>
                                             </div> */}
 
@@ -376,14 +378,14 @@ const Wallet = () => {
                                                 />
                                                 <div className='m-5'>
                                                     <MyPaypalButton amount={formValue?.amount} />
-                                                    <p className='my-4'>Pay with Paypal</p>
+                                                    <p className='my-4'>{t("Pay with Paypal")}</p>
                                                 </div>
                                                 {/* <label htmlFor="control_04">
                                                     <div className="pay_icon">
                                                         <div className="pay_icon">
                                                             <img src="/assets/img/paypal.png" alt="" className="img-fluid" />
                                                         </div>
-                                                        <p className='my-4'>Pay with Paypal</p>
+                                                        <p className='my-4'>{t("Pay with Paypal")}</p>
                                                     </div>
                                                 </label> */}
                                             </div>

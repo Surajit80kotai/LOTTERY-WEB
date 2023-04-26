@@ -6,10 +6,12 @@ import { updateProfile } from '../../../services/slice/UserSlice'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 // import { currency_symbol, generalCurrency_symbol, otherCurrency_symbol } from '../../../util/Currency'
 
 
 const MyProfile = () => {
+    const { t } = useTranslation()
     const { loading } = useSelector((state) => state.userslice)
     const user = JSON.parse(window.localStorage.getItem("user"))
     const date_of_birth = new Date(user?.dob)
@@ -103,7 +105,7 @@ const MyProfile = () => {
                     <div className="content_wrapper">
                         <div className="container">
                             <div className="user_information_area">
-                                <h3 className="user_title">Personal Information</h3>
+                                <h3 className="user_title">{t("Personal Information")}</h3>
                                 {/* <form method="post" encType='multipart/form-data'> */}
                                 <form>
                                     <div className="row mt-5">
@@ -119,7 +121,7 @@ const MyProfile = () => {
                                                         />
                                                         <label className="-label" htmlFor="file">
                                                             <span className="glyphicon glyphicon-camera"><i className="fa-regular fa-pen-to-square fs-3"></i></span>
-                                                            <span className='fs-5'>Change Image</span>
+                                                            <span className='fs-5'>{t("Change Image")}</span>
                                                         </label>
                                                         <input
                                                             className='in_disa'
@@ -164,7 +166,7 @@ const MyProfile = () => {
 
                                                     {/* Full Name */}
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="full_name" className="form-label label_style">Your Full Name</label>
+                                                        <label htmlFor="full_name" className="form-label label_style">{t("Your Full Name")}</label>
                                                         {
                                                             user ?
                                                                 user?.full_name ?
@@ -173,7 +175,7 @@ const MyProfile = () => {
                                                                         className="form-control form_input in_disa"
                                                                         id="full_name"
                                                                         name="full_name"
-                                                                        title="Accept Alphabets & Whitespaces Only"
+                                                                        title={t("Accept Alphabets & Whitespaces Only")}
                                                                         pattern='^[a-zA-Z ]+$'
                                                                         placeholder={user?.full_name}
                                                                         value={formValues.full_name}
@@ -196,7 +198,7 @@ const MyProfile = () => {
 
                                                     {/* Gender */}
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="gender" className="form-label label_style">Gender</label>
+                                                        <label htmlFor="gender" className="form-label label_style">{t("Gender")}</label>
                                                         {
                                                             user ?
                                                                 user?.gender ?
@@ -219,7 +221,7 @@ const MyProfile = () => {
                                                                         id="dob"
                                                                         name="dob"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Gender Is Not Mentioned"
+                                                                        placeholder={t("Gender Is Not Mentioned")}
                                                                         readOnly
                                                                         disabled
                                                                     />
@@ -232,7 +234,7 @@ const MyProfile = () => {
                                                 <div className="row">
                                                     {/* Email */}
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="email" className="form-label label_style">Email</label>
+                                                        <label htmlFor="email" className="form-label label_style">{t("Email")}</label>
                                                         {
                                                             user ?
                                                                 user.email ?
@@ -243,7 +245,7 @@ const MyProfile = () => {
                                                                         name="email"
                                                                         aria-describedby="emailHelp"
                                                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                                                        title="Accept Email Format Only"
+                                                                        title={t("Accept Email Format Only")}
                                                                         placeholder={user?.email}
                                                                         value={formValues?.email}
                                                                         onChange={handleChange} disabled
@@ -254,7 +256,7 @@ const MyProfile = () => {
                                                                         id="email"
                                                                         name="email"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Add Email ID"
+                                                                        placeholder={t("Add Email ID")}
                                                                         onChange={handleChange} disabled
                                                                     />
                                                                 : <input
@@ -272,7 +274,7 @@ const MyProfile = () => {
 
                                                     {/* Phone */}
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="phone" className="form-label label_style">Phone Number</label>
+                                                        <label htmlFor="phone" className="form-label label_style">{t("Phone Number")}</label>
                                                         {
                                                             user ?
                                                                 user?.phone ?
@@ -286,7 +288,7 @@ const MyProfile = () => {
                                                                         value={formValues?.phone}
                                                                         onChange={handleChange}
                                                                         pattern="[0-9]"
-                                                                        title="Enter a valid phone number"
+                                                                        title={t("Enter a valid phone number")}
                                                                         disabled
                                                                     />
                                                                     :
@@ -296,7 +298,7 @@ const MyProfile = () => {
                                                                         id="phone"
                                                                         name="phone"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Phone number did not registered"
+                                                                        placeholder={t("Phone number did not registered")}
                                                                         disabled
                                                                     />
                                                                 : null
@@ -307,7 +309,7 @@ const MyProfile = () => {
                                                 <div className="row">
                                                     {/* DOB */}
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="dob" className="form-label label_style">Date Of Birth</label>
+                                                        <label htmlFor="dob" className="form-label label_style">{t("Date Of Birth")}</label>
                                                         {
                                                             user ?
                                                                 user?.dob ?
@@ -330,7 +332,7 @@ const MyProfile = () => {
                                                                         id="dob"
                                                                         name="dob"
                                                                         aria-describedby="emailHelp"
-                                                                        placeholder="Birth date did not registered"
+                                                                        placeholder={t("Birth date did not registered")}
                                                                         readOnly
                                                                         disabled
                                                                     />
@@ -341,7 +343,7 @@ const MyProfile = () => {
 
                                                     {/* Country */}
                                                     <div className="col-md-6 mb-3">
-                                                        <label htmlFor="country" className="form-label label_style">Country</label>
+                                                        <label htmlFor="country" className="form-label label_style">{t("Country")}</label>
                                                         {
                                                             user ?
                                                                 user?.country ?
@@ -366,7 +368,7 @@ const MyProfile = () => {
                                                                         disabled
                                                                         readOnly
                                                                     >
-                                                                        <option readOnly>Country did not registered</option>
+                                                                        <option readOnly>{t("Country did not registered")}</option>
                                                                     </select>
                                                                 : null
                                                         }
@@ -381,14 +383,14 @@ const MyProfile = () => {
                                                         id="remEdit"
                                                         onClick={enabledEdit}
                                                         style={{ "display": showEditButton ? "block" : "none" }}
-                                                    ><i className="fas fa-edit"></i> Edit</button>
+                                                    ><i className="fas fa-edit"></i> {t("Edit")}</button>
                                                     <button
                                                         onClick={handleSubmit}
                                                         type="button"
                                                         className="btn2 hidden"
                                                         id="saveChanges"
                                                         style={{ "display": !showEditButton ? "block" : "none" }}
-                                                    >Save Changes</button>
+                                                    >{t("Save Changes")}</button>
 
                                                 </div>
 
