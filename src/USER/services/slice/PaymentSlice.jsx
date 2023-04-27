@@ -166,7 +166,7 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderDa
 // paypal onApprove
 export const savePaymentDetails = createAsyncThunk("/save-payment-details", async (newData, { rejectWithValue }) => {
     try {
-        const res = await SAVEPAYMNETDETAILS(newData)
+        const res = await SAVEPAYMNETDETAILS(newData, header)
         return res?.data
     } catch (err) {
         // console.log(err)

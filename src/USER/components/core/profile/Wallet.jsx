@@ -262,13 +262,20 @@ const Wallet = () => {
                                                                                                         </span>
                                                                                                         {t("Commission")}
                                                                                                     </td>
-                                                                                                    :
-                                                                                                    <td colSpan={2}>
-                                                                                                        <span className='payment_logo'>
-                                                                                                            <img src="/assets/img/pending.png" alt="" />
-                                                                                                        </span>
-                                                                                                        {t("Waiting For Payment")}
-                                                                                                    </td>
+                                                                                                    : item.merchant === "PayPal" ?
+                                                                                                        <td colSpan={2}>
+                                                                                                            <span className='payment_logo'>
+                                                                                                                <img src="/assets/img/paypal_logo.png" alt="" />
+                                                                                                            </span>
+                                                                                                            {t("PayPal")}
+                                                                                                        </td>
+                                                                                                        :
+                                                                                                        <td colSpan={2}>
+                                                                                                            <span className='payment_logo'>
+                                                                                                                <img src="/assets/img/pending.png" alt="" />
+                                                                                                            </span>
+                                                                                                            {t("Waiting For Payment")}
+                                                                                                        </td>
                                                                             }
 
                                                                             <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
@@ -291,13 +298,16 @@ const Wallet = () => {
                                                                                                     // SUCCES
                                                                                                     : (item.status_code === "00") ?
                                                                                                         <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
-                                                                                                        :
                                                                                                         // COMISSION
+                                                                                                        :
                                                                                                         item.type === "Commission" ?
                                                                                                             <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
-                                                                                                            :
-                                                                                                            // TRANSACTION ENDED
-                                                                                                            <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
+                                                                                                            // PAYAPL
+                                                                                                            : item.status === "APPROVED" ?
+                                                                                                                <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
+                                                                                                                :
+                                                                                                                // TRANSACTION ENDED
+                                                                                                                <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
                                                                                 }
                                                                             </td>
 

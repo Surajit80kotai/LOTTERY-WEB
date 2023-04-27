@@ -49,6 +49,7 @@ const MyPaypalButton = ({ amount }) => {
                             purchase_units: [
                                 {
                                     amount: {
+                                        currency_code: 'USD',
                                         value: amount,
                                     },
                                 },

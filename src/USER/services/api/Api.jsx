@@ -80,7 +80,7 @@ export const GETOTP = (phone, header) => API.post("/system/register/otp", phone,
 export const VERIFYOTP = (formData, header) => API.post("/system/register/otp/verify", formData, header)
 
 // save payment details
-export const SAVEPAYMNETDETAILS = (data) => API.post("/auth/save-payment-details", data)
+export const SAVEPAYMNETDETAILS = (data, header) => API.post("/auth/save-payment-details", data, header)
 
 
 // test API
