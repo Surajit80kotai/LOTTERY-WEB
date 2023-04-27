@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const HowToPlay = () => {
-
-
+    const { t } = useTranslation()
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -20,7 +20,7 @@ const HowToPlay = () => {
                     </div>
 
                     <div className="page_title">
-                        <h2>How to play</h2>
+                        <h2>{t("How to play")}</h2>
 
                     </div>
 
@@ -30,8 +30,8 @@ const HowToPlay = () => {
                     <div className="container">
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><Link to="/" className="text-color">Home</Link></li>
-                                <li className="breadcrumb-item active" aria-current="page">How to play</li>
+                                <li className="breadcrumb-item"><Link to="/" className="text-color">{t("Home")}</Link></li>
+                                <li className="breadcrumb-item active" aria-current="page">{t("How to play")}</li>
                             </ol>
                         </nav>
                     </div>
@@ -46,7 +46,7 @@ const HowToPlay = () => {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="ab_title">
-                                <h2 className="title_about text-center">How to play</h2>
+                                <h2 className="title_about text-center">{t("How to play")}</h2>
                             </div>
                             <div className="row mt-5">
                                 <div className="col-md-4">
@@ -56,8 +56,7 @@ const HowToPlay = () => {
                                         </div>
                                         <div className="step_details">
                                             <h6>
-                                                <Link to="/verifyphone">Sign-up</Link> for a
-                                                free account.
+                                                <Link to="/verifyphone">{t("Sign-up")}</Link> {t("for a free account")}.
                                             </h6>
                                         </div>
                                     </div>
@@ -68,9 +67,7 @@ const HowToPlay = () => {
                                             <img src="/assets/img/icon2.png" alt="" />
                                         </div>
                                         <div className="step_details">
-                                            <h6>
-                                                Choose a lottery and
-                                                <Link to="/">Buy Your Ticket</Link>
+                                            <h6>{t("Choose a lottery and")} <Link to="/">{t("Buy Your Ticket")}</Link>
                                             </h6>
                                         </div>
                                     </div>
@@ -81,9 +78,7 @@ const HowToPlay = () => {
                                             <img src="/assets/img/icon4.png" alt="" />
                                         </div>
                                         <div className="step_details">
-                                            <h6>
-                                                We will notify you by email or SMS when you win.
-                                            </h6>
+                                            <h6>{t("We will notify you by email or SMS when you win")}.</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +94,7 @@ const HowToPlay = () => {
                     <div className="faq_area">
                         <section id="info-utile" className="bg-white faq-container py-5">
                             <div className="container">
-                                <h3 className="text-center text-uppercase mb-5 lead-h-text text-primary">Frequently Asked <span className="text-font-light text-dark">Questions</span></h3>
+                                <h3 className="text-center text-uppercase mb-5 lead-h-text text-primary">{t("Frequently Asked")} <span className="text-font-light text-dark">{t("Questions")}</span></h3>
 
                                 <div className="accordion" id="accordionExample">
                                     <div className="accordion-item">

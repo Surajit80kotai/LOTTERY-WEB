@@ -2,8 +2,10 @@ import React from 'react'
 import PreLoader from '../../components/core/preloader/PreLoader'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const SignUpSuccessPage = () => {
+    const { t } = useTranslation()
     const { loading } = useSelector((state) => state.authslice)
 
     return (
@@ -24,10 +26,10 @@ const SignUpSuccessPage = () => {
                             </svg>
                         </div>
                         <div className="text-center">
-                            <h1 style={{ "fontSize": "3.5rem" }}>Thank You For Registering!!</h1>
-                            <p className='fs-3'> Our team is excited to review your application and get you started. We'll make sure to notify you via email or phone as soon as your registration is approved. Please keep an eye on your inbox</p>
+                            <h1 style={{ "fontSize": "3.5rem" }}>{t("Thank You For Registering")}!!</h1>
+                            <p className='fs-3'> {t("Our team is excited to review your application and get you started. We'll make sure to notify you via email or phone as soon as your registration is approved. Please keep an eye on your inbox")}</p>
                             <br />
-                            <Link to="/" className="orderplace text-white">&larr; Back To Home Page</Link>
+                            <Link to="/" className="orderplace text-white">&larr; {t("Back To Home Page")}</Link>
                         </div>
                     </div>
                 </div>

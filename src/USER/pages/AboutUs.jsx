@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const AboutUs = () => {
-
+    const { t } = useTranslation()
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -18,7 +19,7 @@ const AboutUs = () => {
                     </div>
 
                     <div className="page_title">
-                        <h2>About Us</h2>
+                        <h2>{t("About")} {t("Us")}</h2>
                     </div>
 
                 </div>
@@ -28,8 +29,8 @@ const AboutUs = () => {
                     <div className="container">
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><Link to="/" className="text-color">Home</Link></li>
-                                <li className="breadcrumb-item active" aria-current="page">About</li>
+                                <li className="breadcrumb-item"><Link to="/" className="text-color">{t("Home")}</Link></li>
+                                <li className="breadcrumb-item active" aria-current="page">{t("About")}</li>
                             </ol>
                         </nav>
                     </div>

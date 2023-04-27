@@ -2,27 +2,24 @@ import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
+import { savePaymentDetails } from '../services/slice/PaymentSlice'
 
 const MyPaypalButton = ({ amount }) => {
-    const [paidFor, setPaidFor] = useState(false)
     const [error, setError] = useState(null)
-    // const [newAmount, setNewAmount] = useState(amount)
+    const dispatch = useDispatch()
 
-    const handleApprove = (orderID) => {
-        // setNewAmount(null)
-        console.log("amount =>", amount);
-        console.log("orderID =>", orderID);
-        setPaidFor(true)
+    const handleApprove = (data) => {
+        const newData = { amount: amount, orderID: data.orderID }
+        dispatch(savePaymentDetails(newData))
     }
 
     useEffect(() => {
-        if (paidFor) {
-            toast.success("Payment Success")
-        } else if (error) {
+        if (error) {
             toast.error(error)
         }
-    }, [paidFor, error])
+    }, [error])
 
 
     return (
@@ -31,11 +28,12 @@ const MyPaypalButton = ({ amount }) => {
                 <PayPalButtons
                     forceReRender={[amount]}
                     style={{
-                        color: 'silver',
+                        color: 'gold',
                         layout: 'horizontal',
                         height: 55,
                         tagline: 'false',
-                        shape: 'pill'
+                        shape: 'pill',
+                        label: 'paypal'
                     }}
                     onClick={(data, actions) => {
                         const alreadyPaid = false
@@ -46,22 +44,19 @@ const MyPaypalButton = ({ amount }) => {
                             return actions.resolve()
                         }
                     }}
-                    createOrder={(data, actions) => {
+                    createOrder={async (data, actions) => {
                         return actions.order.create({
                             purchase_units: [
                                 {
                                     amount: {
                                         value: amount,
-                                        // value: Number(amount)?.toFixed(2),
                                     },
                                 },
                             ],
                         });
                     }}
                     onApprove={async (data, actions) => {
-                        // const order = await actions.order.capture
-                        // console.log(order);
-                        handleApprove(data.orderID)
+                        handleApprove(data)
                     }}
                     onCancel={() => {
                         toast.error("Payment Cancelled")

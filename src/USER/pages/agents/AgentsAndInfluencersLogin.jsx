@@ -9,8 +9,10 @@ import PreLoader from '../../components/core/preloader/PreLoader';
 import { getPhoneCode, testPhoneCode } from '../../services/slice/CountryStateSlice'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { useTranslation } from 'react-i18next'
 
 const AgentsAndInfluencersLogin = () => {
+    const { t } = useTranslation()
     const { login, loading } = useSelector((state) => state.authslice)
     // const { phoneCodeData, testPhoneCodeData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
@@ -81,7 +83,7 @@ const AgentsAndInfluencersLogin = () => {
             <main className="main">
                 {/* Back to home button */}
                 <Link className='text-secondary' to='/'>
-                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>Home</h3>
+                    <h3 className='container text-end'><i className="fa-solid fa-house mx-2"></i>{t("Home")}</h3>
                 </Link>
 
                 <div className="wrapper_area margin-top">
@@ -89,7 +91,7 @@ const AgentsAndInfluencersLogin = () => {
 
                         <div className="right_part">
                             <div className="right_top">
-                                <h2 className="heading_form">LOGIN</h2>
+                                <h2 className="heading_form">{t("LOGIN")}</h2>
                                 <div className="social_sign">
                                     <button onClick={() => socialLogin(facebook)} className="social_signup"><i className="fab fa-facebook-f"></i></button>
                                     <button onClick={() => socialLogin(google)} className="social_signup"><i className="fab fa-google"></i></button>
@@ -98,14 +100,14 @@ const AgentsAndInfluencersLogin = () => {
 
                             <div className="form_area">
                                 {/* Toggle button for email or phone */}
-                                <button className='btn fs-5 toogle_bg' style={{ "display": toggleBtn ? "block" : "none" }} onClick={toggleButton}>Login With Phone</button>
-                                <button className='btn fs-5 toogle_bg' style={{ "display": !toggleBtn ? "block" : "none" }} onClick={toggleButton}>Login With Email</button>
+                                <button className='btn fs-5 toogle_bg' style={{ "display": toggleBtn ? "block" : "none" }} onClick={toggleButton}>{t("Login With Phone")}</button>
+                                <button className='btn fs-5 toogle_bg' style={{ "display": !toggleBtn ? "block" : "none" }} onClick={toggleButton}>{t("Login With Email")}</button>
 
                                 <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
                                     {/* Email ID */}
                                     <div className="mb-5">
                                         <div className='row' style={{ "display": toggleBtn ? "block" : "none" }}>
-                                            <label htmlFor="contact" className="form-label label_style">Enter Email ID
+                                            <label htmlFor="contact" className="form-label label_style">{t("Enter Email ID")}
 
                                             </label>
                                             <div className='col-12'>
@@ -115,9 +117,9 @@ const AgentsAndInfluencersLogin = () => {
                                                     id="contact"
                                                     name="contact"
                                                     aria-describedby="emailHelp"
-                                                    placeholder="Enter Your Email ID"
+                                                    placeholder={t("Enter Your Email ID")}
                                                     pattern="^((\+)?(\d{2}[-]))?(\d{8}){1}$|^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$"
-                                                    title="Enter a valid email or phone number"
+                                                    title={t("Enter a valid email or phone number")}
                                                     value={formValues.contact}
                                                     onChange={handleChange}
                                                 />
@@ -172,13 +174,13 @@ const AgentsAndInfluencersLogin = () => {
 
                                         {/* Phone Number */}
                                         <div className='row' style={{ "display": !toggleBtn ? "block" : "none" }}>
-                                            <label htmlFor="contact" className="form-label label_style">Enter Phone Number
+                                            <label htmlFor="contact" className="form-label label_style">{t("Enter Phone Number")}
 
                                             </label>
                                             <div className='col-12'>
                                                 <PhoneInput
                                                     inputProps={{ required: true }}
-                                                    placeholder="Enter Your Phone Number"
+                                                    placeholder={t("Enter Your Phone Number")}
                                                     country={"cm"}
                                                     enableSearch={true}
                                                     value={phone.phone}
@@ -208,13 +210,13 @@ const AgentsAndInfluencersLogin = () => {
 
                                     {/* Password input */}
                                     <div className="col-12">
-                                        <label htmlFor="password" className="form-label label_style">Password</label>
+                                        <label htmlFor="password" className="form-label label_style">{t("Password")}</label>
                                         <input
                                             type="password"
                                             className="form-control form_input"
                                             id="password"
                                             name="password"
-                                            placeholder="Enter Password"
+                                            placeholder={t("Enter Password")}
                                             value={formValues.password}
                                             onChange={handleChange}
                                             required
@@ -253,12 +255,12 @@ const AgentsAndInfluencersLogin = () => {
                                             type="submit"
                                             className={(formValues?.password?.length) ? active : deactive}
                                             disabled={(formValues?.password?.length) ? false : true}
-                                        >Login</button>
+                                        >{t("Login")}</button>
                                     </div>
 
                                     {/* Forget password Link */}
                                     <div className="forget_password d-flex justify-content-center mt-5">
-                                        <span className='forget_pass mx-2'>Forgot Password?</span><Link to="/f_password" className="forget_pass text-decoration-underline text-primary">Click Here</Link>
+                                        <span className='forget_pass mx-2'>{t("Forgot Password?")}</span><Link to="/f_password" className="forget_pass text-decoration-underline text-primary">{t("Click Here")}</Link>
                                     </div>
                                 </form>
                             </div>
@@ -267,9 +269,9 @@ const AgentsAndInfluencersLogin = () => {
                             <div className="company_logo text-center">
                                 <Link to="/"><img src="/assets/img/eshacplaylogo.png" alt="" className="img-fluid" /></Link>
                             </div>
-                            <h2 className="log_title">Welcome To ESHAC-PLAY</h2>
-                            <h6 className="dont">Don't Have Account?</h6>
-                            <Link to="/verifyphone" className="Signup">Sing Up</Link>
+                            <h2 className="log_title">{t("Welcome To ESHAC-PLAY")}</h2>
+                            <h6 className="dont">{t("Don't Have Account?")}</h6>
+                            <Link to="/verifyphone" className="Signup">{t("Sing Up")}</Link>
                         </div>
                     </div>
                 </div >

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next';
 
 const PrivacyPolicy = () => {
-
+    const { t } = useTranslation()
     // openTab Function
     function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
@@ -30,8 +31,8 @@ const PrivacyPolicy = () => {
                     <div className="container">
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="index.html" className="text-color">Home</a></li>
-                                <li className="breadcrumb-item active" aria-current="page">Privacy Policy</li>
+                                <li className="breadcrumb-item"><a href="index.html" className="text-color">{t("Home")}</a></li>
+                                <li className="breadcrumb-item active" aria-current="page">{t("Privacy Policy")}</li>
                             </ol>
                         </nav>
                     </div>
@@ -40,30 +41,30 @@ const PrivacyPolicy = () => {
 
                 <div className='d-flex  justify-content-between'>
                     <div className="tab">
-                        <button className="tablinks" onClick={(event) => openTab(event, 'firstTab')} id="defaultOpen">Privacy</button>
-                        <button className="tablinks" onClick={(event) => openTab(event, 'secondTab')}>Data collected</button>
-                        <button className="tablinks" onClick={(event) => openTab(event, 'thirdTab')}>How data is collected and processed</button>
-                        <button className="tablinks" onClick={(event) => openTab(event, 'fouthTab')} id="defaultOpen">Use of data</button>
-                        <button className="tablinks" onClick={(event) => openTab(event, 'fifthTab')}>Telephone communications</button>
-                        <button className="tablinks" onClick={(event) => openTab(event, 'sixthTab')}>Exempted disclosures</button>
+                        <button className="tablinks" onClick={(event) => openTab(event, 'firstTab')} id="defaultOpen">{t("Privacy")}</button>
+                        <button className="tablinks" onClick={(event) => openTab(event, 'secondTab')}>{t("Data collected")}</button>
+                        <button className="tablinks" onClick={(event) => openTab(event, 'thirdTab')}>{t("How data is collected and processed")}</button>
+                        <button className="tablinks" onClick={(event) => openTab(event, 'fouthTab')} id="defaultOpen">{t("Use of data")}</button>
+                        <button className="tablinks" onClick={(event) => openTab(event, 'fifthTab')}>{t("Telephone communications")}</button>
+                        <button className="tablinks" onClick={(event) => openTab(event, 'sixthTab')}>{t("Exempted disclosures")}</button>
 
-                        <button className="tablinks" onClick={(event) => openTab(event, 'sevenTab')} id="defaultOpen">Access</button>
-                        <button className="tablinks" onClick={(event) => openTab(event, 'eightTab')}>Acceptance of the use of electronic service providers</button>
-                        <button className="tablinks" onClick={(event) => openTab(event, 'nineTab')} > Acceptance of security controls</button >
-                        <button className="tablinks" onClick={(event) => openTab(event, 'tenTab')} id="defaultOpen" > Security</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'sevenTab')} id="defaultOpen">{t("Access")}</button>
+                        <button className="tablinks" onClick={(event) => openTab(event, 'eightTab')}>{t("Acceptance of the use of electronic service providers")}</button>
+                        <button className="tablinks" onClick={(event) => openTab(event, 'nineTab')} >{t("Acceptance of security controls")}</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'tenTab')} id="defaultOpen" >{t("Security")}</button >
 
-                        <button className="tablinks" onClick={(event) => openTab(event, 'elevenTab')} id="defaultOpen" > Protection of minors</button >
-                        <button className="tablinks" onClick={(event) => openTab(event, 'twelveTab')} > International transfers</button >
-                        <button className="tablinks" onClick={(event) => openTab(event, 'thirteenTab')} > Third party practices</button >
-                        <button className="tablinks" onClick={(event) => openTab(event, 'fourteenTab')} id="defaultOpen" > Disclaimer</button >
-                        <button className="tablinks" onClick={(event) => openTab(event, 'fifteenTab')} > Mergers and other events requiring transfer</button >
-                        <button className="tablinks" onClick={(event) => openTab(event, 'sixteenTab')} > Acceptance of privacy policy</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'elevenTab')} id="defaultOpen" >{t("Protection of minors")}</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'twelveTab')} >{t("International transfers")}</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'thirteenTab')} >{t("Third party practices")}</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'fourteenTab')} id="defaultOpen" >{t("Disclaimer")}</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'fifteenTab')} >{t("Mergers and other events requiring transfer")}</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'sixteenTab')} >{t("Acceptance of privacy policy")}</button >
 
                     </div >
                     <div>
 
                         <div id="firstTab" className="tabcontent">
-                            <h3>Privacy</h3>
+                            <h3>{t("Privacy")}</h3>
                             <h6 className="text-danger mb-4"><strong>Last Update : Dec 24,2023</strong> </h6>
                             <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.

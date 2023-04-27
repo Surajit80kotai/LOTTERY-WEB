@@ -79,11 +79,8 @@ export const GETOTP = (phone, header) => API.post("/system/register/otp", phone,
 // verify otp api
 export const VERIFYOTP = (formData, header) => API.post("/system/register/otp/verify", formData, header)
 
-// Paypal api
-export const PAYPAL = (amount) => API.post("/my-server/create-paypal-order/" + amount)
-
-// Paypal api
-export const PAYPALONAPPROVE = (orderID) => API.post("/my-server/capture-paypal-order", orderID)
+// save payment details
+export const SAVEPAYMNETDETAILS = (data) => API.post("/auth/save-payment-details", data)
 
 
 // test API

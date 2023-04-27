@@ -1,98 +1,61 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 
-const debug = true;
-
-const App = () => {
-  const [state, setState] = useState({
-    amount: "2.00",
-    orderID: "",
-    onApproveMessage: "",
-    onErrorMessage: ""
-  });
-
-  const onChange = (event) => {
-    setState({
-      ...state,
-      amount: event.target.value,
-      orderID: "",
-      onApproveMessage: "",
-      onErrorMessage: ""
-    });
-  }
-
-  const createOrder = (data, actions) => {
-    if (debug) console.log("Creating order for amount", state.amount);
-    return actions.order
-      .create({
-        purchase_units: [
-          {
-            amount: {
-              value: state.amount
-            }
-          }
-        ]
-      })
-      .then((orderID) => {
-        setState(prevState => ({ ...prevState, orderID }));
-        return orderID;
-      });
-  }
-
-  const onApprove = (data, actions) => {
-    return actions.order.capture().then(function (details) {
-      setState(prevState => ({ ...prevState, onApproveMessage: `Transaction completed by ${details.payer.name.given_name}!` }));
-    });
-  }
-
-  const onError = (err) => {
-    setState(prevState => ({ ...prevState, onErrorMessage: err.toString() }));
-  }
-
-  const onClick = () => {
-    if (debug) console.log("When clicked, amount was", state.amount);
-  }
+const TestOne = () => {
+  // process.env.REACT_APP_CLIENT_ID
+  const [isPaid, setIsPaid] = useState(false);
+  const [orderId, setOrderId] = useState("");
 
   return (
-    <div style={{ minHeight: "300px" }}>
-      <table className="table" style={{ maxWidth: "400px" }}>
-        <tbody>
-          <tr>
-            <th>
-              <label htmlFor="amount">Order Amount: </label>
-            </th>
-            <td>
-              <select onChange={onChange} name="amount" id="amount">
-                <option value="2.00">$2.00</option>
-                <option value="4.00">$4.00</option>
-                <option value="6.00">$6.00</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th>Order ID:</th>
-            <td>{state.orderID ? state.orderID : "unknown"}</td>
-          </tr>
-          <tr>
-            <th>On Approve Message: </th>
-            <td data-testid="message">{state.onApproveMessage}</td>
-          </tr>
-          <tr>
-            <th>On Error Message: </th>
-            <td data-testid="error">{state.onErrorMessage}</td>
-          </tr>
-        </tbody>
-      </table>
-      <PayPalScriptProvider options={{ "client-id": "test" }}>
-        <PayPalButtons
-          createOrder={createOrder}
-          onApprove={onApprove}
-          onError={onError}
-          onClick={onClick}
-        />
+    <>
+      <PayPalScriptProvider
+        options={{
+          "client-id": "AXC33PNxFQtif-uOTneXmqMa2yh36VplEy2rJYOuMkF1RMxj7XysglDpDja7iuCdRoMb7DtP5NADN3Gq",
+          currency: "USD",
+        }}
+      >
+        <div>
+          <PayPalButtons
+            style={{
+              color: 'gold',
+              layout: 'horizontal',
+              height: 55,
+              tagline: 'false',
+              shape: 'pill'
+            }}
+            createOrder={(data, actions) => {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: "50",
+                    },
+                  },
+                ],
+              });
+            }}
+            onApprove={(data, actions) => {
+              setIsPaid(true);
+              setOrderId(data.orderID);
+
+              // save payment details to database
+              fetch("http://192.168.1.10:3303/api/save-payment-details", {
+                method: "POST",
+                body: JSON.stringify({
+                  orderId: data.orderID,
+                  amount: "50",
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+            }}
+          />
+        </div>
       </PayPalScriptProvider>
-    </div>
-  );
+
+    </>
+  )
 }
 
-export default App;
+export default TestOne

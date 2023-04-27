@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { BUYNOW, GETALLTRANSACTION, PAYINIT, PAYPAL, PAYPALONAPPROVE, PLACEORDER, UPDATETRANSACTION } from "../api/Api";
+import { BUYNOW, GETALLTRANSACTION, PAYINIT, PLACEORDER, SAVEPAYMNETDETAILS, UPDATETRANSACTION } from "../api/Api";
+import { toast } from "react-toastify";
 
 const token = JSON.parse(window.localStorage.getItem("token"))
 const userID = (JSON.parse(window.localStorage.getItem("user"))?.user_id)
@@ -162,25 +163,10 @@ export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderDa
     }
 })
 
-
-// paypal
-export const paypal = createAsyncThunk("/create-paypal-order/", async (amount, { rejectWithValue }) => {
-    try {
-        const res = await PAYPAL(amount)
-        // console.log("create-paypal-response=>", res);
-        return res?.data
-    } catch (err) {
-        // console.log(err)
-        return rejectWithValue(err.response.data)
-    }
-})
-
 // paypal onApprove
-export const payPalonApprove = createAsyncThunk("/capture-paypal-order", async (orderID, { rejectWithValue }) => {
+export const savePaymentDetails = createAsyncThunk("/save-payment-details", async (newData, { rejectWithValue }) => {
     try {
-        console.log("orderID=>", orderID);
-        const res = await PAYPALONAPPROVE(orderID)
-        console.log("capture-paypal-response=>", res);
+        const res = await SAVEPAYMNETDETAILS(newData)
         return res?.data
     } catch (err) {
         // console.log(err)
@@ -328,33 +314,21 @@ export const PaymentSlice = createSlice({
             state.paymentSliceError = payload
         })
 
-        // States for paypal
-        builder.addCase(paypal.pending, (state) => {
-            state.status = "pending"
-            state.loading = true
-        })
-        builder.addCase(paypal.fulfilled, (state, { payload }) => {
-            state.paymentData = payload
-            state.status = "success"
-            state.loading = false
-        })
-        builder.addCase(paypal.rejected, (state, { payload }) => {
-            state.status = "failed"
-            state.loading = false
-            state.paymentSliceError = payload
-        })
-
         // States for paypal onApprove
-        builder.addCase(payPalonApprove.pending, (state) => {
+        builder.addCase(savePaymentDetails.pending, (state) => {
             state.status = "pending"
             state.loading = true
         })
-        builder.addCase(payPalonApprove.fulfilled, (state, { payload }) => {
+        builder.addCase(savePaymentDetails.fulfilled, (state, { payload }) => {
             state.paymentData = payload
             state.status = "success"
             state.loading = false
+            // console.log("payload", payload);
+            if (payload?.status === "APPROVED") {
+                toast.success("Payment Success")
+            }
         })
-        builder.addCase(payPalonApprove.rejected, (state, { payload }) => {
+        builder.addCase(savePaymentDetails.rejected, (state, { payload }) => {
             state.status = "failed"
             state.loading = false
             state.paymentSliceError = payload

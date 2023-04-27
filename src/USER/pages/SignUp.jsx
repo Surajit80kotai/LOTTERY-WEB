@@ -228,8 +228,8 @@ const SignUp = () => {
                                                     required
                                                 >
                                                     <option value="" disabled>{t('Select Your Gender')}</option>
-                                                    <option value="MALE">{t('MALE')}</option>
-                                                    <option value="FEMALE">{t('FEMALE')}</option>
+                                                    <option value="MALE">{t('Male')}</option>
+                                                    <option value="FEMALE">{t('Female')}</option>
                                                 </select>
                                                 {/* Gender Vaidation */}
                                                 <p className='text-danger fs-4 mt-2'>{signupErr?.gender?.message}</p>

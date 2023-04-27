@@ -21,7 +21,7 @@ import ErrorPage from './USER/util/ErrorPage';
 import PrivacyPolicy from './USER/pages/PrivacyPolicy';
 import SignUpSuccessPage from './USER/pages/agents/SignUpSuccessPage';
 import LiveChat from './USER/util/LiveChat';
-// import TestTwo from './USER/pages/test/TestTwo';
+// import TestOne from './USER/pages/test/TestOne';
 
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
               <Route path='/privacypolicy' element={<PrivacyPolicy />} />
               <Route path='/agentsignupsuccess' element={<SignUpSuccessPage />} />
               {/* Test Route */}
-              {/* <Route path='/test' element={<TestTwo />} /> */}
+              {/* <Route path='/test' element={<TestOne />} /> */}
 
               {/* Private Route Part */}
               <Route element={<PrivateRoute />}>
