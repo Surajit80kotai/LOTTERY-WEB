@@ -49,7 +49,6 @@ const AgentsAndInfluencersSignup = () => {
             return setError("Pasword did not matched")
         } else {
             const signUpData = { ...formValues, phone: "+" + phone }
-            console.log(signUpData);
             dispatch(fetchAgentSignUp({ signUpData, navigate, toast }))
             setError("")
         }

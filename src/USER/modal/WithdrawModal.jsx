@@ -94,7 +94,7 @@ const WithdrawModal = () => {
                         </div>
                         <div className="modal-body">
                             <form onSubmit={handleSubmit}>
-                                <p className='text-center text-danger fs-5'>{t("Minimum Withdraw Amount Should Be 500*")}</p>
+                                <p className='text-center text-danger fs-5' style={{ "color": "#f9772b" }}>{t("Minimum Withdraw Amount Should Be 500*")}</p>
                                 <div className='row'>
                                     <div style={{ padding: "0 50px" }}>
                                         <div className="mb-3">

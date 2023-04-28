@@ -11,7 +11,7 @@ const FooterMain = () => {
                     <Footer />
                     <hr className="hr" />
                     {/* Socials */}
-                    {/* <Socials /> */}
+                    <Socials />
                 </div>
             </footer>
         </>
