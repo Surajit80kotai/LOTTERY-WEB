@@ -36,30 +36,10 @@ const NavBar = () => {
 
   // changeLanguage func.
   const changeLanguage = (e) => {
-    i18next.changeLanguage(e.target.value)
+    const newLanguage = e.target.value;
+    i18next.changeLanguage(newLanguage)
+    localStorage.setItem('language', newLanguage);
   }
-
-  // Language translation function
-  // const googleTranslateElementInit = () => {
-  //   new window.google.translate.TranslateElement(
-  //     {
-  //       pageLanguage: "en",
-  //       autoDisplay: false
-  //     },
-  //     "google_translate_element"
-  //   );
-  // };
-
-
-  // useEffect(() => {
-  //   var addScript = document.createElement("script");
-  //   addScript.setAttribute(
-  //     "src",
-  //     "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-  //   );
-  //   document.body.appendChild(addScript);
-  //   window.googleTranslateElementInit = googleTranslateElementInit;
-  // }, []);
 
 
   useEffect(() => {
@@ -146,9 +126,6 @@ const NavBar = () => {
           </ul>
 
           <div className="nv_rt">
-            {/* Language Section */}
-            {/* <div className='language_dropdown' id="google_translate_element"></div> */}
-
             {/* Language icon to see the dropdown */}
             <div style={{ display: toggle ? "inline" : "none", marginRight: "10px" }}>
               <Link to="#" onClick={() => setToggle(false)}>
@@ -158,7 +135,7 @@ const NavBar = () => {
 
             {/* Language Dropdown */}
             <div style={{ "display": !toggle ? "inline-block" : "none" }}>
-              <select onChange={changeLanguage} className='langu_select'>
+              <select onChange={changeLanguage} value={i18next.language} className='langu_select'>
                 <option disabled>{t('Language')}</option>
                 <option value={"en"}>English</option>
                 <option value={"fr"}>French</option>
