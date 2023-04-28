@@ -120,7 +120,7 @@ const SliderCard = ({ item }) => {
                                         </h3>
                                         :
                                         <h3>
-                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{(rounds[round]?._price).toFixed(2)}</span>
+                                            <span className="discountprice">{token ? currency_symbol : generalCurrency_symbol}  &nbsp;{Number(rounds[round]?._price).toFixed(2)}</span>
                                         </h3>
                                     : null
                             }
