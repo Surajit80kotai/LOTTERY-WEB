@@ -82,6 +82,11 @@ export const VERIFYOTP = (formData, header) => API.post("/system/register/otp/ve
 // save payment details
 export const SAVEPAYMNETDETAILS = (data, header) => API.post("/auth/save-payment-details", data, header)
 
+//init-withdraw
+export const INITWITHDRAW = () => API.get("/auth/withdraw-init")
+
+// withdraw
+export const WITHDRAW = (data) => API.post("/auth/withdraw", data)
 
 // test API
 export const TESTAPI = () => API.get("http://localhost:3000/phonecode.json")

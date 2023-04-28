@@ -2,12 +2,40 @@ import React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import PhoneInput from 'react-phone-input-2'
+import PreLoader from '../components/core/preloader/PreLoader'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { initWithdraw, withdraw } from '../services/slice/UserSlice'
+// import { currency } from '../util/Currency'
 
 const WithdrawModal = () => {
     const { t } = useTranslation()
     const [phone, setPhone] = useState('')
     const [phonecode, setPhonecode] = useState('')
-    const [formValues, setFormValues] = useState({ amount: '' })
+    const [formValues, setFormValues] = useState(
+        {
+            amount: "",
+            currency: "EUR",
+            externalId: "65213456",
+            payer: {
+                partyIdType: "MSISDN",
+                partyId: ""
+            },
+            payerMessage: "Payment",
+            payeeNote: "Payment note"
+        }
+    )
+    const { withdraw_data, loading } = useSelector((state) => state.userslice)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+
+    // openModal func.
+    const openModal = () => {
+        dispatch(initWithdraw(navigate))
+    }
+
+    // console.log(withdraw_data);
 
     // handleChange function
     const handleChange = (e) => {
@@ -17,17 +45,45 @@ const WithdrawModal = () => {
     // handleSubmit function
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(phone);
-        console.log(phonecode);
+        const payer = { ...formValues?.payer, partyId: "+" + phone }
+        const formData = { ...formValues, payer, phonecode }
+        const uuid = withdraw_data?.UUID
+        const access_token = `Bearer ${withdraw_data?.Gen_API_Token?.access_token}`
+        const data = { formData, uuid, access_token }
+        dispatch(withdraw({ data, navigate }))
+
+        setFormValues({
+            amount: "",
+            currency: "",
+            externalId: "",
+            payer: {
+                partyIdType: "",
+                partyId: ""
+            },
+            payerMessage: "",
+            payeeNote: ""
+        })
+        setPhone('')
+        setPhonecode('')
     }
 
 
     return (
         <>
+            {/* PreLoader */}
+            {loading && <PreLoader />}
+
             {/*  Button trigger modal */}
-            <button type="button" className="btn2 mx-5 my-3" data-bs-toggle="modal" data-bs-target="#withdrawModal">
+            <button
+                onClick={openModal}
+                type="button"
+                className="btn2 mx-5 my-3"
+                data-bs-toggle="modal"
+                data-bs-target="#withdrawModal"
+            >
                 {t("Withdraw Money")}
             </button>
+
             {/* <!-- Modal --> */}
             <div className="modal fade" id="withdrawModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
@@ -78,9 +134,9 @@ const WithdrawModal = () => {
                                 <div className="text-center">
                                     {
                                         formValues?.amount >= 500 ?
-                                            <button className="btn2 mt-3" style={{ alignItems: "center" }}>{t("Withdraw")}</button>
+                                            <button onClick={handleSubmit} className="btn2 mt-3" style={{ alignItems: "center" }}>{t("Withdraw")}</button>
                                             :
-                                            <button className="btn2 mt-3" style={{ alignItems: "center", backgroundColor: "#00000078" }}>{t("Withdraw")}</button>
+                                            <button className="btn2_disabled mt-3" style={{ alignItems: "center" }} disabled>{t("Withdraw")}</button>
                                     }
                                 </div>
                             </form>

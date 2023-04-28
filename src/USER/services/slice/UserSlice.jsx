@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CONTACTUS, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE } from "../api/Api";
+import { CONTACTUS, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
+import { toast } from "react-toastify";
 
 // Defining header
 const header = {
@@ -109,10 +110,57 @@ export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, to
 })
 
 
+// init-withdraw
+export const initWithdraw = createAsyncThunk("/auth/withdraw-init", async (navigate, { rejectWithValue }) => {
+    try {
+        const response = await INITWITHDRAW()
+        // console.log(response?.data)
+        return response?.data
+    } catch (err) {
+        // console.log(rejectWithValue(err.response.data));
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                // navigate('/login')
+            }, 3700)
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+// init-withdraw
+export const withdraw = createAsyncThunk("/auth/withdraw", async ({ data, navigate }, { rejectWithValue }) => {
+    try {
+        const response = await WITHDRAW(data)
+        if (response?.data?.status === 202) {
+            toast.success("Withdraw Request Accepted")
+        }
+        return response?.data
+    } catch (err) {
+        // console.log(rejectWithValue(err.response.data));
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                // navigate('/login')
+            }, 3700)
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
 const initialState = {
     balance: [],
     profile_data: [],
     order_history_data: [],
+    withdraw_data: [],
     balance_status: "",
     loading: false,
     status: "",
@@ -188,6 +236,38 @@ export const UserSlice = createSlice({
             state.loading = false
         })
         builder.addCase(contactUs.rejected, (state, { payload }) => {
+            state.status = "Failed"
+            state.loading = false
+            state.userSliceError = payload
+        })
+
+        // states for initWithdraw
+        builder.addCase(initWithdraw.pending, (state) => {
+            state.status = "Loading"
+            state.loading = true
+        })
+        builder.addCase(initWithdraw.fulfilled, (state, { payload }) => {
+            state.status = "Success"
+            state.loading = false
+            state.withdraw_data = payload
+        })
+        builder.addCase(initWithdraw.rejected, (state, { payload }) => {
+            state.status = "Failed"
+            state.loading = false
+            state.userSliceError = payload
+        })
+
+        // states for withdraw
+        builder.addCase(withdraw.pending, (state) => {
+            state.status = "Loading"
+            state.loading = true
+        })
+        builder.addCase(withdraw.fulfilled, (state, { payload }) => {
+            state.status = "Success"
+            state.loading = false
+            state.withdraw_data = payload
+        })
+        builder.addCase(withdraw.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
             state.userSliceError = payload
