@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CONTACTUS, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
+import { CHECKPASSWORD, CONTACTUS, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
 import { toast } from "react-toastify";
 
 // Defining header
@@ -35,10 +35,9 @@ export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async
 export const updateProfile = createAsyncThunk("/auth/update/profile", async ({ formData, toast, navigate }, { rejectWithValue }) => {
     try {
         const response = await UPDATEPROFILE(formData, header)
-        // console.log(response?.data?.user_details);
         window.localStorage.removeItem("user")
-        toast.success("Profile Updated Successfully.\nPlease Login Again To See The Changes", {
-            autoClose: 4500
+        toast.success("Profile Updated Successfully", {
+            autoClose: 3000
         })
         window.localStorage.setItem("user", JSON.stringify(response?.data?.user_details))
         return response?.data
@@ -156,6 +155,27 @@ export const withdraw = createAsyncThunk("/auth/withdraw", async ({ data, naviga
 })
 
 
+// init-withdraw
+export const checkPassword = createAsyncThunk("/auth/email/phone/change", async ({ password, navigate }, { rejectWithValue }) => {
+    try {
+        const response = await CHECKPASSWORD(password, header)
+        return response?.data
+    } catch (err) {
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                // navigate('/login')
+            }, 3700)
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+
 const initialState = {
     balance: [],
     profile_data: [],
@@ -164,7 +184,8 @@ const initialState = {
     balance_status: "",
     loading: false,
     status: "",
-    userSliceError: null
+    userSliceError: null,
+    password_data: []
 }
 
 // Creating Slice
@@ -268,6 +289,31 @@ export const UserSlice = createSlice({
             state.withdraw_data = payload
         })
         builder.addCase(withdraw.rejected, (state, { payload }) => {
+            state.status = "Failed"
+            state.loading = false
+            state.userSliceError = payload
+        })
+
+        // states for checkPassword
+        builder.addCase(checkPassword.pending, (state) => {
+            state.status = "Loading"
+            state.loading = true
+        })
+        builder.addCase(checkPassword.fulfilled, (state, { payload }) => {
+            state.status = "Success"
+            state.loading = false
+            state.password_data = payload
+            if (payload?.valid) {
+                toast.success(payload?.message, {
+                    autoClose: "3500"
+                })
+            } else {
+                toast.error(payload?.message, {
+                    autoClose: "3500"
+                })
+            }
+        })
+        builder.addCase(checkPassword.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
             state.userSliceError = payload

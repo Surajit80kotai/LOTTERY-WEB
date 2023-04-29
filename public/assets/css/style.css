@@ -1447,6 +1447,7 @@ margin: 0.5rem;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-align: center;
+	width: 150px;
 }
 
 .viewall_btn .btn2 {
@@ -4535,4 +4536,30 @@ margin: 0.5rem;
 	-webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.password_chng{
+	display: flex;
+	align-items: center;
+	border: 1px solid #ced4da;
+	background: #e9ecef;
+	border-radius: 0.6rem;
+}
+
+.password_chng input{
+	outline: none;
+	border: 0;
+}
+
+.passchng{
+	text-align: center;
+    padding: 0.8rem 3rem;
+    background: var(--primary-color);
+    font-size: 1.5rem;
+    color: var(--white);
+    border-radius: 0.5rem;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+    border: 3px solid transparent;
+    transition: 0.5s linear;
 }

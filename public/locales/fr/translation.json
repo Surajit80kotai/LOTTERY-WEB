@@ -248,5 +248,8 @@
     "Acceptance of privacy policy": "Acceptation de la politique de confidentialité",
     "Copyright": "Droits d'auteur",
     "ES-Play Corporation": "ES-Play Société",
-    "Version":"Version"
+    "Version": "Version",
+    "Error": "Erreur",
+    "Page Not Found": "Page non trouvée",
+    "Enter Your Password For Save The Changes": "Entrez votre mot de passe pour enregistrer les modifications"
 }

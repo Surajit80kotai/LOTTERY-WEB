@@ -88,5 +88,8 @@ export const INITWITHDRAW = () => API.get("/auth/withdraw-init")
 // withdraw
 export const WITHDRAW = (data) => API.post("/auth/withdraw", data)
 
+// checkpassword
+export const CHECKPASSWORD = (password, header) => API.post("/auth/email/phone/change", password, header)
+
 // test API
 export const TESTAPI = () => API.get("http://localhost:3000/phonecode.json")

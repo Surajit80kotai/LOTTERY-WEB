@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 // import { Link } from 'react-router-dom'
-import { updateProfile } from '../../../services/slice/UserSlice'
+import { checkPassword, updateProfile } from '../../../services/slice/UserSlice'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 import { useNavigate } from 'react-router-dom'
@@ -12,13 +12,17 @@ import { useTranslation } from 'react-i18next'
 
 const MyProfile = () => {
     const { t } = useTranslation()
-    const { loading } = useSelector((state) => state.userslice)
+    const { password_data, loading } = useSelector((state) => state.userslice)
     const user = JSON.parse(window.localStorage.getItem("user"))
     const date_of_birth = new Date(user?.dob)
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const newDOB = `${date_of_birth.getUTCDate()}-${month[date_of_birth.getUTCMonth()]}-${date_of_birth.getUTCFullYear()}`
     const [showEditButton, setShowEditButton] = useState(true)
     const navigate = useNavigate()
+    const [isTrue, setIsTrue] = useState(false)
+    const [password, setPassword] = useState({ password: "" })
+    const [saveChanges, setSaveChanges] = useState(false)
+
     // baseUrl
     // const baseUrl = process.env.REACT_APP_BASE_URL
     const baseNodeUrl = process.env.REACT_APP_NODE_HOST
@@ -54,7 +58,7 @@ const MyProfile = () => {
     const handleSubmit = (e) => {
         setShowEditButton(true)
         e.preventDefault();
-        const formData = new FormData();
+        let formData = new FormData();
         formData.append('profile', "profile");
         // image ? formData.append('profile_img', image) : formData.append('profile_img', user?.profile_img?.split("/")[4])
         formData.append('profile_img', image ? image : user?.profile_img.split("/")[4]);
@@ -64,6 +68,9 @@ const MyProfile = () => {
         formData.append('phone', formValues?.phone);
 
         dispatch(updateProfile({ formData, toast, navigate }))
+
+        setSaveChanges(false)
+        setIsTrue(false)
 
         let inputs = document.getElementsByClassName("in_disa");
         for (let i = 0; i < inputs.length; i++) {
@@ -88,9 +95,23 @@ const MyProfile = () => {
         }
     }
 
+    // sendPassword func.
+    const sendPassword = () => {
+        dispatch(checkPassword({ password, navigate }))
+    }
+
+
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [])
+        if (formValues?.email !== user?.email || formValues?.phone !== user?.phone) {
+            setIsTrue(true)
+            setSaveChanges(true)
+        }
+        if (password_data?.valid) {
+            setSaveChanges(false)
+            setIsTrue(false)
+        }
+    }, [password_data, formValues])
 
     return (
         <>
@@ -373,6 +394,34 @@ const MyProfile = () => {
                                                                 : null
                                                         }
                                                     </div>
+
+                                                    {/* Password */}
+                                                    {
+                                                        isTrue ?
+                                                            <div className="col-md-6 mb-3">
+                                                                <div className='mt-3'>
+                                                                    <label htmlFor="password" className="form-label label_style">{t("Enter Your Password For Save The Changes")}</label>
+                                                                    <div className='password_chng'>
+                                                                        < input
+                                                                            type="password"
+                                                                            className="form-control form_input in_disa"
+                                                                            id="password"
+                                                                            name="password"
+                                                                            aria-describedby="emailHelp"
+                                                                            placeholder={t("Enter Password")}
+                                                                            value={password?.password}
+                                                                            onChange={(e) => setPassword({ ...password, [e.target.name]: e.target.value })}
+                                                                        />
+                                                                        <button
+                                                                            onClick={sendPassword}
+                                                                            type="button"
+                                                                            className="passchng"
+                                                                        >{t("Submit")}</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            : null
+                                                    }
                                                 </div>
 
                                                 {/* Edit Button */}
@@ -384,13 +433,33 @@ const MyProfile = () => {
                                                         onClick={enabledEdit}
                                                         style={{ "display": showEditButton ? "block" : "none" }}
                                                     ><i className="fas fa-edit"></i> {t("Edit")}</button>
-                                                    <button
+                                                    {/* <button
                                                         onClick={handleSubmit}
                                                         type="button"
                                                         className="btn2 hidden"
                                                         id="saveChanges"
                                                         style={{ "display": !showEditButton ? "block" : "none" }}
-                                                    >{t("Save Changes")}</button>
+                                                    >{t("Save Changes")}</button> */}
+                                                    {
+                                                        saveChanges ?
+
+                                                            <button
+                                                                onClick={handleSubmit}
+                                                                type="button"
+                                                                className="btn2_disabled hidden"
+                                                                id="saveChanges"
+                                                                style={{ "display": !showEditButton ? "block" : "none" }}
+                                                                disabled
+                                                            >{t("Save Changes")}</button>
+                                                            :
+                                                            <button
+                                                                onClick={handleSubmit}
+                                                                type="button"
+                                                                className="btn2 hidden"
+                                                                id="saveChanges"
+                                                                style={{ "display": !showEditButton ? "block" : "none" }}
+                                                            >{t("Save Changes")}</button>
+                                                    }
 
                                                 </div>
 
