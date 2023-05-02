@@ -211,7 +211,7 @@ const NavBar = () => {
                       </li>
                       <li className="user-menu__item">
                         <Link className="user-menu-link dropdown-item" to="/">
-                          <button className='text-danger' onClick={logOut}><i className="fa-solid fa-power-off mx-1"></i><span className='fw-bolder'>{t('Logout')}</span></button>
+                          <button className='logout_btn' onClick={logOut}><i className="fa-solid fa-power-off mx-1"></i><span className='fw-bolder'>{t('Logout')}</span></button>
                         </Link>
                       </li>
                     </ul>
