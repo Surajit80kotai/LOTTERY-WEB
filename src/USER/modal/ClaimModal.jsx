@@ -51,6 +51,7 @@ const ClaimModal = () => {
 
     return (
         <>
+            {/* Claim Button */}
             <div className="info_item mb-3">
                 <button type="button" className="claimbtn fs-4" data-bs-toggle="modal" data-bs-target="#claim">
                     {t("Claim")}

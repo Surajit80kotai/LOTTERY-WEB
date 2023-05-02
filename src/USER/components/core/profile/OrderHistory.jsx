@@ -10,23 +10,14 @@ import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import PreLoader from '../preloader/PreLoader'
 import SideNav from './SideNav'
 import { useTranslation } from 'react-i18next'
-import { fetchCountry, fetchStates } from '../../../services/slice/CountryStateSlice'
 import ClaimModal from '../../../modal/ClaimModal'
 
 const OrderHistory = () => {
     const { t } = useTranslation()
-    const [formValues, setFormValues] = useState({
-        address: "",
-        road_name: "",
-        zip_code: "",
-        country: "",
-        state: ""
-    })
     const [filteredOH, setFilteredOH] = useState([])
     const baseUrl = process.env.REACT_APP_NODE_HOST
     const [pageNumber, setPageNumber] = useState(0)
     const { order_history_data, loading } = useSelector(state => state.userslice)
-    const { countryData, stateData } = useSelector((state) => state.countrystateslice)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -38,36 +29,6 @@ const OrderHistory = () => {
     const orderHistoryData = data
     // const orderHistoryData = data?.reverse().slice(pagesVisited, pagesVisited + userPerPage)
     const pageCount = Math.ceil(order_history_data?.length / userPerPage)
-
-
-    // handleChange Function for input change
-    const handleChange = (e) => {
-        setFormValues({ ...formValues, [e.target.name]: e.target.value })
-        const countryId = e.target.value
-        if (countryId) {
-            getCountryId(countryId)
-        }
-    }
-
-    // handleSubmit func.
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    }
-
-    // getCountryId
-    const getCountryId = (name) => {
-        const c_Id = countryData?.filter((item) => {
-            if (item.name === (name.split("||")[0])) {
-                return item?.countries_id
-            }
-            return null
-        })
-        const id = c_Id[0]?.countries_id
-        if (id) {
-            dispatch(fetchStates(id))
-        }
-    }
-
 
 
     // filter order history function
@@ -111,7 +72,6 @@ const OrderHistory = () => {
 
     useEffect(() => {
         setFilteredOH(orderHistoryData)
-        dispatch(fetchCountry())
     }, [dispatch, order_history_data])
 
 
