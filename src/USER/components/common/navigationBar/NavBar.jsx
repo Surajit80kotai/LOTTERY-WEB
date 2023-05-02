@@ -33,6 +33,7 @@ const NavBar = () => {
     navigate('/')
   }
 
+  const baseNodeUrl = process.env.REACT_APP_NODE_HOST
 
   // changeLanguage func.
   const changeLanguage = (e) => {
@@ -177,6 +178,17 @@ const NavBar = () => {
                 {
                   token ?
                     <Link className=" dropdown-toggle userbtn mx-2" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {
+                        user?.profile_img ?
+                          <span className="dp">
+                            <img className='dp_img' src={baseNodeUrl + user?.profile_img} alt="images" />
+                          </span>
+                          :
+                          <span className="dp">
+                            <img className='dp_img' src="./assets/img/user.png" alt="images" />
+                          </span>
+                      }
+
                       {token ?
                         user?.full_name ?
                           user?.full_name

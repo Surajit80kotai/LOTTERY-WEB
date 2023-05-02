@@ -21,6 +21,7 @@ import ErrorPage from './USER/util/ErrorPage';
 import PrivacyPolicy from './USER/pages/PrivacyPolicy';
 import SignUpSuccessPage from './USER/pages/agents/SignUpSuccessPage';
 import LiveChat from './USER/util/LiveChat';
+import CookiesPolicy from './USER/util/CookiesPolicy';
 // import TestOne from './USER/pages/test/TestOne';
 
 
@@ -60,6 +61,7 @@ function App() {
               </Route>
             </Routes>
             <LiveChat />
+            <CookiesPolicy />
             <FooterMain />
           </div>
           : <ErrorPage />

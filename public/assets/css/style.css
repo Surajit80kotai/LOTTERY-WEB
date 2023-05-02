@@ -4538,7 +4538,7 @@ margin: 0.5rem;
 	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 }
 
-.password_chng{
+.password_chng {
 	display: flex;
 	align-items: center;
 	border: 1px solid #ced4da;
@@ -4546,20 +4546,32 @@ margin: 0.5rem;
 	border-radius: 0.6rem;
 }
 
-.password_chng input{
+.password_chng input {
 	outline: none;
 	border: 0;
 }
 
-.passchng{
+.passchng {
 	text-align: center;
-    padding: 0.8rem 3rem;
-    background: var(--primary-color);
-    font-size: 1.5rem;
-    color: var(--white);
-    border-radius: 0.5rem;
+	padding: 0.8rem 3rem;
+	background: var(--primary-color);
+	font-size: 1.5rem;
+	color: var(--white);
+	border-radius: 0.5rem;
 	border-bottom-left-radius: 0;
 	border-top-left-radius: 0;
-    border: 3px solid transparent;
-    transition: 0.5s linear;
+	border: 3px solid transparent;
+	transition: 0.5s linear;
+}
+
+.dp {
+	margin: 5px;
+}
+
+.dp .dp_img {
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	border: 2.5px solid rgb(68, 255, 68);
+	object-fit: cover;
 }
