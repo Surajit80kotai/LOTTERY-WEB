@@ -4602,3 +4602,40 @@ margin: 0.5rem;
 .sticky-top {
 	z-index: 99;
 }
+
+.page_title_name h5 {
+	text-align: center;
+	font-size: 2.5rem;
+	color: var(--primary-color);
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.description_title h5 {
+	font-size: 4rem;
+	color: #171717;
+	font-weight: 600;
+	margin-bottom: 2rem;
+}
+
+.full_describtion p {
+	font-size: 1.5rem;
+	line-height: 2rem;
+	color: #333333;
+}
+
+.heading h4 {
+	font-size: 2rem;
+	color: #4d4b4b;
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.heading p {
+	font-size: 1.6rem;
+	color: #313131;
+}
+
+.heading ul li {
+	font-size: 1.5rem;
+}

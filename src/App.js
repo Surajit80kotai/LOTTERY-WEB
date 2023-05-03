@@ -22,6 +22,12 @@ import PrivacyPolicy from './USER/pages/PrivacyPolicy';
 import SignUpSuccessPage from './USER/pages/agents/SignUpSuccessPage';
 import LiveChat from './USER/util/LiveChat';
 import CookiesPolicy from './USER/util/CookiesPolicy';
+import TermsAndConditions from './USER/pages/TermsAndConditions';
+import CookiePolicy from './USER/pages/CookiePolicy';
+import HowToDeposit from './USER/pages/HowToDeposit';
+import BettingRule from './USER/pages/BettingRule';
+import HowToRegister from './USER/pages/HowToRegister';
+import WorkWithUs from './USER/pages/WorkWithUs';
 // import TestOne from './USER/pages/test/TestOne';
 
 
@@ -45,6 +51,12 @@ function App() {
               <Route path='/info/:lid/:round' element={<LotteryInfo />} />
               <Route path='/viewall/:categoryID' element={<ViewAll />} />
               <Route path='/privacypolicy' element={<PrivacyPolicy />} />
+              <Route path='/terms_condition' element={<TermsAndConditions />} />
+              <Route path='/cookiepolicy' element={<CookiePolicy />} />
+              <Route path='/howtodeposit' element={<HowToDeposit />} />
+              <Route path='/bettingrule' element={<BettingRule />} />
+              <Route path='/howtoregister' element={<HowToRegister />} />
+              <Route path='/workwithus' element={<WorkWithUs />} />
               <Route path='/agentsignupsuccess' element={<SignUpSuccessPage />} />
               {/* Test Route */}
               {/* <Route path='/test' element={<TestOne />} /> */}

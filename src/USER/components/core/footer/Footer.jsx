@@ -14,25 +14,25 @@ const Footer = () => {
                     <ul className="footlinks">
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>About us</Link></li> */}
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>Find Us</Link></li> */}
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Terms & Condition')}</Link></li>
+                        <li><Link to="/terms_condition"><span><i className="fas fa-caret-right"></i></span>{t('Terms & Condition')}</Link></li>
                         <li><Link to="/privacypolicy"><span><i className="fas fa-caret-right"></i></span>{t('Privacy Policy')}</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Cookies Policy')}</Link></li>
+                        <li><Link to="/cookiepolicy"><span><i className="fas fa-caret-right"></i></span>{t('Cookies Policy')}</Link></li>
                     </ul>
                 </div>
                 <div className="footitem">
                     <h4 className="foot_title">{t('Help')}</h4>
                     <ul className="footlinks">
                         <li><Link to="/howtoplay"><span><i className="fas fa-caret-right"></i></span>{t('How to Play')}</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('How to Deposit')}</Link></li>
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Betting Rule')}</Link></li>
+                        <li><Link to="/howtodeposit"><span><i className="fas fa-caret-right"></i></span>{t('How to Deposit')}</Link></li>
+                        <li><Link to="/bettingrule"><span><i className="fas fa-caret-right"></i></span>{t('Betting Rule')}</Link></li>
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('How to Collect')}</Link></li> */}
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('How to Register')}</Link></li>
+                        <li><Link to="/howtoregister"><span><i className="fas fa-caret-right"></i></span>{t('How to Register')}</Link></li>
                         {
                             token ?
                                 <li><Link to="/wallet"><span><i className="fas fa-caret-right"></i></span>{t('Balance Check')}</Link></li>
                                 : <li><Link to="/login"><span><i className="fas fa-caret-right"></i></span>{t('Balance Check')}</Link></li>
                         }
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Help Center')}</Link></li>
+                        {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Help Center')}</Link></li> */}
                     </ul>
                 </div>
                 <div className="footitem">
@@ -48,7 +48,7 @@ const Footer = () => {
                     <h4 className="foot_title">{t('Career')}</h4>
                     <ul className="footlinks">
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Job')}</Link></li> */}
-                        <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Work With Us')}</Link></li>
+                        <li><Link to="/workwithus"><span><i className="fas fa-caret-right"></i></span>{t('Work With Us')}</Link></li>
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Apply')}</Link></li> */}
 
                     </ul>
