@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const Charities = () => {
-
-
+    const { t } = useTranslation()
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
@@ -11,8 +11,17 @@ const Charities = () => {
     return (
         <>
             <main>
+                <div className="inner_pages_title_banner">
+                    <div className="page_title_banner">
+                        <img src="/assets/img/Untitled-1.jpg" alt="" className="img-fluid" />
+                    </div>
+
+                    <div className="page_title">
+                        <h2>{t("Charities")}</h2>
+                    </div>
+                </div>
                 <div className='contact_wrapper'>
-                    <h2 className="text-center contact_title">Charities</h2>
+                    <h2 className="text-center contact_title">{t("Charities")}</h2>
                     <h4 className='container'>
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. At est quia illo rem, recusandae asperiores nostrum consequuntur accusantium aliquam vitae eos rerum inventore quae quaerat nulla quas? Facilis molestiae optio at perferendis qui quae nostrum? Laboriosam, ab laudantium expedita ducimus quae perferendis nostrum qui illo deserunt sapiente possimus incidunt dolores aperiam officia hic sequi distinctio! Quod vero molestiae exercitationem nulla minima quibusdam ratione laborum temporibus eum explicabo molestias quaerat recusandae dignissimos modi amet asperiores voluptas reiciendis ipsa unde, earum expedita. Nobis sed, accusantium vel corrupti maiores ipsum debitis possimus quod voluptatibus asperiores alias aliquid vero odio rem expedita nostrum facilis.
                     </h4>
