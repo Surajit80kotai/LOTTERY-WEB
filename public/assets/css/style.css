@@ -2166,7 +2166,7 @@ margin: 0.5rem;
 	top: 0;
 	padding: 10px;
 	font-size: 20px;
-	z-index: 9;
+	z-index: 999;
 
 }
 
@@ -4432,7 +4432,7 @@ margin: 0.5rem;
 	position: sticky;
 	top: 0;
 	width: 100%;
-	z-index: 9999;
+	/* z-index: 9999; */
 }
 
 /* .sticky+main { 
@@ -4597,4 +4597,8 @@ margin: 0.5rem;
 
 .logout_btn:hover {
 	color: rgb(233, 0, 0);
+}
+
+.sticky-top {
+	z-index: 99;
 }
