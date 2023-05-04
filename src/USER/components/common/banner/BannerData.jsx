@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -144,7 +144,7 @@ const BannerData = ({ item, id }) => {
                                     <div className="one_time">
                                         <br />
                                         <br />
-                                        <h1 className='text-white'>Ticket Is Unavailable Right Now</h1>
+                                        <h1 className='text-white'>{t("Ticket Is Unavailable Right Now")}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -155,4 +155,4 @@ const BannerData = ({ item, id }) => {
     )
 }
 
-export default memo(BannerData)
+export default BannerData
