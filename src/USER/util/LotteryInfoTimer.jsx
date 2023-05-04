@@ -14,7 +14,7 @@ const LotteryInfoTimer = ({ ticketInfo, round }) => {
     useEffect(() => {
         startTimer(Number(timestamp))
         // console.log("render");
-    })
+    }, [startTimer, timestamp])
 
     return (
         <>

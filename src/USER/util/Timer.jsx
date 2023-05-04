@@ -9,7 +9,7 @@ const Timer = ({ item }) => {
     useEffect(() => {
         startTimer(item?.result_on)
         // console.log("render");
-    })
+    }, [startTimer, item?.result_on])
 
 
     return (

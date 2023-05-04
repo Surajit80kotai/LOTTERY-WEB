@@ -61,7 +61,7 @@ const BannerData = ({ item, id }) => {
     useEffect(() => {
         // console.log("render");
         startTimer(Number(timestamp))
-    })
+    }, [startTimer, timestamp])
 
     useEffect(() => {
         calculateRounds()

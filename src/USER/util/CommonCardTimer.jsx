@@ -14,7 +14,7 @@ const CommonCardTimer = ({ item, round }) => {
 
     useEffect(() => {
         startTimer(Number(timestamp))
-    })
+    }, [startTimer, timestamp])
 
     return (
         <>
