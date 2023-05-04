@@ -7,8 +7,8 @@ const CookiesPolicy = () => {
         <>
             <CookieConsent
                 location="bottom"
-                buttonText="I Understand"
-                cookieName="myAwesomeCookieName2"
+                buttonText="I Accept"
+                cookieName="ESHAC-PLAY"
                 style={{
                     background: "#2B373B",
                     fontSize: "20px",
@@ -28,7 +28,7 @@ const CookiesPolicy = () => {
             >
                 This website uses cookies to enhance the user experience.{" "}
                 <span style={{ fontSize: "10px" }}>
-                    <Link to="#" style={{ color: "#31708e", fontSize: "18px" }}>Cookies Policy</Link>
+                    <Link to="/cookiepolicy" style={{ color: "#31708e", fontSize: "18px" }}>Cookies Policy</Link>
                 </span>
             </CookieConsent >
         </>
