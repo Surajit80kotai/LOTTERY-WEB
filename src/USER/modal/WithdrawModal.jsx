@@ -16,13 +16,13 @@ const WithdrawModal = () => {
         {
             amount: "",
             currency: "EUR",
-            externalId: "65213456",
-            payer: {
+            externalId: "986532",
+            payee: {
                 partyIdType: "MSISDN",
                 partyId: ""
             },
-            payerMessage: "Payment",
-            payeeNote: "Payment note"
+            payerMessage: "Withdrawl",
+            payeeNote: "ESHAC-PLAY Wallet Withdrawl"
         }
     )
     const { withdraw_data, loading } = useSelector((state) => state.userslice)
@@ -45,8 +45,8 @@ const WithdrawModal = () => {
     // handleSubmit function
     const handleSubmit = (e) => {
         e.preventDefault()
-        const payer = { ...formValues?.payer, partyId: "+" + phone }
-        const formData = { ...formValues, payer, phonecode }
+        const payee = { ...formValues?.payee, partyId: "+" + phone }
+        const formData = { ...formValues, payee, phonecode }
         const uuid = withdraw_data?.UUID
         const access_token = `Bearer ${withdraw_data?.Gen_API_Token?.access_token}`
         const data = { formData, uuid, access_token }
@@ -56,7 +56,7 @@ const WithdrawModal = () => {
             amount: "",
             currency: "",
             externalId: "",
-            payer: {
+            payee: {
                 partyIdType: "",
                 partyId: ""
             },
