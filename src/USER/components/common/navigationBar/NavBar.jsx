@@ -9,6 +9,7 @@ import PreLoader from '../../core/preloader/PreLoader'
 import SearchDesk from '../../../util/SearchDesk'
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
+import { fetchCategory } from '../../../services/slice/LotterySlice'
 
 
 
@@ -45,6 +46,7 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(getCart(navigate))
+    dispatch(fetchCategory())
   }, [dispatch, cartLength, token, navigate])
 
 
