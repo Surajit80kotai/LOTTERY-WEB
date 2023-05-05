@@ -8,6 +8,7 @@ import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { detailsPageVisit } from '../../../services/slice/UserSlice'
 
 const SliderCard = ({ item }) => {
     const { t } = useTranslation()
@@ -95,7 +96,7 @@ const SliderCard = ({ item }) => {
                 // round >= 0 &&
                 */}
             <div className="product_item_one m-2">
-                <Link to={`/info/${_id}/${round}`}>
+                <Link to={`/info/${_id}/${round}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                     <div className="product_img">
                         <div className="pro_img">
                             {/* Image Condition */}
@@ -107,7 +108,7 @@ const SliderCard = ({ item }) => {
                     </div>
                 </Link>
                 <div className="product_content">
-                    <Link to={`/info/${_id}/${round}`}>
+                    <Link to={`/info/${_id}/${round}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                         <div className="product_price">
                             {
                                 rounds[round] ?

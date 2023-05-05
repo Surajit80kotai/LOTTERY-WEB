@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ADDTOCART, DELCART, FETCHCART, UPDATECART } from "../api/Api";
+import { ADDTOCART, DELCART, FETCHCART, REMOVECARTTRACK, UPDATECART } from "../api/Api";
 import { toast } from 'react-toastify'
 
 
@@ -51,9 +51,9 @@ export const addCart = createAsyncThunk("/auth/add-cart", async ({ cartData, toa
 
 
 // DeleteCart post request handle
-export const delCartItem = createAsyncThunk("/auth/cart/delete", async ({ id, navigate }, { rejectWithValue }) => {
+export const delCartItem = createAsyncThunk("/auth/cart/delete", async ({ id, produt_id, navigate }, { rejectWithValue }) => {
     try {
-        const res = await DELCART(id, header)
+        const res = await DELCART(id, produt_id, header)
         return res?.data
     } catch (err) {
         // console.log(err)
@@ -97,6 +97,27 @@ export const updateCart = createAsyncThunk("/auth/cart/qt_update", async ({ data
     try {
         const { id, qty, flag } = data
         const res = await UPDATECART(id, qty, flag, header)
+        return res?.data
+    } catch (err) {
+        // console.log("Quantity not updated", err)
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                // navigate('/login')
+            }, 3700)
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+// removeCartTrack post request handle
+export const removeCartTrack = createAsyncThunk("/product/remove/cart/log", async ({ product_id, product_count, navigate }, { rejectWithValue }) => {
+    try {
+        const res = await REMOVECARTTRACK(userID, product_id, product_count)
         return res?.data
     } catch (err) {
         // console.log("Quantity not updated", err)
@@ -236,6 +257,22 @@ export const CartSlice = createSlice({
             }
         })
         builder.addCase(updateCart.rejected, (state, { payload }) => {
+            state.status = "Failed"
+            state.loading = false
+            state.cartSliceError = payload
+        })
+
+
+        // states for removeCartTrack system
+        builder.addCase(removeCartTrack.pending, (state) => {
+            state.status = "Loading"
+            state.loading = true
+        })
+        builder.addCase(removeCartTrack.fulfilled, (state, { payload }) => {
+            state.status = "Success"
+            state.loading = false
+        })
+        builder.addCase(removeCartTrack.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
             state.cartSliceError = payload

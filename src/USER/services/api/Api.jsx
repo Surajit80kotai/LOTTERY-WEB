@@ -41,7 +41,7 @@ export const ADDTOCART = (cartData, header) => API.post('/auth/add-cart', cartDa
 export const FETCHCART = (id, header) => API.get("/auth/cart/" + id, header)
 
 // delete cart item
-export const DELCART = (id, header) => API.delete("/auth/cart/delete/" + id, header)
+export const DELCART = (id, produt_id, header) => API.delete("/auth/cart/delete/" + id + "/" + produt_id, header)
 
 // update Cart item quantity
 export const UPDATECART = (id, qty, flag, header) => API.get("/auth/cart/qt_update/" + id + "/" + qty + "/" + flag, header)
@@ -90,6 +90,12 @@ export const WITHDRAW = (data) => API.post("/auth/withdraw", data)
 
 // checkpassword
 export const CHECKPASSWORD = (password, header) => API.post("/auth/email/phone/change", password, header)
+
+// detailsPageVisit
+export const DETAILSPAGEVISIT = (userID, product_id) => API.post("/auth/product/visit/log/" + userID + "/" + product_id)
+
+// removeCartTrack
+export const REMOVECARTTRACK = (userID, product_id, product_count) => API.post("/auth/product/remove/cart/log/" + userID + "/" + product_id + "/" + product_count)
 
 // test API
 export const TESTAPI = () => API.get("http://localhost:3000/phonecode.json")

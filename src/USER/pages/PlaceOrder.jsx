@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { getBalance } from '../services/slice/UserSlice';
+import { detailsPageVisit, getBalance } from '../services/slice/UserSlice';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { clearOrderedData, emptyBuyNow, itemBuyNow, placeOrder } from '../services/slice/PaymentSlice';
@@ -28,6 +28,9 @@ const PlaceOrder = () => {
     const dueAmount = buy_now_data?.amount?.total ? Number((buy_now_data?.amount?.total * buyNowQty) - balance?.balance).toFixed(2) : Number((amount?.total - balance?.balance).toFixed(2))
 
     const buyNowDataObj = Object.keys(buy_now_data)
+
+    // productID for buy now producta
+    var _id = buy_now_data?.ticket?._id
 
     // Accesing token
     const token = JSON.parse(window.localStorage.getItem("token"))
@@ -188,13 +191,13 @@ const PlaceOrder = () => {
                                     buyNowDataObj?.length > 0 ?
                                         <div className="order_history_summary col-md-8">
                                             <div className="cart_list_item" id={buy_now_data?.ticket?._id}>
-                                                <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.product_info?.round_index}`}>
+                                                <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.product_info?.round_index}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                                     <div className="cart_item_img">
                                                         <img loading="lazy" src={baseUrl + buy_now_data?.ticket?.is_image} alt="" className="img-fluid" />
                                                     </div>
                                                 </Link>
                                                 <div className="cart_item_content">
-                                                    <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.product_info?.round_index}`}>
+                                                    <Link to={`/info/${buy_now_data?.ticket?._id}/${buy_now_data?.product_info?.round_index}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                                         <div className="cart_title">
                                                             <h3>{buy_now_data?.ticket?.ticket_name}</h3>
                                                         </div>
@@ -236,15 +239,16 @@ const PlaceOrder = () => {
                                             {
                                                 cart_data?.length ?
                                                     cart_data?.map((item) => {
+                                                        let _id = item?.info[0]?._id
                                                         return (
                                                             <div className="cart_list_item" key={item.resp._id} id={item.resp._id}>
-                                                                <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
+                                                                <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                                                     <div className="cart_item_img">
                                                                         <img loading="lazy" src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                                                                     </div>
                                                                 </Link>
                                                                 <div className="cart_item_content">
-                                                                    <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
+                                                                    <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                                                         <div className="cart_title">
                                                                             <h3>{item?.info[0]?.ticket_name}</h3>
                                                                         </div>

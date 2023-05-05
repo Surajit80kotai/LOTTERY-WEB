@@ -8,6 +8,7 @@ import PreLoader from '../preloader/PreLoader'
 import { toast } from 'react-toastify'
 import CommonCardTimer from '../../../util/CommonCardTimer'
 import { useTranslation } from 'react-i18next'
+import { detailsPageVisit } from '../../../services/slice/UserSlice'
 
 const CommonCard = ({ item }) => {
     const { t } = useTranslation()
@@ -106,7 +107,7 @@ const CommonCard = ({ item }) => {
                 round >= 0 ?
                     <div className="col-md-3 product_item">
                         <div className="product_item_one m-2">
-                            <Link to={`/info/${_id}/${round}`}>
+                            <Link to={`/info/${_id}/${round}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                 <div className="product_img">
                                     <div className="pro_img">
                                         {/* Image Condition */}
@@ -118,7 +119,7 @@ const CommonCard = ({ item }) => {
                                 </div>
                             </Link>
                             <div className="product_content">
-                                <Link to={`/info/${_id}/${round}`}>
+                                <Link to={`/info/${_id}/${round}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                     <div className="product_price">
                                         {
                                             rounds[round]?._dis ?

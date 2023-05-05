@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTimer } from '../../../customHooks/useTimer'
 import { buyNowItem } from '../../../services/slice/PaymentSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 import { useTranslation } from 'react-i18next'
+import { detailsPageVisit } from '../../../services/slice/UserSlice'
 
-const BannerData = ({ item, id }) => {
+const BannerData = ({ item, _id }) => {
     const { t } = useTranslation()
     const [round, setRound] = useState(0)
+    const navigate = useNavigate()
+
 
     // ticket rounds calculation function
     const calculateRounds = () => {
@@ -70,7 +73,7 @@ const BannerData = ({ item, id }) => {
     return (
         <>
             <div>
-                <Link to={`/info/${id}/${round}`}>
+                <Link to={`/info/${_id}/${round}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                     <div className="banner_img">
                         <img loading="lazy" src={baseUrl + item?.banner_image} alt="baaner" className="img-fluid" />
                     </div>
@@ -81,7 +84,7 @@ const BannerData = ({ item, id }) => {
                         (timerDays && timerHours && timerMinutes && timerSeconds) >= 0 ?
                             <div>
                                 <div className="time_counter">
-                                    <Link to={`/info/${id}/${round}`}>
+                                    <Link to={`/info/${_id}/${round}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                         <h1 className="banner_title">{item?.ticket_name}</h1>
                                     </Link>
                                     <h3>{t('Timeleft')}</h3>
@@ -136,7 +139,7 @@ const BannerData = ({ item, id }) => {
                             :
                             <div>
                                 <div className="time_counter">
-                                    <Link to={`/info/${id}/${round}`}>
+                                    <Link to={`/info/${_id}/${round}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                         <h1 className="banner_title">{item?.ticket_name}</h1>
                                     </Link>
                                 </div>

@@ -23,7 +23,7 @@ const Banner = () => {
                                 }
                                 return (
                                     <div className={`carousel-item ${act}`} key={index} data-bs-interval="5000" cycle="true">
-                                        <BannerData item={item} id={item?._id} />
+                                        <BannerData item={item} _id={item?._id} />
                                     </div>
                                 )
                             })

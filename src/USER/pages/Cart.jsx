@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, updateCart, updateQTY } from '../services/slice/CartSlice'
+import { clearDeleteStatus, clearUpdateStatus, delCartItem, getCart, removeCartTrack, updateCart, updateQTY } from '../services/slice/CartSlice'
 import { useEffect } from 'react'
 import { clearOrderedData, emptyBuyNow } from '../services/slice/PaymentSlice'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { currency_symbol, generalCurrency_symbol } from '../util/Currency'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import { detailsPageVisit } from '../services/slice/UserSlice'
 
 const baseUrl = process.env.REACT_APP_NODE_HOST
 
@@ -67,8 +68,9 @@ const Cart = () => {
   }
 
   // removeItem function
-  const removeItem = (id) => {
-    dispatch(delCartItem({ id, navigate }))
+  const removeItem = (id, product_id, product_count) => {
+    dispatch(delCartItem({ id, product_id, navigate }))
+    dispatch(removeCartTrack({ product_id, product_count, navigate }))
     setTimeout(() => {
       toast.success("Item Removed From Cart", {
         autoClose: 3000
@@ -130,11 +132,12 @@ const Cart = () => {
                     cart_data?.length ?
                       cart_data?.map((item) => {
                         // cart_data?.map((item) => {
+                        let _id = item?.info[0]?._id
                         return (
 
                           <div className="cart_list_item" key={item?.resp?._id}>
                             {/* Image */}
-                            <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
+                            <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                               <div className="cart_item_img">
                                 <img loading="lazy" src={baseUrl + item?.info[0]?.main_image} alt="" className="img-fluid" />
                               </div>
@@ -143,7 +146,7 @@ const Cart = () => {
                             {/* Item Info */}
 
                             <div className="cart_item_content">
-                              <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`}>
+                              <Link to={`/info/${item?.info[0]?._id}/${item?.resp?.round_index}`} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                 <div className="cart_title">
                                   <h3>{item?.info[0]?.ticket_name}</h3>
                                 </div>
@@ -177,7 +180,7 @@ const Cart = () => {
 
                             {/* Remove button */}
                             <div className="remove_btn">
-                              <button onClick={() => removeItem(item?.resp?._id)}><i className="bi bi-trash3"></i></button>
+                              <button onClick={() => removeItem(item?.resp?._id, item?.info[0]?._id, item?.resp?.quantity)}><i className="bi bi-trash3"></i></button>
                             </div>
 
                           </div>

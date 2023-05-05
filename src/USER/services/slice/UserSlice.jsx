@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CHECKPASSWORD, CONTACTUS, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
+import { CHECKPASSWORD, CONTACTUS, DETAILSPAGEVISIT, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
 import { toast } from "react-toastify";
+
+// from socialuser
+const socialuserID = (JSON.parse(window.localStorage.getItem("user")))?.uid
 
 // Defining header
 const header = {
@@ -8,6 +11,9 @@ const header = {
         Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("token"))}`
     }
 };
+
+// user ID
+const userID = socialuserID ? socialuserID : (JSON.parse(window.localStorage.getItem("user"))?.user_id)
 
 //get user balance
 export const getBalance = createAsyncThunk("/auth/account/wallet/balance", async (navigate, { rejectWithValue }) => {
@@ -175,6 +181,26 @@ export const checkPassword = createAsyncThunk("/auth/email/phone/change", async 
 })
 
 
+// init-withdraw
+export const detailsPageVisit = createAsyncThunk("/auth/product/visit/log", async ({ _id, navigate }, { rejectWithValue }) => {
+    try {
+        const response = await DETAILSPAGEVISIT(userID, _id)
+        return response?.data
+    } catch (err) {
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                // navigate('/login')
+            }, 3700)
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
 
 const initialState = {
     balance: [],
@@ -314,6 +340,21 @@ export const UserSlice = createSlice({
             }
         })
         builder.addCase(checkPassword.rejected, (state, { payload }) => {
+            state.status = "Failed"
+            state.loading = false
+            state.userSliceError = payload
+        })
+
+        // states for detailsPageVisit
+        builder.addCase(detailsPageVisit.pending, (state) => {
+            state.status = "Loading"
+            state.loading = true
+        })
+        builder.addCase(detailsPageVisit.fulfilled, (state, { payload }) => {
+            state.status = "Success"
+            state.loading = false
+        })
+        builder.addCase(detailsPageVisit.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
             state.userSliceError = payload
