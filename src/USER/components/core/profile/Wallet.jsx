@@ -264,7 +264,7 @@ const Wallet = () => {
                                                                                                                 <span className='payment_logo'>
                                                                                                                     <img src="/assets/img/mtncm.png" alt="" />
                                                                                                                 </span>
-                                                                                                                {t("MTN Withdrawl")}
+                                                                                                                {t("MTN Withdrawal")}
                                                                                                             </td>
                                                                                                             :
                                                                                                             item.merchant === "Purchase" ?
