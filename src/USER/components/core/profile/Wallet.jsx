@@ -191,7 +191,7 @@ const Wallet = () => {
                                                                                             minute: 'numeric',
                                                                                             second: 'numeric'
                                                                                         })}</td>
-                                                                                        : (item.status === "202") || (item.status === "200") ?
+                                                                                        : (item.status_code === "202") || (item.status_code === "200") ?
                                                                                             <td>{new Date(item?.createdAt).toLocaleString('en-US', {
                                                                                                 month: 'short',
                                                                                                 day: '2-digit',
@@ -267,12 +267,20 @@ const Wallet = () => {
                                                                                                                 {t("MTN Withdrawl")}
                                                                                                             </td>
                                                                                                             :
-                                                                                                            <td colSpan={2}>
-                                                                                                                <span className='payment_logo'>
-                                                                                                                    <img src="/assets/img/pending.png" alt="" />
-                                                                                                                </span>
-                                                                                                                {t("Waiting For Payment")}
-                                                                                                            </td>
+                                                                                                            item.merchant === "Purchase" ?
+                                                                                                                <td colSpan={2}>
+                                                                                                                    <span className='payment_logo'>
+                                                                                                                        <img src="/assets/img/ticket_icon.png" alt="" />
+                                                                                                                    </span>
+                                                                                                                    {t("ESHAC-PLAY (Purchase)")}
+                                                                                                                </td>
+                                                                                                                :
+                                                                                                                <td colSpan={2}>
+                                                                                                                    <span className='payment_logo'>
+                                                                                                                        <img src="/assets/img/pending.png" alt="" />
+                                                                                                                    </span>
+                                                                                                                    {t("Waiting For Payment")}
+                                                                                                                </td>
                                                                             }
 
                                                                             <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
@@ -291,10 +299,10 @@ const Wallet = () => {
                                                                                                 : (item.status_code === "600") ?
                                                                                                     <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("FAILED")}</span>
                                                                                                     // SUCCESS
-                                                                                                    : (item.status_code === "00") || (item.status === "200") || (item.status === "APPROVED") || (item.type === "Commission") ?
+                                                                                                    : (item.status_code === "00") || (item.status === "SUCCESSFUL") || (item.status === "APPROVED") || (item.type === "Commission") || (item.status === "Order Placed") ?
                                                                                                         <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
                                                                                                         // ACCEPTED
-                                                                                                        : item.status === "202" ?
+                                                                                                        : item.status === "Accepted" ?
                                                                                                             <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("ACCEPTED")}</span>
                                                                                                             // TRANSACTION ENDED
                                                                                                             : <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>

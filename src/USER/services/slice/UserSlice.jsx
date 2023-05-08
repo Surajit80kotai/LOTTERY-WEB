@@ -142,7 +142,9 @@ export const withdraw = createAsyncThunk("/auth/withdraw", async ({ data, naviga
     try {
         const response = await WITHDRAW(data)
         if (response?.data?.status === 202) {
-            toast.success("Withdraw Request Accepted")
+            toast.success("Withdraw Request Accepted.Please Refresh The Page To See The Changes", {
+                autoClose: "5000"
+            })
         }
         return response?.data
     } catch (err) {
