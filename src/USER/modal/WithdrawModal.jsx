@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { initWithdraw, withdraw } from '../services/slice/UserSlice'
 // import { currency } from '../util/Currency'
 
-const WithdrawModal = () => {
+const WithdrawModal = ({ balance, userID }) => {
     const { t } = useTranslation()
     const [phone, setPhone] = useState('')
     const [phonecode, setPhonecode] = useState('')
@@ -16,7 +16,7 @@ const WithdrawModal = () => {
         {
             amount: "",
             currency: "EUR",
-            externalId: "986532",
+            externalId: Math.floor(Math.random() * 100000000).toString(),
             payee: {
                 partyIdType: "MSISDN",
                 partyId: ""
@@ -49,7 +49,7 @@ const WithdrawModal = () => {
         const formData = { ...formValues, payee, phonecode }
         const uuid = withdraw_data?.UUID
         const access_token = `Bearer ${withdraw_data?.Gen_API_Token?.access_token}`
-        const data = { formData, uuid, access_token }
+        const data = { formData, uuid, access_token, userID }
         dispatch(withdraw({ data, navigate }))
 
         setFormValues({
@@ -74,16 +74,30 @@ const WithdrawModal = () => {
             {loading && <PreLoader />}
 
             {/*  Button trigger modal */}
-            <button
-                onClick={openModal}
-                type="button"
-                className="btn2 mx-5 my-3"
-                data-bs-toggle="modal"
-                data-bs-target="#withdrawModal"
-            >
-                {t("Withdraw Money")}
-            </button>
+            {
+                balance > 500 ?
 
+                    <button
+                        onClick={openModal}
+                        type="button"
+                        className="btn2 mx-5 my-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#withdrawModal"
+                    >
+                        {t("Withdraw Money")}
+                    </button>
+                    :
+                    <button
+                        onClick={openModal}
+                        type="button"
+                        className="btn2_disabled mx-5 my-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#withdrawModal"
+                        disabled
+                    >
+                        {t("Withdraw Money")}
+                    </button>
+            }
             {/* <!-- Modal --> */}
             <div className="modal fade" id="withdrawModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
@@ -94,7 +108,7 @@ const WithdrawModal = () => {
                         </div>
                         <div className="modal-body">
                             <form onSubmit={handleSubmit}>
-                                <p className='text-center text-danger fs-5' style={{ "color": "#f9772b" }}>{t("Minimum Withdraw Amount Should Be 500*")}</p>
+                                <p className='text-center fs-5' style={{ "color": "#f9772b" }}>{t("Minimum Withdraw Amount Should Be 500*")}</p>
                                 <div className='row'>
                                     <div style={{ padding: "0 50px" }}>
                                         <div className="mb-3">

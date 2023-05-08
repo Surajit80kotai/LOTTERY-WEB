@@ -3,8 +3,14 @@ import axios from "axios";
 import { BUYNOW, GETALLTRANSACTION, PAYINIT, PLACEORDER, SAVEPAYMNETDETAILS, UPDATETRANSACTION } from "../api/Api";
 import { toast } from "react-toastify";
 
+// from socialuser
+const socialuserID = (JSON.parse(window.localStorage.getItem("user")))?.uid
+
+
 const token = JSON.parse(window.localStorage.getItem("token"))
-const userID = (JSON.parse(window.localStorage.getItem("user"))?.user_id)
+// user ID
+const userID = socialuserID ? socialuserID : (JSON.parse(window.localStorage.getItem("user"))?.user_id)
+
 // Defining header
 const header = {
     headers: {
@@ -56,6 +62,7 @@ export const cinetPay = createAsyncThunk("/v2/payment", async (formValue, { reje
         data: data
     }
     try {
+        console.log(config);
         const res = await axios(config)
         return res?.data
     } catch (err) {
@@ -63,7 +70,6 @@ export const cinetPay = createAsyncThunk("/v2/payment", async (formValue, { reje
         return rejectWithValue(err.response.data)
     }
 })
-
 
 //payment initialization
 export const initPay = createAsyncThunk("/auth/pay/init", async (paymentData, { rejectWithValue }) => {
@@ -75,7 +81,6 @@ export const initPay = createAsyncThunk("/auth/pay/init", async (paymentData, { 
         return rejectWithValue(err.response.data)
     }
 })
-
 
 // get all transaction
 export const getTransactions = createAsyncThunk("/auth/get/transaction", async (navigate, { rejectWithValue }) => {
@@ -97,7 +102,6 @@ export const getTransactions = createAsyncThunk("/auth/get/transaction", async (
     }
 })
 
-
 //update transaction 
 export const updateTransactions = createAsyncThunk("/auth/update/transaction", async (navigate, { rejectWithValue }) => {
     try {
@@ -117,7 +121,6 @@ export const updateTransactions = createAsyncThunk("/auth/update/transaction", a
         return rejectWithValue(err.response.data)
     }
 })
-
 
 // place order
 export const placeOrder = createAsyncThunk("/auth/order", async ({ orderData, navigate }, { rejectWithValue }) => {
@@ -139,7 +142,6 @@ export const placeOrder = createAsyncThunk("/auth/order", async ({ orderData, na
         return rejectWithValue(err.response.data)
     }
 })
-
 
 //buy now
 export const itemBuyNow = createAsyncThunk("/auth/order/buy/now", async (orderData, { rejectWithValue }) => {

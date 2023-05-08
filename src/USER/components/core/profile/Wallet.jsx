@@ -100,7 +100,7 @@ const Wallet = () => {
                                                 <div className='d-flex'>
 
                                                     {/* Modal */}
-                                                    <WithdrawModal />
+                                                    <WithdrawModal balance={balance?.balance} userID={userID} />
 
                                                     <div>
                                                         {/* Total Balance */}
@@ -171,7 +171,7 @@ const Wallet = () => {
                                                                     return (
                                                                         <tr key={item._id}>
                                                                             {
-                                                                                item.status_code === "662" ?
+                                                                                (item.status_code === "662") || (item.status_code === "623") ?
                                                                                     <td>
                                                                                         {new Date(item?.createdAt).toLocaleString('en-US', {
                                                                                             month: 'short',
@@ -182,27 +182,17 @@ const Wallet = () => {
                                                                                             second: 'numeric'
                                                                                         })}
                                                                                     </td>
-                                                                                    // <td>
-                                                                                    //     {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
-                                                                                    // </td>
-                                                                                    :
-                                                                                    item.status_code === "623" ?
-                                                                                        <td>
-                                                                                            {new Date(item?.createdAt).toLocaleString('en-US', {
-                                                                                                month: 'short',
-                                                                                                day: '2-digit',
-                                                                                                year: 'numeric',
-                                                                                                hour: 'numeric',
-                                                                                                minute: 'numeric',
-                                                                                                second: 'numeric'
-                                                                                            })}
-                                                                                        </td>
-                                                                                        // <td>
-                                                                                        //     {item.createdAt.split("T")[0]} {item.createdAt.split("T")[1].split(".")[0]}
-                                                                                        // </td>
-                                                                                        :
-                                                                                        item.type === "Commission" ?
-                                                                                            <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                    : item.type === "Commission" ?
+                                                                                        <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                            month: 'short',
+                                                                                            day: '2-digit',
+                                                                                            year: 'numeric',
+                                                                                            hour: 'numeric',
+                                                                                            minute: 'numeric',
+                                                                                            second: 'numeric'
+                                                                                        })}</td>
+                                                                                        : (item.status === "202") || (item.status === "200") ?
+                                                                                            <td>{new Date(item?.createdAt).toLocaleString('en-US', {
                                                                                                 month: 'short',
                                                                                                 day: '2-digit',
                                                                                                 year: 'numeric',
@@ -210,8 +200,7 @@ const Wallet = () => {
                                                                                                 minute: 'numeric',
                                                                                                 second: 'numeric'
                                                                                             })}</td>
-                                                                                            :
-                                                                                            <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                            : <td>{new Date(item?.payment_date).toLocaleString('en-US', {
                                                                                                 month: 'short',
                                                                                                 day: '2-digit',
                                                                                                 year: 'numeric',
@@ -270,12 +259,20 @@ const Wallet = () => {
                                                                                                             {t("PayPal")}
                                                                                                         </td>
                                                                                                         :
-                                                                                                        <td colSpan={2}>
-                                                                                                            <span className='payment_logo'>
-                                                                                                                <img src="/assets/img/pending.png" alt="" />
-                                                                                                            </span>
-                                                                                                            {t("Waiting For Payment")}
-                                                                                                        </td>
+                                                                                                        item.merchant === "MTN" ?
+                                                                                                            <td colSpan={2}>
+                                                                                                                <span className='payment_logo'>
+                                                                                                                    <img src="/assets/img/mtncm.png" alt="" />
+                                                                                                                </span>
+                                                                                                                {t("MTN Withdrawl")}
+                                                                                                            </td>
+                                                                                                            :
+                                                                                                            <td colSpan={2}>
+                                                                                                                <span className='payment_logo'>
+                                                                                                                    <img src="/assets/img/pending.png" alt="" />
+                                                                                                                </span>
+                                                                                                                {t("Waiting For Payment")}
+                                                                                                            </td>
                                                                             }
 
                                                                             <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
@@ -284,30 +281,23 @@ const Wallet = () => {
                                                                                 {
                                                                                     (item.status_code === "627") ?
                                                                                         <span className='text-danger'><i className="fa-solid fa-ban mx-3"></i>{t("CANCELLED")}</span>
-                                                                                        :
                                                                                         // WAITING_CUSTOMER_PAYMENT
-                                                                                        (item.status_code === "662") ?
+                                                                                        : (item.status_code === "662") ?
                                                                                             <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>{t("PENDING")}</span>
-                                                                                            :
                                                                                             // WAITING_CUSTOMER_TO_VALIDATE
-                                                                                            (item.status_code === "623") ?
+                                                                                            : (item.status_code === "623") ?
                                                                                                 <span className='text-danger'><i className="fa-regular fa-clock mx-3"></i> {t("TIME EXPIRED")}</span>
                                                                                                 // PAYMENT_FAILED
                                                                                                 : (item.status_code === "600") ?
                                                                                                     <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("FAILED")}</span>
-                                                                                                    // SUCCES
-                                                                                                    : (item.status_code === "00") ?
+                                                                                                    // SUCCESS
+                                                                                                    : (item.status_code === "00") || (item.status === "200") || (item.status === "APPROVED") || (item.type === "Commission") ?
                                                                                                         <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
-                                                                                                        // COMISSION
-                                                                                                        :
-                                                                                                        item.type === "Commission" ?
-                                                                                                            <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
-                                                                                                            // PAYAPL
-                                                                                                            : item.status === "APPROVED" ?
-                                                                                                                <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
-                                                                                                                :
-                                                                                                                // TRANSACTION ENDED
-                                                                                                                <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
+                                                                                                        // ACCEPTED
+                                                                                                        : item.status === "202" ?
+                                                                                                            <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("ACCEPTED")}</span>
+                                                                                                            // TRANSACTION ENDED
+                                                                                                            : <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
                                                                                 }
                                                                             </td>
 
