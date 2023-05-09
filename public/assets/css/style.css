@@ -2768,9 +2768,12 @@ margin: 0.5rem;
 	}
 }
 
+.transaction {
+	margin-bottom: 0;
+}
 
 .transaction_area {
-	margin-top: 2rem;
+	/* margin-top: 2rem; */
 	height: 400px;
 	overflow: scroll;
 }

@@ -152,47 +152,39 @@ const Wallet = () => {
                                         {/* transaction histrory */}
                                         {
                                             transaction_data?.length ?
-                                                <div className="transaction_area">
+                                                <div className='transaction'>
                                                     <h1 className="text-center text-secondary tranhis">{t("Transaction History")}</h1>
-                                                    <table className="table mt-4">
-                                                        <thead className="table_head sticky-top ">
-                                                            <tr>
-                                                                <th scope="col">{t("Date")}</th>
-                                                                <th scope="col" colSpan={2}>{t("Transaction ID")}</th>
-                                                                <th scope="col" colSpan={2}>{t("Merchant")}</th>
-                                                                <th scope="col">{t("Amount")}</th>
-                                                                <th scope="col">{t("Status")}</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            {
-                                                                transaction_data?.map((item) => {
-                                                                    // let newDate = new Date(item.createdAt)
-                                                                    return (
-                                                                        <tr key={item._id}>
-                                                                            {
-                                                                                (item.status_code === "662") || (item.status_code === "623") ?
-                                                                                    <td>
-                                                                                        {new Date(item?.createdAt).toLocaleString('en-US', {
-                                                                                            month: 'short',
-                                                                                            day: '2-digit',
-                                                                                            year: 'numeric',
-                                                                                            hour: 'numeric',
-                                                                                            minute: 'numeric',
-                                                                                            second: 'numeric'
-                                                                                        })}
-                                                                                    </td>
-                                                                                    : item.type === "Commission" ?
-                                                                                        <td>{new Date(item?.payment_date).toLocaleString('en-US', {
-                                                                                            month: 'short',
-                                                                                            day: '2-digit',
-                                                                                            year: 'numeric',
-                                                                                            hour: 'numeric',
-                                                                                            minute: 'numeric',
-                                                                                            second: 'numeric'
-                                                                                        })}</td>
-                                                                                        : (item.status_code === "202") || (item.status_code === "200") ?
-                                                                                            <td>{new Date(item?.createdAt).toLocaleString('en-US', {
+                                                    <div className="transaction_area">
+                                                        <table className="table mt-4">
+                                                            <thead className="table_head sticky-top ">
+                                                                <tr>
+                                                                    <th scope="col">{t("Date")}</th>
+                                                                    <th scope="col" colSpan={2}>{t("Transaction ID")}</th>
+                                                                    <th scope="col" colSpan={2}>{t("Merchant")}</th>
+                                                                    <th scope="col">{t("Amount")}</th>
+                                                                    <th scope="col">{t("Status")}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {
+                                                                    transaction_data?.map((item) => {
+                                                                        // let newDate = new Date(item.createdAt)
+                                                                        return (
+                                                                            <tr key={item._id}>
+                                                                                {
+                                                                                    (item.status_code === "662") || (item.status_code === "623") ?
+                                                                                        <td>
+                                                                                            {new Date(item?.createdAt).toLocaleString('en-US', {
+                                                                                                month: 'short',
+                                                                                                day: '2-digit',
+                                                                                                year: 'numeric',
+                                                                                                hour: 'numeric',
+                                                                                                minute: 'numeric',
+                                                                                                second: 'numeric'
+                                                                                            })}
+                                                                                        </td>
+                                                                                        : item.type === "Commission" ?
+                                                                                            <td>{new Date(item?.payment_date).toLocaleString('en-US', {
                                                                                                 month: 'short',
                                                                                                 day: '2-digit',
                                                                                                 year: 'numeric',
@@ -200,121 +192,131 @@ const Wallet = () => {
                                                                                                 minute: 'numeric',
                                                                                                 second: 'numeric'
                                                                                             })}</td>
-                                                                                            : <td>{new Date(item?.payment_date).toLocaleString('en-US', {
-                                                                                                month: 'short',
-                                                                                                day: '2-digit',
-                                                                                                year: 'numeric',
-                                                                                                hour: 'numeric',
-                                                                                                minute: 'numeric',
-                                                                                                second: 'numeric'
-                                                                                            })}</td>
-                                                                                // <td>{item.payment_date}</td>
-                                                                            }
-                                                                            <td colSpan={2}>{item.transaction_id ? item.transaction_id : "--------"}</td>
-                                                                            {
-                                                                                item.payment_method === "OMCM" ?
-                                                                                    <td colSpan={2}>
-                                                                                        <span className='payment_logo'>
-                                                                                            <img src="/assets/img/omcm.png" alt="" />
-                                                                                        </span>
-                                                                                        {t("Orange Money")}
-                                                                                    </td>
-                                                                                    :
-                                                                                    item.payment_method === "MTNCM" ?
+                                                                                            : (item.status_code === "202") || (item.status_code === "200") ?
+                                                                                                <td>{new Date(item?.createdAt).toLocaleString('en-US', {
+                                                                                                    month: 'short',
+                                                                                                    day: '2-digit',
+                                                                                                    year: 'numeric',
+                                                                                                    hour: 'numeric',
+                                                                                                    minute: 'numeric',
+                                                                                                    second: 'numeric'
+                                                                                                })}</td>
+                                                                                                : <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                                    month: 'short',
+                                                                                                    day: '2-digit',
+                                                                                                    year: 'numeric',
+                                                                                                    hour: 'numeric',
+                                                                                                    minute: 'numeric',
+                                                                                                    second: 'numeric'
+                                                                                                })}</td>
+                                                                                    // <td>{item.payment_date}</td>
+                                                                                }
+                                                                                <td colSpan={2}>{item.transaction_id ? item.transaction_id : "--------"}</td>
+                                                                                {
+                                                                                    item.payment_method === "OMCM" ?
                                                                                         <td colSpan={2}>
                                                                                             <span className='payment_logo'>
-                                                                                                <img src="/assets/img/mtncm.png" alt="" />
+                                                                                                <img src="/assets/img/omcm.png" alt="" />
                                                                                             </span>
-                                                                                            {t("MTN Mobile Money")}
+                                                                                            {t("Orange Money")}
                                                                                         </td>
                                                                                         :
-                                                                                        item.payment_method === "VISAMCM" ?
+                                                                                        item.payment_method === "MTNCM" ?
                                                                                             <td colSpan={2}>
                                                                                                 <span className='payment_logo'>
-                                                                                                    <img src="/assets/img/visamcm.png" alt="" />
+                                                                                                    <img src="/assets/img/mtncm.png" alt="" />
                                                                                                 </span>
-                                                                                                {t("VISA/MasterCard")}
+                                                                                                {t("MTN Mobile Money")}
                                                                                             </td>
                                                                                             :
-                                                                                            item.payment_method === null ?
+                                                                                            item.payment_method === "VISAMCM" ?
                                                                                                 <td colSpan={2}>
                                                                                                     <span className='payment_logo'>
-                                                                                                        <img src="/assets/img/cancel.png" alt="" />
+                                                                                                        <img src="/assets/img/visamcm.png" alt="" />
                                                                                                     </span>
-                                                                                                    {t("Transaction Pending or Cancelled")}
+                                                                                                    {t("VISA/MasterCard")}
                                                                                                 </td>
                                                                                                 :
-                                                                                                item.type === "Commission" ?
+                                                                                                item.payment_method === null ?
                                                                                                     <td colSpan={2}>
                                                                                                         <span className='payment_logo'>
-                                                                                                            <img src="/assets/img/commission.png" alt="" />
+                                                                                                            <img src="/assets/img/cancel.png" alt="" />
                                                                                                         </span>
-                                                                                                        {t("Commission")}
+                                                                                                        {t("Transaction Pending or Cancelled")}
                                                                                                     </td>
-                                                                                                    : item.merchant === "PayPal" ?
+                                                                                                    :
+                                                                                                    item.type === "Commission" ?
                                                                                                         <td colSpan={2}>
                                                                                                             <span className='payment_logo'>
-                                                                                                                <img src="/assets/img/paypal_logo.png" alt="" />
+                                                                                                                <img src="/assets/img/commission.png" alt="" />
                                                                                                             </span>
-                                                                                                            {t("PayPal")}
+                                                                                                            {t("Commission")}
                                                                                                         </td>
-                                                                                                        :
-                                                                                                        item.merchant === "MTN" ?
+                                                                                                        : item.merchant === "PayPal" ?
                                                                                                             <td colSpan={2}>
                                                                                                                 <span className='payment_logo'>
-                                                                                                                    <img src="/assets/img/mtncm.png" alt="" />
+                                                                                                                    <img src="/assets/img/paypal_logo.png" alt="" />
                                                                                                                 </span>
-                                                                                                                {t("MTN Withdrawal")}
+                                                                                                                {t("PayPal")}
                                                                                                             </td>
                                                                                                             :
-                                                                                                            item.merchant === "Purchase" ?
+                                                                                                            item.merchant === "MTN" ?
                                                                                                                 <td colSpan={2}>
                                                                                                                     <span className='payment_logo'>
-                                                                                                                        <img src="/assets/img/ticket_icon.png" alt="" />
+                                                                                                                        <img src="/assets/img/mtncm.png" alt="" />
                                                                                                                     </span>
-                                                                                                                    {t("ESHAC-PLAY (Purchase)")}
+                                                                                                                    {t("MTN Withdrawal")}
                                                                                                                 </td>
                                                                                                                 :
-                                                                                                                <td colSpan={2}>
-                                                                                                                    <span className='payment_logo'>
-                                                                                                                        <img src="/assets/img/pending.png" alt="" />
-                                                                                                                    </span>
-                                                                                                                    {t("Waiting For Payment")}
-                                                                                                                </td>
-                                                                            }
-
-                                                                            <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
-                                                                            {/* <td>{(item.status).replace(/_/g," ")}</td> */}
-                                                                            <td>
-                                                                                {
-                                                                                    (item.status_code === "627") ?
-                                                                                        <span className='text-danger'><i className="fa-solid fa-ban mx-3"></i>{t("CANCELLED")}</span>
-                                                                                        // WAITING_CUSTOMER_PAYMENT
-                                                                                        : (item.status_code === "662") ?
-                                                                                            <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>{t("PENDING")}</span>
-                                                                                            // WAITING_CUSTOMER_TO_VALIDATE
-                                                                                            : (item.status_code === "623") ?
-                                                                                                <span className='text-danger'><i className="fa-regular fa-clock mx-3"></i> {t("TIME EXPIRED")}</span>
-                                                                                                // PAYMENT_FAILED
-                                                                                                : (item.status_code === "600") ?
-                                                                                                    <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("FAILED")}</span>
-                                                                                                    // SUCCESS
-                                                                                                    : (item.status_code === "00") || (item.status === "SUCCESSFUL") || (item.status === "APPROVED") || (item.type === "Commission") || (item.status === "Order Placed") ?
-                                                                                                        <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
-                                                                                                        // ACCEPTED
-                                                                                                        : item.status === "Accepted" ?
-                                                                                                            <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("ACCEPTED")}</span>
-                                                                                                            // TRANSACTION ENDED
-                                                                                                            : <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
+                                                                                                                item.merchant === "Purchase" ?
+                                                                                                                    <td colSpan={2}>
+                                                                                                                        <span className='payment_logo'>
+                                                                                                                            <img src="/assets/img/ticket_icon.png" alt="" />
+                                                                                                                        </span>
+                                                                                                                        {t("ESHAC-PLAY (Purchase)")}
+                                                                                                                    </td>
+                                                                                                                    :
+                                                                                                                    <td colSpan={2}>
+                                                                                                                        <span className='payment_logo'>
+                                                                                                                            <img src="/assets/img/pending.png" alt="" />
+                                                                                                                        </span>
+                                                                                                                        {t("Waiting For Payment")}
+                                                                                                                    </td>
                                                                                 }
-                                                                            </td>
 
-                                                                        </tr>
-                                                                    )
-                                                                }).reverse()
-                                                            }
-                                                        </tbody>
-                                                    </table>
+                                                                                <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
+                                                                                {/* <td>{(item.status).replace(/_/g," ")}</td> */}
+                                                                                <td>
+                                                                                    {
+                                                                                        (item.status_code === "627") ?
+                                                                                            <span className='text-danger'><i className="fa-solid fa-ban mx-3"></i>{t("CANCELLED")}</span>
+                                                                                            // WAITING_CUSTOMER_PAYMENT
+                                                                                            : (item.status_code === "662") ?
+                                                                                                <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-clock-rotate-left mx-3"></i>{t("PENDING")}</span>
+                                                                                                // WAITING_CUSTOMER_TO_VALIDATE
+                                                                                                : (item.status_code === "623") ?
+                                                                                                    <span className='text-danger'><i className="fa-regular fa-clock mx-3"></i> {t("TIME EXPIRED")}</span>
+                                                                                                    // PAYMENT_FAILED
+                                                                                                    : (item.status_code === "600") ?
+                                                                                                        <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("FAILED")}</span>
+                                                                                                        // SUCCESS
+                                                                                                        : (item.status_code === "00") || (item.status === "SUCCESSFUL") || (item.status === "APPROVED") || (item.type === "Commission") || (item.status === "Order Placed") ?
+                                                                                                            <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
+                                                                                                            // ACCEPTED
+                                                                                                            : item.status === "Accepted" ?
+                                                                                                                <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("ACCEPTED")}</span>
+                                                                                                                // TRANSACTION ENDED
+                                                                                                                : <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
+                                                                                    }
+                                                                                </td>
+
+                                                                            </tr>
+                                                                        )
+                                                                    }).reverse()
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                                 : <h4 className='text-center fst-italic fw-semibold mt-2'>{t("No Transaction History Present")}</h4>
                                         }

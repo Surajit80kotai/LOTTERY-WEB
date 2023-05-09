@@ -62,7 +62,6 @@ export const cinetPay = createAsyncThunk("/v2/payment", async (formValue, { reje
         data: data
     }
     try {
-        console.log(config);
         const res = await axios(config)
         return res?.data
     } catch (err) {
