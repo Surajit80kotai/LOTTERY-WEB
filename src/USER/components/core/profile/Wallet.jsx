@@ -284,7 +284,7 @@ const Wallet = () => {
                                                                                                                     </td>
                                                                                 }
 
-                                                                                <td>{userID ? currency_symbol : generalCurrency_symbol}     {item.amount}</td>
+                                                                                <td>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(Number(item.amount)).toFixed(2)}</td>
                                                                                 {/* <td>{(item.status).replace(/_/g," ")}</td> */}
                                                                                 <td>
                                                                                     {

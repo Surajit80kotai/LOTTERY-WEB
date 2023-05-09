@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const PrivacyPolicy = () => {
     const { t } = useTranslation()
@@ -31,7 +32,7 @@ const PrivacyPolicy = () => {
                     <div className="container">
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="index.html" className="text-color">{t("Home")}</a></li>
+                                <li className="breadcrumb-item"><Link to="/" className="text-color">{t("Home")}</Link></li>
                                 <li className="breadcrumb-item active" aria-current="page">{t("Privacy Policy")}</li>
                             </ol>
                         </nav>

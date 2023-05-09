@@ -5,6 +5,7 @@ import CountryStateSlice from "../slice/CountryStateSlice";
 import LotterySlice from "../slice/LotterySlice";
 import PaymentSlice from "../slice/PaymentSlice";
 import UserSlice from "../slice/UserSlice";
+import SettingsSlice from "../slice/SettingsSlice";
 
 export const Store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const Store = configureStore({
         countrystateslice: CountryStateSlice,
         cartslice: CartSlice,
         userslice: UserSlice,
-        paymentslice: PaymentSlice
+        paymentslice: PaymentSlice,
+        settingsSlice: SettingsSlice,
     }
 })

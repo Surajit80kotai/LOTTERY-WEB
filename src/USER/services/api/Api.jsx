@@ -97,5 +97,8 @@ export const DETAILSPAGEVISIT = (userID, product_id) => API.post("/auth/product/
 // removeCartTrack
 export const REMOVECARTTRACK = (userID, product_id, product_count) => API.post("/auth/product/remove/cart/log/" + userID + "/" + product_id + "/" + product_count)
 
+// getLogo
+export const GETLOGO = () => API.get("/system/get/log")
+
 // test API
 export const TESTAPI = () => API.get("http://localhost:3000/phonecode.json")

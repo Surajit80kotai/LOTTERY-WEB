@@ -10,6 +10,7 @@ import SearchDesk from '../../../util/SearchDesk'
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
 import { fetchCategory } from '../../../services/slice/LotterySlice'
+import { getLogo } from '../../../services/slice/SettingsSlice'
 
 
 
@@ -24,7 +25,11 @@ const NavBar = () => {
   const { cart_data } = useSelector((state) => state.cartslice)
   const cartLength = cart_data?.length
   const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
+  const { settings_data } = useSelector((state) => state.settingsSlice)
   const location = useLocation()
+
+  // baseUrl
+  const baseUrl = process.env.REACT_APP_NODE_HOST
 
   // Log Out Function
   const logOut = async () => {
@@ -47,6 +52,7 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(getCart(navigate))
     dispatch(fetchCategory())
+    dispatch(getLogo())
   }, [dispatch, cartLength, token, navigate])
 
 
@@ -79,7 +85,7 @@ const NavBar = () => {
         {/* Logo */}
         <Link className="navbar-brand" to="/">
           <div className="companyLogo">
-            <img src="/assets/img/eshacplaylogo.png" alt="logo" className="img-fluid" />
+            <img src={baseUrl + settings_data?.logo} alt="logo" className="img-fluid" />
           </div>
         </Link>
 
