@@ -28,7 +28,7 @@ root.render(
         <Route element={<ProtectedRoute />}>
           <Route path='/signup' element={<SignUp />} />
         </Route>
-        <Route path='/agentSignup' element={<AgentsAndInfluencersSignup />} />
+        <Route path='/agentSignup/:type' element={<AgentsAndInfluencersSignup />} />
         <Route path='/agentLogin' element={<AgentsAndInfluencersLogin />} />
         <Route path='/login' element={<Login text="/" />} />
         <Route path='/f_password' element={<ForgetPassword />} />

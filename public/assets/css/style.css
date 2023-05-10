@@ -4642,3 +4642,7 @@ margin: 0.5rem;
 .heading ul li {
 	font-size: 1.5rem;
 }
+
+.m_gap .react-tel-input .form-control {
+	width: 455px !important;
+}

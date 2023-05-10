@@ -258,5 +258,7 @@
     "Ticket Is Unavailable Right Now": "Le billet n'est pas disponible pour le moment",
     "MTN Withdrawal": "Retrait MTN",
     "ACCEPTED": "ACCEPTÉ",
-    "ESHAC-PLAY (Purchase)": "ESHAC-PLAY (Achat)"
+    "ESHAC-PLAY (Purchase)": "ESHAC-PLAY (Achat)",
+    "User Type": "Type d'utilisateur",
+    "Agent": "Agent"
 }

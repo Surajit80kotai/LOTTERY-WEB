@@ -3,7 +3,7 @@ import { useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { fetchCountry, fetchStates } from '../../services/slice/CountryStateSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 const AgentsAndInfluencersSignup = () => {
     const { t } = useTranslation()
     const [phone, setPhone] = useState('')
+    const { type } = useParams()
     const initialState = {
         full_name: "",
         email: "",
@@ -22,10 +23,11 @@ const AgentsAndInfluencersSignup = () => {
         gender: "",
         address: "",
         password: "",
+        user_type: type,
         confirmPassword: ""
     }
     const [formValues, setFormValues] = useState(initialState)
-    const { full_name, email, dob, country, gender, address, password, confirmPassword } = formValues
+    const { full_name, email, dob, country, gender, address, password, user_type, confirmPassword } = formValues
     const [error, setError] = useState("")
     const { countryData } = useSelector((state) => state.countrystateslice)
     const { signupErr, loading } = useSelector((state) => state.authslice)
@@ -153,6 +155,7 @@ const AgentsAndInfluencersSignup = () => {
                                         />*/}
 
                                         <PhoneInput
+                                            id="phone_input"
                                             inputProps={{ required: true }}
                                             placeholder={t("Enter Your Phone Number")}
                                             country={"cm"}
@@ -218,29 +221,49 @@ const AgentsAndInfluencersSignup = () => {
                                     </div>
 
                                     {/* Country */}
-                                    <div className="m_gap">
-                                        <label htmlFor="Country" className="form-label label_style">{t("Country")} <span className="text-danger">*</span></label>
-                                        <select
-                                            className="form-select form_input form_select"
-                                            aria-label="Default select example"
-                                            id="selects"
-                                            name='country'
-                                            value={country}
-                                            onChange={handleChange}
-                                            required
-                                        >
-                                            <option value="" disabled>{t("Select Your Country")}</option>
-                                            {
-                                                countryData?.map((country) => {
-                                                    return (
-                                                        <option key={country.countries_id
-                                                        } value={country.name + "||" + country.countries_id}>{country.name}</option>
-                                                    )
-                                                })
-                                            }
-                                        </select>
-                                        {/* Country Vaidation */}
-                                        <p className='text-danger fs-4 mt-2'>{signupErr?.country?.message}</p>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="m_gap">
+                                                <label htmlFor="Country" className="form-label label_style">{t("Country")} <span className="text-danger">*</span></label>
+                                                <select
+                                                    className="form-select form_input form_select"
+                                                    aria-label="Default select example"
+                                                    id="selects"
+                                                    name='country'
+                                                    value={country}
+                                                    onChange={handleChange}
+                                                    required
+                                                >
+                                                    <option value="" disabled>{t("Select Your Country")}</option>
+                                                    {
+                                                        countryData?.map((country) => {
+                                                            return (
+                                                                <option key={country.countries_id
+                                                                } value={country.name + "||" + country.countries_id}>{country.name}</option>
+                                                            )
+                                                        })
+                                                    }
+                                                </select>
+                                                {/* Country Vaidation */}
+                                                <p className='text-danger fs-4 mt-2'>{signupErr?.country?.message}</p>
+                                            </div>
+                                        </div>
+
+                                        {/* User Type */}
+                                        <div className="col-md-6">
+                                            <div className="m_gap">
+                                                <label htmlFor="user_type" className="form-label label_style">{t("User Type")} <span className="text-danger">*</span></label>
+                                                <input
+                                                    type="text"
+                                                    name="user_type"
+                                                    id="user_type"
+                                                    className="form-control form_input"
+                                                    value={user_type}
+                                                    onChange={handleChange}
+                                                    readOnly
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
 
                                     {/* Register with promo code */}
