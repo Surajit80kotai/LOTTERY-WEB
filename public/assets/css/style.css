@@ -4647,3 +4647,9 @@ margin: 0.5rem;
 .m_gap .react-tel-input .form-control {
 	width: 455px !important;
 }
+
+.banner-img-fluid {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+}

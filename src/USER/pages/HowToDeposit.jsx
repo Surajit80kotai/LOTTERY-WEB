@@ -1,12 +1,20 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { getCommonPageData } from '../services/slice/SettingsSlice'
 
 const HowToDeposit = () => {
+    const { common_page_data } = useSelector((state) => state.settingsSlice)
     const { t } = useTranslation()
+    const dispatch = useDispatch()
+
+    const baseUrl = process.env.REACT_APP_NODE_HOST
+
     useEffect(() => {
         window.scrollTo(0, 0)
+        dispatch(getCommonPageData())
     }, [])
 
     return (
@@ -14,7 +22,7 @@ const HowToDeposit = () => {
             <main style={{ marginBottom: "50px" }}>
                 <div className="inner_pages_title_banner">
                     <div className="page_title_banner">
-                        <img src="assets/img/Untitled-1.jpg" alt="" className="img-fluid" />
+                        <img src={baseUrl + common_page_data?.header_image} alt="" className="banner-img-fluid" />
                     </div>
 
                     <div className="page_title">
@@ -67,27 +75,16 @@ const HowToDeposit = () => {
                         </div>
                     </div>
                     <div className="row heading">
-                        <div className="full_describtion">
-                            <h4 className=" fw-bold ">{t("Cookies and Log data")}</h4>
-                            <p>
-                                We as a policy do not collect visitors personal data who visit our website, unless shared by the visitors
-                                themselves. We have forms which visitors can fill up to submit their queries. We collect basic information
-                                on the form like visitor name, email address, contact number. We value an individuals privacy and do not
-                                share such data with any 3rd party.
-                                For our business purpose we also collect information about the region and location from where a enquiry is
-                                generated and the browser used. This information is used for our internal assessment and for formulating
-                                marketing strategies.
-                                <br /><br />
-                                We as a policy do not collect visitors personal data who visit our website, unless shared by the visitors
-                                themselves. We have forms which visitors can fill up to submit their queries. We collect basic information
-                                on the form like visitor name, email address, contact number. We value an individuals privacy and do not
-                                share such data with any 3rd party.
-                                For our business purpose we also collect information about the region and location from where a enquiry is
-                                generated and the browser used. This information is used for our internal assessment and for formulating
-                                marketing strategies.
-                            </p>
-
-                        </div>
+                        {
+                            common_page_data?.list?.map((item) => {
+                                return (
+                                    <div className="full_describtion" key={item?._id}>
+                                        <h4 className=" fw-bold ">{item?.common_list?.heading}</h4>
+                                        <p>{item?.common_list?.description}</p>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                     <div className="row heading">
                         <div className="full_describtion">

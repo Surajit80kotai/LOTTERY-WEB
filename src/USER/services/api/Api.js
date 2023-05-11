@@ -105,3 +105,9 @@ export const TERMSANDCONDITIONS = () => API.get("/system/get/tc")
 
 // privacyPolicy
 export const PRIVACYPOLICY = () => API.get("/system/get/pp")
+
+// cookiePolicy
+export const COOKIEPOLICY = () => API.get("/system/get/cookie")
+
+// getCommonPageData
+export const GETCOMMONPAGEDATA = () => API.get("/system/get/common")

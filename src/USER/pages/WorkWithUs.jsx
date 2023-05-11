@@ -1,13 +1,20 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { getCommonPageData } from '../services/slice/SettingsSlice'
 
 const WorkWithUs = () => {
+    const { common_page_data } = useSelector((state) => state.settingsSlice)
     const { t } = useTranslation()
+    const dispatch = useDispatch()
+
+    const baseUrl = process.env.REACT_APP_NODE_HOST
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        dispatch(getCommonPageData())
     }, [])
 
     return (
@@ -15,7 +22,7 @@ const WorkWithUs = () => {
             <main style={{ marginBottom: "50px" }}>
                 <div className="inner_pages_title_banner">
                     <div className="page_title_banner">
-                        <img src="assets/img/Untitled-1.jpg" alt="" className="img-fluid" />
+                        <img src={baseUrl + common_page_data?.header_image} alt="" className="banner-img-fluid" />
                     </div>
 
                     <div className="page_title">
@@ -67,15 +74,16 @@ const WorkWithUs = () => {
                         </div>
                     </div>
                     <div className="row heading">
-                        <div className="full_describtion">
-                            <h4 className=" fw-bold ">Heading One</h4>
-                            <p>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, in nihil adipisci quos asperiores fugit incidunt id illo ab provident labore quisquam et velit quaerat dicta doloribus hic quia placeat eius, aut sint eum reprehenderit nulla? Quae possimus consequuntur eum dicta sunt nisi eligendi recusandae nihil iusto modi accusantium, necessitatibus sequi deleniti voluptas dolorum reprehenderit alias, harum nesciunt explicabo sed officiis! Optio ipsam assumenda qui. Qui repellat repudiandae quia distinctio, quis odit, voluptatem minus quasi eum officia dicta delectus, explicabo temporibus possimus impedit vel veritatis praesentium porro magni consequuntur nam molestiae? Accusamus at eveniet quia dicta, suscipit asperiores qui? Veniam est maxime quia iste. Impedit.
-                                <br /><br />
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt laborum fugit facilis, obcaecati, illo deleniti nostrum, aliquid magnam quia esse mollitia dignissimos error dolores rem sint sapiente cumque pariatur dolorem sequi ullam cupiditate ipsam! Dolores dicta explicabo aspernatur exercitationem! Ullam aspernatur dolore harum quis eaque voluptate ea quas saepe! Voluptates quisquam vitae eum enim deserunt nostrum quis quidem? Blanditiis cum aperiam aliquid voluptatem quo? Soluta et perferendis deserunt non quam reprehenderit nesciunt eum odit officia placeat facilis eos expedita explicabo officiis totam recusandae error eius, quo, corrupti, porro quis maiores quod minus in! Ipsam fuga assumenda quos eos animi quas rerum itaque!
-                            </p>
-
-                        </div>
+                        {
+                            common_page_data?.list?.map((item) => {
+                                return (
+                                    <div className="full_describtion" key={item?._id}>
+                                        <h4 className=" fw-bold ">{item?.common_list?.heading}</h4>
+                                        <p>{item?.common_list?.description}</p>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                     <div className="row heading">
                         <div className="full_describtion">

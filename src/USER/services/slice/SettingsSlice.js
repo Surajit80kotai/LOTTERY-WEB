@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { GETLOGO, PRIVACYPOLICY, TERMSANDCONDITIONS } from "../api/Api"
+import { COOKIEPOLICY, GETCOMMONPAGEDATA, GETLOGO, PRIVACYPOLICY, TERMSANDCONDITIONS } from "../api/Api"
 
 
 // fetching pageLogo
@@ -24,10 +24,32 @@ export const termsAndConditons = createAsyncThunk("/system/get/tc", async (paylo
 })
 
 
-// fetching termsAndConditons
+// fetching privacyPolicy
 export const privacyPolicy = createAsyncThunk("/system/get/pp", async (payload, { rejectWithValue }) => {
     try {
         const response = await PRIVACYPOLICY()
+        return response?.data
+    } catch (err) {
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+// fetching cookiePolicy
+export const cookiePolicy = createAsyncThunk("/system/get/cookie", async (payload, { rejectWithValue }) => {
+    try {
+        const response = await COOKIEPOLICY()
+        return response?.data
+    } catch (err) {
+        return rejectWithValue(err.response.data)
+    }
+})
+
+
+// fetching getCommonPageData
+export const getCommonPageData = createAsyncThunk("/system/get/common", async (payload, { rejectWithValue }) => {
+    try {
+        const response = await GETCOMMONPAGEDATA()
         return response?.data
     } catch (err) {
         return rejectWithValue(err.response.data)
@@ -40,6 +62,8 @@ const initialState = {
     site_logo_data: {},
     terms_conditons_data: [],
     privacy_policy_data: [],
+    cookie_policy_data: [],
+    common_page_data: [],
     settings_status: "",
     settings_error: ""
 }
@@ -95,6 +119,40 @@ export const SettingsSlice = createSlice({
             state.privacy_policy_data = payload
         })
         builder.addCase(privacyPolicy.rejected, (state, { payload }) => {
+            state.settings_status = "Failed"
+            state.loading = false
+            state.settings_error = payload
+        })
+
+
+        // states for cookiePolicy
+        builder.addCase(cookiePolicy.pending, (state) => {
+            state.settings_status = "Loading"
+            state.loading = true
+        })
+        builder.addCase(cookiePolicy.fulfilled, (state, { payload }) => {
+            state.settings_status = "Success"
+            state.loading = false
+            state.cookie_policy_data = payload
+        })
+        builder.addCase(cookiePolicy.rejected, (state, { payload }) => {
+            state.settings_status = "Failed"
+            state.loading = false
+            state.settings_error = payload
+        })
+
+
+        // states for getCommonPageData
+        builder.addCase(getCommonPageData.pending, (state) => {
+            state.settings_status = "Loading"
+            state.loading = true
+        })
+        builder.addCase(getCommonPageData.fulfilled, (state, { payload }) => {
+            state.settings_status = "Success"
+            state.loading = false
+            state.common_page_data = payload
+        })
+        builder.addCase(getCommonPageData.rejected, (state, { payload }) => {
             state.settings_status = "Failed"
             state.loading = false
             state.settings_error = payload

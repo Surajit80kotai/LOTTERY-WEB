@@ -14,7 +14,7 @@ const Charities = () => {
             <main style={{ marginBottom: "50px" }}>
                 <div className="inner_pages_title_banner">
                     <div className="page_title_banner">
-                        <img src="assets/img/Untitled-1.jpg" alt="" className="img-fluid" />
+                        <img src="assets/img/Untitled-1.jpg" alt="" className="banner-img-fluid" />
                     </div>
 
                     <div className="page_title">
