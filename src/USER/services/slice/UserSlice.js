@@ -137,7 +137,7 @@ export const initWithdraw = createAsyncThunk("/auth/withdraw-init", async (navig
 })
 
 
-// init-withdraw
+// withdraw
 export const withdraw = createAsyncThunk("/auth/withdraw", async ({ data, navigate }, { rejectWithValue }) => {
     try {
         const response = await WITHDRAW(data)
@@ -163,7 +163,7 @@ export const withdraw = createAsyncThunk("/auth/withdraw", async ({ data, naviga
 })
 
 
-// init-withdraw
+// checkPassword
 export const checkPassword = createAsyncThunk("/auth/email/phone/change", async ({ password, navigate }, { rejectWithValue }) => {
     try {
         const response = await CHECKPASSWORD(password, header)
@@ -183,7 +183,7 @@ export const checkPassword = createAsyncThunk("/auth/email/phone/change", async 
 })
 
 
-// init-withdraw
+// detailsPageVisit
 export const detailsPageVisit = createAsyncThunk("/auth/product/visit/log", async ({ _id, navigate }, { rejectWithValue }) => {
     try {
         const response = await DETAILSPAGEVISIT(userID, _id)
