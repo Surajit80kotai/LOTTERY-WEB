@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { COUNTRY, PHONECODE, STATE, TESTAPI } from "../api/Api";
+import { COUNTRY, PHONECODE, STATE } from "../api/Api";
 
 // Defining header
 const header = {
@@ -7,6 +7,7 @@ const header = {
         Authorization: `Bearer ${JSON.parse(window.localStorage.getItem("token"))}`
     }
 };
+
 
 // fetchCountry data
 export const fetchCountry = createAsyncThunk("/countries", async (payload, { rejectWithValue }) => {
@@ -20,6 +21,7 @@ export const fetchCountry = createAsyncThunk("/countries", async (payload, { rej
     }
 })
 
+
 // getPhone code
 export const getPhoneCode = createAsyncThunk("/phone/code", async (payload, { rejectWithValue }) => {
     try {
@@ -32,22 +34,11 @@ export const getPhoneCode = createAsyncThunk("/phone/code", async (payload, { re
     }
 })
 
+
 // fetchStates data
 export const fetchStates = createAsyncThunk("/state", async (id, { rejectWithValue }) => {
     try {
         const result = await STATE(id, header)
-        // console.log(result?.data);
-        return result?.data
-    } catch (err) {
-        // console.log(err);
-        return rejectWithValue(err.response.data)
-    }
-})
-
-// test
-export const testPhoneCode = createAsyncThunk("/phonecode.json", async (payload, { rejectWithValue }) => {
-    try {
-        const result = await TESTAPI(header)
         // console.log(result?.data);
         return result?.data
     } catch (err) {
@@ -112,23 +103,6 @@ const CountryStateSlice = createSlice({
             state.stateData = payload
         })
         builder.addCase(fetchStates.rejected, (state) => {
-            state.msg = "Failed"
-            state.loading = false
-        })
-
-
-        //  For state fetch
-        builder.addCase(testPhoneCode.pending, (state) => {
-            state.msg = "Loading.."
-            state.loading = true
-        })
-        builder.addCase(testPhoneCode.fulfilled, (state, { payload }) => {
-            state.msg = "Success"
-            state.loading = false
-            state.testPhoneCodeData = payload
-            // console.log(payload);
-        })
-        builder.addCase(testPhoneCode.rejected, (state) => {
             state.msg = "Failed"
             state.loading = false
         })

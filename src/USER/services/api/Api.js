@@ -100,5 +100,8 @@ export const REMOVECARTTRACK = (userID, product_id, product_count) => API.post("
 // getLogo
 export const GETLOGO = () => API.get("/system/get/log")
 
-// test API
-export const TESTAPI = () => API.get("http://localhost:3000/phonecode.json")
+// termsAndConditons
+export const TERMSANDCONDITIONS = () => API.get("/system/get/tc")
+
+// privacyPolicy
+export const PRIVACYPOLICY = () => API.get("/system/get/pp")

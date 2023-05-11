@@ -25,7 +25,7 @@ const NavBar = () => {
   const { cart_data } = useSelector((state) => state.cartslice)
   const cartLength = cart_data?.length
   const { fetch_lott_data, category_data, loading } = useSelector((state) => state.lotteryslice)
-  const { settings_data } = useSelector((state) => state.settingsSlice)
+  const { site_logo_data } = useSelector((state) => state.settingsSlice)
   const location = useLocation()
 
   // baseUrl
@@ -85,7 +85,7 @@ const NavBar = () => {
         {/* Logo */}
         <Link className="navbar-brand" to="/">
           <div className="companyLogo">
-            <img src={baseUrl + settings_data?.logo} alt="logo" className="img-fluid" />
+            <img src={baseUrl + site_logo_data?.logo} alt="logo" className="img-fluid" />
           </div>
         </Link>
 

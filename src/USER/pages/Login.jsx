@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { auth, google, facebook } from '../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import PreLoader from '../components/core/preloader/PreLoader';
-import { getPhoneCode, testPhoneCode } from '../services/slice/CountryStateSlice'
+import { getPhoneCode } from '../services/slice/CountryStateSlice'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { useTranslation } from 'react-i18next'
@@ -15,7 +15,6 @@ import { useTranslation } from 'react-i18next'
 const Login = () => {
     const { t } = useTranslation()
     const { login, loading } = useSelector((state) => state.authslice)
-    // const { phoneCodeData, testPhoneCodeData } = useSelector((state) => state.countrystateslice)
     const { error_user, error_password } = login
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -69,11 +68,8 @@ const Login = () => {
         console.log(result);
     }
 
-    // console.log(testPhoneCodeData);
-
     useEffect(() => {
         dispatch(getPhoneCode())
-        dispatch(testPhoneCode())
     }, [dispatch])
 
 
