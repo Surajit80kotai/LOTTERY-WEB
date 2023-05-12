@@ -244,33 +244,33 @@ export const UserSlice = createSlice({
 
         // states for updateProfile
         builder.addCase(updateProfile.pending, (state) => {
-            state.balance_status = "Loading"
+            state.status = "Loading"
             state.loading = true
         })
         builder.addCase(updateProfile.fulfilled, (state, { payload }) => {
-            state.balance_status = "Success"
+            state.status = "Success"
             state.loading = false
             state.profile_data = payload
             // console.log(payload);
         })
         builder.addCase(updateProfile.rejected, (state, { payload }) => {
-            state.balance_status = "Failed"
+            state.status = "Failed"
             state.loading = false
             state.userSliceError = payload
         })
 
         // states for orderHistory
         builder.addCase(userOrderHistory.pending, (state) => {
-            state.balance_status = "Loading"
+            state.status = "Loading"
             state.loading = true
         })
         builder.addCase(userOrderHistory.fulfilled, (state, { payload }) => {
-            state.balance_status = "Success"
+            state.status = "Success"
             state.loading = false
             state.order_history_data = payload
         })
         builder.addCase(userOrderHistory.rejected, (state, { payload }) => {
-            state.balance_status = "Failed"
+            state.status = "Failed"
             state.loading = false
             state.userSliceError = payload
         })

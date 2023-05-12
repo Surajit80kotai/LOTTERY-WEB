@@ -111,7 +111,7 @@ const MyProfile = () => {
             setSaveChanges(false)
             setIsTrue(false)
         }
-    }, [password_data, formValues])
+    }, [password_data, formValues, user])
 
     return (
         <>

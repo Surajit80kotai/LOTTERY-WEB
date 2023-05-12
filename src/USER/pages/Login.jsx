@@ -21,6 +21,7 @@ const Login = () => {
     const [formValues, setFormValues] = useState({ phone_code: "", contact: "", password: "" })
     const [phone, setPhone] = useState('')
     const [toggleBtn, setToggleBtn] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
     // toggle button function
     const toggleButton = () => {
@@ -66,6 +67,15 @@ const Login = () => {
         }, 3500)
 
         console.log(result);
+    }
+
+    // handlePassword
+    const handlePassword = () => {
+        if (showPassword === true) {
+            setShowPassword(false)
+        } else if (showPassword === false) {
+            setShowPassword(true)
+        }
     }
 
     useEffect(() => {
@@ -207,16 +217,31 @@ const Login = () => {
                                     {/* Password input */}
                                     <div className="col-12">
                                         <label htmlFor="password" className="form-label label_style">{t('Password')} </label>
-                                        <input
-                                            type="password"
-                                            className="form-control form_input"
-                                            id="password"
-                                            name="password"
-                                            placeholder={t("Enter Password")}
-                                            value={formValues.password}
-                                            onChange={handleChange}
-                                            required
-                                        />
+                                        <div className="password_input">
+                                            <input
+                                                type={showPassword ? "text" : "password"}
+                                                className="form-control form_input"
+                                                id="password"
+                                                name="password"
+                                                placeholder={t("Enter Password")}
+                                                value={formValues.password}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                            <span className='eye_btn'>
+                                                {
+                                                    showPassword ?
+                                                        <button onClick={handlePassword} type='button'>
+                                                            <i className="fas fa-eye" style={{ color: "#4d4d4d" }}></i>
+                                                        </button>
+                                                        :
+                                                        <button onClick={handlePassword} type='button'>
+                                                            <i className="fas fa-eye-slash" style={{ color: "#4d4d4d" }}></i>
+                                                        </button>
+                                                }
+                                            </span>
+                                        </div>
+
                                         {/* <label htmlFor="password" className="form-label label_style">Password</label>
                                         <input
                                             type="password"
