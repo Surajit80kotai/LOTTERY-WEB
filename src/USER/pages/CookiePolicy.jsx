@@ -13,7 +13,7 @@ const CookiePolicy = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(cookiePolicy())
-    }, [])
+    }, [dispatch])
 
 
     return (

@@ -15,7 +15,7 @@ const WorkWithUs = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(getCommonPageData())
-    }, [])
+    }, [dispatch])
 
     return (
         <>

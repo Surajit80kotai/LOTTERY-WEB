@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 import { cinetPay, getTransactions, initPay, updateTransactions } from '../../../services/slice/PaymentSlice';
-import { getBalance } from '../../../services/slice/UserSlice';
+import { getBalance, getWithdrawalStatus } from '../../../services/slice/UserSlice';
 import { currency, currency_symbol, generalCurrency, generalCurrency_symbol } from '../../../util/Currency';
 import PreLoader from '../preloader/PreLoader';
 import SideNav from './SideNav';
@@ -19,6 +19,12 @@ const Wallet = () => {
     const dispatch = useDispatch()
     const { balance } = useSelector((state) => state.userslice)
     const { paymentData, transaction_data, loading } = useSelector((state) => state.paymentslice)
+    const { init_withdraw_data, withdraw_data, withdraw_status } = useSelector((state) => state.userslice)
+
+
+    // console.log("withdraw_data=>", withdraw_data);
+    // console.log("withdraw_status =>", withdraw_status);
+
     // userID
     const userID = (JSON.parse(window.localStorage.getItem("user")))?.user_id
     const navigate = useNavigate()
@@ -64,6 +70,11 @@ const Wallet = () => {
         redirectPage()
         dispatch(getTransactions(navigate))
         dispatch(updateTransactions(navigate))
+        if (withdraw_data?.status === 202) {
+            const uuid = init_withdraw_data?.UUID
+            // dispatch(getWithdrawalStatus({uuid, navigate}))
+            console.log("uuid", uuid);
+        }
     }, [dispatch, paymentData, navigate])
 
 
