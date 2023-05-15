@@ -196,7 +196,7 @@ const OrderHistory = () => {
 
                                                             {/* claim */}
                                                             {
-                                                                item?.is_win === '' ?
+                                                                item?.is_win === 'true' ?
                                                                     <ClaimModal />
                                                                     : null
                                                             }
