@@ -29,6 +29,7 @@ const ClaimModal = () => {
     // handleSubmit func.
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(formValues);
     }
 
     // getCountryId
@@ -107,7 +108,8 @@ const ClaimModal = () => {
                                             <label htmlFor="pincode" className="form-label label_style">{t("Zipcode/Pincode")}</label>
                                             <input
                                                 type="text"
-                                                className="form-control" id="pincode"
+                                                className="form-control"
+                                                id="pincode"
                                                 name='zip_code'
                                                 value={formValues?.zip_code}
                                                 onChange={handleChange}

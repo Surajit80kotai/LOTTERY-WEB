@@ -115,6 +115,7 @@ const WithdrawModal = ({ balance, userID }) => {
                                             <label htmlFor="phone" className="form-label fs-4">{t("Enter Your Registered Phone Number")}
                                             </label>
                                             <PhoneInput
+                                                id='phone'
                                                 inputProps={{ required: true }}
                                                 placeholder={t("Enter Your Phone Number")}
                                                 country={"cm"}

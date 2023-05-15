@@ -119,7 +119,7 @@ const AgentsAndInfluencersSignup = () => {
 
                                     {/* Email */}
                                     <div className="m_gap">
-                                        <label htmlFor="emailid" className="form-label label_style">{t("Email")} <span className="text-danger">*</span></label>
+                                        <label htmlFor="email" className="form-label label_style">{t("Email")} <span className="text-danger">*</span></label>
                                         <input
                                             type="email"
                                             className="form-control form_input"
@@ -138,11 +138,11 @@ const AgentsAndInfluencersSignup = () => {
 
                                     {/* Phone */}
                                     <div className="m_gap">
-                                        <label htmlFor="mobile_code" className="form-label label_style">{t("Phone")} <span className="text-danger">*</span></label>
+                                        <label htmlFor="phone_input" className="form-label label_style">{t("Phone")} <span className="text-danger">*</span></label>
                                         {/* <input
                                             type="tel"
                                             className="form-control form_input"
-                                            id="mobile_code"
+                                            id="phone_input"
                                             name="phone"
                                             aria-describedby="emailHelp"
                                             placeholder={t("Enter Your Phone Number")}
@@ -186,7 +186,7 @@ const AgentsAndInfluencersSignup = () => {
                                                     title={t("Accept Date Format Only")}
                                                     type="date"
                                                     name="dob"
-                                                    id="datepicker"
+                                                    id="dob"
                                                     className="calendar form-control form_input cal_input"
                                                     value={dob}
                                                     onChange={handleChange}
@@ -224,11 +224,11 @@ const AgentsAndInfluencersSignup = () => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="m_gap">
-                                                <label htmlFor="Country" className="form-label label_style">{t("Country")} <span className="text-danger">*</span></label>
+                                                <label htmlFor="country" className="form-label label_style">{t("Country")} <span className="text-danger">*</span></label>
                                                 <select
                                                     className="form-select form_input form_select"
                                                     aria-label="Default select example"
-                                                    id="selects"
+                                                    id="country"
                                                     name='country'
                                                     value={country}
                                                     onChange={handleChange}

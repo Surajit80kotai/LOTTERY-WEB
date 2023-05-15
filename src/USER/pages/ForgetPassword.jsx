@@ -218,6 +218,7 @@ const ForgetPassword = () => {
                                         <label htmlFor="contact" className="form-label label_for">{t("Enter Your Registered Phone Number")}</label>
                                         <div className='col-12'>
                                             <PhoneInput
+                                                id='contact'
                                                 inputProps={{ required: true }}
                                                 placeholder={t("Enter Your Phone Number")}
                                                 country={"cm"}

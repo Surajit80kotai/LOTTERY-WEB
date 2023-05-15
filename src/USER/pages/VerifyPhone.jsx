@@ -159,6 +159,7 @@ const VerifyPhone = () => {
                                         </div> */}
 
                                         <PhoneInput
+                                            id='phone'
                                             inputProps={{ required: true }}
                                             placeholder={t("Enter Your Phone Number")}
                                             country={"cm"}

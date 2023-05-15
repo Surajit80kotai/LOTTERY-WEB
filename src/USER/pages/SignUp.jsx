@@ -121,7 +121,7 @@ const SignUp = () => {
 
                                     {/* Email */}
                                     <div className="m_gap">
-                                        <label htmlFor="emailid" className="form-label label_style">{t('Email')}</label>
+                                        <label htmlFor="email" className="form-label label_style">{t('Email')}</label>
                                         <input
                                             type="email"
                                             className="form-control form_input"
@@ -186,11 +186,11 @@ const SignUp = () => {
                                         {/* Country */}
                                         <div className="col-md-6">
                                             <div className="m_gap">
-                                                <label htmlFor="Country" className="form-label label_style">{t('Country')} <span className="text-danger">*</span></label>
+                                                <label htmlFor="country" className="form-label label_style">{t('Country')} <span className="text-danger">*</span></label>
                                                 <select
                                                     className="form-select form_input form_select"
                                                     aria-label="Default select example"
-                                                    id="selects"
+                                                    id="country"
                                                     name='country'
                                                     value={country}
                                                     onChange={handleChange}
