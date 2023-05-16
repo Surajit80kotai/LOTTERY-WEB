@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { userOrderHistory } from '../../../services/slice/UserSlice'
+import { detailsPageVisit, userOrderHistory } from '../../../services/slice/UserSlice'
 import { currency_symbol, generalCurrency_symbol } from '../../../util/Currency'
 // import Timer from '../../../util/Timer'
 import PreLoader from '../preloader/PreLoader'
@@ -135,6 +135,7 @@ const OrderHistory = () => {
                                         {
                                             orderHistoryData?.length ?
                                                 filteredOH?.map((item) => {
+                                                    let _id = item?.product_id;
                                                     return (
                                                         item?._id &&
                                                         <div className="orderhistroy_item" key={item?._id}>
@@ -155,15 +156,18 @@ const OrderHistory = () => {
                                                                 <div className="product_history_img">
                                                                     <img src={baseUrl + item?.image_link} alt="" className="img-fluid" />
                                                                 </div>
-                                                                <div className="info_pro_title">
-                                                                    <h4>{item?.ticket_name}</h4>
-                                                                    <div className="num_of_tick">
-                                                                        <h4>{t("Quantity")} : {item?.quantity}</h4>
+
+                                                                <Link to={`/info/${item?.product_id}/${Number(item?.round)}`} style={{ color: "black" }} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
+                                                                    <div className="info_pro_title">
+                                                                        <h4>{item?.ticket_name}</h4>
+                                                                        <div className="num_of_tick">
+                                                                            <h4>{t("Quantity")} : {item?.quantity}</h4>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                                </Link>
                                                             </div>
                                                             <div className="info_item">
-                                                                <h3 className="dateofresult"><span></span>{t("Round")}: {item?.round}</h3>
+                                                                <h3 className="dateofresult"><span></span>{t("Round")}: {Number(item?.round)}</h3>
                                                             </div>
                                                             <div className="info_item">
                                                                 <h3 className="dateofresult"><span></span>{t("Price")}</h3>
@@ -197,7 +201,7 @@ const OrderHistory = () => {
                                                             {/* claim */}
                                                             {
                                                                 item?.is_win === 'true' ?
-                                                                    <ClaimModal />
+                                                                    <ClaimModal item={item} />
                                                                     : null
                                                             }
                                                         </div>

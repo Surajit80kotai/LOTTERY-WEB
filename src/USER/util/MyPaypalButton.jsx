@@ -26,7 +26,7 @@ const MyPaypalButton = ({ amount }) => {
         <>
             <PayPalScriptProvider options={{ "client-id": process.env.REACT_APP_CLIENT_ID }}>
                 <PayPalButtons
-                    forceReRender={[amount]}
+                    forceReRender={[amount]} // to take dynamic value from paypal
                     style={{
                         color: 'gold',
                         layout: 'horizontal',

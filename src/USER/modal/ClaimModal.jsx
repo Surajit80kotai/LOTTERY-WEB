@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
 
-const ClaimModal = () => {
+const ClaimModal = ({ item }) => {
     const { t } = useTranslation()
     const { countryData, stateData } = useSelector((state) => state.countrystateslice)
     const [formValues, setFormValues] = useState({
@@ -29,7 +29,8 @@ const ClaimModal = () => {
     // handleSubmit func.
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formValues);
+        const formData = { formValues, product_id: item?.product_id, order_id: item?.order_id }
+        console.log(formData);
     }
 
     // getCountryId

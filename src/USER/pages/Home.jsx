@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Banner from '../components/core/home/Banner'
 import TrustedPayment from '../components/common/trustedPayment/TrustedPayment'
@@ -28,6 +28,7 @@ const Home = () => {
     const navigate = useNavigate()
     const token = JSON.parse(window.localStorage.getItem("token"))
     const error = (cartSliceError?.error === true || paymentSliceError?.error === true || userSliceError?.error === true) ? true : false
+    const [sessionExpired, setSessionExpired] = useState(false);
 
 
     // Getting category_name & category_id
@@ -57,17 +58,18 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if (error) {
-            toast.info("Your Session Is Expeired.\nPlease Login To Continue", {
+        if (error && !sessionExpired) {
+            toast.info("Your Session Is Expired.\nPlease Login To Continue", {
                 autoClose: 3500
-            })
+            });
+            setSessionExpired(true);
         }
         return () => {
-            dispatch(clearCartSliceError())
-            dispatch(clearUserSliceError())
-            dispatch(clearPaymentSliceError())
-        }
-    }, [dispatch, error])
+            dispatch(clearCartSliceError());
+            dispatch(clearUserSliceError());
+            dispatch(clearPaymentSliceError());
+        };
+    }, [dispatch, error, sessionExpired]);
 
     // mount cycle
     useEffect(() => {
