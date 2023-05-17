@@ -180,7 +180,7 @@ const Cart = () => {
 
                             {/* Remove button */}
                             <div className="remove_btn">
-                              <button onClick={() => removeItem(item?.resp?._id, item?.info[0]?._id, item?.resp?.quantity)}><i className="bi bi-trash3"></i></button>
+                              <button onClick={() => removeItem(item?.resp?._id, item?.resp?.product_id, item?.resp?.quantity)}><i className="bi bi-trash3"></i></button>
                             </div>
 
                           </div>
