@@ -81,6 +81,7 @@ const ClaimModal = ({ item }) => {
                                         className="form-control"
                                         id="address"
                                         aria-describedby="emailHelp"
+                                        placeholder='Enter Your Address'
                                         name='address'
                                         value={formValues?.address}
                                         onChange={handleChange}
@@ -96,6 +97,7 @@ const ClaimModal = ({ item }) => {
                                         className="form-control"
                                         id="rode_name"
                                         name='road_name'
+                                        placeholder='Enter Your Road name/Area/Colony'
                                         value={formValues?.road_name}
                                         onChange={handleChange}
                                         required
@@ -112,6 +114,7 @@ const ClaimModal = ({ item }) => {
                                                 className="form-control"
                                                 id="pincode"
                                                 name='zip_code'
+                                                placeholder='Enter Your Zipcode/Pincode'
                                                 value={formValues?.zip_code}
                                                 onChange={handleChange}
                                                 required

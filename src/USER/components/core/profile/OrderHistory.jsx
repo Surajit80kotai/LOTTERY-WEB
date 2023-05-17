@@ -157,7 +157,7 @@ const OrderHistory = () => {
                                                                     <img src={baseUrl + item?.image_link} alt="" className="img-fluid" />
                                                                 </div>
 
-                                                                <Link to={`/info/${item?.product_id}/${Number(item?.round)}`} style={{ color: "black" }} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
+                                                                <Link to={`/info/${item?.product_id}/${(Number(item?.round) - 1)}`} style={{ color: "black" }} onClick={() => dispatch(detailsPageVisit({ _id, navigate }))}>
                                                                     <div className="info_pro_title">
                                                                         <h4>{item?.ticket_name}</h4>
                                                                         <div className="num_of_tick">
