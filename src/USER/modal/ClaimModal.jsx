@@ -4,18 +4,26 @@ import { fetchCountry, fetchStates } from '../services/slice/CountryStateSlice'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
+import { claim, clearClaimStatus, userOrderHistory } from '../services/slice/UserSlice'
+import { useNavigate } from 'react-router-dom'
 
 const ClaimModal = ({ item }) => {
     const { t } = useTranslation()
     const { countryData, stateData } = useSelector((state) => state.countrystateslice)
+    const { claim_data } = useSelector((state) => state.userslice)
     const [formValues, setFormValues] = useState({
         address: "",
-        road_name: "",
-        zip_code: "",
+        sub_address: "",
+        pin_code: "",
         country: "",
-        state: ""
+        state: "",
+        product_id: item?.product_id,
+        order_id: item?._id,
+        purchase_id: item?.order_id,
+        user_id: JSON.parse(window.localStorage.getItem("user"))?.user_id
     })
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     // handleChange Function for input change
     const handleChange = (e) => {
@@ -29,8 +37,7 @@ const ClaimModal = ({ item }) => {
     // handleSubmit func.
     const handleSubmit = (e) => {
         e.preventDefault()
-        const formData = { formValues, product_id: item?.product_id, order_id: item?.order_id }
-        console.log(formData);
+        dispatch(claim({ formValues, navigate }))
     }
 
     // getCountryId
@@ -49,18 +56,49 @@ const ClaimModal = ({ item }) => {
 
     useEffect(() => {
         dispatch(fetchCountry())
-    }, [dispatch])
+        if (claim_data?.claim_status === "Pending" || claim_data?.claim_status === "Approve") {
+            dispatch(userOrderHistory(navigate))
+        }
+        return () => {
+            dispatch(clearClaimStatus())
+        }
+    }, [dispatch, navigate, claim_data])
 
     return (
         <>
             {/* Claim Button */}
             <div className="info_item mb-3">
-                <button type="button" className="claimbtn fs-4" data-bs-toggle="modal" data-bs-target="#claim">
-                    {t("Claim")}
-                    <span className='mx-2'>
-                        <i className="fas fa-gift" style={{ "color": "#ffffff" }}></i>
-                    </span>
-                </button>
+                {
+                    item?.claim_status === "" ?
+                        <button type="button" className="claimbtn fs-4" data-bs-toggle="modal" data-bs-target="#claim">
+                            {t("Claim")}
+                            <span className='mx-2'>
+                                <i className="fas fa-gift" style={{ "color": "#ffffff" }}></i>
+                            </span>
+                        </button>
+                        :
+                        item?.claim_status === "Pending" ?
+                            <button type="button" className="claimbtn fs-4" data-bs-toggle="modal" data-bs-target="#claim"
+                                style={{
+                                    backgroundColor: "#FFAF0A",
+                                }} disabled>
+                                {t("Applied")}
+                                <span className='mx-2'>
+                                    <i className="fa-solid fa-box-open" style={{ color: "#ffffff" }}></i>
+                                </span>
+                            </button>
+                            :
+                            <button type="button" className="claimbtn fs-4" data-bs-toggle="modal" data-bs-target="#claim"
+                                style={{
+                                    backgroundColor: "#8dc735",
+                                }}
+                                disabled>
+                                {t("Claimed")}
+                                <span className='mx-2'>
+                                    <i className="fa-solid fa-award" style={{ color: "#ffffff" }}></i>
+                                </span>
+                            </button>
+                }
             </div>
 
             {/* Claim Modal Form */}
@@ -96,9 +134,9 @@ const ClaimModal = ({ item }) => {
                                         type="text"
                                         className="form-control"
                                         id="rode_name"
-                                        name='road_name'
+                                        name='sub_address'
                                         placeholder='Enter Your Road name/Area/Colony'
-                                        value={formValues?.road_name}
+                                        value={formValues?.sub_address}
                                         onChange={handleChange}
                                         required
                                     />
@@ -113,9 +151,9 @@ const ClaimModal = ({ item }) => {
                                                 type="text"
                                                 className="form-control"
                                                 id="pincode"
-                                                name='zip_code'
+                                                name='pin_code'
                                                 placeholder='Enter Your Zipcode/Pincode'
-                                                value={formValues?.zip_code}
+                                                value={formValues?.pin_code}
                                                 onChange={handleChange}
                                                 required
                                             />
@@ -161,7 +199,7 @@ const ClaimModal = ({ item }) => {
                                                 {
                                                     stateData?.map((state) => {
                                                         return (
-                                                            <option key={state?.state_id} value={state?.name}>{state?.name}</option>
+                                                            <option key={state?.state_id} value={state?.name + "||" + state.state_id}>{state?.name}</option>
                                                         )
                                                     })
                                                 }
@@ -170,7 +208,7 @@ const ClaimModal = ({ item }) => {
                                     </div>
                                 </div>
                                 <div className="text-center m-2">
-                                    <button type="submit" className="btn2 btn-primary">{t("Submit")}</button>
+                                    <button type="submit" className="btn2 btn-primary" data-bs-dismiss="modal">{t("Submit")}</button>
                                 </div>
 
                             </form>

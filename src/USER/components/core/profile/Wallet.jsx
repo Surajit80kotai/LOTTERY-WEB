@@ -287,12 +287,20 @@ const Wallet = () => {
                                                                                                                         {t("ESHAC-PLAY (Purchase)")}
                                                                                                                     </td>
                                                                                                                     :
-                                                                                                                    <td colSpan={2}>
-                                                                                                                        <span className='payment_logo'>
-                                                                                                                            <img src="/assets/img/pending.png" alt="" />
-                                                                                                                        </span>
-                                                                                                                        {t("Waiting For Payment")}
-                                                                                                                    </td>
+                                                                                                                    item.merchant === "Win" ?
+                                                                                                                        <td colSpan={2}>
+                                                                                                                            <span className='payment_logo'>
+                                                                                                                                <img src="/assets/img/win_cash.png" alt="" />
+                                                                                                                            </span>
+                                                                                                                            {t("ESHAC-PLAY (Cash Credit)")}
+                                                                                                                        </td>
+                                                                                                                        :
+                                                                                                                        <td colSpan={2}>
+                                                                                                                            <span className='payment_logo'>
+                                                                                                                                <img src="/assets/img/pending.png" alt="" />
+                                                                                                                            </span>
+                                                                                                                            {t("Waiting For Payment")}
+                                                                                                                        </td>
                                                                                 }
 
                                                                                 <td>{userID ? currency_symbol : generalCurrency_symbol}&nbsp;{(Number(item.amount)).toFixed(2)}</td>
@@ -311,7 +319,7 @@ const Wallet = () => {
                                                                                                     : (item.status_code === "600") ?
                                                                                                         <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("FAILED")}</span>
                                                                                                         // SUCCESS
-                                                                                                        : (item.status_code === "00") || (item.status === "SUCCESSFUL") || (item.status === "APPROVED") || (item.type === "Commission") || (item.status === "Order Placed") ?
+                                                                                                        : (item.status_code === "00") || (item.status === "SUCCESSFUL") || (item.status === "APPROVED") || (item.type === "Commission") || (item.status === "Order Placed") || (item.status === "Win Price") ?
                                                                                                             <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
                                                                                                             // ACCEPTED
                                                                                                             : item.status === "Accepted" ?

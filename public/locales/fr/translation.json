@@ -205,6 +205,7 @@
     "mm": "mm",
     "ss": "ss",
     "Claim": "Réclamation",
+    "Claimed": "Revendiqué",
     "Fill Details For Claim Your Prize": "Remplissez les détails pour réclamer votre prix",
     "Address": "Adresse",
     "Road name/Area/Colony": "Nom de la route/Zone/Colonie",
@@ -260,5 +261,7 @@
     "ACCEPTED": "ACCEPTÉ",
     "ESHAC-PLAY (Purchase)": "ESHAC-PLAY (Achat)",
     "User Type": "Type d'utilisateur",
-    "Agent": "Agent"
+    "Agent": "Agent",
+    "Applied": "Appliqué",
+    "ESHAC-PLAY (Cash Credit)": "ESHAC-PLAY (Crédit Cash)"
 }

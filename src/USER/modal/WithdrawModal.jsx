@@ -149,7 +149,7 @@ const WithdrawModal = ({ balance, userID }) => {
                                 <div className="text-center">
                                     {
                                         formValues?.amount >= 500 ?
-                                            <button onClick={handleSubmit} className="btn2 mt-3" style={{ alignItems: "center" }}>{t("Withdraw")}</button>
+                                            <button onClick={handleSubmit} className="btn2 mt-3" style={{ alignItems: "center" }} data-bs-dismiss={loading ? "" : "modal"}>{t("Withdraw")}</button>
                                             :
                                             <button className="btn2_disabled mt-3" style={{ alignItems: "center" }} disabled>{t("Withdraw")}</button>
                                     }

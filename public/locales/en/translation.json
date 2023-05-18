@@ -205,6 +205,7 @@
     "mm": "mm",
     "ss": "ss",
     "Claim": "Claim",
+    "Claimed": "Claimed",
     "Fill Details For Claim Your Prize": "Fill Details For Claim Your Prize",
     "Address": "Address",
     "Road name/Area/Colony": "Road name/Area/Colony",
@@ -260,5 +261,7 @@
     "ACCEPTED": "ACCEPTED",
     "ESHAC-PLAY (Purchase)": "ESHAC-PLAY (Purchase)",
     "User Type": "User Type",
-    "Agent": "Agent"
+    "Agent": "Agent",
+    "Applied": "Applied",
+    "ESHAC-PLAY (Cash Credit)": "ESHAC-PLAY (Cash Credit)"
 }

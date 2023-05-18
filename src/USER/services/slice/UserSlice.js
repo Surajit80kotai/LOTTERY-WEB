@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CHECKPASSWORD, CONTACTUS, DETAILSPAGEVISIT, GETWITHDRAWALSTATUS, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
+import { CHECKPASSWORD, CLAIM, CONTACTUS, DETAILSPAGEVISIT, GETWITHDRAWALSTATUS, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
 import { toast } from "react-toastify";
 
 // from socialuser
@@ -203,7 +203,7 @@ export const detailsPageVisit = createAsyncThunk("/auth/product/visit/log", asyn
 })
 
 
-// detailsPageVisit
+// getWithdrawalStatus
 export const getWithdrawalStatus = createAsyncThunk("/v1_0/transfer/", async ({ uuid, navigate }, { rejectWithValue }) => {
     try {
         const response = await GETWITHDRAWALSTATUS(uuid)
@@ -223,6 +223,25 @@ export const getWithdrawalStatus = createAsyncThunk("/v1_0/transfer/", async ({ 
 })
 
 
+// claim
+export const claim = createAsyncThunk("/auth/claim", async ({ formValues, navigate }, { rejectWithValue }) => {
+    try {
+        const response = await CLAIM(formValues)
+        return response?.data
+    } catch (err) {
+        if (err.response.data.error === true) {
+            window.localStorage.removeItem("token")
+            window.localStorage.removeItem("user")
+            navigate('/')
+            setTimeout(() => {
+                window.location.reload()
+                // navigate('/login')
+            }, 3700)
+        }
+        return rejectWithValue(err.response.data)
+    }
+})
+
 
 const initialState = {
     balance: [],
@@ -235,7 +254,8 @@ const initialState = {
     status: "",
     userSliceError: null,
     password_data: [],
-    withdraw_status: []
+    withdraw_status: [],
+    claim_data: null
 }
 
 // Creating Slice
@@ -245,6 +265,9 @@ export const UserSlice = createSlice({
     reducers: {
         clearUserSliceError(state) {
             state.userSliceError = null
+        },
+        clearClaimStatus(state) {
+            state.claim_data = null
         }
     },
     extraReducers: (builder) => {
@@ -384,7 +407,7 @@ export const UserSlice = createSlice({
             state.userSliceError = payload
         })
 
-        // states for detailsPageVisit
+        // states for getWithdrawalStatus
         builder.addCase(getWithdrawalStatus.pending, (state) => {
             state.status = "Loading"
             state.loading = true
@@ -399,8 +422,24 @@ export const UserSlice = createSlice({
             state.loading = false
             state.userSliceError = payload
         })
+
+        // states for claim
+        builder.addCase(claim.pending, (state) => {
+            state.status = "Loading"
+            state.loading = true
+        })
+        builder.addCase(claim.fulfilled, (state, { payload }) => {
+            state.status = "Success"
+            state.loading = false
+            state.claim_data = payload
+        })
+        builder.addCase(claim.rejected, (state, { payload }) => {
+            state.status = "Failed"
+            state.loading = false
+            state.userSliceError = payload
+        })
     }
 })
 
-export const { clearUserSliceError } = UserSlice.actions
+export const { clearUserSliceError, clearClaimStatus } = UserSlice.actions
 export default UserSlice.reducer
