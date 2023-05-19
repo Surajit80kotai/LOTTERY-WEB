@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CHECKPASSWORD, CLAIM, CONTACTUS, DETAILSPAGEVISIT, GETWITHDRAWALSTATUS, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
+import { CHECKPASSWORD, CLAIM, CONTACTUS, DETAILSPAGEVISIT, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
 import { toast } from "react-toastify";
 
 // from socialuser
@@ -203,26 +203,6 @@ export const detailsPageVisit = createAsyncThunk("/auth/product/visit/log", asyn
 })
 
 
-// getWithdrawalStatus
-export const getWithdrawalStatus = createAsyncThunk("/v1_0/transfer/", async ({ uuid, navigate }, { rejectWithValue }) => {
-    try {
-        const response = await GETWITHDRAWALSTATUS(uuid)
-        return response?.data
-    } catch (err) {
-        if (err.response.data.error === true) {
-            window.localStorage.removeItem("token")
-            window.localStorage.removeItem("user")
-            navigate('/')
-            setTimeout(() => {
-                window.location.reload()
-                // navigate('/login')
-            }, 3700)
-        }
-        return rejectWithValue(err.response.data)
-    }
-})
-
-
 // claim
 export const claim = createAsyncThunk("/auth/claim", async ({ formValues, navigate }, { rejectWithValue }) => {
     try {
@@ -402,22 +382,6 @@ export const UserSlice = createSlice({
             state.loading = false
         })
         builder.addCase(detailsPageVisit.rejected, (state, { payload }) => {
-            state.status = "Failed"
-            state.loading = false
-            state.userSliceError = payload
-        })
-
-        // states for getWithdrawalStatus
-        builder.addCase(getWithdrawalStatus.pending, (state) => {
-            state.status = "Loading"
-            state.loading = true
-        })
-        builder.addCase(getWithdrawalStatus.fulfilled, (state, { payload }) => {
-            state.status = "Success"
-            state.loading = false
-            state.withdraw_status = payload
-        })
-        builder.addCase(getWithdrawalStatus.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
             state.userSliceError = payload

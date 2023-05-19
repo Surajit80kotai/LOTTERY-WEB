@@ -112,8 +112,5 @@ export const COOKIEPOLICY = () => API.get("/system/get/cookie")
 // getCommonPageData
 export const GETCOMMONPAGEDATA = () => API.get("/system/get/common")
 
-// getWithdrawalStatus
-export const GETWITHDRAWALSTATUS = (uuid) => API.get("https://sandbox.momodeveloper.mtn.com/disbursement/v1_0/transfer/" + uuid)
-
 // claim
 export const CLAIM = (formValues) => API.post("/auth/claim", formValues)

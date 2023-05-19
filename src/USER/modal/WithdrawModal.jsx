@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import PhoneInput from 'react-phone-input-2'
@@ -6,6 +6,7 @@ import PreLoader from '../components/core/preloader/PreLoader'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { initWithdraw, withdraw } from '../services/slice/UserSlice'
+import { getTransactions } from '../services/slice/PaymentSlice'
 // import { currency } from '../util/Currency'
 
 const WithdrawModal = ({ balance, userID }) => {
@@ -25,7 +26,7 @@ const WithdrawModal = ({ balance, userID }) => {
             payeeNote: "ESHAC-PLAY Wallet Withdrawl"
         }
     )
-    const { withdraw_data, loading } = useSelector((state) => state.userslice)
+    const { init_withdraw_data, withdraw_data, loading } = useSelector((state) => state.userslice)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -34,8 +35,6 @@ const WithdrawModal = ({ balance, userID }) => {
     const openModal = () => {
         dispatch(initWithdraw(navigate))
     }
-
-    // console.log(withdraw_data);
 
     // handleChange function
     const handleChange = (e) => {
@@ -47,8 +46,8 @@ const WithdrawModal = ({ balance, userID }) => {
         e.preventDefault()
         const payee = { ...formValues?.payee, partyId: "+" + phone }
         const formData = { ...formValues, payee, phonecode }
-        const uuid = withdraw_data?.UUID
-        const access_token = `Bearer ${withdraw_data?.Gen_API_Token?.access_token}`
+        const uuid = init_withdraw_data?.UUID
+        const access_token = `Bearer ${init_withdraw_data?.Gen_API_Token?.access_token}`
         const data = { formData, uuid, access_token, userID }
         dispatch(withdraw({ data, navigate }))
 
@@ -66,6 +65,12 @@ const WithdrawModal = ({ balance, userID }) => {
         setPhone('')
         setPhonecode('')
     }
+
+    useEffect(() => {
+        if (withdraw_data?.status === 202) {
+            dispatch(getTransactions(navigate))
+        }
+    }, [dispatch, navigate, withdraw_data])
 
 
     return (
