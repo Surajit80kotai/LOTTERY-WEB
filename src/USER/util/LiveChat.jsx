@@ -9,8 +9,8 @@ const LiveChat = () => {
             {
                 token ?
                     <TawkMessengerReact
-                        propertyId="643fa25f4247f20fefec8966"
-                        widgetId="1guc94m3j"
+                        propertyId={process.env.REACT_APP_PROPERTY_ID}
+                        widgetId={process.env.REACT_APP_WIDGET_ID}
                     />
                     : null
             }
