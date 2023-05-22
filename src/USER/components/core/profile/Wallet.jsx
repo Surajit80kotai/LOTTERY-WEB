@@ -176,7 +176,7 @@ const Wallet = () => {
                                                                         return (
                                                                             <tr key={item._id}>
                                                                                 {
-                                                                                    (item.status_code === "662") || (item.status_code === "623") ?
+                                                                                    (item.status_code === "662") || (item.status_code === "623") || (item.status_code === "202") || (item.status_code === "200") ?
                                                                                         <td>
                                                                                             {new Date(item?.createdAt).toLocaleString('en-US', {
                                                                                                 month: 'short',
@@ -196,23 +196,14 @@ const Wallet = () => {
                                                                                                 minute: 'numeric',
                                                                                                 second: 'numeric'
                                                                                             })}</td>
-                                                                                            : (item.status_code === "202") || (item.status_code === "200") ?
-                                                                                                <td>{new Date(item?.createdAt).toLocaleString('en-US', {
-                                                                                                    month: 'short',
-                                                                                                    day: '2-digit',
-                                                                                                    year: 'numeric',
-                                                                                                    hour: 'numeric',
-                                                                                                    minute: 'numeric',
-                                                                                                    second: 'numeric'
-                                                                                                })}</td>
-                                                                                                : <td>{new Date(item?.payment_date).toLocaleString('en-US', {
-                                                                                                    month: 'short',
-                                                                                                    day: '2-digit',
-                                                                                                    year: 'numeric',
-                                                                                                    hour: 'numeric',
-                                                                                                    minute: 'numeric',
-                                                                                                    second: 'numeric'
-                                                                                                })}</td>
+                                                                                            : <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                                month: 'short',
+                                                                                                day: '2-digit',
+                                                                                                year: 'numeric',
+                                                                                                hour: 'numeric',
+                                                                                                minute: 'numeric',
+                                                                                                second: 'numeric'
+                                                                                            })}</td>
                                                                                     // <td>{item.payment_date}</td>
                                                                                 }
                                                                                 <td colSpan={2}>{item.transaction_id ? item.transaction_id : "--------"}</td>
