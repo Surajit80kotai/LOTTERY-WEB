@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
     const { t } = useTranslation()
     const token = JSON.parse(window.localStorage.getItem("token"))
+    const lang = window.localStorage.getItem("language")
 
     return (
         <>
@@ -38,8 +39,8 @@ const Footer = () => {
                 <div className="footitem">
                     <h4 className="foot_title">{t('Partner')}</h4>
                     <ul className="footlinks">
-                        <li><Link to="/agentSignup/Agent"><span><i className="fas fa-caret-right"></i></span>{t('Agents')}</Link></li>
-                        <li><Link to="/agentSignup/Influencer"><span><i className="fas fa-caret-right"></i></span>{t('Influencer')}</Link></li>
+                        <li><Link to={lang === "en" ? "/agentSignup/Agent" : "/agentSignup/Agentes"}><span><i className="fas fa-caret-right"></i></span>{t('Agents')}</Link></li>
+                        <li><Link to={lang === "en" ? "/agentSignup/Influencer" : "/agentSignup/Influenceuse"}><span><i className="fas fa-caret-right"></i></span>{t('Influencer')}</Link></li>
                         {/* <li><Link to="#"><span><i className="fas fa-caret-right"></i></span>{t('Affiliate Partner')}</Link></li> */}
 
                     </ul>
