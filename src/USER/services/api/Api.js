@@ -14,6 +14,9 @@ export const AGENTLOGIN = (loginData) => API.post('/auth/agent/login', loginData
 // agentsignup api function
 export const AGENTSIGNUP = (signupData) => API.post('/auth/agent/signup', signupData)
 
+// agentsignup api function
+export const AGENTFORGETPASSWORD = (agentForgetPasswordData) => API.post('/auth/agent/forget', agentForgetPasswordData)
+
 // forgetpassword api function
 export const FORGETPASSWORD = (formValue) => API.post('/auth/forget', formValue)
 

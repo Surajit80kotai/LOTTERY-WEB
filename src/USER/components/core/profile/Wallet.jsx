@@ -188,7 +188,7 @@ const Wallet = () => {
                                                                                             })}
                                                                                         </td>
                                                                                         : item.type === "Commission" ?
-                                                                                            <td>{new Date(item?.payment_date).toLocaleString('en-US', {
+                                                                                            <td>{new Date(item?.createdAt).toLocaleString('en-US', {
                                                                                                 month: 'short',
                                                                                                 day: '2-digit',
                                                                                                 year: 'numeric',

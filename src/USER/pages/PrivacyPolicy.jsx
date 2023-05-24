@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { privacyPolicy } from '../services/slice/SettingsSlice';
 
 const PrivacyPolicy = () => {
     const { t } = useTranslation()
-    const dispatch = useDispatch()
-    const { privacy_policy_data } = useSelector((state) => state.settingsSlice)
+    // const dispatch = useDispatch()
+    // const { privacy_policy_data } = useSelector((state) => state.settingsSlice)
 
     // console.log(privacy_policy_data);
 

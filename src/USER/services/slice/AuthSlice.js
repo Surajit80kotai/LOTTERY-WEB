@@ -1,116 +1,109 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { AGENTLOGIN, AGENTSIGNUP, FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
+import { AGENTFORGETPASSWORD, AGENTLOGIN, AGENTSIGNUP, FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
 
 
 //AsyncThunk For SignUp 
-export const fetchAgentSignUp = createAsyncThunk(
-    "agent/signup",
-    async ({ signUpData, navigate, toast }, { rejectWithValue }) => {
+export const fetchAgentSignUp = createAsyncThunk("agent/signup", async ({ signUpData, navigate, toast }, { rejectWithValue }) => {
 
-        try {
-            const res = await AGENTSIGNUP(signUpData)
-            navigate('/agentsignupsuccess')
-            // toast.success('Registered Successfully.\nPlease login to continue', {
-            //     autoClose: 4500
-            // })
-            return res?.data
-        } catch (err) {
-            // console.log("Sign Slice", rejectWithValue(err.response.data.errors));
-            return rejectWithValue(err.response.data.errors)
-        }
+    try {
+        const res = await AGENTSIGNUP(signUpData)
+        navigate('/agentsignupsuccess')
+        // toast.success('Registered Successfully.\nPlease login to continue', {
+        //     autoClose: 4500
+        // })
+        return res?.data
+    } catch (err) {
+        // console.log("Sign Slice", rejectWithValue(err.response.data.errors));
+        return rejectWithValue(err.response.data.errors)
+    }
 
-    })
+})
 
 
 //AsyncThunk For Login 
-export const fetchAgentLogIn = createAsyncThunk(
-    "agent/login", async ({ data, navigate, toast }, { rejectWithValue }) => {
-        // console.log(data)
-        try {
-            const result = await AGENTLOGIN(data)
-            window.localStorage.setItem("token", JSON.stringify(result?.data?.token))
-            window.localStorage.setItem("user", JSON.stringify(result?.data?.user_details))
-            navigate('/')
+export const fetchAgentLogIn = createAsyncThunk("agent/login", async ({ data, navigate, toast }, { rejectWithValue }) => {
+    // console.log(data)
+    try {
+        const result = await AGENTLOGIN(data)
+        window.localStorage.setItem("token", JSON.stringify(result?.data?.token))
+        window.localStorage.setItem("user", JSON.stringify(result?.data?.user_details))
+        navigate('/')
 
-            // To reload the page autometically after login
-            setTimeout(() => {
-                window.location.reload()
-            }, 3500)
+        // To reload the page autometically after login
+        setTimeout(() => {
+            window.location.reload()
+        }, 3500)
 
-            // react toast message
-            toast.success('Logged In Successfully', {
-                autoClose: 3000
-            })
-            return result?.data
-        } catch (err) {
-            // console.log(rejectWithValue(err.response.data));
-            return rejectWithValue(err.response.data)
-        }
+        // react toast message
+        toast.success('Logged In Successfully', {
+            autoClose: 3000
+        })
+        return result?.data
+    } catch (err) {
+        // console.log(rejectWithValue(err.response.data));
+        return rejectWithValue(err.response.data)
+    }
 
-    })
+})
 
 
 //AsyncThunk For SignUp 
-export const fetchSignUp = createAsyncThunk(
-    "signup",
-    async ({ formValues, navigate, toast }, { rejectWithValue }) => {
+export const fetchSignUp = createAsyncThunk("signup", async ({ formValues, navigate, toast }, { rejectWithValue }) => {
 
-        try {
-            const res = await SIGNUP(formValues)
-            navigate('/login')
-            toast.success('Registered Successfully.\nPlease login to continue', {
-                autoClose: 4500
-            })
-            return res?.data
-        } catch (err) {
-            // console.log("Sign Slice", rejectWithValue(err.response.data.errors));
-            return rejectWithValue(err.response.data.errors)
-        }
+    try {
+        const res = await SIGNUP(formValues)
+        navigate('/login')
+        toast.success('Registered Successfully.\nPlease login to continue', {
+            autoClose: 4500
+        })
+        return res?.data
+    } catch (err) {
+        // console.log("Sign Slice", rejectWithValue(err.response.data.errors));
+        return rejectWithValue(err.response.data.errors)
+    }
 
-    })
+})
 
 
 //AsyncThunk For Login 
-export const fetchLogin = createAsyncThunk(
-    "login", async ({ data, navigate, toast }, { rejectWithValue }) => {
-        // console.log(data)
-        try {
-            const result = await LOGIN(data)
-            window.localStorage.setItem("token", JSON.stringify(result?.data?.token))
-            window.localStorage.setItem("user", JSON.stringify(result?.data?.user_details))
-            navigate('/')
+export const fetchLogin = createAsyncThunk("login", async ({ data, navigate, toast }, { rejectWithValue }) => {
+    // console.log(data)
+    try {
+        const result = await LOGIN(data)
+        window.localStorage.setItem("token", JSON.stringify(result?.data?.token))
+        window.localStorage.setItem("user", JSON.stringify(result?.data?.user_details))
+        navigate('/')
 
-            // To reload the page autometically after login
-            setTimeout(() => {
-                window.location.reload()
-            }, 3500)
+        // To reload the page autometically after login
+        setTimeout(() => {
+            window.location.reload()
+        }, 3500)
 
-            // react toast message
-            toast.success('Logged In Successfully', {
-                autoClose: 3000
-            })
-            return result?.data
-        } catch (err) {
-            // console.log(rejectWithValue(err.response.data));
-            return rejectWithValue(err.response.data)
-        }
+        // react toast message
+        toast.success('Logged In Successfully', {
+            autoClose: 3000
+        })
+        return result?.data
+    } catch (err) {
+        // console.log(rejectWithValue(err.response.data));
+        return rejectWithValue(err.response.data)
+    }
 
-    })
+})
 
 
 //AsyncThunk For ForgetPassword 
-export const fetchForgetPass = createAsyncThunk(
-    "forget", async ({ formValues }, { rejectWithValue }) => {
-        try {
-            const res = await FORGETPASSWORD(formValues)
-            return res?.data
-        } catch (err) {
-            // console.log(rejectWithValue(err.response.data));
-            return rejectWithValue(err.response.data)
-        }
+// export const fetchForgetPass = createAsyncThunk("forget", async ({ formValues }, { rejectWithValue }) => {
+//     try {
+//         const res = await FORGETPASSWORD(formValues)
+//         return res?.data
+//     } catch (err) {
+//         // console.log(rejectWithValue(err.response.data));
+//         return rejectWithValue(err.response.data)
+//     }
 
-    })
+// })
 
 
 //AsyncThunk For Register OTP
@@ -140,35 +133,50 @@ export const verifyOTP = createAsyncThunk("/system/register/otp/verify", async (
 
 
 // forget password otp
-export const fetchForgetPassOTP = createAsyncThunk(
-    "/system/forget/password/otp", async (data, { rejectWithValue }) => {
-        try {
-            const res = await FORGETPASSWORDOTP(data)
-            return res?.data
-        } catch (err) {
-            // console.log(rejectWithValue(err.response.data));
-            return rejectWithValue(err.response.data)
-        }
+export const fetchForgetPassOTP = createAsyncThunk("/system/forget/password/otp", async (data, { rejectWithValue }) => {
+    try {
+        const res = await FORGETPASSWORDOTP(data)
+        return res?.data
+    } catch (err) {
+        // console.log(rejectWithValue(err.response.data));
+        return rejectWithValue(err.response.data)
+    }
 
-    })
+})
 
 
 // set new password
-export const setNewPassword = createAsyncThunk(
-    "/system/set/password", async ({ data, navigate, toast }, { rejectWithValue }) => {
-        try {
-            const res = await SETNEWPASSWORD(data)
-            navigate('/login')
-            toast.success(`${res?.data?.message} Please login to continue`, {
-                autoClose: 4500
-            })
-            return res?.data
-        } catch (err) {
-            // console.log(rejectWithValue(err.response.data));
-            return rejectWithValue(err.response.data)
-        }
+export const setNewPassword = createAsyncThunk("/system/set/password", async ({ data, navigate, toast }, { rejectWithValue }) => {
+    try {
+        const res = await SETNEWPASSWORD(data)
+        navigate('/login')
+        toast.success(`${res?.data?.message} Please login to continue`, {
+            autoClose: 4500
+        })
+        return res?.data
+    } catch (err) {
+        // console.log(rejectWithValue(err.response.data));
+        return rejectWithValue(err.response.data)
+    }
 
-    })
+})
+
+
+// set new password
+export const setNewPasswordAgentInfluencers = createAsyncThunk("/auth/agent/forget", async ({ data, navigate, toast }, { rejectWithValue }) => {
+    try {
+        const res = await AGENTFORGETPASSWORD(data)
+        navigate('/agentLogin')
+        toast.success(`${res?.data?.message} Please login to continue`, {
+            autoClose: 4500
+        })
+        return res?.data
+    } catch (err) {
+        // console.log(rejectWithValue(err.response.data));
+        return rejectWithValue(err.response.data)
+    }
+
+})
 
 
 
@@ -248,7 +256,13 @@ export const AuthSlice = createSlice({
         builder.addCase(fetchAgentLogIn.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
-            state.signupErr = payload
+            if (payload?.data?.type === "user") {
+                state.login.error_user = payload.data
+                state.login.error_password = ""
+            } else if (payload?.data?.type === "password") {
+                state.login.error_password = payload.data
+                state.login.error_user = ""
+            }
         })
 
 
@@ -294,20 +308,20 @@ export const AuthSlice = createSlice({
 
 
         //States for ForgetPass
-        builder.addCase(fetchForgetPass.pending, (state) => {
-            state.msg = "Loading"
-            state.loading = true
-        })
-        builder.addCase(fetchForgetPass.fulfilled, (state, { payload }) => {
-            state.msg = "Success"
-            state.loading = false
-            state.user = payload
-        })
-        builder.addCase(fetchForgetPass.rejected, (state, { payload }) => {
-            state.msg = "Failed"
-            state.loading = false
-            state.error = payload
-        })
+        // builder.addCase(fetchForgetPass.pending, (state) => {
+        //     state.msg = "Loading"
+        //     state.loading = true
+        // })
+        // builder.addCase(fetchForgetPass.fulfilled, (state, { payload }) => {
+        //     state.msg = "Success"
+        //     state.loading = false
+        //     state.user = payload
+        // })
+        // builder.addCase(fetchForgetPass.rejected, (state, { payload }) => {
+        //     state.msg = "Failed"
+        //     state.loading = false
+        //     state.error = payload
+        // })
 
 
         //States for Register OTP
@@ -377,6 +391,22 @@ export const AuthSlice = createSlice({
             state.loading = false
         })
         builder.addCase(setNewPassword.rejected, (state, { payload }) => {
+            state.msg = "Failed"
+            state.loading = false
+            state.error = payload?.message
+        })
+
+
+        //States for Set New Password for agent and influencers
+        builder.addCase(setNewPasswordAgentInfluencers.pending, (state) => {
+            state.msg = "Loading"
+            state.loading = true
+        })
+        builder.addCase(setNewPasswordAgentInfluencers.fulfilled, (state) => {
+            state.msg = "Success"
+            state.loading = false
+        })
+        builder.addCase(setNewPasswordAgentInfluencers.rejected, (state, { payload }) => {
             state.msg = "Failed"
             state.loading = false
             state.error = payload?.message

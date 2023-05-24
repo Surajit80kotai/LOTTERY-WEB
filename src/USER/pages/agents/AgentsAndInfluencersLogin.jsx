@@ -98,7 +98,7 @@ const AgentsAndInfluencersLogin = () => {
 
                         <div className="right_part">
                             <div className="right_top">
-                                <h2 className="heading_form">{t("LOGIN")}</h2>
+                                <h2 className="heading_form">{t("AGENT & INFLUENCER LOGIN")}</h2>
                                 <div className="social_sign">
                                     <button onClick={() => socialLogin(facebook)} className="social_signup"><i className="fab fa-facebook-f"></i></button>
                                     <button onClick={() => socialLogin(google)} className="social_signup"><i className="fab fa-google"></i></button>
@@ -282,7 +282,7 @@ const AgentsAndInfluencersLogin = () => {
 
                                     {/* Forget password Link */}
                                     <div className="forget_password d-flex justify-content-center mt-5">
-                                        <span className='forget_pass mx-2'>{t("Forgot Password?")}</span><Link to="/f_password" className="forget_pass text-decoration-underline text-primary">{t("Click Here")}</Link>
+                                        <span className='forget_pass mx-2'>{t("Forgot Password?")}</span><Link to="/ag_in_f_password" className="forget_pass text-decoration-underline text-primary">{t("Click Here")}</Link>
                                     </div>
                                 </form>
                             </div>

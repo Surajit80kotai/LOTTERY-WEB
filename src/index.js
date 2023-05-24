@@ -15,6 +15,7 @@ import ProtectedRoute from './USER/privateroute/ProtectedRoute';
 import AgentsAndInfluencersSignup from './USER/pages/agents/AgentsAndInfluencersSignup';
 import AgentsAndInfluencersLogin from './USER/pages/agents/AgentsAndInfluencersLogin';
 import './i18n';
+import AgentsAndInfluencersForgetPassword from './USER/pages/agents/AgentsAndInfluencersForgetPassword';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -32,6 +33,7 @@ root.render(
         <Route path='/agentLogin' element={<AgentsAndInfluencersLogin />} />
         <Route path='/login' element={<Login text="/" />} />
         <Route path='/f_password' element={<ForgetPassword />} />
+        <Route path='/ag_in_f_password' element={<AgentsAndInfluencersForgetPassword />} />
         {/* <Route path='/ordersuccess' element={<OrderSuccess />} /> */}
       </Routes>
     </Router>
