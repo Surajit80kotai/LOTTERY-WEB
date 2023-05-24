@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { AGENTFORGETPASSWORD, AGENTLOGIN, AGENTSIGNUP, FORGETPASSWORD, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
+import { AGENTFORGETPASSWORD, AGENTLOGIN, AGENTSIGNUP, FORGETPASSWORDOTP, GETOTP, LOGIN, SETNEWPASSWORD, SIGNUP, VERIFYOTP } from "../api/Api";
 
 
 //AsyncThunk For SignUp 
