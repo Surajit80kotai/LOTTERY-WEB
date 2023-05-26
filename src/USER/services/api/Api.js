@@ -2,39 +2,39 @@ import axios from "axios";
 
 export const API = axios.create({ baseURL: process.env.REACT_APP_BASE_URL })
 
-// login api function
+// login api
 export const LOGIN = (loginData) => API.post('/auth/login', loginData)
 
-// signup api function
+// signup api
 export const SIGNUP = (signupData) => API.post('/auth/signup', signupData)
 
-// agentlogin api function
+// agentlogin api
 export const AGENTLOGIN = (loginData) => API.post('/auth/agent/login', loginData)
 
-// agentsignup api function
+// agentsignup api
 export const AGENTSIGNUP = (signupData) => API.post('/auth/agent/signup', signupData)
 
-// agentsignup api function
+// agentforegetpassword api
 export const AGENTFORGETPASSWORD = (agentForgetPasswordData) => API.post('/auth/agent/forget', agentForgetPasswordData)
 
-// forgetpassword api function
+// forgetpassword api
 export const FORGETPASSWORD = (formValue) => API.post('/auth/forget', formValue)
 
-// forgetpassword api function
+// forgetpassword api
 export const FORGETPASSWORDOTP = (phone) => API.post('/system/forget/password/otp', phone)
 
 // set new password
 export const SETNEWPASSWORD = (data) => API.post('/system/set/password', data)
 
-// country & state api function
+// country & state api
 export const COUNTRY = (header) => API.get('/countries', header)
 export const STATE = (id, header) => API.get('/state/' + id, header)
 export const PHONECODE = (header) => API.get('/phone/code', header)
 
-// get Category api function
+// get Category api
 export const CATEGORY = (header) => API.get('/admin/get-category', header)
 
-// get ticket api Function
+// get ticket api
 export const TICKET = (header) => API.get('/ticket/get-tickets', header)
 
 // post Add to Cart
