@@ -16,6 +16,7 @@ import AgentsAndInfluencersSignup from './USER/pages/agents/AgentsAndInfluencers
 import AgentsAndInfluencersLogin from './USER/pages/agents/AgentsAndInfluencersLogin';
 import './i18n';
 import AgentsAndInfluencersForgetPassword from './USER/pages/agents/AgentsAndInfluencersForgetPassword';
+import LiveChatForAndroid from './USER/util/LiveChatForAndroid';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -35,6 +36,7 @@ root.render(
         <Route path='/f_password' element={<ForgetPassword />} />
         <Route path='/ag_in_f_password' element={<AgentsAndInfluencersForgetPassword />} />
         {/* <Route path='/ordersuccess' element={<OrderSuccess />} /> */}
+        <Route path='/livechat' element={<LiveChatForAndroid />} />
       </Routes>
     </Router>
     <ToastContainer style={{ "fontSize": "15px" }} transition={Flip} position="top-center" />
