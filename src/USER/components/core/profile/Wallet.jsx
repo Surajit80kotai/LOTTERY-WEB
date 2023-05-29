@@ -39,8 +39,10 @@ const Wallet = () => {
     const selectPayOption = (value) => {
         if (value === "Orange") {
             dispatch(cinetPay(formValue))
+            setFormValue({ ...formValue, amount: "" })
         } else if (value === "MTN") {
             dispatch(cinetPay(formValue))
+            setFormValue({ ...formValue, amount: "" })
         }
         // else if (value === "Paypal") {
         //     console.log(formValue);
@@ -68,6 +70,9 @@ const Wallet = () => {
         redirectPage()
         dispatch(getTransactions(navigate))
         dispatch(updateTransactions(navigate))
+        if (paymentData?.status === "APPROVED") {
+            setFormValue({ ...formValue, amount: "" })
+        }
     }, [dispatch, paymentData, navigate])
 
 
@@ -144,7 +149,7 @@ const Wallet = () => {
                                                     <div className="col-md-4">
                                                         {
                                                             formValue?.amount >= 100 ?
-                                                                <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal">{t("Add Money")}</button>
+                                                                <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-dismiss={loading ? "" : "modal"}>{t("Add Money")}</button>
                                                                 : <button type="button" className="addmoney" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled style={{ "backgroundColor": "#00000078" }}>{t("Add Money")}</button>
                                                         }
                                                     </div>
@@ -187,7 +192,7 @@ const Wallet = () => {
                                                                                                 second: 'numeric'
                                                                                             })}
                                                                                         </td>
-                                                                                        : item.type === "Commission" ?
+                                                                                        : item.type === "Commission" || item.type === "Withdrawal" ?
                                                                                             <td>{new Date(item?.createdAt).toLocaleString('en-US', {
                                                                                                 month: 'short',
                                                                                                 day: '2-digit',
@@ -306,8 +311,8 @@ const Wallet = () => {
                                                                                                         : (item.status_code === "00") || (item.status === "SUCCESSFUL") || (item.status === "APPROVED") || (item.type === "Commission") || (item.status === "Order Placed") || (item.status === "Win Price") ?
                                                                                                             <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
                                                                                                             // ACCEPTED
-                                                                                                            : item.status === "Accepted" ?
-                                                                                                                <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("ACCEPTED")}</span>
+                                                                                                            : item.status === "Processing" ?
+                                                                                                                <span style={{ "color": "#ff9900" }}><i className="fa-solid fa-hourglass-half mx-3" style={{ color: "#ff9900" }}></i>{t("PROCESSING")}</span>
                                                                                                                 // TRANSACTION ENDED
                                                                                                                 : <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("TRANSACTION ENDED")}</span>
                                                                                     }

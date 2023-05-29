@@ -91,6 +91,9 @@ export const INITWITHDRAW = () => API.get("/auth/withdraw-init")
 // withdraw
 export const WITHDRAW = (data) => API.post("/auth/withdraw", data)
 
+// withdraw
+export const WITHDRAWREQ = (data) => API.post("/auth/withdraw-req", data)
+
 // checkpassword
 export const CHECKPASSWORD = (password, header) => API.post("/auth/email/phone/change", password, header)
 

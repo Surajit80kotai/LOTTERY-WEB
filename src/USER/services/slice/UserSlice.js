@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CHECKPASSWORD, CLAIM, CONTACTUS, DETAILSPAGEVISIT, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW } from "../api/Api";
+import { CHECKPASSWORD, CLAIM, CONTACTUS, DETAILSPAGEVISIT, INITWITHDRAW, ORDERHISTORY, UPDATEPROFILE, WALLETBALANCE, WITHDRAW, WITHDRAWREQ } from "../api/Api";
 import { toast } from "react-toastify";
 
 // from socialuser
@@ -116,36 +116,57 @@ export const contactUs = createAsyncThunk("/auth/contact", async ({ formData, to
 
 
 // init-withdraw
-export const initWithdraw = createAsyncThunk("/auth/withdraw-init", async (navigate, { rejectWithValue }) => {
-    try {
-        const response = await INITWITHDRAW()
-        // console.log(response?.data)
-        return response?.data
-    } catch (err) {
-        // console.log(rejectWithValue(err.response.data));
-        if (err.response.data.error === true) {
-            window.localStorage.removeItem("token")
-            window.localStorage.removeItem("user")
-            navigate('/')
-            setTimeout(() => {
-                window.location.reload()
-                // navigate('/login')
-            }, 3700)
-        }
-        return rejectWithValue(err.response.data)
-    }
-})
+// export const initWithdraw = createAsyncThunk("/auth/withdraw-init", async (navigate, { rejectWithValue }) => {
+//     try {
+//         const response = await INITWITHDRAW()
+//         // console.log(response?.data)
+//         return response?.data
+//     } catch (err) {
+//         // console.log(rejectWithValue(err.response.data));
+//         if (err.response.data.error === true) {
+//             window.localStorage.removeItem("token")
+//             window.localStorage.removeItem("user")
+//             navigate('/')
+//             setTimeout(() => {
+//                 window.location.reload()
+//                 // navigate('/login')
+//             }, 3700)
+//         }
+//         return rejectWithValue(err.response.data)
+//     }
+// })
 
 
 // withdraw
-export const withdraw = createAsyncThunk("/auth/withdraw", async ({ data, navigate }, { rejectWithValue }) => {
+// export const withdraw = createAsyncThunk("/auth/withdraw", async ({ data, navigate }, { rejectWithValue }) => {
+//     try {
+//         const response = await WITHDRAW(data)
+//         if (response?.data?.status === 202) {
+//             toast.success("Withdraw Request Accepted.Please Refresh The Page To See The Changes", {
+//                 autoClose: "5000"
+//             })
+//         }
+//         return response?.data
+//     } catch (err) {
+//         // console.log(rejectWithValue(err.response.data));
+//         if (err.response.data.error === true) {
+//             window.localStorage.removeItem("token")
+//             window.localStorage.removeItem("user")
+//             navigate('/')
+//             setTimeout(() => {
+//                 window.location.reload()
+//                 // navigate('/login')
+//             }, 3700)
+//         }
+//         return rejectWithValue(err.response.data)
+//     }
+// })
+
+
+// withdraw req
+export const withdrawReq = createAsyncThunk("/auth/withdraw-req", async ({ data, navigate }, { rejectWithValue }) => {
     try {
-        const response = await WITHDRAW(data)
-        if (response?.data?.status === 202) {
-            toast.success("Withdraw Request Accepted.Please Refresh The Page To See The Changes", {
-                autoClose: "5000"
-            })
-        }
+        const response = await WITHDRAWREQ(data)
         return response?.data
     } catch (err) {
         // console.log(rejectWithValue(err.response.data));
@@ -315,33 +336,54 @@ export const UserSlice = createSlice({
             state.userSliceError = payload
         })
 
-        // states for initWithdraw
-        builder.addCase(initWithdraw.pending, (state) => {
-            state.status = "Loading"
-            state.loading = true
-        })
-        builder.addCase(initWithdraw.fulfilled, (state, { payload }) => {
-            state.status = "Success"
-            state.loading = false
-            state.init_withdraw_data = payload
-        })
-        builder.addCase(initWithdraw.rejected, (state, { payload }) => {
-            state.status = "Failed"
-            state.loading = false
-            state.userSliceError = payload
-        })
+        // // states for initWithdraw
+        // builder.addCase(initWithdraw.pending, (state) => {
+        //     state.status = "Loading"
+        //     state.loading = true
+        // })
+        // builder.addCase(initWithdraw.fulfilled, (state, { payload }) => {
+        //     state.status = "Success"
+        //     state.loading = false
+        //     state.init_withdraw_data = payload
+        // })
+        // builder.addCase(initWithdraw.rejected, (state, { payload }) => {
+        //     state.status = "Failed"
+        //     state.loading = false
+        //     state.userSliceError = payload
+        // })
 
-        // states for withdraw
-        builder.addCase(withdraw.pending, (state) => {
+        // // states for withdraw
+        // builder.addCase(withdraw.pending, (state) => {
+        //     state.status = "Loading"
+        //     state.loading = true
+        // })
+        // builder.addCase(withdraw.fulfilled, (state, { payload }) => {
+        //     state.status = "Success"
+        //     state.loading = false
+        //     state.withdraw_data = payload
+        // })
+        // builder.addCase(withdraw.rejected, (state, { payload }) => {
+        //     state.status = "Failed"
+        //     state.loading = false
+        //     state.userSliceError = payload
+        // })
+
+        // states for withdrawReq
+        builder.addCase(withdrawReq.pending, (state) => {
             state.status = "Loading"
             state.loading = true
         })
-        builder.addCase(withdraw.fulfilled, (state, { payload }) => {
+        builder.addCase(withdrawReq.fulfilled, (state, { payload }) => {
             state.status = "Success"
             state.loading = false
             state.withdraw_data = payload
+            if (payload?.status === true) {
+                toast.success(payload?.message, { autoClose: "5000" })
+            } else if (payload?.status === false) {
+                toast.error(payload?.message, { autoClose: "5000" })
+            }
         })
-        builder.addCase(withdraw.rejected, (state, { payload }) => {
+        builder.addCase(withdrawReq.rejected, (state, { payload }) => {
             state.status = "Failed"
             state.loading = false
             state.userSliceError = payload

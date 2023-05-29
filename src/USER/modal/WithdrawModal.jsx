@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import PhoneInput from 'react-phone-input-2'
+// import PhoneInput from 'react-phone-input-2'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { initWithdraw, withdraw } from '../services/slice/UserSlice'
+import { withdrawReq } from '../services/slice/UserSlice'
+// import { initWithdraw, withdraw } from '../services/slice/UserSlice'
 import { getTransactions } from '../services/slice/PaymentSlice'
 // import { currency } from '../util/Currency'
 
 const WithdrawModal = ({ balance, userID }) => {
     const { t } = useTranslation()
-    const [phone, setPhone] = useState('')
-    const [phonecode, setPhonecode] = useState('')
+    // const [phone, setPhone] = useState('')
+    // const [phonecode, setPhonecode] = useState('')
     const [formValues, setFormValues] = useState(
         {
             amount: "",
@@ -20,21 +21,22 @@ const WithdrawModal = ({ balance, userID }) => {
             externalId: Math.floor(Math.random() * 100000000).toString(),
             payee: {
                 partyIdType: "MSISDN",
-                partyId: ""
+                partyId: JSON.parse(window.localStorage.getItem("user"))?.phone
             },
-            payerMessage: "Withdrawl",
-            payeeNote: "ESHAC-PLAY Wallet Withdrawl"
+            payerMessage: "Withdrawal",
+            payeeNote: "ESHAC-PLAY Wallet Withdrawal"
         }
     )
-    const { init_withdraw_data, withdraw_data, loading } = useSelector((state) => state.userslice)
+    const { withdraw_data, loading } = useSelector((state) => state.userslice)
+    // const { init_withdraw_data, withdraw_data, loading } = useSelector((state) => state.userslice)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
 
     // openModal func.
-    const openModal = () => {
-        dispatch(initWithdraw(navigate))
-    }
+    // const openModal = () => {
+    //     dispatch(initWithdraw(navigate))
+    // }
 
     // handleChange function
     const handleChange = (e) => {
@@ -44,32 +46,20 @@ const WithdrawModal = ({ balance, userID }) => {
     // handleSubmit function
     const handleSubmit = (e) => {
         e.preventDefault()
-        const payee = { ...formValues?.payee, partyId: "+" + phone }
-        const formData = { ...formValues, payee, phonecode }
-        const uuid = init_withdraw_data?.UUID
-        const access_token = `Bearer ${init_withdraw_data?.Gen_API_Token?.access_token}`
-        const data = { formData, uuid, access_token, userID }
-        dispatch(withdraw({ data, navigate }))
+        // const payee = { ...formValues?.payee, partyId: "+" + phone }
+        // const formData = { ...formValues, payee, phonecode }
+        // const uuid = init_withdraw_data?.UUID
+        // const access_token = `Bearer ${init_withdraw_data?.Gen_API_Token?.access_token}`
+        const data = { formValues, userID, user_type: "user" }
+        dispatch(withdrawReq({ data, navigate }))
 
-        setFormValues({
-            amount: "",
-            currency: "",
-            externalId: "",
-            payee: {
-                partyIdType: "",
-                partyId: ""
-            },
-            payerMessage: "",
-            payeeNote: ""
-        })
-        setPhone('')
-        setPhonecode('')
+        setFormValues({ ...formValues, amount: "" })
+        // setPhone('')
+        // setPhonecode('')
     }
 
     useEffect(() => {
-        if (withdraw_data?.status === 202) {
-            dispatch(getTransactions(navigate))
-        }
+        dispatch(getTransactions(navigate))
     }, [dispatch, navigate, withdraw_data])
 
 
@@ -83,7 +73,7 @@ const WithdrawModal = ({ balance, userID }) => {
                 balance > 500 ?
 
                     <button
-                        onClick={openModal}
+                        // onClick={openModal}
                         type="button"
                         className="btn2 mx-5 my-3"
                         data-bs-toggle="modal"
@@ -93,7 +83,7 @@ const WithdrawModal = ({ balance, userID }) => {
                     </button>
                     :
                     <button
-                        onClick={openModal}
+                        // onClick={openModal}
                         type="button"
                         className="btn2_disabled mx-5 my-3"
                         data-bs-toggle="modal"
@@ -116,7 +106,7 @@ const WithdrawModal = ({ balance, userID }) => {
                                 <p className='text-center fs-5' style={{ "color": "#f9772b" }}>{t("Minimum Withdraw Amount Should Be 500*")}</p>
                                 <div className='row'>
                                     <div style={{ padding: "0 50px" }}>
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label htmlFor="phone" className="form-label fs-4">{t("Enter Your Registered Phone Number")}
                                             </label>
                                             <PhoneInput
@@ -132,7 +122,7 @@ const WithdrawModal = ({ balance, userID }) => {
                                                     }
                                                 }
                                             />
-                                        </div>
+                                        </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="amount" className="form-label fs-4">{t("Enter Withdraw Amount")}</label>
                                             <input
