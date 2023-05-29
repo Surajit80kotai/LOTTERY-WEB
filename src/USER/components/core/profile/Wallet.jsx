@@ -211,7 +211,7 @@ const Wallet = () => {
                                                                                             })}</td>
                                                                                     // <td>{item.payment_date}</td>
                                                                                 }
-                                                                                <td colSpan={2}>{item.transaction_id ? item.transaction_id : "--------"}</td>
+                                                                                <td colSpan={2}>{item.transaction_id ? item.transaction_id.toString().toUpperCase() : "-------------"}</td>
                                                                                 {
                                                                                     item.payment_method === "OMCM" ?
                                                                                         <td colSpan={2}>
@@ -308,7 +308,7 @@ const Wallet = () => {
                                                                                                     : (item.status_code === "600") ?
                                                                                                         <span className='text-danger'><i className="fa-solid fa-circle-exclamation mx-3"></i>{t("FAILED")}</span>
                                                                                                         // SUCCESS
-                                                                                                        : (item.status_code === "00") || (item.status === "SUCCESSFUL") || (item.status === "APPROVED") || (item.type === "Commission") || (item.status === "Order Placed") || (item.status === "Win Price") ?
+                                                                                                        : (item.status_code === "00") || (item.status === "SUCCESSFUL") || (item.status === "APPROVED") || (item.type === "Commission") || (item.status === "Order Placed") || (item.status === "Win Price") || (item.status === "Accepted") ?
                                                                                                             <span className='text-success'><i className="fa-solid fa-circle-check mx-3"></i>{t("SUCCESS")}</span>
                                                                                                             // ACCEPTED
                                                                                                             : item.status === "Processing" ?

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import PreLoader from '../components/core/preloader/PreLoader'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { withdrawReq } from '../services/slice/UserSlice'
+import { getBalance, withdrawReq } from '../services/slice/UserSlice'
 // import { initWithdraw, withdraw } from '../services/slice/UserSlice'
 import { getTransactions } from '../services/slice/PaymentSlice'
 // import { currency } from '../util/Currency'
@@ -59,6 +59,7 @@ const WithdrawModal = ({ balance, userID }) => {
     }
 
     useEffect(() => {
+        dispatch(getBalance(navigate))
         dispatch(getTransactions(navigate))
     }, [dispatch, navigate, withdraw_data])
 
