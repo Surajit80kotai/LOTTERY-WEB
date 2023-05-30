@@ -18,7 +18,7 @@ const Socials = () => {
         <div className="copywriter">
           <h6>
             {t("Copyright")} © 2023
-            <span><Link to="#" className="copy"> {t("ES-Play Corporation")}</Link> || {t("Version")} 1.0.1</span> </h6>
+            <span><Link to="#" className="copy"> {t("ESHAC-Play Corporation")}</Link> || {t("Version")} 1.0.1</span> </h6>
         </div>
       </div>
     </>
