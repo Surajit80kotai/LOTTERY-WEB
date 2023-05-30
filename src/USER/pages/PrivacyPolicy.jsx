@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { privacyPolicy } from '../services/slice/SettingsSlice';
+import { privacyPolicy } from '../services/slice/SettingsSlice';
 
 const PrivacyPolicy = () => {
     const { t } = useTranslation()
-    // const dispatch = useDispatch()
-    // const { privacy_policy_data } = useSelector((state) => state.settingsSlice)
+    const dispatch = useDispatch()
+    const { privacy_policy_data } = useSelector((state) => state.settingsSlice)
 
     // console.log(privacy_policy_data);
 
@@ -30,8 +30,8 @@ const PrivacyPolicy = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        // dispatch(privacyPolicy())
-    }, [])
+        dispatch(privacyPolicy())
+    }, [dispatch])
 
     return (
         <>
@@ -50,8 +50,17 @@ const PrivacyPolicy = () => {
 
                 <div className='d-flex  justify-content-between'>
                     <div className="tab">
-                        <button className="tablinks" onClick={(event) => openTab(event, 'firstTab')} id="defaultOpen">{t("Privacy")}</button>
-                        <button className="tablinks" onClick={(event) => openTab(event, 'secondTab')}>{t("Data collected")}</button>
+                        {
+                            privacy_policy_data?.map((item, index) => {
+                                let tab_id = index;
+                                return (
+                                    <button className="tablinks" onClick={(event) => openTab(event, tab_id)} id="defaultOpen">
+                                        {item?.title}
+                                    </button>
+                                )
+                            })
+                        }
+                        {/* <button className="tablinks" onClick={(event) => openTab(event, 'secondTab')}>{t("Data collected")}</button>
                         <button className="tablinks" onClick={(event) => openTab(event, 'thirdTab')}>{t("How data is collected and processed")}</button>
                         <button className="tablinks" onClick={(event) => openTab(event, 'fouthTab')} id="defaultOpen">{t("Use of data")}</button>
                         <button className="tablinks" onClick={(event) => openTab(event, 'fifthTab')}>{t("Telephone communications")}</button>
@@ -67,59 +76,80 @@ const PrivacyPolicy = () => {
                         <button className="tablinks" onClick={(event) => openTab(event, 'thirteenTab')} >{t("Third party practices")}</button >
                         <button className="tablinks" onClick={(event) => openTab(event, 'fourteenTab')} id="defaultOpen" >{t("Disclaimer")}</button >
                         <button className="tablinks" onClick={(event) => openTab(event, 'fifteenTab')} >{t("Mergers and other events requiring transfer")}</button >
-                        <button className="tablinks" onClick={(event) => openTab(event, 'sixteenTab')} >{t("Acceptance of privacy policy")}</button >
+                        <button className="tablinks" onClick={(event) => openTab(event, 'sixteenTab')} >{t("Acceptance of privacy policy")}</button > */}
 
                     </div >
                     <div>
 
-                        <div id="firstTab" className="tabcontent">
-                            <h3>{t("Privacy")}</h3>
-                            <h6 className="text-danger mb-4"><strong>Last Update : Dec 24,2023</strong> </h6>
-                            <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. Duis molestie ipsum quis nisl ultrices feugiat.
-                                Nam at purus ut ligula ultrices aliquet vitae nec eros. Aenean condimentum tellus eu urna
-                                tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
-                                <br /> <br />
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                        {
+                            privacy_policy_data?.map((item, index) => {
+                                return (
+                                    <div id={index} className="tabcontent" key={item?._id}>
+                                        <h3>{item?.title}</h3>
+                                        <h6 className="text-danger mb-4"><strong>Last Update : {new Date(item?.createdAt).toLocaleString('en-US', {
+                                            month: 'short',
+                                            day: '2-digit',
+                                            year: 'numeric'
+                                        })}</strong> </h6>
+                                        <h4 className="content_title">
+                                            <span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> {item?.title}
+                                        </h4>
+                                        <p>{item?.description}</p>
+                                    </div>
+                                )
+                            })
+                        }
+
+                        {/*
+                        <div id="firstTab" className="tabcontent" key={item?._id}>
+                                        <h3>{t("Privacy")}</h3>
+                                        <h6 className="text-danger mb-4"><strong>Last Update : Dec 24,2023</strong> </h6>
+                                        <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
+                                            Donec vitae ullamcorper lacus, ut vehicula metus. Duis molestie ipsum quis nisl ultrices feugiat.
+                                            Nam at purus ut ligula ultrices aliquet vitae nec eros. Aenean condimentum tellus eu urna
+                                            tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
+                                            <br /> <br />
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
+                                            Donec vitae ullamcorper lacus, ut vehicula metus.
 
 
-                            </p>
-                            <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. Duis molestie ipsum quis nisl ultrices feugiat.
-                                Nam at purus ut ligula ultrices aliquet vitae nec eros. Aenean condimentum tellus eu urna
-                                tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
-                                <br /> <br />
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                        </p>
+                                        <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
+                                            Donec vitae ullamcorper lacus, ut vehicula metus. Duis molestie ipsum quis nisl ultrices feugiat.
+                                            Nam at purus ut ligula ultrices aliquet vitae nec eros. Aenean condimentum tellus eu urna
+                                            tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
+                                            <br /> <br />
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
+                                            Donec vitae ullamcorper lacus, ut vehicula metus.
 
 
-                            </p>
-                            <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. Duis molestie ipsum quis nisl ultrices feugiat.
-                                Nam at purus ut ligula ultrices aliquet vitae nec eros. Aenean condimentum tellus eu urna
-                                tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
-                                <br /> <br />
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                        </p>
+                                        <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
+                                            Donec vitae ullamcorper lacus, ut vehicula metus. Duis molestie ipsum quis nisl ultrices feugiat.
+                                            Nam at purus ut ligula ultrices aliquet vitae nec eros. Aenean condimentum tellus eu urna
+                                            tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
+                                            <br /> <br />
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
+                                            Donec vitae ullamcorper lacus, ut vehicula metus.
 
 
-                            </p>
-                            <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus. Duis molestie ipsum quis nisl ultrices feugiat.
-                                Nam at purus ut ligula ultrices aliquet vitae nec eros. Aenean condimentum tellus eu urna
-                                tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
-                                <br /> <br />
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
-                                Donec vitae ullamcorper lacus, ut vehicula metus.
+                                        </p>
+                                        <h4 className="content_title"><span><i className="far fa-check-circle" style={{ "color": "#f89130" }}></i></span> Heading </h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
+                                            Donec vitae ullamcorper lacus, ut vehicula metus. Duis molestie ipsum quis nisl ultrices feugiat.
+                                            Nam at purus ut ligula ultrices aliquet vitae nec eros. Aenean condimentum tellus eu urna
+                                            tincidunt volutpat. Nunc bibendum quam ut congue dignissim.
+                                            <br /> <br />
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim maximus enim, nec dictum diam pellentesque nec. Nulla facilisis, massa ut egestas bibendum, ex libero varius nisl, a aliquet dui ante sed purus.
+                                            Donec vitae ullamcorper lacus, ut vehicula metus.
 
 
-                            </p>
-                        </div>
+                                        </p>
+                                    </div>
+                        
 
                         <div id="secondTab" className="tabcontent">
                             <h3>Data collect</h3>
@@ -345,10 +375,11 @@ const PrivacyPolicy = () => {
                             <h3>fifth tab title</h3>
                             <p>Suspendisse lacinia sapien eget risus porttitor, sit amet faucibus velit ullamcorper. Quisque dictum erat neque, placerat dignissim ante tempor at. Nullam ullamcorper justo felis, nec pulvinar ex suscipit vel. Donec viverra leo ut ante iaculis, sit amet porta leo vehicula. Suspendisse fermentum congue ligula sed molestie. Praesent lacinia, massa non fringilla scelerisque, tellus arcu sodales nunc, in ultrices sapien ante et ante. In iaculis tellus urna, at convallis massa porta in. Proin vehicula facilisis varius. Pellentesque vitae purus non mauris ultricies porttitor nec sodales nulla.</p>
                         </div>
+
                         <div id="sixteenTab" className="tabcontent">
                             <h3>sixth tab title</h3>
                             <p>Suspendisse lacinia sapien eget risus porttitor, sit amet faucibus velit ullamcorper. Quisque dictum erat neque, placerat dignissim ante tempor at. Nullam ullamcorper justo felis, nec pulvinar ex suscipit vel. Donec viverra leo ut ante iaculis, sit amet porta leo vehicula. Suspendisse fermentum congue ligula sed molestie. Praesent lacinia, massa non fringilla scelerisque, tellus arcu sodales nunc, in ultrices sapien ante et ante. In iaculis tellus urna, at convallis massa porta in. Proin vehicula facilisis varius. Pellentesque vitae purus non mauris ultricies porttitor nec sodales nulla.</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
