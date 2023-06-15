@@ -69,7 +69,7 @@ const initialState = {
 }
 
 // Creating Slice
-export const SettingsSlice = createSlice({
+const SettingsSlice = createSlice({
     name: "settingsSlice",
     initialState,
     reducers: {},

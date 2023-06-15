@@ -136,7 +136,7 @@ export const removeCartTrack = createAsyncThunk("/product/remove/cart/log", asyn
 
 
 
-export const CartSlice = createSlice({
+const CartSlice = createSlice({
     name: "cartslice",
     initialState: {
         cart_data: [],

@@ -190,7 +190,7 @@ const initialState = {
 }
 
 
-export const PaymentSlice = createSlice({
+const PaymentSlice = createSlice({
     name: "paymentslice",
     initialState,
     reducers: {

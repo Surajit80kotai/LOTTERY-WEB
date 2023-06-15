@@ -46,7 +46,7 @@ const initialState = {
 }
 
 // Creating Slice
-export const LotterySlice = createSlice({
+const LotterySlice = createSlice({
     name: "lotteryslice",
     initialState,
     reducers: {},
